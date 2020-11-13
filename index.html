@@ -56,7 +56,7 @@
               href="#"
               tabindex="-1"
               aria-disabled="true"
-              >Honda</a
+              >???</a
             >
           </li>
           <li class="nav-item dropdown">
@@ -91,20 +91,35 @@
     </nav>
   </body>
 
-  <div class="container">
+  <div class="container" id="jsDiv">
     <div class="starter-template">
       <h1>Official Site of Antisocialistic</h1>
-      <p class="lead">
-        Actual features TBD.<br />
-        Should be fun.
-      </p>
+      <p class="lead">Actual features TBD.</p>
     </div>
   </div>
 
-    <!-- Bootstrap core JavaScript
+  <script>
+    var para = document.createElement("p");
+    var node = document.createTextNode("This is new.");
+    para.appendChild(node);
+    
+    var element = document.getElementById("jsDiv");
+    element.appendChild(para);
+  </script>
+
+  <!-- Bootstrap core JavaScript
     ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
-    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
-    <script src="bootstrap/js/bootstrap.min.js"></script>
+  <!-- Placed at the end of the document so the pages load faster -->
+  <script
+    src="https://code.jquery.com/jquery-1.12.4.min.js"
+    integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ"
+    crossorigin="anonymous"
+  ></script>
+  <script>
+    window.jQuery ||
+      document.write(
+        '<script src="../../assets/js/vendor/jquery.min.js"><\/script>'
+      );
+  </script>
+  <script src="bootstrap/js/bootstrap.min.js"></script>
 </html>
