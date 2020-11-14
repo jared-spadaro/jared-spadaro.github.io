@@ -110,7 +110,20 @@
   </script>
 
   <!-- My React scripts -->
-  <script src="js/test.js"></script>
+  <script>
+    // Display a "Like" <button>
+    function LikeButton() {
+      return (
+        <button 
+            onClick={() => this.setState({ liked: true })}>
+            Like
+        </button>
+      );
+    }
+
+    const domContainer = document.querySelector("#react-container");
+    ReactDOM.render(LikeButton, domContainer);
+  </script>
 
   <!-- React Min -->
   <script src="https://unpkg.com/react@17/umd/react.production.min.js" crossorigin></script>
