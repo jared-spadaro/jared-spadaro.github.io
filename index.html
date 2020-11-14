@@ -23,12 +23,12 @@
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" />
 
     <!-- Custom styles for this template -->
-    <link href="starter-template.css" rel="stylesheet" />
+    <link href="css/starter-template.css" rel="stylesheet" />
     
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-    <link rel="manifest" href="/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+    <link rel="manifest" href="favicon/site.webmanifest">
   </head>
   <body>
     <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
@@ -101,25 +101,27 @@
       <h1>Official Site of Antisocialistic</h1>
       <p class="lead">Actual features TBD.</p>
     </div>
+    <div id="react-container"></div>
   </div>
 
+  <!-- My bogus script -->
   <script>
       console.log('test');
   </script>
 
-  <!-- Bootstrap core JavaScript
-    ================================================== -->
-  <!-- Placed at the end of the document so the pages load faster -->
+  <!-- My React scripts -->
+  <script type="text/babel" src="js/test.js"></script>
+
+  <!-- React Min -->
+  <script src="https://unpkg.com/react@17/umd/react.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+  <!-- Bootstrap core JavaScript -->
   <script
     src="https://code.jquery.com/jquery-1.12.4.min.js"
     integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ"
     crossorigin="anonymous"
   ></script>
-  <script>
-    window.jQuery ||
-      document.write(
-        '<script src="../../assets/js/vendor/jquery.min.js"><\/script>'
-      );
-  </script>
   <script src="bootstrap/js/bootstrap.min.js"></script>
 </html>
