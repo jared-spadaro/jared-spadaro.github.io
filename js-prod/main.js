@@ -43,12 +43,12 @@ var Board = function (_React$Component) {
       var ndx = 0;
       for (var i = 0; i < 20; i++) {
         var squares = [];
-        for (var _j = 0; _j < 20; _j++) {
+        for (var j = 0; j < 20; j++) {
           squares.push(this.renderSquare(ndx++));
         }
         squareRows.push(React.createElement(
           "div",
-          { key: j, className: "board-row" },
+          { key: i, className: "board-row" },
           squares
         ));
       }
