@@ -110,7 +110,29 @@
   </script>
 
   <!-- My React scripts -->
-  <script type="module" src="js-prod/test.js"></script>
+  <script>
+    class LikeButton extends React.Component {
+      constructor(props) {
+        super(props);
+        this.state = { liked: false };
+      }
+    
+      render() {
+        if (this.state.liked) {
+          return "You liked this.";
+        }
+        return (
+          <button 
+            onClick={() => this.setState({ liked: true })}>
+            Like
+          </button>
+        );
+      }
+    }
+    
+    const domContainer = document.querySelector("#react-container");
+    ReactDOM.render(LikeButton, domContainer);
+  </script>
 
   <!-- React Min -->
   <script src="https://unpkg.com/react@17/umd/react.production.min.js" crossorigin></script>
