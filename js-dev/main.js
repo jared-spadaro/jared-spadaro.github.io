@@ -1,25 +1,40 @@
 "use strict";
 
-class LikeButton extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { liked: false };
+function Square(props) {
+  return (
+    <button className="square" onClick={props.onClick}>
+      {props.value}
+    </button>
+  );
+}
+
+class Board extends React.Component {
+  renderSquare(i) {
+    return (
+      <Square
+        key={i}
+        value={i}
+        onClick={() => console.log('Square[' + i + '] rendered')}
+      />
+    );
   }
 
   render() {
-    if (this.state.liked) {
-      return "You liked this.";
+    let squareRows = [];
+    let ndx = 0;
+    for (let i = 0; i < 20; i++) {
+      let squares = [];
+      for (let j = 0; j < 20; j++) {
+        squares.push(this.renderSquare(ndx++));
+      }
+      squareRows.push(<div key={j} className="board-row">{squares}</div>);
     }
     return (
       <div>
-        <button 
-          onClick={() => this.setState({ liked: true })}>
-          Like
-        </button>
-        <p>testing</p>
+        {squareRows}
       </div>
     );
   }
 }
 
-ReactDOM.render(<LikeButton/>, document.querySelector("#react-container"));
+ReactDOM.render(<Board/>, document.querySelector("#snake-game"));

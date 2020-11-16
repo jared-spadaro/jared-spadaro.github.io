@@ -8,47 +8,59 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var LikeButton = function (_React$Component) {
-  _inherits(LikeButton, _React$Component);
+function Square(props) {
+  return React.createElement(
+    "button",
+    { className: "square", onClick: props.onClick },
+    props.value
+  );
+}
 
-  function LikeButton(props) {
-    _classCallCheck(this, LikeButton);
+var Board = function (_React$Component) {
+  _inherits(Board, _React$Component);
 
-    var _this = _possibleConstructorReturn(this, (LikeButton.__proto__ || Object.getPrototypeOf(LikeButton)).call(this, props));
+  function Board() {
+    _classCallCheck(this, Board);
 
-    _this.state = { liked: false };
-    return _this;
+    return _possibleConstructorReturn(this, (Board.__proto__ || Object.getPrototypeOf(Board)).apply(this, arguments));
   }
 
-  _createClass(LikeButton, [{
+  _createClass(Board, [{
+    key: "renderSquare",
+    value: function renderSquare(i) {
+      return React.createElement(Square, {
+        key: i,
+        value: i,
+        onClick: function onClick() {
+          return console.log('Square[' + i + '] rendered');
+        }
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
-      var _this2 = this;
-
-      if (this.state.liked) {
-        return "You liked this.";
+      var squareRows = [];
+      var ndx = 0;
+      for (var i = 0; i < 20; i++) {
+        var squares = [];
+        for (var _j = 0; _j < 20; _j++) {
+          squares.push(this.renderSquare(ndx++));
+        }
+        squareRows.push(React.createElement(
+          "div",
+          { key: j, className: "board-row" },
+          squares
+        ));
       }
       return React.createElement(
         "div",
         null,
-        React.createElement(
-          "button",
-          {
-            onClick: function onClick() {
-              return _this2.setState({ liked: true });
-            } },
-          "Like"
-        ),
-        React.createElement(
-          "p",
-          null,
-          "testing"
-        )
+        squareRows
       );
     }
   }]);
 
-  return LikeButton;
+  return Board;
 }(React.Component);
 
-ReactDOM.render(React.createElement(LikeButton, null), document.querySelector("#react-container"));
+ReactDOM.render(React.createElement(Board, null), document.querySelector("#snake-game"));
