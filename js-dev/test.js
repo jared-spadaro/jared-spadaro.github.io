@@ -11,15 +11,15 @@ class LikeButton extends React.Component {
       return "You liked this.";
     }
     return (
-      <button 
-        onClick={() => this.setState({ liked: true })}>
-        Like
-      </button>
+      <div>
+        <button 
+          onClick={() => this.setState({ liked: true })}>
+          Like
+        </button>
+        <p>testing</p>
+      </div>
     );
   }
 }
 
-const domContainer = document.querySelector("#react-container");
-ReactDOM.render(<LikeButton/>, domContainer);
-console.log('rendered node --> ' + JSON.stringify(LikeButton));
-console.log('testing456');
+ReactDOM.render(<LikeButton />, document.getElementById("react-container"));

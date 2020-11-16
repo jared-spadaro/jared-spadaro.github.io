@@ -29,12 +29,21 @@ var LikeButton = function (_React$Component) {
         return "You liked this.";
       }
       return React.createElement(
-        "button",
-        {
-          onClick: function onClick() {
-            return _this2.setState({ liked: true });
-          } },
-        "Like"
+        "div",
+        null,
+        React.createElement(
+          "button",
+          {
+            onClick: function onClick() {
+              return _this2.setState({ liked: true });
+            } },
+          "Like"
+        ),
+        React.createElement(
+          "p",
+          null,
+          "testing"
+        )
       );
     }
   }]);
@@ -42,7 +51,4 @@ var LikeButton = function (_React$Component) {
   return LikeButton;
 }(React.Component);
 
-var domContainer = document.querySelector("#react-container");
-ReactDOM.render(React.createElement(LikeButton, null), domContainer);
-console.log('rendered node --> ' + JSON.stringify(LikeButton));
-console.log('testing456');
+ReactDOM.render(React.createElement(LikeButton, null), document.getElementById("react-container"));
