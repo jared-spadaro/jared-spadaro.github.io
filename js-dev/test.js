@@ -1,8 +1,5 @@
 "use strict";
 
-import ReactDOM from "react-dom";
-import react from "react";
-
 class LikeButton extends React.Component {
   constructor(props) {
     super(props);
