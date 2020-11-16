@@ -51,4 +51,4 @@ var LikeButton = function (_React$Component) {
   return LikeButton;
 }(React.Component);
 
-ReactDOM.render(React.createElement(LikeButton, null), document.getElementById("react-container"));
+ReactDOM.render(React.createElement(LikeButton, null), document.querySelector("react-container"));
