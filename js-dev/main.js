@@ -1,10 +1,10 @@
 "use strict";
 
-const NUM_SQUARES = 441;
-const RIGHT = 0;
-const LEFT = 1;
-const UP = 2;
-const DOWN = 3;
+const NUM_SQUARES = 400;
+const RIGHT = 1;
+const LEFT = -1;
+const UP = -20;
+const DOWN = 20;
 
 function Square(props) {
   return (
@@ -18,8 +18,8 @@ class Board extends React.Component {
     super(props);
     this.state = {
       squares : this.initBoard(),
-      headDirection : 1,
-      tailDirection : 1,
+      headDirection : RIGHT,
+      tailDirection : RIGHT,
       head : 112,
       tail : 110,
       turns : new Map(), //<location, directon> -- add on keyboardInterrupt, remove when tail arrives
@@ -28,7 +28,7 @@ class Board extends React.Component {
     this.initBoard();
     this.handleKeyPress = this.handleKeyPress.bind(this);
     this.handleClick = this.handleClick.bind(this);
-    window.setInterval(this.move.bind(this), 500);
+    window.setInterval(this.move.bind(this), 100);
   }
 
   initBoard() {
@@ -43,16 +43,16 @@ class Board extends React.Component {
     console.log('in key press, event.key = ' + event.key);
     switch (event.key) {
       case 'ArrowDown':
-        dir = 21;
+        dir = DOWN;
         break;
       case 'ArrowUp':
-        dir = -21;
+        dir = UP;
         break;
       case 'ArrowLeft':
-        dir = -1;
+        dir = LEFT;
         break;
       case 'ArrowRight':
-        dir = 1;
+        dir = RIGHT;
         break;
       default:
         dir = null;
@@ -72,11 +72,18 @@ class Board extends React.Component {
     const squares = this.state.squares.slice();
     const dir = this.state.headDirection;
     const turns = new Map(this.state.turns);
-    //move the head in the proper direction
-    if (this.state.head + dir > 0 && this.state.head + dir < NUM_SQUARES) {
-      squares[this.state.head + dir] = true;
+    
+    //first, check for boundaries
+    if ((dir === RIGHT && (this.state.head + 1) % 20 === 0) ||  //19,39,59,79,etc
+     (dir === LEFT && this.state.head % 20 === 0) ||
+     (dir === UP && this.state.head < 20) ||
+     (dir === DOWN && this.state.head > 379)) {
+      throw new Error('reached boundary');
     }
-    else throw new Error('reached boundary');
+
+    //move the head in the proper direction
+    squares[this.state.head + dir] = true;
+    //set tail to false
     squares[this.state.tail] = false;
     //check if tail is at a turn
     let tailDir;
@@ -118,9 +125,9 @@ class Board extends React.Component {
   render() {
     let squareRows = [];
     let ndx = 0;
-    for (let i = 0; i < 21; i++) {
+    for (let i = 0; i < 20; i++) {
       let squares = [];
-      for (let j = 0; j < 21; j++) {
+      for (let j = 0; j < 20; j++) {
         squares.push(this.renderSquare(ndx++));
       }
       squareRows.push(<div key={i} className="board-row">{squares}</div>);

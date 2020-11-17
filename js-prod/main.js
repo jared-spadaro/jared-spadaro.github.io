@@ -8,11 +8,11 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var NUM_SQUARES = 441;
-var RIGHT = 0;
-var LEFT = 1;
-var UP = 2;
-var DOWN = 3;
+var NUM_SQUARES = 400;
+var RIGHT = 1;
+var LEFT = -1;
+var UP = -20;
+var DOWN = 20;
 
 function Square(props) {
   return React.createElement('button', { key: props.id, id: props.id, className: props.class });
@@ -28,8 +28,8 @@ var Board = function (_React$Component) {
 
     _this.state = {
       squares: _this.initBoard(),
-      headDirection: 1,
-      tailDirection: 1,
+      headDirection: RIGHT,
+      tailDirection: RIGHT,
       head: 112,
       tail: 110,
       turns: new Map(), //<location, directon> -- add on keyboardInterrupt, remove when tail arrives
@@ -38,7 +38,7 @@ var Board = function (_React$Component) {
     _this.initBoard();
     _this.handleKeyPress = _this.handleKeyPress.bind(_this);
     _this.handleClick = _this.handleClick.bind(_this);
-    window.setInterval(_this.move.bind(_this), 500);
+    window.setInterval(_this.move.bind(_this), 100);
     return _this;
   }
 
@@ -57,16 +57,16 @@ var Board = function (_React$Component) {
       console.log('in key press, event.key = ' + event.key);
       switch (event.key) {
         case 'ArrowDown':
-          dir = 21;
+          dir = DOWN;
           break;
         case 'ArrowUp':
-          dir = -21;
+          dir = UP;
           break;
         case 'ArrowLeft':
-          dir = -1;
+          dir = LEFT;
           break;
         case 'ArrowRight':
-          dir = 1;
+          dir = RIGHT;
           break;
         default:
           dir = null;
@@ -86,10 +86,16 @@ var Board = function (_React$Component) {
       var squares = this.state.squares.slice();
       var dir = this.state.headDirection;
       var turns = new Map(this.state.turns);
+
+      //first, check for boundaries
+      if (dir === RIGHT && (this.state.head + 1) % 20 === 0 || //19,39,59,79,etc
+      dir === LEFT && this.state.head % 20 === 0 || dir === UP && this.state.head < 20 || dir === DOWN && this.state.head > 379) {
+        throw new Error('reached boundary');
+      }
+
       //move the head in the proper direction
-      if (this.state.head + dir > 0 && this.state.head + dir < NUM_SQUARES) {
-        squares[this.state.head + dir] = true;
-      } else throw new Error('reached boundary');
+      squares[this.state.head + dir] = true;
+      //set tail to false
       squares[this.state.tail] = false;
       //check if tail is at a turn
       var tailDir = void 0;
@@ -131,9 +137,9 @@ var Board = function (_React$Component) {
     value: function render() {
       var squareRows = [];
       var ndx = 0;
-      for (var i = 0; i < 21; i++) {
+      for (var i = 0; i < 20; i++) {
         var squares = [];
-        for (var j = 0; j < 21; j++) {
+        for (var j = 0; j < 20; j++) {
           squares.push(this.renderSquare(ndx++));
         }
         squareRows.push(React.createElement(
