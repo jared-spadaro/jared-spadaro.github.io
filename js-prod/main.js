@@ -130,7 +130,7 @@ var Board = function (_React$Component) {
       }
       return React.createElement(
         'div',
-        { onkeypress: this.handleKeyPress },
+        { onKeyPress: this.handleKeyPress },
         squareRows
       );
     }
