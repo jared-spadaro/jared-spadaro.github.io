@@ -44,7 +44,7 @@ var Board = function (_React$Component) {
       var className = this.state.squares[i] ? 'black-square' : 'white-square';
       return React.createElement(Square, {
         id: i,
-        onClick: function onClick(i) {
+        onClick: function onClick() {
           return _this2.handleClick(i);
         },
         'class': className
