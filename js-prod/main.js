@@ -25,19 +25,7 @@ var Board = function (_React$Component) {
     _this.state = {
       squares: Array(400).fill(false)
     };
-    window.setInterval(function () {
-      var squares = _this.state.squares.slice();
-      for (var i = 0; i < numSquares; i++) {
-        if (!i || i % 2 === 0) {
-          squares[i] = false;
-        } else {
-          squares[i] = true;
-        }
-      }
-      _this.setState({
-        squares: squares
-      });
-    }, 500);
+    window.setInterval(_this.setSquares.bind(_this), 500);
     return _this;
   }
 
@@ -45,6 +33,21 @@ var Board = function (_React$Component) {
     key: 'handleClick',
     value: function handleClick(i) {
       console.log('handle click, i = ' + i);
+    }
+  }, {
+    key: 'setSquares',
+    value: function setSquares() {
+      var squares = this.state.squares.slice();
+      for (var i = 0; i < numSquares; i++) {
+        if (!i || i % 2 === 0) {
+          squares[i] = false;
+        } else {
+          squares[i] = true;
+        }
+      }
+      this.setState({
+        squares: squares
+      });
     }
   }, {
     key: 'componentDidMount',
