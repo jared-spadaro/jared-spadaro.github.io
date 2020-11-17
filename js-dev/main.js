@@ -8,7 +8,7 @@ const DOWN = 3;
 
 function Square(props) {
   return (
-    <button key={props.key} id={props.key} className={props.class}></button>
+    <button key={props.id} id={props.id} className={props.class}></button>
   );
 }
 
@@ -98,6 +98,7 @@ class Board extends React.Component {
     return (
       <Square
         key={i}
+        id={i}
         class={className}
       />
     );

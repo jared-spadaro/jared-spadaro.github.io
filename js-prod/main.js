@@ -15,7 +15,7 @@ var UP = 2;
 var DOWN = 3;
 
 function Square(props) {
-  return React.createElement('button', { key: props.key, id: props.key, className: props.class });
+  return React.createElement('button', { key: props.id, id: props.id, className: props.class });
 }
 
 var Board = function (_React$Component) {
@@ -109,6 +109,7 @@ var Board = function (_React$Component) {
       var className = this.state.squares[i] ? 'black-square' : 'white-square';
       return React.createElement(Square, {
         key: i,
+        id: i,
         'class': className
       });
     }
