@@ -131,7 +131,7 @@ var Board = function (_React$Component) {
       }
       return React.createElement(
         'div',
-        { tabIndex: '0', onKeyPress: this.handleKeyPress },
+        { id: 'board', tabIndex: '-1', onKeyPress: this.handleKeyPress },
         squareRows
       );
     }
@@ -141,4 +141,4 @@ var Board = function (_React$Component) {
 }(React.Component);
 
 ReactDOM.render(React.createElement(Board, null), document.querySelector("#snake-game"));
-window.setInterval(this.setSquares);
+document.querySelector("#board").focus();
