@@ -20,7 +20,8 @@ class Board extends React.Component {
       squares : this.initBoard(),
       direction : RIGHT,
       head : 112,
-      tail : 110
+      tail : 110,
+      turns : [] //add on keyboardInterrupt, remove when tail arrives
     };
     this.initBoard();
     window.setInterval(this.move.bind(this), 500);
@@ -71,6 +72,26 @@ class Board extends React.Component {
     );
   }
 
+  handleKeyPress(event) {
+    let dir;
+    console.log('in key press, event.key = ' + event.key);
+    switch (event.key) {
+      case 'ArrowDown':
+        dir = DOWN;
+      case 'ArrowUp':
+        dir = UP;
+      case 'ArrowLeft':
+        dir = LEFT;
+      case 'ArrowRight':
+        dir = RIGHT;
+      default:
+        dir = null;
+    }
+    this.setState({
+      direction : dir
+    });
+  }
+
   render() {
     let squareRows = [];
     let ndx = 0;
@@ -82,7 +103,7 @@ class Board extends React.Component {
       squareRows.push(<div key={i} className="board-row">{squares}</div>);
     }
     return (
-      <div>
+      <div onkeypress={this.handleKeyPress}>
         {squareRows}
       </div>
     );

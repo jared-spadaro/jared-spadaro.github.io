@@ -30,7 +30,8 @@ var Board = function (_React$Component) {
       squares: _this.initBoard(),
       direction: RIGHT,
       head: 112,
-      tail: 110
+      tail: 110,
+      turns: [] //add on keyboardInterrupt, remove when tail arrives
     };
     _this.initBoard();
     window.setInterval(_this.move.bind(_this), 500);
@@ -88,6 +89,27 @@ var Board = function (_React$Component) {
       });
     }
   }, {
+    key: 'handleKeyPress',
+    value: function handleKeyPress(event) {
+      var dir = void 0;
+      console.log('in key press, event.key = ' + event.key);
+      switch (event.key) {
+        case 'ArrowDown':
+          dir = DOWN;
+        case 'ArrowUp':
+          dir = UP;
+        case 'ArrowLeft':
+          dir = LEFT;
+        case 'ArrowRight':
+          dir = RIGHT;
+        default:
+          dir = null;
+      }
+      this.setState({
+        direction: dir
+      });
+    }
+  }, {
     key: 'render',
     value: function render() {
       var squareRows = [];
@@ -105,7 +127,7 @@ var Board = function (_React$Component) {
       }
       return React.createElement(
         'div',
-        null,
+        { onkeypress: this.handleKeyPress },
         squareRows
       );
     }
