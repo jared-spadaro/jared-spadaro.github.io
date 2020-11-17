@@ -8,7 +8,7 @@ const DOWN = 3;
 
 function Square(props) {
   return (
-    <button key={props.id} id={props.id} className={props.class} onClick={props.onClick}></button>
+    <button key={props.id} id={props.id} className={props.class}></button>
   );
 }
 
@@ -18,10 +18,11 @@ class Board extends React.Component {
     super(props);
     this.state = {
       squares : this.initBoard(),
-      direction : RIGHT,
+      headDirection : RIGHT,
+      tailDirection : RIGHT,
       head : 112,
       tail : 110,
-      turns : [] //add on keyboardInterrupt, remove when tail arrives
+      turns : new Map() //<location, directon> -- add on keyboardInterrupt, remove when tail arrives
     };
     this.initBoard();
     window.setInterval(this.move.bind(this), 500);
@@ -32,25 +33,56 @@ class Board extends React.Component {
     squares[110] = squares[111] = squares[112] = true;
     return squares;
   }
-
-  handleClick(i) {
-    console.log('handle click, i = ' + i);
+  
+  handleKeyPress(event) {
+    let dir;
+    console.log('in key press, event.key = ' + event.key);
+    switch (event.key) {
+      case 'ArrowDown':
+        dir = 21;
+      case 'ArrowUp':
+        dir = -21;
+      case 'ArrowLeft':
+        dir = -1;
+      case 'ArrowRight':
+        dir = 1;
+      default:
+        dir = null;
+    }
+    const turns = this.state.turns.slice();
+    if (dir) turns.set(this.state.head, dir);
+    else throw new Error('dir is null');
+    this.setState({
+      headDirection : dir,
+      turns : turns
+    });
   }
 
   move() {
     const squares = this.state.squares.slice();
-    const dir = this.state.direction;
-    if (this.state.head + 1 < NUM_SQUARES) {
-      squares[this.state.head + 1] = true;
+    const dir = this.state.headDirection;
+    const turns = new Map(this.state.turns);
+    //move the head in the proper direction
+    if (this.state.head + dir > 0 && this.state.head + dir < NUM_SQUARES) {
+      squares[this.state.head + dir] = true;
     }
-    if (this.state.tail < NUM_SQUARES - 3) {
-      squares[this.state.tail] = false;
+    else throw new Error('reached boundary');
+    squares[this.state.tail] = false;
+    //check if tail is at a turn
+    let tailDir;
+    if (turns.has(this.state.tail)) {
+      tailDir = turns.get(this.state.tail);
+      turns.delete(this.state.tail);
+    }
+    else {
+      tailDir = this.state.tailDirection;
     }
     this.setState({
       squares : squares,
-      swap : !this.state.swap,
-      head : this.state.head+1,
-      tail : this.state.tail+1
+      head : this.state.head + dir,
+      tail : this.state.tail + tailDir,
+      tailDirection : tailDir,
+      turns : turns
     });
   }
 
@@ -66,30 +98,9 @@ class Board extends React.Component {
     return (
       <Square
         id={i}
-        onClick={() => this.handleClick(i)}
         class={className}
       />
     );
-  }
-
-  handleKeyPress(event) {
-    let dir;
-    console.log('in key press, event.key = ' + event.key);
-    switch (event.key) {
-      case 'ArrowDown':
-        dir = DOWN;
-      case 'ArrowUp':
-        dir = UP;
-      case 'ArrowLeft':
-        dir = LEFT;
-      case 'ArrowRight':
-        dir = RIGHT;
-      default:
-        dir = null;
-    }
-    this.setState({
-      direction : dir
-    });
   }
 
   render() {
