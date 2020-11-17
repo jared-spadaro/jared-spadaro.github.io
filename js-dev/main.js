@@ -22,11 +22,13 @@ class Board extends React.Component {
       tailDirection : 1,
       head : 112,
       tail : 110,
-      turns : new Map() //<location, directon> -- add on keyboardInterrupt, remove when tail arrives
+      turns : new Map(), //<location, directon> -- add on keyboardInterrupt, remove when tail arrives
+      start : false
     };
     this.initBoard();
     this.handleKeyPress = this.handleKeyPress.bind(this);
-    window.setInterval(this.move.bind(this), 100);
+    this.handleClick = this.handleClick.bind(this);
+    window.setInterval(this.move.bind(this), 500);
   }
 
   initBoard() {
@@ -66,6 +68,7 @@ class Board extends React.Component {
   }
 
   move() {
+    if (!this.state.start) return;
     const squares = this.state.squares.slice();
     const dir = this.state.headDirection;
     const turns = new Map(this.state.turns);
@@ -93,11 +96,12 @@ class Board extends React.Component {
     });
   }
 
-  componentDidMount() {
-  }
-
-  componentWillUnmount() {
-
+  handleClick() {
+    if (!this.state.start) {
+      this.setState({
+        start : true
+      });
+    }
   }
 
   renderSquare(i) {
@@ -122,7 +126,7 @@ class Board extends React.Component {
       squareRows.push(<div key={i} className="board-row">{squares}</div>);
     }
     return (
-      <div id="board" tabIndex="0" onKeyDown={this.handleKeyPress}>
+      <div id="board" tabIndex="0" onClick={this.handleClick} onKeyDown={this.handleKeyPress}>
         {squareRows}
       </div>
     );

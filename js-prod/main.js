@@ -32,11 +32,13 @@ var Board = function (_React$Component) {
       tailDirection: 1,
       head: 112,
       tail: 110,
-      turns: new Map() //<location, directon> -- add on keyboardInterrupt, remove when tail arrives
+      turns: new Map(), //<location, directon> -- add on keyboardInterrupt, remove when tail arrives
+      start: false
     };
     _this.initBoard();
     _this.handleKeyPress = _this.handleKeyPress.bind(_this);
-    window.setInterval(_this.move.bind(_this), 100);
+    _this.handleClick = _this.handleClick.bind(_this);
+    window.setInterval(_this.move.bind(_this), 500);
     return _this;
   }
 
@@ -80,6 +82,7 @@ var Board = function (_React$Component) {
   }, {
     key: 'move',
     value: function move() {
+      if (!this.state.start) return;
       var squares = this.state.squares.slice();
       var dir = this.state.headDirection;
       var turns = new Map(this.state.turns);
@@ -105,11 +108,14 @@ var Board = function (_React$Component) {
       });
     }
   }, {
-    key: 'componentDidMount',
-    value: function componentDidMount() {}
-  }, {
-    key: 'componentWillUnmount',
-    value: function componentWillUnmount() {}
+    key: 'handleClick',
+    value: function handleClick() {
+      if (!this.state.start) {
+        this.setState({
+          start: true
+        });
+      }
+    }
   }, {
     key: 'renderSquare',
     value: function renderSquare(i) {
@@ -138,7 +144,7 @@ var Board = function (_React$Component) {
       }
       return React.createElement(
         'div',
-        { id: 'board', tabIndex: '0', onKeyDown: this.handleKeyPress },
+        { id: 'board', tabIndex: '0', onClick: this.handleClick, onKeyDown: this.handleKeyPress },
         squareRows
       );
     }
