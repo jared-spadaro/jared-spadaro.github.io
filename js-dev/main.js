@@ -15,7 +15,6 @@ class Board extends React.Component {
     this.state = {
       squares : Array(400).fill(false)
     };
-    window.setInterval(this.setSquares, 500);
   }
 
   handleClick(i) {
@@ -38,7 +37,7 @@ class Board extends React.Component {
   }
 
   componentDidMount() {
-
+    window.setInterval(this.setSquares, 500);
   }
 
   componentWillUnmount() {

@@ -25,7 +25,6 @@ var Board = function (_React$Component) {
     _this.state = {
       squares: Array(400).fill(false)
     };
-    window.setInterval(_this.setSquares, 500);
     return _this;
   }
 
@@ -51,7 +50,9 @@ var Board = function (_React$Component) {
     }
   }, {
     key: 'componentDidMount',
-    value: function componentDidMount() {}
+    value: function componentDidMount() {
+      window.setInterval(this.setSquares, 500);
+    }
   }, {
     key: 'componentWillUnmount',
     value: function componentWillUnmount() {}
