@@ -8,7 +8,7 @@ const DOWN = 3;
 
 function Square(props) {
   return (
-    <button key={props.id} id={props.id} className={props.class}></button>
+    <button key={props.key} id={props.key} className={props.class}></button>
   );
 }
 
@@ -97,7 +97,7 @@ class Board extends React.Component {
     const className = this.state.squares[i] ? 'black-square' : 'white-square';
     return (
       <Square
-        id={i}
+        key={i}
         class={className}
       />
     );
