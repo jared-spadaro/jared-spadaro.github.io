@@ -115,7 +115,7 @@ class Board extends React.Component {
       squareRows.push(<div key={i} className="board-row">{squares}</div>);
     }
     return (
-      <div id="board" tabIndex="-1" onKeyPress={this.handleKeyPress}>
+      <div id="board" tabIndex="-1" onKeyPress={this.handleKeyPress()}>
         {squareRows}
       </div>
     );

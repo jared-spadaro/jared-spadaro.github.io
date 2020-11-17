@@ -131,7 +131,7 @@ var Board = function (_React$Component) {
       }
       return React.createElement(
         'div',
-        { id: 'board', tabIndex: '-1', onKeyPress: this.handleKeyPress },
+        { id: 'board', tabIndex: '-1', onKeyPress: this.handleKeyPress() },
         squareRows
       );
     }
