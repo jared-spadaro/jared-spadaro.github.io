@@ -33,8 +33,12 @@ class Board extends React.Component {
     squares[110] = squares[111] = squares[112] = true;
     return squares;
   }
+
+  handleKeyPress = (event) => {
+    console.log('event code ' + event.key);
+  }
   
-  handleKeyPress(event) {
+  /*handleKeyPress(event) {
     let dir;
     console.log('in key press, event.key = ' + event.key);
     switch (event.key) {
@@ -56,7 +60,7 @@ class Board extends React.Component {
       headDirection : dir,
       turns : turns
     });
-  }
+  }*/
 
   move() {
     const squares = this.state.squares.slice();
@@ -115,7 +119,7 @@ class Board extends React.Component {
       squareRows.push(<div key={i} className="board-row">{squares}</div>);
     }
     return (
-      <div id="board" tabIndex="-1" onKeyPress={this.handleKeyPress()}>
+      <div id="board" tabIndex="-1" onKeyPress={this.handleKeyPress}>
         {squareRows}
       </div>
     );
