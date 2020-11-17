@@ -25,6 +25,7 @@ class Board extends React.Component {
       turns : new Map() //<location, directon> -- add on keyboardInterrupt, remove when tail arrives
     };
     this.initBoard();
+    this.handleKeyPress = this.handleKeyPress.bind(this);
     window.setInterval(this.move.bind(this), 500);
   }
 
@@ -34,11 +35,8 @@ class Board extends React.Component {
     return squares;
   }
 
-  handleKeyPress = (event) => {
-    console.log('event code ' + event.key);
-  }
-  
-  /*handleKeyPress(event) {
+  handleKeyPress(event) {
+    event.preventDefault();
     let dir;
     console.log('in key press, event.key = ' + event.key);
     switch (event.key) {
@@ -60,7 +58,7 @@ class Board extends React.Component {
       headDirection : dir,
       turns : turns
     });
-  }*/
+  }
 
   move() {
     const squares = this.state.squares.slice();

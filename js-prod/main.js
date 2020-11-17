@@ -26,10 +26,6 @@ var Board = function (_React$Component) {
 
     var _this = _possibleConstructorReturn(this, (Board.__proto__ || Object.getPrototypeOf(Board)).call(this, props));
 
-    _this.handleKeyPress = function (event) {
-      console.log('event code ' + event.key);
-    };
-
     _this.state = {
       squares: _this.initBoard(),
       headDirection: 1,
@@ -39,6 +35,7 @@ var Board = function (_React$Component) {
       turns: new Map() //<location, directon> -- add on keyboardInterrupt, remove when tail arrives
     };
     _this.initBoard();
+    _this.handleKeyPress = _this.handleKeyPress.bind(_this);
     window.setInterval(_this.move.bind(_this), 500);
     return _this;
   }
@@ -51,11 +48,10 @@ var Board = function (_React$Component) {
       return squares;
     }
   }, {
-    key: 'move',
-
-
-    /*handleKeyPress(event) {
-      let dir;
+    key: 'handleKeyPress',
+    value: function handleKeyPress(event) {
+      event.preventDefault();
+      var dir = void 0;
       console.log('in key press, event.key = ' + event.key);
       switch (event.key) {
         case 'ArrowDown':
@@ -69,15 +65,15 @@ var Board = function (_React$Component) {
         default:
           dir = null;
       }
-      const turns = this.state.turns.slice();
-      if (dir) turns.set(this.state.head, dir);
-      else throw new Error('dir is null');
+      var turns = this.state.turns.slice();
+      if (dir) turns.set(this.state.head, dir);else throw new Error('dir is null');
       this.setState({
-        headDirection : dir,
-        turns : turns
+        headDirection: dir,
+        turns: turns
       });
-    }*/
-
+    }
+  }, {
+    key: 'move',
     value: function move() {
       var squares = this.state.squares.slice();
       var dir = this.state.headDirection;
