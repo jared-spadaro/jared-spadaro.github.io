@@ -29,16 +29,17 @@ var Board = function (_React$Component) {
   _createClass(Board, [{
     key: 'handleClick',
     value: function handleClick(i) {
+      console.log('handle click. i = ' + i);
       var squares = this.state.squares.slice();
       squares[i] = !squares[i];
       this.setState({
         squares: squares
       });
-      console.log('setting state of square [' + i + '] to ' + squares[i] + ', state[' + i + '] = ' + this.state.squares[i]);
     }
   }, {
     key: 'renderSquare',
     value: function renderSquare(i) {
+      console.log('render square. i = ' + i);
       var className = this.state.squares[i] ? 'black-square' : 'white-square';
       return React.createElement(Square, {
         id: i,

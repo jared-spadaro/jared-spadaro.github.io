@@ -15,15 +15,16 @@ class Board extends React.Component {
   }
 
   handleClick(i) {
+    console.log('handle click. i = ' + i);
     const squares = this.state.squares.slice();
     squares[i] = !squares[i];
     this.setState({
       squares : squares
     });
-    console.log('setting state of square [' + i +'] to ' + squares[i] + ', state[' + i + '] = ' + this.state.squares[i]);
   }
 
   renderSquare(i) {
+    console.log('render square. i = ' + i);
     const className = this.state.squares[i] ? 'black-square' : 'white-square';
     return (
       <Square
