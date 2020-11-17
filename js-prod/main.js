@@ -36,7 +36,7 @@ var Board = function (_React$Component) {
     };
     _this.initBoard();
     _this.handleKeyPress = _this.handleKeyPress.bind(_this);
-    window.setInterval(_this.move.bind(_this), 500);
+    window.setInterval(_this.move.bind(_this), 100);
     return _this;
   }
 

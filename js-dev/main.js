@@ -26,7 +26,7 @@ class Board extends React.Component {
     };
     this.initBoard();
     this.handleKeyPress = this.handleKeyPress.bind(this);
-    window.setInterval(this.move.bind(this), 500);
+    window.setInterval(this.move.bind(this), 100);
   }
 
   initBoard() {
