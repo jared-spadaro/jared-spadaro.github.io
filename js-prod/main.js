@@ -65,7 +65,7 @@ var Board = function (_React$Component) {
         default:
           dir = null;
       }
-      var turns = this.state.turns.slice();
+      var turns = new Map(this.state.turns);
       if (dir) turns.set(this.state.head, dir);else throw new Error('dir is null');
       this.setState({
         headDirection: dir,
@@ -143,5 +143,4 @@ var Board = function (_React$Component) {
 }(React.Component);
 
 ReactDOM.render(React.createElement(Board, null), document.querySelector("#snake-game"));
-document.querySelector("#board").contentEditable = true;
 document.querySelector("#board").focus();

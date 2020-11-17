@@ -51,7 +51,7 @@ class Board extends React.Component {
       default:
         dir = null;
     }
-    const turns = this.state.turns.slice();
+    const turns = new Map(this.state.turns);
     if (dir) turns.set(this.state.head, dir);
     else throw new Error('dir is null');
     this.setState({
@@ -125,5 +125,4 @@ class Board extends React.Component {
 }
 
 ReactDOM.render(<Board/>, document.querySelector("#snake-game"));
-document.querySelector("#board").contentEditable = true;
 document.querySelector("#board").focus();
