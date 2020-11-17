@@ -52,13 +52,16 @@ var Board = function (_React$Component) {
     value: function move() {
       var squares = this.state.squares.slice();
       var dir = this.state.direction;
+      console.log('move, dir = ' + dir);
       for (var i = 0; i < NUM_SQUARES; i++) {
         if (squares[i]) {
           if (dir === RIGHT) {
             if (i < NUM_SQUARES - 1 && !squares[i + 1]) {
+              console.log('adding square in move');
               squares[i + 1] = true;
             }
             if (i > 0 && !squares[i - 1]) {
+              console.log('removing square in move');
               squares[i] = false;
             }
           }
