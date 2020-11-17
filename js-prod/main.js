@@ -34,15 +34,14 @@ var Board = function (_React$Component) {
       this.setState({
         squares: squares
       });
+      console.log('setting state of square [' + i + '] to ' + squares[i] + ', state[' + i + '] = ' + this.state.squares[i]);
     }
   }, {
     key: 'renderSquare',
     value: function renderSquare(i) {
       var _this2 = this;
 
-      console.log('render square invoked with input = ' + i + '/' + JSON.stringify(i));
       var className = this.state.squares[i] ? 'black-square' : 'white-square';
-      console.log('setting classname to ' + className + ', state = ' + JSON.stringify(this.state.squares));
       return React.createElement(Square, {
         id: i,
         onClick: function onClick(i) {

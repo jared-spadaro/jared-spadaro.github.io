@@ -20,12 +20,11 @@ class Board extends React.Component {
     this.setState({
       squares : squares
     });
+    console.log('setting state of square [' + i +'] to ' + squares[i] + ', state[' + i + '] = ' + this.state.squares[i]);
   }
 
   renderSquare(i) {
-    console.log('render square invoked with input = ' + i + '/' + JSON.stringify(i));
     const className = this.state.squares[i] ? 'black-square' : 'white-square';
-    console.log('setting classname to ' + className + ', state = ' + JSON.stringify(this.state.squares));
     return (
       <Square
         id={i}
