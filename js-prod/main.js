@@ -39,14 +39,10 @@ var Board = function (_React$Component) {
   }, {
     key: 'renderSquare',
     value: function renderSquare(i) {
-      var _this2 = this;
-
       var className = this.state.squares[i] ? 'black-square' : 'white-square';
       return React.createElement(Square, {
         id: i,
-        onClick: function onClick(i) {
-          return _this2.handleClick(i);
-        },
+        onClick: this.handleClick(i),
         'class': className
       });
     }
