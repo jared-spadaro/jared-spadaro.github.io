@@ -125,4 +125,5 @@ class Board extends React.Component {
 }
 
 ReactDOM.render(<Board/>, document.querySelector("#snake-game"));
+document.querySelector("#board").contentEditable = true;
 document.querySelector("#board").focus();

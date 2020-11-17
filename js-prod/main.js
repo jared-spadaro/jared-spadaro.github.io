@@ -143,4 +143,5 @@ var Board = function (_React$Component) {
 }(React.Component);
 
 ReactDOM.render(React.createElement(Board, null), document.querySelector("#snake-game"));
+document.querySelector("#board").contentEditable = true;
 document.querySelector("#board").focus();
