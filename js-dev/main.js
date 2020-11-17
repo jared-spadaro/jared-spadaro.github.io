@@ -2,7 +2,7 @@
 
 function Square(props) {
   return (
-    <button key={props.value} id={props.value} className={props.class} onClick={props.onClick}></button>
+    <button key={props.id} id={props.id} className={props.class} onClick={props.onClick}></button>
   );
 }
 
@@ -17,18 +17,18 @@ class Board extends React.Component {
   handleClick(i) {
     const squares = this.state.squares.slice();
     squares[i] = !squares[i];
-    console.log('setting square to ' + squares[i]);
     this.setState({
       squares : squares
     });
+    console.log('setting state to ' + JSON.stringify(this.state.squares));
   }
 
   renderSquare(i) {
     const className = this.state.squares[i] ? 'black-square' : 'white-square';
-    console.log('setting classname to ' + className);
+    console.log('setting classname to ' + className + ', state = ' + JSON.stringify(this.state.squares));
     return (
       <Square
-        value={i}
+        id={i}
         onClick={i => this.handleClick(i)}
         class={className}
       />

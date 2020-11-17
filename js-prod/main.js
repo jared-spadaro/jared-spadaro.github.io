@@ -9,7 +9,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 function Square(props) {
-  return React.createElement('button', { key: props.value, id: props.value, className: props.class, onClick: props.onClick });
+  return React.createElement('button', { key: props.id, id: props.id, className: props.class, onClick: props.onClick });
 }
 
 var Board = function (_React$Component) {
@@ -31,10 +31,10 @@ var Board = function (_React$Component) {
     value: function handleClick(i) {
       var squares = this.state.squares.slice();
       squares[i] = !squares[i];
-      console.log('setting square to ' + squares[i]);
       this.setState({
         squares: squares
       });
+      console.log('setting state to ' + JSON.stringify(this.state.squares));
     }
   }, {
     key: 'renderSquare',
@@ -42,9 +42,9 @@ var Board = function (_React$Component) {
       var _this2 = this;
 
       var className = this.state.squares[i] ? 'black-square' : 'white-square';
-      console.log('setting classname to ' + className);
+      console.log('setting classname to ' + className + ', state = ' + JSON.stringify(this.state.squares));
       return React.createElement(Square, {
-        value: i,
+        id: i,
         onClick: function onClick(i) {
           return _this2.handleClick(i);
         },
