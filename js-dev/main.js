@@ -13,7 +13,8 @@ class Board extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      squares : Array(400).fill(false)
+      squares : Array(400).fill(false),
+      swap : false
     };
     window.setInterval(this.setSquares.bind(this), 500);
   }
@@ -24,16 +25,18 @@ class Board extends React.Component {
 
   setSquares() {
     const squares = this.state.squares.slice();
+    const swap = this.state.swap;
     for (let i = 0; i < numSquares; i++) {
       if (!i || i % 2 === 0) {
-        squares[i] = false;
+        squares[i] = this.state.swap ? false : true;
       }
       else {
-        squares[i] = true;
+        squares[i] = this.state.swap ? true : false;
       }
     }
     this.setState({
-      squares : squares
+      squares : squares,
+      swap : !this.state.swap
     });
   }
 

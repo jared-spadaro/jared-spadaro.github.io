@@ -23,7 +23,8 @@ var Board = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (Board.__proto__ || Object.getPrototypeOf(Board)).call(this, props));
 
     _this.state = {
-      squares: Array(400).fill(false)
+      squares: Array(400).fill(false),
+      swap: false
     };
     window.setInterval(_this.setSquares.bind(_this), 500);
     return _this;
@@ -38,15 +39,17 @@ var Board = function (_React$Component) {
     key: 'setSquares',
     value: function setSquares() {
       var squares = this.state.squares.slice();
+      var swap = this.state.swap;
       for (var i = 0; i < numSquares; i++) {
         if (!i || i % 2 === 0) {
-          squares[i] = false;
+          squares[i] = this.state.swap ? false : true;
         } else {
-          squares[i] = true;
+          squares[i] = this.state.swap ? true : false;
         }
       }
       this.setState({
-        squares: squares
+        squares: squares,
+        swap: !this.state.swap
       });
     }
   }, {
