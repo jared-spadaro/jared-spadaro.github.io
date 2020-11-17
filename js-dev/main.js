@@ -18,8 +18,8 @@ class Board extends React.Component {
     super(props);
     this.state = {
       squares : this.initBoard(),
-      headDirection : RIGHT,
-      tailDirection : RIGHT,
+      headDirection : 1,
+      tailDirection : 1,
       head : 112,
       tail : 110,
       turns : new Map() //<location, directon> -- add on keyboardInterrupt, remove when tail arrives
@@ -115,7 +115,7 @@ class Board extends React.Component {
       squareRows.push(<div key={i} className="board-row">{squares}</div>);
     }
     return (
-      <div onKeyPress={this.handleKeyPress}>
+      <div tabIndex="0" onKeyPress={this.handleKeyPress}>
         {squareRows}
       </div>
     );

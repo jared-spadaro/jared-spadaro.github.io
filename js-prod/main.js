@@ -28,8 +28,8 @@ var Board = function (_React$Component) {
 
     _this.state = {
       squares: _this.initBoard(),
-      headDirection: RIGHT,
-      tailDirection: RIGHT,
+      headDirection: 1,
+      tailDirection: 1,
       head: 112,
       tail: 110,
       turns: new Map() //<location, directon> -- add on keyboardInterrupt, remove when tail arrives
@@ -131,7 +131,7 @@ var Board = function (_React$Component) {
       }
       return React.createElement(
         'div',
-        { onKeyPress: this.handleKeyPress },
+        { tabIndex: '0', onKeyPress: this.handleKeyPress },
         squareRows
       );
     }
