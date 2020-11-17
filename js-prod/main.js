@@ -9,35 +9,48 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 function Square(props) {
-  return React.createElement(
-    "button",
-    { className: "square", onClick: props.onClick },
-    props.value
-  );
+  return React.createElement('button', { key: props.value, id: props.value, className: props.class, onClick: props.onClick });
 }
 
 var Board = function (_React$Component) {
   _inherits(Board, _React$Component);
 
-  function Board() {
+  function Board(props) {
     _classCallCheck(this, Board);
 
-    return _possibleConstructorReturn(this, (Board.__proto__ || Object.getPrototypeOf(Board)).apply(this, arguments));
+    var _this = _possibleConstructorReturn(this, (Board.__proto__ || Object.getPrototypeOf(Board)).call(this, props));
+
+    _this.state = {
+      squares: Array(400).fill(false)
+    };
+    return _this;
   }
 
   _createClass(Board, [{
-    key: "renderSquare",
-    value: function renderSquare(i) {
-      return React.createElement(Square, {
-        key: i,
-        value: i,
-        onClick: function onClick() {
-          return console.log('Square[' + i + '] rendered');
-        }
+    key: 'handleClick',
+    value: function handleClick(i) {
+      var squares = this.state.squares.slice();
+      squares[i] = !squares[i];
+      this.setState({
+        squares: squares
       });
     }
   }, {
-    key: "render",
+    key: 'renderSquare',
+    value: function renderSquare(i) {
+      var _this2 = this;
+
+      var className = this.state.squares[i] ? 'black-square' : 'white-square';
+      return React.createElement(Square, {
+        value: i,
+        onClick: function onClick(i) {
+          return _this2.handleClick(i);
+        },
+        'class': className
+      });
+    }
+  }, {
+    key: 'render',
     value: function render() {
       var squareRows = [];
       var ndx = 0;
@@ -47,13 +60,13 @@ var Board = function (_React$Component) {
           squares.push(this.renderSquare(ndx++));
         }
         squareRows.push(React.createElement(
-          "div",
-          { key: i, className: "board-row" },
+          'div',
+          { key: i, className: 'board-row' },
           squares
         ));
       }
       return React.createElement(
-        "div",
+        'div',
         null,
         squareRows
       );
