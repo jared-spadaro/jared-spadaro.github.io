@@ -15,7 +15,7 @@ class Board extends React.Component {
   }
 
   handleClick(i) {
-    console.log('handle click. i = ' + i);
+    console.log('handle click, i = ' + i);
     const squares = this.state.squares.slice();
     squares[i] = !squares[i];
     this.setState({
@@ -24,12 +24,11 @@ class Board extends React.Component {
   }
 
   renderSquare(i) {
-    console.log('render square. i = ' + i);
     const className = this.state.squares[i] ? 'black-square' : 'white-square';
     return (
       <Square
         id={i}
-        onClick={this.handleClick(i)}
+        onClick={i => this.handleClick(i)}
         class={className}
       />
     );
