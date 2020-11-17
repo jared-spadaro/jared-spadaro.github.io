@@ -25,14 +25,14 @@ class Board extends React.Component {
 
   setSquares() {
     const squares = this.state.squares.slice();
-    const swap = this.state.swap;
     for (let i = 0; i < numSquares; i++) {
-      if (!i || i % 2 === 0) {
+      if (i % 2 === 0) {
         squares[i] = this.state.swap ? false : true;
       }
       else {
         squares[i] = this.state.swap ? true : false;
       }
+      if (i % 20 === 0) i++; //stagger
     }
     this.setState({
       squares : squares,

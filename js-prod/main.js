@@ -39,13 +39,13 @@ var Board = function (_React$Component) {
     key: 'setSquares',
     value: function setSquares() {
       var squares = this.state.squares.slice();
-      var swap = this.state.swap;
       for (var i = 0; i < numSquares; i++) {
-        if (!i || i % 2 === 0) {
+        if (i % 2 === 0) {
           squares[i] = this.state.swap ? false : true;
         } else {
           squares[i] = this.state.swap ? true : false;
         }
+        if (i % 20 === 0) i++; //stagger
       }
       this.setState({
         squares: squares,
