@@ -15,26 +15,24 @@ class Board extends React.Component {
     this.state = {
       squares : Array(400).fill(false)
     };
-    window.setInterval(() => this.setSquares(), 500);
+    window.setInterval(() => {
+      const squares = this.state.squares.slice();
+      for (let i = 0; i < numSquares; i++) {
+        if (!i || i % 2 === 0) {
+          squares[i] = false;
+        }
+        else {
+          squares[i] = true;
+        }
+      }
+      this.setState({
+        squares : squares
+      });
+    }, 500);
   }
 
   handleClick(i) {
     console.log('handle click, i = ' + i);
-  }
-
-  setSquares() {
-    const squares = this.state.squares.slice();
-    for (let i = 0; i < numSquares; i++) {
-      if (!i || i % 2 === 0) {
-        squares[i] = false;
-      }
-      else {
-        squares[i] = true;
-      }
-    }
-    this.setState({
-      squares : squares
-    });
   }
 
   componentDidMount() {
