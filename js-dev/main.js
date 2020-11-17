@@ -122,7 +122,7 @@ class Board extends React.Component {
       squareRows.push(<div key={i} className="board-row">{squares}</div>);
     }
     return (
-      <div id="board" tabIndex="-1" onKeyDown={this.handleKeyPress}>
+      <div id="board" tabIndex="0" onKeyDown={this.handleKeyPress}>
         {squareRows}
       </div>
     );
@@ -130,4 +130,3 @@ class Board extends React.Component {
 }
 
 ReactDOM.render(<Board/>, document.querySelector("#snake-game"));
-document.querySelector("#board").focus();
