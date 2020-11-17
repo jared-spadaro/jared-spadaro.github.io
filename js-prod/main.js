@@ -56,14 +56,19 @@ var Board = function (_React$Component) {
       switch (event.key) {
         case 'ArrowDown':
           dir = 21;
+          break;
         case 'ArrowUp':
           dir = -21;
+          break;
         case 'ArrowLeft':
           dir = -1;
+          break;
         case 'ArrowRight':
           dir = 1;
+          break;
         default:
           dir = null;
+          break;
       }
       var turns = new Map(this.state.turns);
       if (dir) turns.set(this.state.head, dir);else throw new Error('dir is null');

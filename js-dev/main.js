@@ -42,14 +42,19 @@ class Board extends React.Component {
     switch (event.key) {
       case 'ArrowDown':
         dir = 21;
+        break;
       case 'ArrowUp':
         dir = -21;
+        break;
       case 'ArrowLeft':
         dir = -1;
+        break;
       case 'ArrowRight':
         dir = 1;
+        break;
       default:
         dir = null;
+        break;
     }
     const turns = new Map(this.state.turns);
     if (dir) turns.set(this.state.head, dir);
