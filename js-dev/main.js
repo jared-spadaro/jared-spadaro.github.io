@@ -39,13 +39,13 @@ class Board extends React.Component {
     const dir = this.state.direction;
     console.log('move, dir = ' + dir);
     for (let i = 0; i < NUM_SQUARES; i++) {
-      if (squares[i]) {
+      if (squares[i] === true) {
         if (dir === RIGHT) {
-          if (i < NUM_SQUARES - 1 && !squares[i+1]) {
+          if (i < NUM_SQUARES - 1 && squares[i+1] === false) {
             console.log('adding square in move (index = ' + i + ')');
             squares[i+1] = true;
           }
-          if (i > 0 && !squares[i-1]) {
+          if (i > 0 && squares[i-1] === false) {
             console.log('removing square in move (index = ' + i + ')');
             squares[i] = false;
           }
