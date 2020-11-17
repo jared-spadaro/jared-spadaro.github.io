@@ -172,7 +172,11 @@ var Board = function (_React$Component) {
           { 'class': 'game-over' },
           'Game Over',
           React.createElement('br', null),
-          React.createElement('button', { 'class': 'back-button', onClick: this.handleBackClick })
+          React.createElement(
+            'button',
+            { 'class': 'back-button', onClick: this.handleBackClick },
+            'Go Back'
+          )
         );
       } else {
         return React.createElement(

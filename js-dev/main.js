@@ -153,7 +153,7 @@ class Board extends React.Component {
       return (
         <div class="game-over">
           Game Over<br/>
-          <button class="back-button" onClick={this.handleBackClick}></button>
+          <button class="back-button" onClick={this.handleBackClick}>Go Back</button>
         </div>
       );
     }
