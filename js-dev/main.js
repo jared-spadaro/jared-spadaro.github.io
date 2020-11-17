@@ -1,6 +1,10 @@
 "use strict";
 
-const numSquares = 441;
+const NUM_SQUARES = 441;
+const RIGHT = 0;
+const LEFT = 1;
+const UP = 2;
+const DOWN = 3;
 
 function Square(props) {
   return (
@@ -13,24 +17,36 @@ class Board extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      squares : Array(400).fill(false),
-      swap : false
+      squares : this.initBoard(),
+      direction : RIGHT
     };
-    window.setInterval(this.setSquares.bind(this), 500);
+    this.initBoard();
+    window.setInterval(this.move.bind(this), 500);
+  }
+
+  initBoard() {
+    const squares = Array(400).fill(false);
+    squares[100] = squares[101] = squares[102] = true;
+    return squares;
   }
 
   handleClick(i) {
     console.log('handle click, i = ' + i);
   }
 
-  setSquares() {
+  move() {
     const squares = this.state.squares.slice();
-    for (let i = 0; i < numSquares; i++) {
-      if (i % 2 === 0) {
-        squares[i] = this.state.swap ? false : true;
-      }
-      else {
-        squares[i] = this.state.swap ? true : false;
+    const dir = this.state.direction;
+    for (let i = 0; i < NUM_SQUARES; i++) {
+      if (squares[i]) {
+        if (dir === RIGHT) {
+          if (i < NUM_SQUARES - 1 && !squares[i+1]) {
+            squares[i+1] = true;
+          }
+          if (i > 0 && !squares[i-1]) {
+            squares[i] = false;
+          }
+        }
       }
     }
     this.setState({

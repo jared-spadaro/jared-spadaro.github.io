@@ -8,7 +8,11 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var numSquares = 441;
+var NUM_SQUARES = 441;
+var RIGHT = 0;
+var LEFT = 1;
+var UP = 2;
+var DOWN = 3;
 
 function Square(props) {
   return React.createElement('button', { key: props.id, id: props.id, className: props.class, onClick: props.onClick });
@@ -23,27 +27,41 @@ var Board = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (Board.__proto__ || Object.getPrototypeOf(Board)).call(this, props));
 
     _this.state = {
-      squares: Array(400).fill(false),
-      swap: false
+      squares: _this.initBoard(),
+      direction: RIGHT
     };
-    window.setInterval(_this.setSquares.bind(_this), 500);
+    _this.initBoard();
+    window.setInterval(_this.move.bind(_this), 500);
     return _this;
   }
 
   _createClass(Board, [{
+    key: 'initBoard',
+    value: function initBoard() {
+      var squares = Array(400).fill(false);
+      squares[100] = squares[101] = squares[102] = true;
+      return squares;
+    }
+  }, {
     key: 'handleClick',
     value: function handleClick(i) {
       console.log('handle click, i = ' + i);
     }
   }, {
-    key: 'setSquares',
-    value: function setSquares() {
+    key: 'move',
+    value: function move() {
       var squares = this.state.squares.slice();
-      for (var i = 0; i < numSquares; i++) {
-        if (i % 2 === 0) {
-          squares[i] = this.state.swap ? false : true;
-        } else {
-          squares[i] = this.state.swap ? true : false;
+      var dir = this.state.direction;
+      for (var i = 0; i < NUM_SQUARES; i++) {
+        if (squares[i]) {
+          if (dir === RIGHT) {
+            if (i < NUM_SQUARES - 1 && !squares[i + 1]) {
+              squares[i + 1] = true;
+            }
+            if (i > 0 && !squares[i - 1]) {
+              squares[i] = false;
+            }
+          }
         }
       }
       this.setState({
