@@ -25,7 +25,9 @@ var Board = function (_React$Component) {
     _this.state = {
       squares: Array(400).fill(false)
     };
-    window.setInterval(_this.setSquares, 500);
+    window.setInterval(function () {
+      return _this.setSquares();
+    }, 500);
     return _this;
   }
 

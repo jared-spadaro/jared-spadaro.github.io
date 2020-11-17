@@ -15,7 +15,7 @@ class Board extends React.Component {
     this.state = {
       squares : Array(400).fill(false)
     };
-    window.setInterval(this.setSquares, 500);
+    window.setInterval(() => this.setSquares(), 500);
   }
 
   handleClick(i) {
