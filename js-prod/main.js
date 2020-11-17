@@ -8,6 +8,8 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+var numSquares = 400;
+
 function Square(props) {
   return React.createElement('button', { key: props.id, id: props.id, className: props.class, onClick: props.onClick });
 }
@@ -23,6 +25,7 @@ var Board = function (_React$Component) {
     _this.state = {
       squares: Array(400).fill(false)
     };
+    window.setInterval(_this.setSquares, 500);
     return _this;
   }
 
@@ -30,12 +33,28 @@ var Board = function (_React$Component) {
     key: 'handleClick',
     value: function handleClick(i) {
       console.log('handle click, i = ' + i);
+    }
+  }, {
+    key: 'setSquares',
+    value: function setSquares() {
       var squares = this.state.squares.slice();
-      squares[i] = !squares[i];
+      for (var i = 0; i < numSquares; i++) {
+        if (!i || i % 2 === 0) {
+          squares[i] = false;
+        } else {
+          squares[i] = true;
+        }
+      }
       this.setState({
         squares: squares
       });
     }
+  }, {
+    key: 'componentDidMount',
+    value: function componentDidMount() {}
+  }, {
+    key: 'componentWillUnmount',
+    value: function componentWillUnmount() {}
   }, {
     key: 'renderSquare',
     value: function renderSquare(i) {
@@ -78,3 +97,4 @@ var Board = function (_React$Component) {
 }(React.Component);
 
 ReactDOM.render(React.createElement(Board, null), document.querySelector("#snake-game"));
+window.setInterval(this.setSquares);

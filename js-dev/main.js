@@ -1,5 +1,7 @@
 "use strict";
 
+const numSquares = 400;
+
 function Square(props) {
   return (
     <button key={props.id} id={props.id} className={props.class} onClick={props.onClick}></button>
@@ -7,20 +9,40 @@ function Square(props) {
 }
 
 class Board extends React.Component {
+
   constructor(props) {
     super(props);
     this.state = {
       squares : Array(400).fill(false)
     };
+    window.setInterval(this.setSquares, 500);
   }
 
   handleClick(i) {
     console.log('handle click, i = ' + i);
+  }
+
+  setSquares() {
     const squares = this.state.squares.slice();
-    squares[i] = !squares[i];
+    for (let i = 0; i < numSquares; i++) {
+      if (!i || i % 2 === 0) {
+        squares[i] = false;
+      }
+      else {
+        squares[i] = true;
+      }
+    }
     this.setState({
       squares : squares
     });
+  }
+
+  componentDidMount() {
+
+  }
+
+  componentWillUnmount() {
+
   }
 
   renderSquare(i) {
@@ -53,3 +75,4 @@ class Board extends React.Component {
 }
 
 ReactDOM.render(<Board/>, document.querySelector("#snake-game"));
+window.setInterval(this.setSquares)
