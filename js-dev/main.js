@@ -1,6 +1,6 @@
 "use strict";
 
-const numSquares = 400;
+const numSquares = 441;
 
 function Square(props) {
   return (
@@ -32,7 +32,6 @@ class Board extends React.Component {
       else {
         squares[i] = this.state.swap ? true : false;
       }
-      if (i % 20 === 0) i++; //stagger
     }
     this.setState({
       squares : squares,
@@ -61,9 +60,9 @@ class Board extends React.Component {
   render() {
     let squareRows = [];
     let ndx = 0;
-    for (let i = 0; i < 20; i++) {
+    for (let i = 0; i < 21; i++) {
       let squares = [];
-      for (let j = 0; j < 20; j++) {
+      for (let j = 0; j < 21; j++) {
         squares.push(this.renderSquare(ndx++));
       }
       squareRows.push(<div key={i} className="board-row">{squares}</div>);

@@ -8,7 +8,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var numSquares = 400;
+var numSquares = 441;
 
 function Square(props) {
   return React.createElement('button', { key: props.id, id: props.id, className: props.class, onClick: props.onClick });
@@ -45,7 +45,6 @@ var Board = function (_React$Component) {
         } else {
           squares[i] = this.state.swap ? true : false;
         }
-        if (i % 20 === 0) i++; //stagger
       }
       this.setState({
         squares: squares,
@@ -77,9 +76,9 @@ var Board = function (_React$Component) {
     value: function render() {
       var squareRows = [];
       var ndx = 0;
-      for (var i = 0; i < 20; i++) {
+      for (var i = 0; i < 21; i++) {
         var squares = [];
-        for (var j = 0; j < 20; j++) {
+        for (var j = 0; j < 21; j++) {
           squares.push(this.renderSquare(ndx++));
         }
         squareRows.push(React.createElement(
