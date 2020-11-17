@@ -31,7 +31,7 @@ var Board = function (_React$Component) {
     value: function handleClick(i) {
       var squares = this.state.squares.slice();
       squares[i] = !squares[i];
-      console.log('setting squares[' + i + '] to ' + !squares[i]);
+      console.log('setting square to ' + squares[i]);
       this.setState({
         squares: squares
       });
@@ -42,6 +42,7 @@ var Board = function (_React$Component) {
       var _this2 = this;
 
       var className = this.state.squares[i] ? 'black-square' : 'white-square';
+      console.log('setting classname to ' + className);
       return React.createElement(Square, {
         value: i,
         onClick: function onClick(i) {
