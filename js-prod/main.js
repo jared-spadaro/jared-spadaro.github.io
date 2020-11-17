@@ -31,6 +31,7 @@ var Board = function (_React$Component) {
     value: function handleClick(i) {
       var squares = this.state.squares.slice();
       squares[i] = !squares[i];
+      console.log('setting squares[' + i + '] to ' + !squares[i]);
       this.setState({
         squares: squares
       });
