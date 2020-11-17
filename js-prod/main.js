@@ -28,7 +28,9 @@ var Board = function (_React$Component) {
 
     _this.state = {
       squares: _this.initBoard(),
-      direction: RIGHT
+      direction: RIGHT,
+      head: 112,
+      tail: 110
     };
     _this.initBoard();
     window.setInterval(_this.move.bind(_this), 500);
@@ -52,23 +54,17 @@ var Board = function (_React$Component) {
     value: function move() {
       var squares = this.state.squares.slice();
       var dir = this.state.direction;
-      console.log('move, dir = ' + dir);
-      for (var i = 0; i < NUM_SQUARES; i++) {
-        if (squares[i]) {
-          if (dir === RIGHT) {
-            if (i < NUM_SQUARES - 1 && !squares[i + 1]) {
-              console.log('adding square in move (index = ' + i + ')');
-              squares[i + 1] = true;
-            } else if (i > 0 && !squares[i - 1]) {
-              console.log('removing square in move (index = ' + i + ')');
-              squares[i] = false;
-            }
-          }
-        }
+      if (this.state.head + 1 < NUM_SQUARES) {
+        squares[this.state.head + 1] = true;
+      }
+      if (this.state.tail < NUM_SQUARES - 3) {
+        squares[this.state.tail] = false;
       }
       this.setState({
         squares: squares,
-        swap: !this.state.swap
+        swap: !this.state.swap,
+        head: this.state.head + 1,
+        tail: this.state.tail + 1
       });
     }
   }, {

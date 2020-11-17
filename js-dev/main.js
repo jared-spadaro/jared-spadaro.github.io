@@ -18,7 +18,9 @@ class Board extends React.Component {
     super(props);
     this.state = {
       squares : this.initBoard(),
-      direction : RIGHT
+      direction : RIGHT,
+      head : 112,
+      tail : 110
     };
     this.initBoard();
     window.setInterval(this.move.bind(this), 500);
@@ -37,24 +39,17 @@ class Board extends React.Component {
   move() {
     const squares = this.state.squares.slice();
     const dir = this.state.direction;
-    console.log('move, dir = ' + dir);
-    for (let i = 0; i < NUM_SQUARES; i++) {
-      if (squares[i]) {
-        if (dir === RIGHT) {
-          if (i < NUM_SQUARES - 1 && !squares[i+1]) {
-            console.log('adding square in move (index = ' + i + ')');
-            squares[i+1] = true;
-          }
-          else if (i > 0 && !squares[i-1]) {
-            console.log('removing square in move (index = ' + i + ')');
-            squares[i] = false;
-          }
-        }
-      }
+    if (this.state.head + 1 < NUM_SQUARES) {
+      squares[this.state.head + 1] = true;
+    }
+    if (this.state.tail < NUM_SQUARES - 3) {
+      squares[this.state.tail] = false;
     }
     this.setState({
       squares : squares,
-      swap : !this.state.swap
+      swap : !this.state.swap,
+      head : this.state.head+1,
+      tail : this.state.tail+1
     });
   }
 
