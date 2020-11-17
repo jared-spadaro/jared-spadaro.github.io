@@ -26,7 +26,7 @@ class Board extends React.Component {
 
   initBoard() {
     const squares = Array(400).fill(false);
-    squares[100] = squares[101] = squares[102] = true;
+    squares[110] = squares[111] = squares[112] = true;
     return squares;
   }
 

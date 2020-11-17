@@ -39,7 +39,7 @@ var Board = function (_React$Component) {
     key: 'initBoard',
     value: function initBoard() {
       var squares = Array(400).fill(false);
-      squares[100] = squares[101] = squares[102] = true;
+      squares[110] = squares[111] = squares[112] = true;
       return squares;
     }
   }, {
