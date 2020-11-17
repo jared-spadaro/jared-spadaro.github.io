@@ -23,11 +23,13 @@ class Board extends React.Component {
       head : 112,
       tail : 110,
       turns : new Map(), //<location, directon> -- add on keyboardInterrupt, remove when tail arrives
-      start : false
+      start : false,
+      gameOver : false
     };
     this.initBoard();
     this.handleKeyPress = this.handleKeyPress.bind(this);
     this.handleClick = this.handleClick.bind(this);
+    this.handleBackClick = this.handleBackClick.bind(this);
     window.setInterval(this.move.bind(this), 100);
   }
 
@@ -78,7 +80,9 @@ class Board extends React.Component {
      (dir === LEFT && this.state.head % 20 === 0) ||
      (dir === UP && this.state.head < 20) ||
      (dir === DOWN && this.state.head > 379)) {
-      throw new Error('reached boundary');
+      this.setState({
+        gameOver : true
+      });
     }
 
     //move the head in the proper direction
@@ -122,6 +126,19 @@ class Board extends React.Component {
     );
   }
 
+  handleBackClick() {
+    this.setState({
+        squares : this.initBoard(),
+        headDirection : RIGHT,
+        tailDirection : RIGHT,
+        head : 112,
+        tail : 110,
+        turns : new Map(), //<location, directon> -- add on keyboardInterrupt, remove when tail arrives
+        start : false,
+        gameOver : false
+    });
+  }
+
   render() {
     let squareRows = [];
     let ndx = 0;
@@ -132,11 +149,21 @@ class Board extends React.Component {
       }
       squareRows.push(<div key={i} className="board-row">{squares}</div>);
     }
-    return (
-      <div id="board" tabIndex="0" onClick={this.handleClick} onKeyDown={this.handleKeyPress}>
-        {squareRows}
-      </div>
-    );
+    if (this.state.gameOver) {
+      return (
+        <div class="game-over">
+          Game Over<br/>
+          <button class="back-button" onClick={this.handleBackClick}></button>
+        </div>
+      );
+    }
+    else {
+      return (
+        <div id="board" tabIndex="0" onClick={this.handleClick} onKeyDown={this.handleKeyPress}>
+          {squareRows}
+        </div>
+      );
+    }
   }
 }
 

@@ -33,11 +33,13 @@ var Board = function (_React$Component) {
       head: 112,
       tail: 110,
       turns: new Map(), //<location, directon> -- add on keyboardInterrupt, remove when tail arrives
-      start: false
+      start: false,
+      gameOver: false
     };
     _this.initBoard();
     _this.handleKeyPress = _this.handleKeyPress.bind(_this);
     _this.handleClick = _this.handleClick.bind(_this);
+    _this.handleBackClick = _this.handleBackClick.bind(_this);
     window.setInterval(_this.move.bind(_this), 100);
     return _this;
   }
@@ -90,7 +92,9 @@ var Board = function (_React$Component) {
       //first, check for boundaries
       if (dir === RIGHT && (this.state.head + 1) % 20 === 0 || //19,39,59,79,etc
       dir === LEFT && this.state.head % 20 === 0 || dir === UP && this.state.head < 20 || dir === DOWN && this.state.head > 379) {
-        throw new Error('reached boundary');
+        this.setState({
+          gameOver: true
+        });
       }
 
       //move the head in the proper direction
@@ -133,6 +137,20 @@ var Board = function (_React$Component) {
       });
     }
   }, {
+    key: 'handleBackClick',
+    value: function handleBackClick() {
+      this.setState({
+        squares: this.initBoard(),
+        headDirection: RIGHT,
+        tailDirection: RIGHT,
+        head: 112,
+        tail: 110,
+        turns: new Map(), //<location, directon> -- add on keyboardInterrupt, remove when tail arrives
+        start: false,
+        gameOver: false
+      });
+    }
+  }, {
     key: 'render',
     value: function render() {
       var squareRows = [];
@@ -148,11 +166,21 @@ var Board = function (_React$Component) {
           squares
         ));
       }
-      return React.createElement(
-        'div',
-        { id: 'board', tabIndex: '0', onClick: this.handleClick, onKeyDown: this.handleKeyPress },
-        squareRows
-      );
+      if (this.state.gameOver) {
+        return React.createElement(
+          'div',
+          { 'class': 'game-over' },
+          'Game Over',
+          React.createElement('br', null),
+          React.createElement('button', { 'class': 'back-button', onClick: this.handleBackClick })
+        );
+      } else {
+        return React.createElement(
+          'div',
+          { id: 'board', tabIndex: '0', onClick: this.handleClick, onKeyDown: this.handleKeyPress },
+          squareRows
+        );
+      }
     }
   }]);
 
