@@ -157,7 +157,8 @@ class Board extends React.Component {
     });
   }
 
-  handleClick() {
+  handleClick(event) {
+    event.preventDefault();
     console.log('handle click');
     if (!this.state.start) {
       this.setState({
