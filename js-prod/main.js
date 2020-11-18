@@ -189,9 +189,9 @@ var Board = function (_React$Component) {
       if (squares[this.state.head + dir].isFood) {
         squares[this.state.head + dir].isFood = false;
         var ndx = this.getRandom(0, NUM_SQUARES);
-        while (squares[ndx].isSnake) {
+        /*while (squares[ndx].isSnake) {
           ndx = this.getRandom(0, NUM_SQUARES);
-        }
+        }*/
         squares[ndx].isFood = true;
       }
       //no food, remove tail
