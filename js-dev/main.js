@@ -146,12 +146,13 @@ class Board extends React.Component {
   }
 
   handleClick() {
-    console.log('handle click. start = ' + this.state.start);
+    console.log('start of handle click. state = ' + JSON.stringify(this.state));
     if (!this.state.start) {
       this.setState({
         start : true
       });
     }
+    console.log('end of handle click. state = ' + JSON.stringify(this.state));
   }
 
   renderSquare(i) {
