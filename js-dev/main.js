@@ -26,7 +26,6 @@ class Board extends React.Component {
       start : false,
       gameOver : false
     };
-    this.initBoard();
     this.handleKeyPress = this.handleKeyPress.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.reset = this.reset.bind(this);
@@ -42,11 +41,12 @@ class Board extends React.Component {
       isSnake : false,
       isFood : false
     });
+    
     //initialize snake
     squares[45].isSnake = squares[46].isSnake = squares[47].isSnake = true;
+    
     //initialize food
-
-    squares[this.getRandom(80,NUM_SQUARES)].isFood = true;
+    squares[this.getRandom(80, NUM_SQUARES)].isFood = true;
     return squares;
   }
 
@@ -155,8 +155,8 @@ class Board extends React.Component {
         squares : this.initBoard(),
         headDirection : RIGHT,
         tailDirection : RIGHT,
-        head : 112,
-        tail : 110,
+        head : 47,
+        tail : 45,
         turns : new Map(), //<location, directon> -- add on keyboardInterrupt, remove when tail arrives
         start : false,
         gameOver : false

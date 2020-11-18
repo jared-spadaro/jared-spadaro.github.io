@@ -36,7 +36,6 @@ var Board = function (_React$Component) {
       start: false,
       gameOver: false
     };
-    _this.initBoard();
     _this.handleKeyPress = _this.handleKeyPress.bind(_this);
     _this.handleClick = _this.handleClick.bind(_this);
     _this.reset = _this.reset.bind(_this);
@@ -56,10 +55,11 @@ var Board = function (_React$Component) {
         isSnake: false,
         isFood: false
       });
+
       //initialize snake
       squares[45].isSnake = squares[46].isSnake = squares[47].isSnake = true;
-      //initialize food
 
+      //initialize food
       squares[this.getRandom(80, NUM_SQUARES)].isFood = true;
       return squares;
     }
@@ -167,8 +167,8 @@ var Board = function (_React$Component) {
         squares: this.initBoard(),
         headDirection: RIGHT,
         tailDirection: RIGHT,
-        head: 112,
-        tail: 110,
+        head: 47,
+        tail: 45,
         turns: new Map(), //<location, directon> -- add on keyboardInterrupt, remove when tail arrives
         start: false,
         gameOver: false
