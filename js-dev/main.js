@@ -37,40 +37,6 @@ class Header extends React.Component {
     }
     return (
       <div>
-          <meta charSet="utf-8" />
-          <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1, shrink-to-fit=no"
-          />
-          <meta name="generator" content="Jekyll v4.1.1" />
-
-          <link
-            rel="canonical"
-            href="https://getbootstrap.com/docs/4.5/examples/starter-template/"
-          />
-
-          <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" />
-          <link href="css/starter-template.css" rel="stylesheet" />
-          <link href="css/styles.css" rel="stylesheet" />
-
-          <link
-            rel="apple-touch-icon"
-            sizes="180x180"
-            href="favicon/apple-touch-icon.png"
-          />
-          <link
-            rel="icon"
-            type="image/png"
-            sizes="32x32"
-            href="favicon/favicon-32x32.png"
-          />
-          <link
-            rel="icon"
-            type="image/png"
-            sizes="16x16"
-            href="favicon/favicon-16x16.png"
-          />
-          <link rel="manifest" href="favicon/site.webmanifest" />
           <nav className="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
             <a className="navbar-brand" href="#" onClick={this.setPage} data-id="Home">
               Home

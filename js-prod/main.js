@@ -57,37 +57,6 @@ var Header = function (_React$Component) {
       return React.createElement(
         "div",
         null,
-        React.createElement("meta", { charSet: "utf-8" }),
-        React.createElement("meta", {
-          name: "viewport",
-          content: "width=device-width, initial-scale=1, shrink-to-fit=no"
-        }),
-        React.createElement("meta", { name: "generator", content: "Jekyll v4.1.1" }),
-        React.createElement("link", {
-          rel: "canonical",
-          href: "https://getbootstrap.com/docs/4.5/examples/starter-template/"
-        }),
-        React.createElement("link", { href: "bootstrap/css/bootstrap.min.css", rel: "stylesheet" }),
-        React.createElement("link", { href: "css/starter-template.css", rel: "stylesheet" }),
-        React.createElement("link", { href: "css/styles.css", rel: "stylesheet" }),
-        React.createElement("link", {
-          rel: "apple-touch-icon",
-          sizes: "180x180",
-          href: "favicon/apple-touch-icon.png"
-        }),
-        React.createElement("link", {
-          rel: "icon",
-          type: "image/png",
-          sizes: "32x32",
-          href: "favicon/favicon-32x32.png"
-        }),
-        React.createElement("link", {
-          rel: "icon",
-          type: "image/png",
-          sizes: "16x16",
-          href: "favicon/favicon-16x16.png"
-        }),
-        React.createElement("link", { rel: "manifest", href: "favicon/site.webmanifest" }),
         React.createElement(
           "nav",
           { className: "navbar navbar-expand-md navbar-dark bg-dark fixed-top" },
