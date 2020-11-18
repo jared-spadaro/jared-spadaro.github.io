@@ -130,7 +130,7 @@ function Home() {
 }
 
 function Square(props) {
-  return <button key={props.id} id={props.id} className={props.class}></button>;
+  return <button key={props.id} id={props.id} className={props.class}>{props.label}</button>;
 }
 
 class Board extends React.Component {
@@ -289,11 +289,9 @@ class Board extends React.Component {
   }
 
   renderSquare(i) {
-    const className =
-      this.state.squares[i].isSnake || this.state.squares[i].isFood
-        ? "black-square"
-        : "white-square";
-    return <Square key={i} id={i} class={className} />;
+    const className = this.state.squares[i].isSnake? "black-square" : "white-square";
+    const label = this.state.squares[i].isFood ? "*" : "";
+    return <Square key={i} id={i} class={className} label={label}/>;
   }
 
   reset() {
@@ -329,7 +327,7 @@ class Board extends React.Component {
         <div className="starter-template">
           Game Over
           <br />
-          <button className="back-button" onClick={this.reset}>
+          <button className="btn btn-dark" onClick={this.reset}>
             Go Back
           </button>
         </div>

@@ -200,7 +200,11 @@ function Home() {
 }
 
 function Square(props) {
-  return React.createElement("button", { key: props.id, id: props.id, className: props.class });
+  return React.createElement(
+    "button",
+    { key: props.id, id: props.id, className: props.class },
+    props.label
+  );
 }
 
 var Board = function (_React$Component2) {
@@ -366,8 +370,9 @@ var Board = function (_React$Component2) {
   }, {
     key: "renderSquare",
     value: function renderSquare(i) {
-      var className = this.state.squares[i].isSnake || this.state.squares[i].isFood ? "black-square" : "white-square";
-      return React.createElement(Square, { key: i, id: i, "class": className });
+      var className = this.state.squares[i].isSnake ? "black-square" : "white-square";
+      var label = this.state.squares[i].isFood ? "*" : "";
+      return React.createElement(Square, { key: i, id: i, "class": className, label: label });
     }
   }, {
     key: "reset",
@@ -408,7 +413,7 @@ var Board = function (_React$Component2) {
           React.createElement("br", null),
           React.createElement(
             "button",
-            { className: "back-button", onClick: this.reset },
+            { className: "btn btn-dark", onClick: this.reset },
             "Go Back"
           )
         );
