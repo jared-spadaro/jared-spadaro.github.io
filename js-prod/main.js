@@ -193,11 +193,6 @@ function Home() {
         "h1",
         null,
         "Official Site of Antisocialistic"
-      ),
-      React.createElement(
-        "p",
-        { className: "lead" },
-        "Actual features TBD."
       )
     )
   );
@@ -390,6 +385,7 @@ var Board = function (_React$Component2) {
   }, {
     key: "render",
     value: function render() {
+      console.log('rendering board');
       var squareRows = [];
       var ndx = 0;
       for (var i = 0; i < 20; i++) {
@@ -406,7 +402,7 @@ var Board = function (_React$Component2) {
       if (this.state.gameOver) {
         return React.createElement(
           "div",
-          { className: "game-over" },
+          { className: "starter-template" },
           "Game Over",
           React.createElement("br", null),
           React.createElement(
@@ -416,11 +412,10 @@ var Board = function (_React$Component2) {
           )
         );
       } else {
-        console.log('rendering board');
         return React.createElement(
           "div",
           {
-            className: "board",
+            className: "starter-template",
             id: "board",
             tabIndex: "0",
             onClick: this.handleClick,

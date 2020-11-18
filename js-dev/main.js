@@ -123,7 +123,6 @@ function Home() {
     <div className="container" id="jsDiv">
       <div className="starter-template">
         <h1>Official Site of Antisocialistic</h1>
-        <p className="lead">Actual features TBD.</p>
       </div>
     </div>
   );
@@ -310,6 +309,7 @@ class Board extends React.Component {
   }
 
   render() {
+    console.log('rendering board');
     let squareRows = [];
     let ndx = 0;
     for (let i = 0; i < 20; i++) {
@@ -325,7 +325,7 @@ class Board extends React.Component {
     }
     if (this.state.gameOver) {
       return (
-        <div className="game-over">
+        <div className="starter-template">
           Game Over
           <br />
           <button className="back-button" onClick={this.reset}>
@@ -334,10 +334,9 @@ class Board extends React.Component {
         </div>
       );
     } else {
-      console.log('rendering board');
       return (
         <div
-          className="board"
+          className="starter-template"
           id="board"
           tabIndex="0"
           onClick={this.handleClick}
