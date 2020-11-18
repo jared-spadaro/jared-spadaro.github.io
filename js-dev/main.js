@@ -191,7 +191,7 @@ class Board extends React.Component {
     }
     if (this.state.gameOver) {
       return (
-        <div class="game-over">
+        <div className="game-over">
           Game Over<br/>
           <button className="back-button" onClick={this.reset}>Go Back</button>
         </div>
