@@ -203,7 +203,11 @@ function Square(props) {
   return React.createElement(
     "button",
     { key: props.id, id: props.id, className: props.class },
-    props.label
+    React.createElement(
+      "span",
+      { "class": "food-label" },
+      props.label
+    )
   );
 }
 

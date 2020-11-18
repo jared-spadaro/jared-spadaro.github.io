@@ -130,7 +130,11 @@ function Home() {
 }
 
 function Square(props) {
-  return <button key={props.id} id={props.id} className={props.class}>{props.label}</button>;
+  return (
+    <button key={props.id} id={props.id} className={props.class}>
+      <span class="food-label">{props.label}</span>
+    </button>
+  );
 }
 
 class Board extends React.Component {
