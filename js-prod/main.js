@@ -36,7 +36,9 @@ var Board = function (_React$Component) {
       start: false,
       gameOver: false
     };
-    console.log('constructor. squares == ' + _this.state.squares);
+    for (var i = 0; i < NUM_SQUARES; i++) {
+      console.log(JSON.stringify(_this.state.squares[i]));
+    }
     _this.handleKeyPress = _this.handleKeyPress.bind(_this);
     _this.handleClick = _this.handleClick.bind(_this);
     _this.reset = _this.reset.bind(_this);
@@ -62,7 +64,9 @@ var Board = function (_React$Component) {
 
       //initialize food
       squares[this.getRandom(80, NUM_SQUARES)].isFood = true;
-      console.log('init board. squares == ' + squares);
+      for (var i = 0; i < NUM_SQUARES; i++) {
+        console.log(JSON.stringify(squares[i]));
+      }
       return squares;
     }
   }, {

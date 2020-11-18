@@ -26,7 +26,9 @@ class Board extends React.Component {
       start : false,
       gameOver : false
     };
-    console.log('constructor. squares == ' + this.state.squares);
+    for (let i = 0; i < NUM_SQUARES; i++) {
+      console.log(JSON.stringify(this.state.squares[i]));
+    }
     this.handleKeyPress = this.handleKeyPress.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.reset = this.reset.bind(this);
@@ -48,7 +50,9 @@ class Board extends React.Component {
     
     //initialize food
     squares[this.getRandom(80, NUM_SQUARES)].isFood = true;
-    console.log('init board. squares == ' + squares);
+    for (let i = 0; i < NUM_SQUARES; i++) {
+      console.log(JSON.stringify(squares[i]));
+    }
     return squares;
   }
 
