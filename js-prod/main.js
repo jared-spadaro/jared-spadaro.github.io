@@ -213,14 +213,14 @@ var Board = function (_React$Component) {
           React.createElement('br', null),
           React.createElement(
             'button',
-            { 'class': 'back-button', onClick: this.reset },
+            { className: 'back-button', onClick: this.reset },
             'Go Back'
           )
         );
       } else {
         return React.createElement(
           'div',
-          { id: 'board', tabIndex: '-1', onClick: this.handleClick, onKeyDown: this.handleKeyPress },
+          { id: 'board', tabIndex: '0', onClick: this.handleClick, onKeyDown: this.handleKeyPress },
           squareRows
         );
       }
@@ -231,4 +231,3 @@ var Board = function (_React$Component) {
 }(React.Component);
 
 ReactDOM.render(React.createElement(Board, null), document.querySelector("#snake-game"));
-document.querySelector("#board").focus();

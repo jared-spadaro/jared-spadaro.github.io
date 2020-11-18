@@ -192,13 +192,13 @@ class Board extends React.Component {
       return (
         <div class="game-over">
           Game Over<br/>
-          <button class="back-button" onClick={this.reset}>Go Back</button>
+          <button className="back-button" onClick={this.reset}>Go Back</button>
         </div>
       );
     }
     else {
       return (
-        <div id="board" tabIndex="-1" onClick={this.handleClick} onKeyDown={this.handleKeyPress}>
+        <div id="board" tabIndex="0" onClick={this.handleClick} onKeyDown={this.handleKeyPress}>
           {squareRows}
         </div>
       );
@@ -207,4 +207,3 @@ class Board extends React.Component {
 }
 
 ReactDOM.render(<Board/>, document.querySelector("#snake-game"));
-document.querySelector("#board").focus();
