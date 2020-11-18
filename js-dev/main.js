@@ -139,7 +139,7 @@ class Board extends React.Component {
   }
 
   renderSquare(i) {
-    const className = this.state.squares[i].isSnake || this.state.squares[i].isFood ? 
+    const className = (this.state.squares[i].isSnake || this.state.squares[i].isFood) ? 
      'black-square' : 'white-square';
     return (
       <Square
