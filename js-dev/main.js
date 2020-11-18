@@ -49,7 +49,7 @@ class Board extends React.Component {
     }
     
     //initialize snake
-    squares[45].isSnake = squares[46].isSnake = squares[47].isSnake = {
+    squares[45] = squares[46] = squares[47] = {
       isSnake : true,
       isFood : false
     };
