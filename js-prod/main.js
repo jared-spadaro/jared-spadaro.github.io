@@ -226,6 +226,7 @@ var Board = function (_React$Component) {
     key: 'renderSquare',
     value: function renderSquare(i) {
       var className = this.state.squares[i].isSnake || this.state.squares[i].isFood ? 'black-square' : 'white-square';
+      console.log('render square --> ' + JSON.stringify(this.state.squares[i]));
       return React.createElement(Square, {
         key: i,
         id: i,
