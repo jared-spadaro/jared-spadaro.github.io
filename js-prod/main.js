@@ -47,7 +47,7 @@ var Board = function (_React$Component) {
   _createClass(Board, [{
     key: 'getRandom',
     value: function getRandom(min, max) {
-      return Math.random() * (max - min) + min;
+      return Math.floor(Math.random() * (max - min) + min);
     }
   }, {
     key: 'initBoard',
@@ -59,6 +59,7 @@ var Board = function (_React$Component) {
       //initialize snake
       squares[45].isSnake = squares[46].isSnake = squares[47].isSnake = true;
       //initialize food
+
       squares[this.getRandom(80, NUM_SQUARES)].isFood = true;
       return squares;
     }
