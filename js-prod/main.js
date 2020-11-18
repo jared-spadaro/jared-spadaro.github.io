@@ -36,13 +36,10 @@ var Board = function (_React$Component) {
       start: false,
       gameOver: false
     };
-    for (var i = 0; i < NUM_SQUARES; i++) {
-      console.log(JSON.stringify(_this.state.squares[i]));
-    }
     _this.handleKeyPress = _this.handleKeyPress.bind(_this);
     _this.handleClick = _this.handleClick.bind(_this);
     _this.reset = _this.reset.bind(_this);
-    window.setInterval(_this.move.bind(_this), 100);
+    window.setInterval(_this.move.bind(_this), 200);
     return _this;
   }
 
@@ -54,14 +51,10 @@ var Board = function (_React$Component) {
   }, {
     key: 'initBoard',
     value: function initBoard() {
-      console.log('running initBoard');
       var squares = Array(NUM_SQUARES).fill({
         isSnake: false,
         isFood: false
       });
-      for (var i = 0; i < NUM_SQUARES; i++) {
-        console.log(JSON.stringify(squares[i]));
-      }
 
       //initialize snake
       squares[45] = squares[46] = squares[47] = {
@@ -74,18 +67,13 @@ var Board = function (_React$Component) {
         isSnake: false,
         isFood: true
       };
-      for (var _i = 0; _i < NUM_SQUARES; _i++) {
-        console.log(JSON.stringify(squares[_i]));
-      }
       return squares;
     }
   }, {
     key: 'handleKeyPress',
     value: function handleKeyPress(event) {
-      console.log('running keypress');
       event.preventDefault();
       var dir = void 0;
-      console.log('in key press, event.key = ' + event.key);
       switch (event.key) {
         case 'ArrowDown':
           dir = DOWN;
@@ -113,7 +101,6 @@ var Board = function (_React$Component) {
   }, {
     key: 'move',
     value: function move() {
-      console.log('running move');
       if (!this.state.start) return;
       var squares = this.state.squares.slice();
       var dir = this.state.headDirection;
@@ -182,7 +169,6 @@ var Board = function (_React$Component) {
     key: 'renderSquare',
     value: function renderSquare(i) {
       var className = this.state.squares[i].isSnake || this.state.squares[i].isFood ? 'black-square' : 'white-square';
-      console.log('render square --> ' + JSON.stringify(this.state.squares[i]));
       return React.createElement(Square, {
         key: i,
         id: i,
@@ -192,7 +178,6 @@ var Board = function (_React$Component) {
   }, {
     key: 'reset',
     value: function reset() {
-      console.log('running reset');
       this.setState({
         squares: this.initBoard(),
         headDirection: RIGHT,
@@ -207,7 +192,6 @@ var Board = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
-      console.log('running board render');
       var squareRows = [];
       var ndx = 0;
       for (var i = 0; i < 20; i++) {

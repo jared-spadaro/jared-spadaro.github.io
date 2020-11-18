@@ -26,13 +26,10 @@ class Board extends React.Component {
       start : false,
       gameOver : false
     };
-    for (let i = 0; i < NUM_SQUARES; i++) {
-      console.log(JSON.stringify(this.state.squares[i]));
-    }
     this.handleKeyPress = this.handleKeyPress.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.reset = this.reset.bind(this);
-    window.setInterval(this.move.bind(this), 100);
+    window.setInterval(this.move.bind(this), 200);
   }
 
   getRandom(min, max) {
@@ -40,14 +37,10 @@ class Board extends React.Component {
   }
 
   initBoard() {
-    console.log('running initBoard');
     let squares = Array(NUM_SQUARES).fill({
       isSnake : false,
       isFood : false
     });
-    for (let i = 0; i < NUM_SQUARES; i++) {
-      console.log(JSON.stringify(squares[i]));
-    }
     
     //initialize snake
     squares[45] = squares[46] = squares[47] = {
@@ -60,17 +53,12 @@ class Board extends React.Component {
       isSnake : false,
       isFood : true
     };
-    for (let i = 0; i < NUM_SQUARES; i++) {
-      console.log(JSON.stringify(squares[i]));
-    }
     return squares;
   }
 
   handleKeyPress(event) {
-    console.log('running keypress');
     event.preventDefault();
     let dir;
-    console.log('in key press, event.key = ' + event.key);
     switch (event.key) {
       case 'ArrowDown':
         dir = DOWN;
@@ -98,7 +86,6 @@ class Board extends React.Component {
   }
 
   move() {
-    console.log('running move');
     if (!this.state.start) return;
     let squares = this.state.squares.slice();
     const dir = this.state.headDirection;
@@ -171,7 +158,6 @@ class Board extends React.Component {
   renderSquare(i) {
     const className = (this.state.squares[i].isSnake || this.state.squares[i].isFood) ?
      'black-square' : 'white-square';
-     console.log('render square --> ' + JSON.stringify(this.state.squares[i]));
     return (
       <Square
         key={i}
@@ -182,7 +168,6 @@ class Board extends React.Component {
   }
 
   reset() {
-    console.log('running reset');
     this.setState({
         squares : this.initBoard(),
         headDirection : RIGHT,
@@ -196,7 +181,6 @@ class Board extends React.Component {
   }
 
   render() {
-    console.log('running board render');
     let squareRows = [];
     let ndx = 0;
     for (let i = 0; i < 20; i++) {
