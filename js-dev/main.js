@@ -23,7 +23,7 @@ class Board extends React.Component {
       head : 47,
       tail : 45,
       turns : new Map(), //<location, directon> -- add on keyboardInterrupt, remove when tail arrives
-      start : true,
+      start : false,
       gameOver : false
     };
     for (let i = 0; i < NUM_SQUARES; i++) {
@@ -167,7 +167,13 @@ class Board extends React.Component {
   }
 
   renderSquare(i) {
-    const className = this.state.squares[i].isSnake || this.state.squares[i].isFood ? 'black-square' : 'white-square';
+    const className;
+    if (this.state.squares[i].isSnake || this.state.squares[i].isFood) {
+      className = 'black-square';
+    }
+    else {
+      className = 'white-square';
+    }
     return (
       <Square
         key={i}
