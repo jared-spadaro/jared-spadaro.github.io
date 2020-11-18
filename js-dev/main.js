@@ -32,7 +32,7 @@ class Board extends React.Component {
     this.handleKeyPress = this.handleKeyPress.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.reset = this.reset.bind(this);
-    window.setInterval(this.move.bind(this), 100);
+    //window.setInterval(this.move.bind(this), 100);
   }
 
   getRandom(min, max) {
@@ -131,7 +131,9 @@ class Board extends React.Component {
     if (squares[this.state.head + dir].isFood) {
       squares[this.state.head + dir].isFood = false;
       let ndx = this.getRandom(0, NUM_SQUARES);
-      while (squares[ndx].isSnake) ndx = this.getRandom(0, NUM_SQUARES);
+      while (squares[ndx].isSnake) {
+        ndx = this.getRandom(0, NUM_SQUARES);
+      }
       squares[ndx].isFood = true;
     }
     //no food, remove tail
@@ -158,19 +160,14 @@ class Board extends React.Component {
   }
 
   handleClick() {
-    this.setState(state => ({
-      start: !state.start
-    }));
+    this.setState({
+      start: true
+    });
   }
 
   renderSquare(i) {
-    const className;
-    if (this.state.squares[i].isSnake || this.state.squares[i].isFood) {
-      className = 'black-square';
-    }
-    else {
-      className = 'white-square';
-    }
+    const className = (this.state.squares[i].isSnake || this.state.squares[i].isFood) ?
+     'black-square' : 'white-square';
     return (
       <Square
         key={i}

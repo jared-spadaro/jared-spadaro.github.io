@@ -33,7 +33,7 @@ var Board = function (_React$Component) {
       head: 47,
       tail: 45,
       turns: new Map(), //<location, directon> -- add on keyboardInterrupt, remove when tail arrives
-      start: true,
+      start: false,
       gameOver: false
     };
     for (var i = 0; i < NUM_SQUARES; i++) {
@@ -42,7 +42,7 @@ var Board = function (_React$Component) {
     _this.handleKeyPress = _this.handleKeyPress.bind(_this);
     _this.handleClick = _this.handleClick.bind(_this);
     _this.reset = _this.reset.bind(_this);
-    window.setInterval(_this.move.bind(_this), 100);
+    //window.setInterval(this.move.bind(this), 100);
     return _this;
   }
 
@@ -121,12 +121,13 @@ var Board = function (_React$Component) {
 
       //check for boundaries
       if (dir === RIGHT && (this.state.head + 1) % 20 === 0 || //19,39,59,79,etc
-      dir === LEFT && this.state.head % 20 === 0 || dir === UP && this.state.head < 20 || dir === DOWN && this.state.head > 379 || squares[this.state.head + dir].isSnake) {
-        this.setState({
-          gameOver: true
-        });
-        return;
-      }
+      dir === LEFT && this.state.head % 20 === 0 || dir === UP && this.state.head < 20 || dir === DOWN && this.state.head > 379 /* || 
+                                                                                                                                (squares[this.state.head + dir].isSnake)*/) {
+          this.setState({
+            gameOver: true
+          });
+          return;
+        }
 
       //move the head in the proper direction
       if (squares[this.state.head + dir]) {
@@ -144,7 +145,8 @@ var Board = function (_React$Component) {
         var ndx = this.getRandom(0, NUM_SQUARES);
         while (squares[ndx].isSnake) {
           ndx = this.getRandom(0, NUM_SQUARES);
-        }squares[ndx].isFood = true;
+        }
+        squares[ndx].isFood = true;
       }
       //no food, remove tail
       else {
@@ -170,12 +172,9 @@ var Board = function (_React$Component) {
   }, {
     key: 'handleClick',
     value: function handleClick() {
-      console.log('handle click');
-      if (!this.state.start) {
-        this.setState({
-          start: true
-        });
-      }
+      this.setState({
+        start: true
+      });
     }
   }, {
     key: 'renderSquare',
