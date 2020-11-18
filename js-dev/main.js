@@ -335,7 +335,7 @@ class Board extends React.Component {
     } else {
       return (
         <div
-          className="starter-template"
+          className="starter-template board"
           id="board"
           tabIndex="0"
           onClick={this.handleClick}

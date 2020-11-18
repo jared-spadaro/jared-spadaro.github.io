@@ -421,7 +421,7 @@ var Board = function (_React$Component2) {
         return React.createElement(
           "div",
           {
-            className: "starter-template",
+            className: "starter-template board",
             id: "board",
             tabIndex: "0",
             onClick: this.handleClick,

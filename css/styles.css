@@ -2,7 +2,7 @@
     background: #E9F7D2;
     border: 1px solid #999;
     float: left;
-    font-size: 20px;
+    font-size: 30px;
     font-weight: bold;
     line-height: 20px;
     height: 20px;
@@ -50,5 +50,6 @@
   }
 
   .board {
-      position:absolute;
+    border-style: solid;
+    border-width: medium;
   }
