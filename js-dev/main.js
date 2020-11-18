@@ -29,7 +29,7 @@ class Board extends React.Component {
     this.handleKeyPress = this.handleKeyPress.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.reset = this.reset.bind(this);
-    window.setInterval(this.move.bind(this), 200);
+    window.setInterval(this.move.bind(this), 100);
   }
 
   getRandom(min, max) {

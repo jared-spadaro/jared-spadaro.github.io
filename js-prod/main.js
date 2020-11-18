@@ -39,7 +39,7 @@ var Board = function (_React$Component) {
     _this.handleKeyPress = _this.handleKeyPress.bind(_this);
     _this.handleClick = _this.handleClick.bind(_this);
     _this.reset = _this.reset.bind(_this);
-    window.setInterval(_this.move.bind(_this), 200);
+    window.setInterval(_this.move.bind(_this), 100);
     return _this;
   }
 
