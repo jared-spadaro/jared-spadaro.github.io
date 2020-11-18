@@ -108,8 +108,8 @@ class Board extends React.Component {
     if ((dir === RIGHT && (this.state.head + 1) % 20 === 0) ||  //19,39,59,79,etc
         (dir === LEFT && this.state.head % 20 === 0) ||
         (dir === UP && this.state.head < 20) ||
-        (dir === DOWN && this.state.head > 379) || 
-        (squares[this.state.head + dir].isSnake)) {
+        (dir === DOWN && this.state.head > 379)/* || 
+        (squares[this.state.head + dir].isSnake)*/) {
       this.setState({
         gameOver : true
       });
