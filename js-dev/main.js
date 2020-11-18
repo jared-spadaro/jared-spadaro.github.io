@@ -132,7 +132,7 @@ function Home() {
 function Square(props) {
   return (
     <button key={props.id} id={props.id} className={props.class}>
-      <span class="food-label">{props.label}</span>
+      <span className="food-label">{props.label}</span>
     </button>
   );
 }
@@ -328,7 +328,7 @@ class Board extends React.Component {
     }
     if (this.state.gameOver) {
       return (
-        <div className="game-over">
+        <div className="board">
           Game Over
           <br />
           <button className="btn btn-dark" onClick={this.reset}>

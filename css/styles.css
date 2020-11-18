@@ -29,9 +29,8 @@
   }
 
   .food-label {
-      font-size: 30px;
-      font-weight: bold;
-      margin-top:3px;
+      font-size: 24px;
+      font-weight: 900;
   }
   
   .square:focus {
@@ -46,5 +45,7 @@
 
   .board {
     border-style: solid;
-    border-width: medium;
+    border-width: thick;
+    margin: auto;
+    width: 27.1%;
   }

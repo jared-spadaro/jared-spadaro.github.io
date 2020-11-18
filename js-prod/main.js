@@ -205,7 +205,7 @@ function Square(props) {
     { key: props.id, id: props.id, className: props.class },
     React.createElement(
       "span",
-      { "class": "food-label" },
+      { className: "food-label" },
       props.label
     )
   );
@@ -412,7 +412,7 @@ var Board = function (_React$Component2) {
       if (this.state.gameOver) {
         return React.createElement(
           "div",
-          { className: "game-over" },
+          { className: "board" },
           "Game Over",
           React.createElement("br", null),
           React.createElement(
