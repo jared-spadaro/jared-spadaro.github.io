@@ -30,8 +30,8 @@ var Board = function (_React$Component) {
       squares: _this.initBoard(),
       headDirection: RIGHT,
       tailDirection: RIGHT,
-      head: 112,
-      tail: 110,
+      head: 47,
+      tail: 45,
       turns: new Map(), //<location, directon> -- add on keyboardInterrupt, remove when tail arrives
       start: false,
       gameOver: false
@@ -39,16 +39,27 @@ var Board = function (_React$Component) {
     _this.initBoard();
     _this.handleKeyPress = _this.handleKeyPress.bind(_this);
     _this.handleClick = _this.handleClick.bind(_this);
-    _this.handleBackClick = _this.handleBackClick.bind(_this);
+    _this.reset = _this.reset.bind(_this);
     window.setInterval(_this.move.bind(_this), 100);
     return _this;
   }
 
   _createClass(Board, [{
+    key: 'getRandom',
+    value: function getRandom(min, max) {
+      return Math.random() * (max - min) + min;
+    }
+  }, {
     key: 'initBoard',
     value: function initBoard() {
-      var squares = Array(400).fill(false);
-      squares[110] = squares[111] = squares[112] = true;
+      var squares = Array(NUM_SQUARES).fill({
+        isSnake: false,
+        isFood: false
+      });
+      //initialize snake
+      squares[45].isSnake = squares[46].isSnake = squares[47].isSnake = true;
+      //initialize food
+      squares[this.getRandom(80, NUM_SQUARES)].isFood = true;
       return squares;
     }
   }, {
@@ -89,18 +100,29 @@ var Board = function (_React$Component) {
       var dir = this.state.headDirection;
       var turns = new Map(this.state.turns);
 
-      //first, check for boundaries
+      //check for boundaries
       if (dir === RIGHT && (this.state.head + 1) % 20 === 0 || //19,39,59,79,etc
-      dir === LEFT && this.state.head % 20 === 0 || dir === UP && this.state.head < 20 || dir === DOWN && this.state.head > 379) {
+      dir === LEFT && this.state.head % 20 === 0 || dir === UP && this.state.head < 20 || dir === DOWN && this.state.head > 379 || squares[this.state.head + dir].isSnake) {
         this.setState({
           gameOver: true
         });
       }
 
       //move the head in the proper direction
-      squares[this.state.head + dir] = true;
-      //set tail to false
-      squares[this.state.tail] = false;
+      squares[this.state.head + dir].isSnake = true;
+
+      //is food, place food in new spot and keep tail
+      if (squares[this.state.head + dir].isFood) {
+        squares[this.state.head + dir].isFood = false;
+        var ndx = this.getRandom(0, NUM_SQUARES);
+        while (squares[ndx].isSnake) {
+          ndx = this.getRandom(0, NUM_SQUARES);
+        }squares[ndx].isFood = true;
+      }
+      //no food, remove tail
+      else {
+          squares[this.state.tail].isSnake = false;
+        }
       //check if tail is at a turn
       var tailDir = void 0;
       if (turns.has(this.state.tail)) {
@@ -109,6 +131,7 @@ var Board = function (_React$Component) {
       } else {
         tailDir = this.state.tailDirection;
       }
+
       this.setState({
         squares: squares,
         head: this.state.head + dir,
@@ -129,7 +152,7 @@ var Board = function (_React$Component) {
   }, {
     key: 'renderSquare',
     value: function renderSquare(i) {
-      var className = this.state.squares[i] ? 'black-square' : 'white-square';
+      var className = this.state.squares[i].isSnake || this.state.squares[i].isFood ? 'black-square' : 'white-square';
       return React.createElement(Square, {
         key: i,
         id: i,
@@ -137,8 +160,8 @@ var Board = function (_React$Component) {
       });
     }
   }, {
-    key: 'handleBackClick',
-    value: function handleBackClick() {
+    key: 'reset',
+    value: function reset() {
       this.setState({
         squares: this.initBoard(),
         headDirection: RIGHT,
@@ -174,7 +197,7 @@ var Board = function (_React$Component) {
           React.createElement('br', null),
           React.createElement(
             'button',
-            { 'class': 'back-button', onClick: this.handleBackClick },
+            { 'class': 'back-button', onClick: this.reset },
             'Go Back'
           )
         );

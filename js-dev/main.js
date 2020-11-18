@@ -20,8 +20,8 @@ class Board extends React.Component {
       squares : this.initBoard(),
       headDirection : RIGHT,
       tailDirection : RIGHT,
-      head : 112,
-      tail : 110,
+      head : 47,
+      tail : 45,
       turns : new Map(), //<location, directon> -- add on keyboardInterrupt, remove when tail arrives
       start : false,
       gameOver : false
@@ -29,13 +29,23 @@ class Board extends React.Component {
     this.initBoard();
     this.handleKeyPress = this.handleKeyPress.bind(this);
     this.handleClick = this.handleClick.bind(this);
-    this.handleBackClick = this.handleBackClick.bind(this);
+    this.reset = this.reset.bind(this);
     window.setInterval(this.move.bind(this), 100);
   }
 
+  getRandom(min, max) {
+    return Math.random() * (max - min) + min;
+  }
+
   initBoard() {
-    const squares = Array(400).fill(false);
-    squares[110] = squares[111] = squares[112] = true;
+    const squares = Array(NUM_SQUARES).fill({
+      isSnake : false,
+      isFood : false
+    });
+    //initialize snake
+    squares[45].isSnake = squares[46].isSnake = squares[47].isSnake = true;
+    //initialize food
+    squares[this.getRandom(80,NUM_SQUARES)].isFood = true;
     return squares;
   }
 
@@ -75,20 +85,31 @@ class Board extends React.Component {
     const dir = this.state.headDirection;
     const turns = new Map(this.state.turns);
     
-    //first, check for boundaries
+    //check for boundaries
     if ((dir === RIGHT && (this.state.head + 1) % 20 === 0) ||  //19,39,59,79,etc
-     (dir === LEFT && this.state.head % 20 === 0) ||
-     (dir === UP && this.state.head < 20) ||
-     (dir === DOWN && this.state.head > 379)) {
+        (dir === LEFT && this.state.head % 20 === 0) ||
+        (dir === UP && this.state.head < 20) ||
+        (dir === DOWN && this.state.head > 379) || 
+        (squares[this.state.head + dir].isSnake)) {
       this.setState({
         gameOver : true
       });
     }
 
     //move the head in the proper direction
-    squares[this.state.head + dir] = true;
-    //set tail to false
-    squares[this.state.tail] = false;
+    squares[this.state.head + dir].isSnake = true;
+
+    //is food, place food in new spot and keep tail
+    if (squares[this.state.head + dir].isFood) {
+      squares[this.state.head + dir].isFood = false;
+      let ndx = this.getRandom(0, NUM_SQUARES);
+      while (squares[ndx].isSnake) ndx = this.getRandom(0, NUM_SQUARES);
+      squares[ndx].isFood = true;
+    }
+    //no food, remove tail
+    else {
+      squares[this.state.tail].isSnake = false;
+    }
     //check if tail is at a turn
     let tailDir;
     if (turns.has(this.state.tail)) {
@@ -98,6 +119,7 @@ class Board extends React.Component {
     else {
       tailDir = this.state.tailDirection;
     }
+
     this.setState({
       squares : squares,
       head : this.state.head + dir,
@@ -116,7 +138,8 @@ class Board extends React.Component {
   }
 
   renderSquare(i) {
-    const className = this.state.squares[i] ? 'black-square' : 'white-square';
+    const className = this.state.squares[i].isSnake || this.state.squares[i].isFood ? 
+     'black-square' : 'white-square';
     return (
       <Square
         key={i}
@@ -126,7 +149,7 @@ class Board extends React.Component {
     );
   }
 
-  handleBackClick() {
+  reset() {
     this.setState({
         squares : this.initBoard(),
         headDirection : RIGHT,
@@ -153,7 +176,7 @@ class Board extends React.Component {
       return (
         <div class="game-over">
           Game Over<br/>
-          <button class="back-button" onClick={this.handleBackClick}>Go Back</button>
+          <button class="back-button" onClick={this.reset}>Go Back</button>
         </div>
       );
     }
