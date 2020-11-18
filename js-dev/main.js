@@ -119,16 +119,26 @@ class Board extends React.Component {
 
     //is food, place food in new spot and keep tail
     if (squares[this.state.head + dir].isFood) {
-      squares[this.state.head + dir].isFood = false;
+      console.log('found food');
+      squares[this.state.head + dir] = {
+        isSnake : true,
+        isFood : false
+      };
       let ndx = this.getRandom(0, NUM_SQUARES);
       while (squares[ndx].isSnake) {
         ndx = this.getRandom(0, NUM_SQUARES);
       }
-      squares[ndx].isFood = true;
+      squares[ndx] = {
+        isSnake : false,
+        isFood : true
+      };
     }
     //no food, remove tail
     else {
-      squares[this.state.tail].isSnake = false;
+      squares[this.state.tail] = {
+        isSnake : false,
+        isFood : false
+      };
     }
     //check if tail is at a turn
     let tailDir;
