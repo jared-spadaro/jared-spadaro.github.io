@@ -90,6 +90,7 @@ class Board extends React.Component {
     let squares = this.state.squares.slice();
     const dir = this.state.headDirection;
     const turns = new Map(this.state.turns);
+    let found = false;
     
     //check for boundaries
     if ((dir === RIGHT && (this.state.head + 1) % 20 === 0) ||  //19,39,59,79,etc
@@ -105,6 +106,7 @@ class Board extends React.Component {
 
     //is food, place food in new spot and keep tail
     if (squares[this.state.head + dir].isFood) {
+      found = true;
       console.log('found food');
       squares[this.state.head + dir] = {
         isSnake : true,
@@ -154,7 +156,7 @@ class Board extends React.Component {
     this.setState({
       squares : squares,
       head : this.state.head + dir,
-      tail : this.state.tail + tailDir,
+      tail : !found ? this.state.tail + tailDir : this.state.tail,
       tailDirection : tailDir,
       turns : turns
     });
