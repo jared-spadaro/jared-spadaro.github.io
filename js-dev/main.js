@@ -49,16 +49,10 @@ class Board extends React.Component {
     }
     
     //initialize snake
-    squares[45] = squares[46] = squares[47] = {
-      isSnake : true,
-      isFood : true
-    };
+    squares[45].isSnake = squares[46].isSnake = squares[47].isSnake = true;
     
     //initialize food
-    squares[this.getRandom(80, NUM_SQUARES)] = {
-      isSnake : false,
-      isFood : false
-    };
+    squares[this.getRandom(80, NUM_SQUARES)].isFood = true;
     for (let i = 0; i < NUM_SQUARES; i++) {
       console.log(JSON.stringify(squares[i]));
     }
