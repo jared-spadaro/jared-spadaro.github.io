@@ -31,7 +31,7 @@ class Board extends React.Component {
     }
     this.handleKeyPress = this.handleKeyPress.bind(this);
     this.handleClick = this.handleClick.bind(this);
-    this.reset = this.reset.bind(his);
+    this.reset = this.reset.bind(this);
     window.setInterval(this.simpleMove.bind(this), 100);
   }
 
