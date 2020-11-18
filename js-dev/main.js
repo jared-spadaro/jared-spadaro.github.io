@@ -198,7 +198,7 @@ class Board extends React.Component {
     }
     else {
       return (
-        <div id="board" tabIndex="0" onClick={this.handleClick} onKeyDown={this.handleKeyPress}>
+        <div id="board" tabIndex="-1" onClick={this.handleClick} onKeyDown={this.handleKeyPress}>
           {squareRows}
         </div>
       );
@@ -207,3 +207,4 @@ class Board extends React.Component {
 }
 
 ReactDOM.render(<Board/>, document.querySelector("#snake-game"));
+document.querySelector("#board").focus();
