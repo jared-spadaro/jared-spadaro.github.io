@@ -159,6 +159,7 @@ var Board = function (_React$Component) {
   }, {
     key: 'handleClick',
     value: function handleClick() {
+      console.log('handle click. start = ' + this.state.start);
       if (!this.state.start) {
         this.setState({
           start: true

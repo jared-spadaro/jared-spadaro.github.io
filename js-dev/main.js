@@ -146,6 +146,7 @@ class Board extends React.Component {
   }
 
   handleClick() {
+    console.log('handle click. start = ' + this.state.start);
     if (!this.state.start) {
       this.setState({
         start : true
