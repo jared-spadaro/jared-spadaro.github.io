@@ -33,7 +33,7 @@ var Board = function (_React$Component) {
       head: 47,
       tail: 45,
       turns: new Map(), //<location, directon> -- add on keyboardInterrupt, remove when tail arrives
-      start: false,
+      start: true,
       gameOver: false
     };
     for (var i = 0; i < NUM_SQUARES; i++) {
