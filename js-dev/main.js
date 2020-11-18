@@ -32,7 +32,7 @@ class Board extends React.Component {
     this.handleKeyPress = this.handleKeyPress.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.reset = this.reset.bind(this);
-    window.setInterval(this.simpleMove.bind(this), 100);
+    window.setInterval(this.move.bind(this), 100);
   }
 
   getRandom(min, max) {
@@ -97,59 +97,10 @@ class Board extends React.Component {
     });
   }
 
-  simpleMove() {
-    console.log('running move');
-    if (!this.state.start) return;
-    const squares = this.state.squares.slice();
-    const dir = this.state.headDirection;
-    const turns = new Map(this.state.turns);
-    
-    //check for boundaries
-    if ((dir === RIGHT && (this.state.head + 1) % 20 === 0) ||  //19,39,59,79,etc
-        (dir === LEFT && this.state.head % 20 === 0) ||
-        (dir === UP && this.state.head < 20) ||
-        (dir === DOWN && this.state.head > 379)/* || 
-        (squares[this.state.head + dir].isSnake)*/) {
-      this.setState({
-        gameOver : true
-      });
-      return;
-    }
-
-    //move the head in the proper direction
-    if (squares[this.state.head + dir]) {
-      squares[this.state.head + dir].isSnake = true;
-    }
-    else {
-      this.setState({
-        gameOver : true
-      });
-      return;
-    }
-
-    //check if tail is at a turn
-    let tailDir;
-    if (turns.has(this.state.tail)) {
-      tailDir = turns.get(this.state.tail);
-      turns.delete(this.state.tail);
-    }
-    else {
-      tailDir = this.state.tailDirection;
-    }
-
-    this.setState({
-      squares : squares,
-      head : this.state.head + dir,
-      tail : this.state.tail + tailDir,
-      tailDirection : tailDir,
-      turns : turns
-    });
-  }
-
   move() {
     console.log('running move');
     if (!this.state.start) return;
-    const squares = this.state.squares.slice();
+    let squares = this.state.squares.slice();
     const dir = this.state.headDirection;
     const turns = new Map(this.state.turns);
     
@@ -157,8 +108,8 @@ class Board extends React.Component {
     if ((dir === RIGHT && (this.state.head + 1) % 20 === 0) ||  //19,39,59,79,etc
         (dir === LEFT && this.state.head % 20 === 0) ||
         (dir === UP && this.state.head < 20) ||
-        (dir === DOWN && this.state.head > 379)/* || 
-        (squares[this.state.head + dir].isSnake)*/) {
+        (dir === DOWN && this.state.head > 379) || 
+        (squares[this.state.head + dir].isSnake)) {
       this.setState({
         gameOver : true
       });
@@ -167,7 +118,10 @@ class Board extends React.Component {
 
     //move the head in the proper direction
     if (squares[this.state.head + dir]) {
-      squares[this.state.head + dir].isSnake = true;
+      squares[this.state.head + dir] = {
+        isSnake : true,
+        isFood : false
+      };
     }
     else {
       this.setState({
@@ -180,9 +134,9 @@ class Board extends React.Component {
     if (squares[this.state.head + dir].isFood) {
       squares[this.state.head + dir].isFood = false;
       let ndx = this.getRandom(0, NUM_SQUARES);
-      /*while (squares[ndx].isSnake) {
+      while (squares[ndx].isSnake) {
         ndx = this.getRandom(0, NUM_SQUARES);
-      }*/
+      }
       squares[ndx].isFood = true;
     }
     //no food, remove tail
