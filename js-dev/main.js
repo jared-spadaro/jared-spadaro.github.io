@@ -103,20 +103,6 @@ class Board extends React.Component {
       return;
     }
 
-    //move the head in the proper direction
-    if (squares[this.state.head + dir]) {
-      squares[this.state.head + dir] = {
-        isSnake : true,
-        isFood : false
-      };
-    }
-    else {
-      this.setState({
-        gameOver : true
-      });
-      return;
-    }
-
     //is food, place food in new spot and keep tail
     if (squares[this.state.head + dir].isFood) {
       console.log('found food');
@@ -139,7 +125,22 @@ class Board extends React.Component {
         isSnake : false,
         isFood : false
       };
+    } 
+
+    //move the head in the proper direction
+    if (squares[this.state.head + dir]) {
+      squares[this.state.head + dir] = {
+        isSnake : true,
+        isFood : false
+      };
     }
+    else {
+      this.setState({
+        gameOver : true
+      });
+      return;
+    }
+
     //check if tail is at a turn
     let tailDir;
     if (turns.has(this.state.tail)) {
