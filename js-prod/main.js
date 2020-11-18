@@ -90,7 +90,7 @@ var Header = function (_React$Component) {
                 React.createElement(
                   "a",
                   { className: "nav-link", href: "#" },
-                  "Home ",
+                  "Google ",
                   React.createElement(
                     "span",
                     { className: "sr-only" },
@@ -416,9 +416,11 @@ var Board = function (_React$Component2) {
           )
         );
       } else {
+        console.log('rendering board');
         return React.createElement(
           "div",
           {
+            className: "board",
             id: "board",
             tabIndex: "0",
             onClick: this.handleClick,

@@ -57,7 +57,7 @@ class Header extends React.Component {
               <ul className="navbar-nav mr-auto">
                 <li className="nav-item active">
                   <a className="nav-link" href="#">
-                    Home <span className="sr-only">(current)</span>
+                    Google <span className="sr-only">(current)</span>
                   </a>
                 </li>
                 <li className="nav-item">
@@ -334,8 +334,10 @@ class Board extends React.Component {
         </div>
       );
     } else {
+      console.log('rendering board');
       return (
         <div
+          className="board"
           id="board"
           tabIndex="0"
           onClick={this.handleClick}
