@@ -32,6 +32,7 @@ var Header = function (_React$Component) {
   _createClass(Header, [{
     key: "setPage",
     value: function setPage(event) {
+      console.log('setting page to ' + event.target.dataset.id);
       this.setState({
         page: event.target.dataset.id
       });
@@ -56,158 +57,150 @@ var Header = function (_React$Component) {
       return React.createElement(
         "div",
         null,
+        React.createElement("meta", { charSet: "utf-8" }),
+        React.createElement("meta", {
+          name: "viewport",
+          content: "width=device-width, initial-scale=1, shrink-to-fit=no"
+        }),
+        React.createElement("meta", { name: "generator", content: "Jekyll v4.1.1" }),
+        React.createElement("link", {
+          rel: "canonical",
+          href: "https://getbootstrap.com/docs/4.5/examples/starter-template/"
+        }),
+        React.createElement("link", { href: "bootstrap/css/bootstrap.min.css", rel: "stylesheet" }),
+        React.createElement("link", { href: "css/starter-template.css", rel: "stylesheet" }),
+        React.createElement("link", { href: "css/styles.css", rel: "stylesheet" }),
+        React.createElement("link", {
+          rel: "apple-touch-icon",
+          sizes: "180x180",
+          href: "favicon/apple-touch-icon.png"
+        }),
+        React.createElement("link", {
+          rel: "icon",
+          type: "image/png",
+          sizes: "32x32",
+          href: "favicon/favicon-32x32.png"
+        }),
+        React.createElement("link", {
+          rel: "icon",
+          type: "image/png",
+          sizes: "16x16",
+          href: "favicon/favicon-16x16.png"
+        }),
+        React.createElement("link", { rel: "manifest", href: "favicon/site.webmanifest" }),
         React.createElement(
-          "head",
-          null,
-          React.createElement("meta", { charset: "utf-8" }),
-          React.createElement("meta", {
-            name: "viewport",
-            content: "width=device-width, initial-scale=1, shrink-to-fit=no"
-          }),
-          React.createElement("meta", { name: "generator", content: "Jekyll v4.1.1" }),
-          React.createElement("link", {
-            rel: "canonical",
-            href: "https://getbootstrap.com/docs/4.5/examples/starter-template/"
-          }),
-          React.createElement("link", { href: "bootstrap/css/bootstrap.min.css", rel: "stylesheet" }),
-          React.createElement("link", { href: "css/starter-template.css", rel: "stylesheet" }),
-          React.createElement("link", { href: "css/styles.css", rel: "stylesheet" }),
-          React.createElement("link", {
-            rel: "apple-touch-icon",
-            sizes: "180x180",
-            href: "favicon/apple-touch-icon.png"
-          }),
-          React.createElement("link", {
-            rel: "icon",
-            type: "image/png",
-            sizes: "32x32",
-            href: "favicon/favicon-32x32.png"
-          }),
-          React.createElement("link", {
-            rel: "icon",
-            type: "image/png",
-            sizes: "16x16",
-            href: "favicon/favicon-16x16.png"
-          }),
-          React.createElement("link", { rel: "manifest", href: "favicon/site.webmanifest" })
-        ),
-        React.createElement(
-          "body",
-          null,
+          "nav",
+          { className: "navbar navbar-expand-md navbar-dark bg-dark fixed-top" },
           React.createElement(
-            "nav",
-            { "class": "navbar navbar-expand-md navbar-dark bg-dark fixed-top" },
+            "a",
+            { className: "navbar-brand", href: "#", onClick: this.setPage, "data-id": "Home" },
+            "Home"
+          ),
+          React.createElement(
+            "button",
+            {
+              className: "navbar-toggler",
+              type: "button",
+              "data-toggle": "collapse",
+              "data-target": "#navbarsExampleDefault",
+              "aria-controls": "navbarsExampleDefault",
+              "aria-expanded": "false",
+              "aria-label": "Toggle navigation"
+            },
+            React.createElement("span", { className: "navbar-toggler-icon" })
+          ),
+          React.createElement(
+            "div",
+            { className: "collapse navbar-collapse", id: "navbarsExampleDefault" },
             React.createElement(
-              "a",
-              { "class": "navbar-brand", href: "#", onClick: this.setPage, "data-id": "Home" },
-              "Home"
-            ),
-            React.createElement(
-              "button",
-              {
-                "class": "navbar-toggler",
-                type: "button",
-                "data-toggle": "collapse",
-                "data-target": "#navbarsExampleDefault",
-                "aria-controls": "navbarsExampleDefault",
-                "aria-expanded": "false",
-                "aria-label": "Toggle navigation"
-              },
-              React.createElement("span", { "class": "navbar-toggler-icon" })
-            ),
-            React.createElement(
-              "div",
-              { "class": "collapse navbar-collapse", id: "navbarsExampleDefault" },
+              "ul",
+              { className: "navbar-nav mr-auto" },
               React.createElement(
-                "ul",
-                { "class": "navbar-nav mr-auto" },
+                "li",
+                { className: "nav-item active" },
                 React.createElement(
-                  "li",
-                  { "class": "nav-item active" },
+                  "a",
+                  { className: "nav-link", href: "#" },
+                  "Home ",
                   React.createElement(
-                    "a",
-                    { "class": "nav-link", href: "#" },
-                    "Home ",
-                    React.createElement(
-                      "span",
-                      { "class": "sr-only" },
-                      "(current)"
-                    )
-                  )
-                ),
-                React.createElement(
-                  "li",
-                  { "class": "nav-item" },
-                  React.createElement(
-                    "a",
-                    { "class": "nav-link", href: "#", onClick: this.setPage, "data-id": "Snake" },
-                    "Snake"
-                  )
-                ),
-                React.createElement(
-                  "li",
-                  { "class": "nav-item" },
-                  React.createElement(
-                    "a",
-                    {
-                      "class": "nav-link disabled",
-                      href: "#",
-                      tabindex: "-1",
-                      "aria-disabled": "true"
-                    },
-                    "???"
-                  )
-                ),
-                React.createElement(
-                  "li",
-                  { "class": "nav-item dropdown" },
-                  React.createElement(
-                    "a",
-                    {
-                      "class": "nav-link dropdown-toggle",
-                      href: "#",
-                      id: "dropdown01",
-                      "data-toggle": "dropdown",
-                      "aria-haspopup": "true",
-                      "aria-expanded": "false"
-                    },
-                    "Check These Out"
-                  ),
-                  React.createElement(
-                    "div",
-                    { "class": "dropdown-menu", "aria-labelledby": "dropdown01" },
-                    React.createElement(
-                      "a",
-                      { "class": "dropdown-item", href: "#" },
-                      "Action"
-                    ),
-                    React.createElement(
-                      "a",
-                      { "class": "dropdown-item", href: "#" },
-                      "Another action"
-                    ),
-                    React.createElement(
-                      "a",
-                      { "class": "dropdown-item", href: "#" },
-                      "Something else here"
-                    )
+                    "span",
+                    { className: "sr-only" },
+                    "(current)"
                   )
                 )
               ),
               React.createElement(
-                "form",
-                { "class": "form-inline my-2 my-lg-0" },
-                React.createElement("input", {
-                  "class": "form-control mr-sm-2",
-                  type: "text",
-                  placeholder: "Search",
-                  "aria-label": "Search"
-                }),
+                "li",
+                { className: "nav-item" },
                 React.createElement(
-                  "button",
-                  { "class": "btn btn-secondary my-2 my-sm-0", type: "submit" },
-                  "Search"
+                  "a",
+                  { className: "nav-link", href: "#", onClick: this.setPage, "data-id": "Snake" },
+                  "Snake"
                 )
+              ),
+              React.createElement(
+                "li",
+                { className: "nav-item" },
+                React.createElement(
+                  "a",
+                  {
+                    className: "nav-link disabled",
+                    href: "#",
+                    tabIndex: "-1",
+                    "aria-disabled": "true"
+                  },
+                  "???"
+                )
+              ),
+              React.createElement(
+                "li",
+                { className: "nav-item dropdown" },
+                React.createElement(
+                  "a",
+                  {
+                    className: "nav-link dropdown-toggle",
+                    href: "#",
+                    id: "dropdown01",
+                    "data-toggle": "dropdown",
+                    "aria-haspopup": "true",
+                    "aria-expanded": "false"
+                  },
+                  "Check These Out"
+                ),
+                React.createElement(
+                  "div",
+                  { className: "dropdown-menu", "aria-labelledby": "dropdown01" },
+                  React.createElement(
+                    "a",
+                    { className: "dropdown-item", href: "#" },
+                    "Action"
+                  ),
+                  React.createElement(
+                    "a",
+                    { className: "dropdown-item", href: "#" },
+                    "Another action"
+                  ),
+                  React.createElement(
+                    "a",
+                    { className: "dropdown-item", href: "#" },
+                    "Something else here"
+                  )
+                )
+              )
+            ),
+            React.createElement(
+              "form",
+              { className: "form-inline my-2 my-lg-0" },
+              React.createElement("input", {
+                className: "form-control mr-sm-2",
+                type: "text",
+                placeholder: "Search",
+                "aria-label": "Search"
+              }),
+              React.createElement(
+                "button",
+                { className: "btn btn-secondary my-2 my-sm-0", type: "submit" },
+                "Search"
               )
             )
           )
@@ -223,10 +216,10 @@ var Header = function (_React$Component) {
 function Home() {
   return React.createElement(
     "div",
-    { "class": "container", id: "jsDiv" },
+    { className: "container", id: "jsDiv" },
     React.createElement(
       "div",
-      { "class": "starter-template" },
+      { className: "starter-template" },
       React.createElement(
         "h1",
         null,
@@ -234,7 +227,7 @@ function Home() {
       ),
       React.createElement(
         "p",
-        { "class": "lead" },
+        { className: "lead" },
         "Actual features TBD."
       )
     )
