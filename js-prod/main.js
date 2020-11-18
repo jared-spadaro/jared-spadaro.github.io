@@ -408,7 +408,7 @@ var Board = function (_React$Component2) {
       if (this.state.gameOver) {
         return React.createElement(
           "div",
-          { className: "starter-template" },
+          { className: "game-over" },
           "Game Over",
           React.createElement("br", null),
           React.createElement(
@@ -421,7 +421,7 @@ var Board = function (_React$Component2) {
         return React.createElement(
           "div",
           {
-            className: "starter-template board",
+            className: "board",
             id: "board",
             tabIndex: "0",
             onClick: this.handleClick,

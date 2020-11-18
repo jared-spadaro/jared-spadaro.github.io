@@ -324,7 +324,7 @@ class Board extends React.Component {
     }
     if (this.state.gameOver) {
       return (
-        <div className="starter-template">
+        <div className="game-over">
           Game Over
           <br />
           <button className="btn btn-dark" onClick={this.reset}>
@@ -335,7 +335,7 @@ class Board extends React.Component {
     } else {
       return (
         <div
-          className="starter-template board"
+          className="board"
           id="board"
           tabIndex="0"
           onClick={this.handleClick}
