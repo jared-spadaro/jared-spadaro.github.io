@@ -122,10 +122,18 @@ var Board = function (_React$Component) {
         this.setState({
           gameOver: true
         });
+        return;
       }
 
       //move the head in the proper direction
-      squares[this.state.head + dir].isSnake = true;
+      if (squares[this.state.head + dir]) {
+        squares[this.state.head + dir].isSnake = true;
+      } else {
+        this.setState({
+          gameOver: true
+        });
+        return;
+      }
 
       //is food, place food in new spot and keep tail
       if (squares[this.state.head + dir].isFood) {
