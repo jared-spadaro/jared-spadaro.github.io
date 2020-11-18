@@ -49,3 +49,9 @@
     margin: auto;
     width: 27.1%;
   }
+
+  .game-over {
+    border-style: none;
+    margin: auto;
+    width: 10% 
+  }
