@@ -50,6 +50,7 @@ var Header = function (_React$Component) {
           break;
         case 'Snake':
           content = React.createElement(Board, null);
+          break;
         default:
           content = null;
           break;

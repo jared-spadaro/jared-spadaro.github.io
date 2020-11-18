@@ -31,6 +31,7 @@ class Header extends React.Component {
         break;
       case 'Snake':
         content = <Board/>;
+        break;
       default:
         content = null;
         break;
