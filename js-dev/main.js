@@ -385,4 +385,4 @@ class Board extends React.Component {
   }
 }
 
-ReactDOM.render(<Board />, document.querySelector("#snake-game"));
+ReactDOM.render(<Header/>, document.querySelector("#root"));

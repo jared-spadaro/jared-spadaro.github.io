@@ -471,4 +471,4 @@ var Board = function (_React$Component2) {
   return Board;
 }(React.Component);
 
-ReactDOM.render(React.createElement(Board, null), document.querySelector("#snake-game"));
+ReactDOM.render(React.createElement(Header, null), document.querySelector("#root"));
