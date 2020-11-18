@@ -58,14 +58,17 @@ var Board = function (_React$Component) {
         isSnake: false,
         isFood: false
       });
+      for (var i = 0; i < NUM_SQUARES; i++) {
+        console.log(JSON.stringify(squares[i]));
+      }
 
       //initialize snake
       squares[45].isSnake = squares[46].isSnake = squares[47].isSnake = true;
 
       //initialize food
       squares[this.getRandom(80, NUM_SQUARES)].isFood = true;
-      for (var i = 0; i < NUM_SQUARES; i++) {
-        console.log(JSON.stringify(squares[i]));
+      for (var _i = 0; _i < NUM_SQUARES; _i++) {
+        console.log(JSON.stringify(squares[_i]));
       }
       return squares;
     }

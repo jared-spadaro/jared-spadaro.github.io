@@ -44,6 +44,9 @@ class Board extends React.Component {
       isSnake : false,
       isFood : false
     });
+    for (let i = 0; i < NUM_SQUARES; i++) {
+      console.log(JSON.stringify(squares[i]));
+    }
     
     //initialize snake
     squares[45].isSnake = squares[46].isSnake = squares[47].isSnake = true;
