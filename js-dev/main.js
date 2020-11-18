@@ -40,6 +40,7 @@ class Board extends React.Component {
   }
 
   initBoard() {
+    console.log('running initBoard');
     let squares = Array(NUM_SQUARES).fill({
       isSnake : false,
       isFood : false
@@ -66,6 +67,7 @@ class Board extends React.Component {
   }
 
   handleKeyPress(event) {
+    console.log('running keypress');
     event.preventDefault();
     let dir;
     console.log('in key press, event.key = ' + event.key);
@@ -96,6 +98,7 @@ class Board extends React.Component {
   }
 
   move() {
+    console.log('running move');
     if (!this.state.start) return;
     const squares = this.state.squares.slice();
     const dir = this.state.headDirection;
@@ -155,8 +158,8 @@ class Board extends React.Component {
   }
 
   handleClick() {
+    console.log('handle click');
     if (!this.state.start) {
-      console.log('setting start to true');
       this.setState({
         start : true
       });
@@ -176,6 +179,7 @@ class Board extends React.Component {
   }
 
   reset() {
+    console.log('running reset');
     this.setState({
         squares : this.initBoard(),
         headDirection : RIGHT,
@@ -189,6 +193,7 @@ class Board extends React.Component {
   }
 
   render() {
+    console.log('running board render');
     let squareRows = [];
     let ndx = 0;
     for (let i = 0; i < 20; i++) {

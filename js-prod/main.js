@@ -54,6 +54,7 @@ var Board = function (_React$Component) {
   }, {
     key: 'initBoard',
     value: function initBoard() {
+      console.log('running initBoard');
       var squares = Array(NUM_SQUARES).fill({
         isSnake: false,
         isFood: false
@@ -81,6 +82,7 @@ var Board = function (_React$Component) {
   }, {
     key: 'handleKeyPress',
     value: function handleKeyPress(event) {
+      console.log('running keypress');
       event.preventDefault();
       var dir = void 0;
       console.log('in key press, event.key = ' + event.key);
@@ -111,6 +113,7 @@ var Board = function (_React$Component) {
   }, {
     key: 'move',
     value: function move() {
+      console.log('running move');
       if (!this.state.start) return;
       var squares = this.state.squares.slice();
       var dir = this.state.headDirection;
@@ -167,8 +170,8 @@ var Board = function (_React$Component) {
   }, {
     key: 'handleClick',
     value: function handleClick() {
+      console.log('handle click');
       if (!this.state.start) {
-        console.log('setting start to true');
         this.setState({
           start: true
         });
@@ -187,6 +190,7 @@ var Board = function (_React$Component) {
   }, {
     key: 'reset',
     value: function reset() {
+      console.log('running reset');
       this.setState({
         squares: this.initBoard(),
         headDirection: RIGHT,
@@ -201,6 +205,7 @@ var Board = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
+      console.log('running board render');
       var squareRows = [];
       var ndx = 0;
       for (var i = 0; i < 20; i++) {
