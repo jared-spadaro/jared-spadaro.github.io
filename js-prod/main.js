@@ -41,8 +41,8 @@ var Board = function (_React$Component) {
     }
     _this.handleKeyPress = _this.handleKeyPress.bind(_this);
     _this.handleClick = _this.handleClick.bind(_this);
-    _this.reset = _this.reset.bind(_this);
-    //window.setInterval(this.move.bind(this), 100);
+    _this.reset = _this.reset.bind(his);
+    window.setInterval(_this.simpleMove.bind(_this), 100);
     return _this;
   }
 
@@ -107,6 +107,52 @@ var Board = function (_React$Component) {
       if (dir) turns.set(this.state.head, dir);else throw new Error('dir is null');
       this.setState({
         headDirection: dir,
+        turns: turns
+      });
+    }
+  }, {
+    key: 'simpleMove',
+    value: function simpleMove() {
+      console.log('running move');
+      if (!this.state.start) return;
+      var squares = this.state.squares.slice();
+      var dir = this.state.headDirection;
+      var turns = new Map(this.state.turns);
+
+      //check for boundaries
+      if (dir === RIGHT && (this.state.head + 1) % 20 === 0 || //19,39,59,79,etc
+      dir === LEFT && this.state.head % 20 === 0 || dir === UP && this.state.head < 20 || dir === DOWN && this.state.head > 379 /* || 
+                                                                                                                                (squares[this.state.head + dir].isSnake)*/) {
+          this.setState({
+            gameOver: true
+          });
+          return;
+        }
+
+      //move the head in the proper direction
+      if (squares[this.state.head + dir]) {
+        squares[this.state.head + dir].isSnake = true;
+      } else {
+        this.setState({
+          gameOver: true
+        });
+        return;
+      }
+
+      //check if tail is at a turn
+      var tailDir = void 0;
+      if (turns.has(this.state.tail)) {
+        tailDir = turns.get(this.state.tail);
+        turns.delete(this.state.tail);
+      } else {
+        tailDir = this.state.tailDirection;
+      }
+
+      this.setState({
+        squares: squares,
+        head: this.state.head + dir,
+        tail: this.state.tail + tailDir,
+        tailDirection: tailDir,
         turns: turns
       });
     }
