@@ -40,7 +40,7 @@ class Board extends React.Component {
   }
 
   initBoard() {
-    const squares = Array(NUM_SQUARES).fill({
+    let squares = Array(NUM_SQUARES).fill({
       isSnake : false,
       isFood : false
     });
