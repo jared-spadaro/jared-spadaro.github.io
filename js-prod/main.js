@@ -425,13 +425,13 @@ var Board = function (_React$Component2) {
           ),
           React.createElement(
             "div",
-            { className: "snake-title" },
+            { className: "snake-title score" },
             "Score: ",
             this.state.score
           ),
           React.createElement(
             "button",
-            { className: "btn btn-dark", onClick: this.reset },
+            { className: "btn btn-dark go-back", onClick: this.reset },
             "Go Back"
           )
         );

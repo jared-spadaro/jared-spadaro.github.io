@@ -335,8 +335,8 @@ class Board extends React.Component {
       return (
         <div className="game-over">
           <div className="snake-title">Game Over.</div>
-          <div className="snake-title">Score: {this.state.score}</div>
-          <button className="btn btn-dark" onClick={this.reset}>
+          <div className="snake-title score">Score: {this.state.score}</div>
+          <button className="btn btn-dark go-back" onClick={this.reset}>
             Go Back
           </button>
         </div>
