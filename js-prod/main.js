@@ -228,12 +228,13 @@ var Board = function (_React$Component2) {
       turns: new Map(), //<location, directon> -- add on keyboardInterrupt, remove when tail arrives
       start: false,
       gameOver: false,
-      score: 0
+      score: 0,
+      interval: 100
     };
     _this2.handleKeyPress = _this2.handleKeyPress.bind(_this2);
     _this2.handleClick = _this2.handleClick.bind(_this2);
     _this2.reset = _this2.reset.bind(_this2);
-    window.setInterval(_this2.move.bind(_this2), 100);
+    window.setInterval(_this2.move.bind(_this2), _this2.state.interval);
     return _this2;
   }
 
@@ -299,6 +300,7 @@ var Board = function (_React$Component2) {
       var squares = this.state.squares.slice();
       var dir = this.state.headDirection;
       var turns = new Map(this.state.turns);
+      var interval = this.state.interval;
       var score = this.state.score;
       var found = false;
 
@@ -315,6 +317,7 @@ var Board = function (_React$Component2) {
       if (squares[this.state.head + dir].isFood) {
         found = true;
         score++;
+        interval--;
         console.log("found food");
         squares[this.state.head + dir] = {
           isSnake: true,
@@ -365,7 +368,8 @@ var Board = function (_React$Component2) {
         tail: !found ? this.state.tail + tailDir : this.state.tail,
         tailDirection: tailDir,
         turns: turns,
-        score: score
+        score: score,
+        interval: interval
       });
     }
   }, {
@@ -394,7 +398,8 @@ var Board = function (_React$Component2) {
         turns: new Map(), //<location, directon> -- add on keyboardInterrupt, remove when tail arrives
         start: false,
         gameOver: false,
-        score: 0
+        score: 0,
+        interval: 100
       });
     }
   }, {

@@ -149,12 +149,13 @@ class Board extends React.Component {
       turns: new Map(), //<location, directon> -- add on keyboardInterrupt, remove when tail arrives
       start: false,
       gameOver: false,
-      score: 0
+      score: 0,
+      interval: 100
     };
     this.handleKeyPress = this.handleKeyPress.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.reset = this.reset.bind(this);
-    window.setInterval(this.move.bind(this), 100);
+    window.setInterval(this.move.bind(this), this.state.interval);
   }
 
   getRandom(min, max) {
@@ -215,6 +216,7 @@ class Board extends React.Component {
     let squares = this.state.squares.slice();
     const dir = this.state.headDirection;
     const turns = new Map(this.state.turns);
+    let interval = this.state.interval;
     let score = this.state.score;
     let found = false;
 
@@ -236,6 +238,7 @@ class Board extends React.Component {
     if (squares[this.state.head + dir].isFood) {
       found = true;
       score++;
+      interval--;
       console.log("found food");
       squares[this.state.head + dir] = {
         isSnake: true,
@@ -286,7 +289,8 @@ class Board extends React.Component {
       tail: !found ? this.state.tail + tailDir : this.state.tail,
       tailDirection: tailDir,
       turns: turns,
-      score : score
+      score : score,
+      interval: interval
     });
   }
 
@@ -312,7 +316,8 @@ class Board extends React.Component {
       turns: new Map(), //<location, directon> -- add on keyboardInterrupt, remove when tail arrives
       start: false,
       gameOver: false,
-      score: 0
+      score: 0,
+      interval:100
     });
   }
 
