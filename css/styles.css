@@ -72,3 +72,7 @@
     font-size: 25px;
     font-variant: small-caps;
   }
+
+  .score {
+    margin-left:120px;
+  }

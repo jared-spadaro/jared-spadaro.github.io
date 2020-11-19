@@ -445,7 +445,7 @@ var Board = function (_React$Component2) {
             ),
             React.createElement(
               "div",
-              { style: "margin-left:120px", className: "snake-title" },
+              { className: "snake-title score" },
               "Score: ",
               this.state.score
             )
