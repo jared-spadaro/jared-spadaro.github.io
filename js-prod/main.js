@@ -418,7 +418,12 @@ var Board = function (_React$Component2) {
         return React.createElement(
           "div",
           { className: "game-over" },
-          "Game Over",
+          React.createElement(
+            "span",
+            { className: "snake-title" },
+            "Game Over. Score: ",
+            this.state.score
+          ),
           React.createElement("br", null),
           React.createElement(
             "button",
@@ -440,7 +445,7 @@ var Board = function (_React$Component2) {
             ),
             React.createElement(
               "div",
-              { className: "snake-title" },
+              { style: "margin-left:120px", className: "snake-title" },
               "Score: ",
               this.state.score
             )
