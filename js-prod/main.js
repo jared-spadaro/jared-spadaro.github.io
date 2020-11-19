@@ -299,6 +299,7 @@ var Board = function (_React$Component2) {
       var squares = this.state.squares.slice();
       var dir = this.state.headDirection;
       var turns = new Map(this.state.turns);
+      var score = this.state.score;
       var found = false;
 
       //check for boundaries
@@ -313,6 +314,7 @@ var Board = function (_React$Component2) {
       //is food, place food in new spot and keep tail
       if (squares[this.state.head + dir].isFood) {
         found = true;
+        score++;
         console.log("found food");
         squares[this.state.head + dir] = {
           isSnake: true,
@@ -363,7 +365,7 @@ var Board = function (_React$Component2) {
         tail: !found ? this.state.tail + tailDir : this.state.tail,
         tailDirection: tailDir,
         turns: turns,
-        score: this.state.score + 1
+        score: score
       });
     }
   }, {
@@ -430,18 +432,14 @@ var Board = function (_React$Component2) {
           { className: "game" },
           React.createElement(
             "div",
-            null,
+            { className: "game-info" },
             React.createElement(
-              "span",
+              "div",
               { className: "snake-title" },
               "Snake! (Click on game to start)"
-            )
-          ),
-          React.createElement(
-            "div",
-            null,
+            ),
             React.createElement(
-              "span",
+              "div",
               { className: "snake-title" },
               "Score: ",
               this.state.score

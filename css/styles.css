@@ -61,9 +61,14 @@
     flex-direction: column;
   }
 
+  .game-info {
+    margin: auto; 
+  }
+
   .snake-title {
-      font-variant-caps: titling-caps;
-      font-weight:bold;
-      font-family: "Times New Roman", Times, serif;
-      font-size:large;
+    font-variant-caps: titling-caps;
+    font-weight: 900;
+    font-family: "Times New Roman", Times, serif;
+    font-size: 25px;
+    font-variant: small-caps;
   }
