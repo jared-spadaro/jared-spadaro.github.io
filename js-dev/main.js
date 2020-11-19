@@ -149,6 +149,7 @@ class Board extends React.Component {
       turns: new Map(), //<location, directon> -- add on keyboardInterrupt, remove when tail arrives
       start: false,
       gameOver: false,
+      score: 0
     };
     this.handleKeyPress = this.handleKeyPress.bind(this);
     this.handleClick = this.handleClick.bind(this);
@@ -283,6 +284,7 @@ class Board extends React.Component {
       tail: !found ? this.state.tail + tailDir : this.state.tail,
       tailDirection: tailDir,
       turns: turns,
+      score: this.state.score+1
     });
   }
 
@@ -308,6 +310,7 @@ class Board extends React.Component {
       turns: new Map(), //<location, directon> -- add on keyboardInterrupt, remove when tail arrives
       start: false,
       gameOver: false,
+      score: 0
     });
   }
 
@@ -338,14 +341,22 @@ class Board extends React.Component {
       );
     } else {
       return (
-        <div
-          className="board"
-          id="board"
-          tabIndex="0"
-          onClick={this.handleClick}
-          onKeyDown={this.handleKeyPress}
-        >
-          {squareRows}
+        <div className="game">
+          <div>
+            <span className="snake-title">Snake! (Click on game to start)</span>
+          </div>
+          <div>
+            <span className="snake-title">Score: {this.state.score}</span>
+          </div>
+          <div
+            className="board"
+            id="board"
+            tabIndex="0"
+            onClick={this.handleClick}
+            onKeyDown={this.handleKeyPress}
+          >
+            {squareRows}
+          </div>
         </div>
       );
     }

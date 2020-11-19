@@ -227,7 +227,8 @@ var Board = function (_React$Component2) {
       tail: 45,
       turns: new Map(), //<location, directon> -- add on keyboardInterrupt, remove when tail arrives
       start: false,
-      gameOver: false
+      gameOver: false,
+      score: 0
     };
     _this2.handleKeyPress = _this2.handleKeyPress.bind(_this2);
     _this2.handleClick = _this2.handleClick.bind(_this2);
@@ -361,7 +362,8 @@ var Board = function (_React$Component2) {
         head: this.state.head + dir,
         tail: !found ? this.state.tail + tailDir : this.state.tail,
         tailDirection: tailDir,
-        turns: turns
+        turns: turns,
+        score: this.state.score + 1
       });
     }
   }, {
@@ -389,7 +391,8 @@ var Board = function (_React$Component2) {
         tail: 45,
         turns: new Map(), //<location, directon> -- add on keyboardInterrupt, remove when tail arrives
         start: false,
-        gameOver: false
+        gameOver: false,
+        score: 0
       });
     }
   }, {
@@ -424,14 +427,37 @@ var Board = function (_React$Component2) {
       } else {
         return React.createElement(
           "div",
-          {
-            className: "board",
-            id: "board",
-            tabIndex: "0",
-            onClick: this.handleClick,
-            onKeyDown: this.handleKeyPress
-          },
-          squareRows
+          { className: "game" },
+          React.createElement(
+            "div",
+            null,
+            React.createElement(
+              "span",
+              { className: "snake-title" },
+              "Snake! (Click on game to start)"
+            )
+          ),
+          React.createElement(
+            "div",
+            null,
+            React.createElement(
+              "span",
+              { className: "snake-title" },
+              "Score: ",
+              this.state.score
+            )
+          ),
+          React.createElement(
+            "div",
+            {
+              className: "board",
+              id: "board",
+              tabIndex: "0",
+              onClick: this.handleClick,
+              onKeyDown: this.handleKeyPress
+            },
+            squareRows
+          )
         );
       }
     }

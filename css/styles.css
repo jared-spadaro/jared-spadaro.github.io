@@ -55,3 +55,15 @@
     margin: auto;
     width: 10% 
   }
+
+  .game {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .snake-title {
+      font-variant-caps: titling-caps;
+      font-weight:bold;
+      font-family: "Times New Roman", Times, serif;
+      font-size:large;
+  }
