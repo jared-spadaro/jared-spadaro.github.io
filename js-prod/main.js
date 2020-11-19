@@ -419,12 +419,16 @@ var Board = function (_React$Component2) {
           "div",
           { className: "game-over" },
           React.createElement(
-            "span",
+            "div",
             { className: "snake-title" },
-            "Game Over. Score: ",
+            "Game Over."
+          ),
+          React.createElement(
+            "div",
+            { className: "snake-title" },
+            "Score: ",
             this.state.score
           ),
-          React.createElement("br", null),
           React.createElement(
             "button",
             { className: "btn btn-dark", onClick: this.reset },

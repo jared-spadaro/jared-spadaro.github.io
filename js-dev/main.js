@@ -334,8 +334,8 @@ class Board extends React.Component {
     if (this.state.gameOver) {
       return (
         <div className="game-over">
-          <span className="snake-title">Game Over. Score: {this.state.score}</span>
-          <br />
+          <div className="snake-title">Game Over.</div>
+          <div className="snake-title">Score: {this.state.score}</div>
           <button className="btn btn-dark" onClick={this.reset}>
             Go Back
           </button>
