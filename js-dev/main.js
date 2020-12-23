@@ -126,11 +126,11 @@ function Home() {
       <div className="starter-template">
         <h1>Official Site of Antisocialistic</h1>
         <iframe 
-          frameborder="0" 
+          frameBorder="0" 
           scrolling="no"
           width="640" 
           height="480"
-          src="https://drive.google.com/file/d/19ERk1tDLGLLeP39LNQ_VWDKibnWkLIVu/view?usp=sharing">
+          src="https://drive.google.com/file/d/19ERk1tDLGLLeP39LNQ_VWDKibnWkLIVu/view?usp=sharing&output=embed">
         </iframe>
       </div>
     </div>
