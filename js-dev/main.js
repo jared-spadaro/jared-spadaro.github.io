@@ -1,6 +1,6 @@
 "use strict";
 
-import { Document } from '../modules/react-pdf/src/Document.jsx';
+import { Document } from '../modules/react-pdf';
 
 const NUM_SQUARES = 400;
 const RIGHT = 1;
@@ -127,6 +127,13 @@ function Home() {
     <div className="container" id="jsDiv">
       <div className="starter-template">
         <h1>Official Site of Antisocialistic</h1>
+        <iframe 
+          frameborder="0" 
+          scrolling="no"
+          width="640" 
+          height="480"
+          src="https://drive.google.com/file/d/19ERk1tDLGLLeP39LNQ_VWDKibnWkLIVu/view?usp=sharing">
+        </iframe>
       </div>
     </div>
   );
