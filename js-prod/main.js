@@ -52,6 +52,7 @@ var Header = function (_React$Component) {
           break;
         case 'Senior':
           content = React.createElement(Senior, null);
+          break;
         default:
           content = null;
           break;

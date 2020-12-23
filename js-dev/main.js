@@ -33,6 +33,7 @@ class Header extends React.Component {
         break;
       case 'Senior':
         content = <Senior />;
+        break;
       default:
         content = null;
         break;
