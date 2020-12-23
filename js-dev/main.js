@@ -1,5 +1,4 @@
 "use strict";
-import { Document } from '../node_modules/react-pdf/src/Document.jsx';
 
 const NUM_SQUARES = 400;
 const RIGHT = 1;
