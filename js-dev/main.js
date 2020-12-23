@@ -122,13 +122,11 @@ class Header extends React.Component {
 
 function Senior() {
   return (
-    <div>
-      <iframe 
-          src="https://drive.google.com/file/d/19ERk1tDLGLLeP39LNQ_VWDKibnWkLIVu/preview" 
-          width="800" 
-          height="500"
-      ></iframe>
-    </div>
+    <iframe 
+        src="https://drive.google.com/file/d/19ERk1tDLGLLeP39LNQ_VWDKibnWkLIVu/preview" 
+        width="800" 
+        height="500"
+    ></iframe>
   );
 }
 
@@ -137,8 +135,9 @@ function Home() {
     <div className="container" id="jsDiv">
       <div className="starter-template">
         <h1>Official Site of Antisocialistic</h1>
-        <img src="career_headshot.jpg" height="200" width="200"/>
-        <p>Howdy. This is the project site of Jared S aka Antisocialistic.</p>
+        <img src="career_headshot.jpg" height="200" width="200" border-radius="75%"/>
+        <br/>
+        <p>Howdy. This is the project site of Jared Spadaro aka Antisocialistic.</p>
         <p>Use the navbar to check out different things I've done or am working on.</p>
       </div>
     </div>
