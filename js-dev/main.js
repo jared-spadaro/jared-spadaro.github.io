@@ -1,4 +1,6 @@
 "use strict";
+import React, { useState } from 'react';
+import { Document, Page } from 'react-pdf';
 
 const NUM_SQUARES = 400;
 const RIGHT = 1;
@@ -16,7 +18,6 @@ class Header extends React.Component {
   }
 
   setPage(event) {
-    console.log('setting page to ' + event.target.dataset.id);
     this.setState({
       page : event.target.dataset.id
     });
@@ -32,6 +33,8 @@ class Header extends React.Component {
       case 'Snake':
         content = <Board/>;
         break;
+      case 'Senior':
+        content = <Senior/>;
       default:
         content = null;
         break;
@@ -57,13 +60,13 @@ class Header extends React.Component {
             <div className="collapse navbar-collapse" id="navbarsExampleDefault">
               <ul className="navbar-nav mr-auto">
                 <li className="nav-item active">
-                  <a className="nav-link" href="#">
-                    Google <span className="sr-only">(current)</span>
+                  <a className="nav-link" href="#" onClick={this.setPage} data-id="Senior">
+                    Senior Project
                   </a>
                 </li>
                 <li className="nav-item">
                   <a className="nav-link" href="#" onClick={this.setPage} data-id="Snake">
-                    Snake
+                    Snake Game
                   </a>
                 </li>
                 <li className="nav-item">
