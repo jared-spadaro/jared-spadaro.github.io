@@ -182,9 +182,10 @@ var Header = function (_React$Component) {
 
 function Senior() {
   return React.createElement("iframe", {
+    className: "senior",
     src: "https://drive.google.com/file/d/19ERk1tDLGLLeP39LNQ_VWDKibnWkLIVu/preview",
     width: "800",
-    height: "500"
+    height: "800"
   });
 }
 
@@ -200,7 +201,7 @@ function Home() {
         null,
         "Official Site of Antisocialistic"
       ),
-      React.createElement("img", { src: "career_headshot.jpg", height: "200", width: "200", "border-radius": "75%" }),
+      React.createElement("img", { className: "headshot", src: "career_headshot.jpg", height: "200", width: "200" }),
       React.createElement("br", null),
       React.createElement(
         "p",
