@@ -192,11 +192,10 @@ function Home() {
         "Official Site of Antisocialistic"
       ),
       React.createElement("iframe", {
-        frameBorder: "0",
-        scrolling: "no",
+        src: "https://drive.google.com/file/d/19ERk1tDLGLLeP39LNQ_VWDKibnWkLIVu/preview",
         width: "640",
-        height: "480",
-        src: "https://drive.google.com/file/d/19ERk1tDLGLLeP39LNQ_VWDKibnWkLIVu/view?usp=sharing&output=embed" })
+        height: "480"
+      })
     )
   );
 }

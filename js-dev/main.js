@@ -17,7 +17,7 @@ class Header extends React.Component {
 
   setPage(event) {
     this.setState({
-      page : event.target.dataset.id
+      page: event.target.dataset.id
     });
   }
 
@@ -26,94 +26,94 @@ class Header extends React.Component {
     let content;
     switch (this.state.page) {
       case 'Home':
-        content = <Home/>;
+        content = <Home />;
         break;
       case 'Snake':
-        content = <Board/>;
+        content = <Board />;
         break;
       case 'Senior':
-        content = <Senior/>;
+        content = <Senior />;
       default:
         content = null;
         break;
     }
     return (
       <div>
-          <nav className="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-            <a className="navbar-brand" href="#" onClick={this.setPage} data-id="Home">
-              Home
+        <nav className="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+          <a className="navbar-brand" href="#" onClick={this.setPage} data-id="Home">
+            Home
             </a>
-            <button
-              className="navbar-toggler"
-              type="button"
-              data-toggle="collapse"
-              data-target="#navbarsExampleDefault"
-              aria-controls="navbarsExampleDefault"
-              aria-expanded="false"
-              aria-label="Toggle navigation"
-            >
-              <span className="navbar-toggler-icon"></span>
-            </button>
+          <button
+            className="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarsExampleDefault"
+            aria-controls="navbarsExampleDefault"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span className="navbar-toggler-icon"></span>
+          </button>
 
-            <div className="collapse navbar-collapse" id="navbarsExampleDefault">
-              <ul className="navbar-nav mr-auto">
-                <li className="nav-item active">
-                  <a className="nav-link" href="#" onClick={this.setPage} data-id="Senior">
-                    Senior Project
+          <div className="collapse navbar-collapse" id="navbarsExampleDefault">
+            <ul className="navbar-nav mr-auto">
+              <li className="nav-item active">
+                <a className="nav-link" href="#" onClick={this.setPage} data-id="Senior">
+                  Senior Project
                   </a>
-                </li>
-                <li className="nav-item">
-                  <a className="nav-link" href="#" onClick={this.setPage} data-id="Snake">
-                    Snake Game
+              </li>
+              <li className="nav-item">
+                <a className="nav-link" href="#" onClick={this.setPage} data-id="Snake">
+                  Snake Game
                   </a>
-                </li>
-                <li className="nav-item">
-                  <a
-                    className="nav-link disabled"
-                    href="#"
-                    tabIndex="-1"
-                    aria-disabled="true"
-                  >
-                    ???
+              </li>
+              <li className="nav-item">
+                <a
+                  className="nav-link disabled"
+                  href="#"
+                  tabIndex="-1"
+                  aria-disabled="true"
+                >
+                  ???
                   </a>
-                </li>
-                <li className="nav-item dropdown">
-                  <a
-                    className="nav-link dropdown-toggle"
-                    href="#"
-                    id="dropdown01"
-                    data-toggle="dropdown"
-                    aria-haspopup="true"
-                    aria-expanded="false"
-                  >
-                    Check These Out
+              </li>
+              <li className="nav-item dropdown">
+                <a
+                  className="nav-link dropdown-toggle"
+                  href="#"
+                  id="dropdown01"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+                  Check These Out
                   </a>
-                  <div className="dropdown-menu" aria-labelledby="dropdown01">
-                    <a className="dropdown-item" href="#">
-                      Action
+                <div className="dropdown-menu" aria-labelledby="dropdown01">
+                  <a className="dropdown-item" href="#">
+                    Action
                     </a>
-                    <a className="dropdown-item" href="#">
-                      Another action
+                  <a className="dropdown-item" href="#">
+                    Another action
                     </a>
-                    <a className="dropdown-item" href="#">
-                      Something else here
+                  <a className="dropdown-item" href="#">
+                    Something else here
                     </a>
-                  </div>
-                </li>
-              </ul>
-              <form className="form-inline my-2 my-lg-0">
-                <input
-                  className="form-control mr-sm-2"
-                  type="text"
-                  placeholder="Search"
-                  aria-label="Search"
-                />
-                <button className="btn btn-secondary my-2 my-sm-0" type="submit">
-                  Search
+                </div>
+              </li>
+            </ul>
+            <form className="form-inline my-2 my-lg-0">
+              <input
+                className="form-control mr-sm-2"
+                type="text"
+                placeholder="Search"
+                aria-label="Search"
+              />
+              <button className="btn btn-secondary my-2 my-sm-0" type="submit">
+                Search
                 </button>
-              </form>
-            </div>
-          </nav>
+            </form>
+          </div>
+        </nav>
         {content}
       </div>
     );
@@ -126,12 +126,10 @@ function Home() {
       <div className="starter-template">
         <h1>Official Site of Antisocialistic</h1>
         <iframe 
-          frameBorder="0" 
-          scrolling="no"
-          width="640" 
-          height="480"
-          src="https://drive.google.com/file/d/19ERk1tDLGLLeP39LNQ_VWDKibnWkLIVu/view?usp=sharing&output=embed">
-        </iframe>
+         src="https://drive.google.com/file/d/19ERk1tDLGLLeP39LNQ_VWDKibnWkLIVu/preview" 
+         width="640" 
+         height="480"
+        ></iframe>
       </div>
     </div>
   );
@@ -297,7 +295,7 @@ class Board extends React.Component {
       tail: !found ? this.state.tail + tailDir : this.state.tail,
       tailDirection: tailDir,
       turns: turns,
-      score : score,
+      score: score,
       interval: interval
     });
   }
@@ -309,9 +307,9 @@ class Board extends React.Component {
   }
 
   renderSquare(i) {
-    const className = this.state.squares[i].isSnake? "black-square" : "white-square";
+    const className = this.state.squares[i].isSnake ? "black-square" : "white-square";
     const label = this.state.squares[i].isFood ? "*" : "";
-    return <Square key={i} id={i} class={className} label={label}/>;
+    return <Square key={i} id={i} class={className} label={label} />;
   }
 
   reset() {
@@ -325,7 +323,7 @@ class Board extends React.Component {
       start: false,
       gameOver: false,
       score: 0,
-      interval:100
+      interval: 100
     });
   }
 
@@ -376,4 +374,4 @@ class Board extends React.Component {
   }
 }
 
-ReactDOM.render(<Header/>, document.querySelector("#root"));
+ReactDOM.render(<Header />, document.querySelector("#root"));
