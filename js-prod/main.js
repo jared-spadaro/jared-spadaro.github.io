@@ -179,6 +179,18 @@ var Header = function (_React$Component) {
   return Header;
 }(React.Component);
 
+function Senior() {
+  return React.createElement(
+    "div",
+    null,
+    React.createElement("iframe", {
+      src: "https://drive.google.com/file/d/19ERk1tDLGLLeP39LNQ_VWDKibnWkLIVu/preview",
+      width: "800",
+      height: "500"
+    })
+  );
+}
+
 function Home() {
   return React.createElement(
     "div",
@@ -191,11 +203,17 @@ function Home() {
         null,
         "Official Site of Antisocialistic"
       ),
-      React.createElement("iframe", {
-        src: "https://drive.google.com/file/d/19ERk1tDLGLLeP39LNQ_VWDKibnWkLIVu/preview",
-        width: "640",
-        height: "480"
-      })
+      React.createElement("img", { src: "career_headshot.jpg", height: "200", width: "200" }),
+      React.createElement(
+        "p",
+        null,
+        "Howdy. This is the project site of Jared S aka Antisocialistic."
+      ),
+      React.createElement(
+        "p",
+        null,
+        "Use the navbar to check out different things I've done or am working on."
+      )
     )
   );
 }
