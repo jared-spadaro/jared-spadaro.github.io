@@ -1,5 +1,5 @@
 "use strict";
-import { Document, Page } from '../node_modules/react-pdf';
+import { Document, Page } from '../node_modules/react-pdf/src';
 
 const NUM_SQUARES = 400;
 const RIGHT = 1;
