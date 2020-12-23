@@ -8,7 +8,6 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-import React, { useState } from 'react';
 import { Document, Page } from 'react-pdf';
 
 var NUM_SQUARES = 400;
@@ -33,7 +32,7 @@ var Header = function (_React$Component) {
   }
 
   _createClass(Header, [{
-    key: 'setPage',
+    key: "setPage",
     value: function setPage(event) {
       this.setState({
         page: event.target.dataset.id
@@ -43,7 +42,7 @@ var Header = function (_React$Component) {
     //check what page we are on and load it
 
   }, {
-    key: 'render',
+    key: "render",
     value: function render() {
       var content = void 0;
       switch (this.state.page) {
@@ -60,116 +59,116 @@ var Header = function (_React$Component) {
           break;
       }
       return React.createElement(
-        'div',
+        "div",
         null,
         React.createElement(
-          'nav',
-          { className: 'navbar navbar-expand-md navbar-dark bg-dark fixed-top' },
+          "nav",
+          { className: "navbar navbar-expand-md navbar-dark bg-dark fixed-top" },
           React.createElement(
-            'a',
-            { className: 'navbar-brand', href: '#', onClick: this.setPage, 'data-id': 'Home' },
-            'Home'
+            "a",
+            { className: "navbar-brand", href: "#", onClick: this.setPage, "data-id": "Home" },
+            "Home"
           ),
           React.createElement(
-            'button',
+            "button",
             {
-              className: 'navbar-toggler',
-              type: 'button',
-              'data-toggle': 'collapse',
-              'data-target': '#navbarsExampleDefault',
-              'aria-controls': 'navbarsExampleDefault',
-              'aria-expanded': 'false',
-              'aria-label': 'Toggle navigation'
+              className: "navbar-toggler",
+              type: "button",
+              "data-toggle": "collapse",
+              "data-target": "#navbarsExampleDefault",
+              "aria-controls": "navbarsExampleDefault",
+              "aria-expanded": "false",
+              "aria-label": "Toggle navigation"
             },
-            React.createElement('span', { className: 'navbar-toggler-icon' })
+            React.createElement("span", { className: "navbar-toggler-icon" })
           ),
           React.createElement(
-            'div',
-            { className: 'collapse navbar-collapse', id: 'navbarsExampleDefault' },
+            "div",
+            { className: "collapse navbar-collapse", id: "navbarsExampleDefault" },
             React.createElement(
-              'ul',
-              { className: 'navbar-nav mr-auto' },
+              "ul",
+              { className: "navbar-nav mr-auto" },
               React.createElement(
-                'li',
-                { className: 'nav-item active' },
+                "li",
+                { className: "nav-item active" },
                 React.createElement(
-                  'a',
-                  { className: 'nav-link', href: '#', onClick: this.setPage, 'data-id': 'Senior' },
-                  'Senior Project'
+                  "a",
+                  { className: "nav-link", href: "#", onClick: this.setPage, "data-id": "Senior" },
+                  "Senior Project"
                 )
               ),
               React.createElement(
-                'li',
-                { className: 'nav-item' },
+                "li",
+                { className: "nav-item" },
                 React.createElement(
-                  'a',
-                  { className: 'nav-link', href: '#', onClick: this.setPage, 'data-id': 'Snake' },
-                  'Snake Game'
+                  "a",
+                  { className: "nav-link", href: "#", onClick: this.setPage, "data-id": "Snake" },
+                  "Snake Game"
                 )
               ),
               React.createElement(
-                'li',
-                { className: 'nav-item' },
+                "li",
+                { className: "nav-item" },
                 React.createElement(
-                  'a',
+                  "a",
                   {
-                    className: 'nav-link disabled',
-                    href: '#',
-                    tabIndex: '-1',
-                    'aria-disabled': 'true'
+                    className: "nav-link disabled",
+                    href: "#",
+                    tabIndex: "-1",
+                    "aria-disabled": "true"
                   },
-                  '???'
+                  "???"
                 )
               ),
               React.createElement(
-                'li',
-                { className: 'nav-item dropdown' },
+                "li",
+                { className: "nav-item dropdown" },
                 React.createElement(
-                  'a',
+                  "a",
                   {
-                    className: 'nav-link dropdown-toggle',
-                    href: '#',
-                    id: 'dropdown01',
-                    'data-toggle': 'dropdown',
-                    'aria-haspopup': 'true',
-                    'aria-expanded': 'false'
+                    className: "nav-link dropdown-toggle",
+                    href: "#",
+                    id: "dropdown01",
+                    "data-toggle": "dropdown",
+                    "aria-haspopup": "true",
+                    "aria-expanded": "false"
                   },
-                  'Check These Out'
+                  "Check These Out"
                 ),
                 React.createElement(
-                  'div',
-                  { className: 'dropdown-menu', 'aria-labelledby': 'dropdown01' },
+                  "div",
+                  { className: "dropdown-menu", "aria-labelledby": "dropdown01" },
                   React.createElement(
-                    'a',
-                    { className: 'dropdown-item', href: '#' },
-                    'Action'
+                    "a",
+                    { className: "dropdown-item", href: "#" },
+                    "Action"
                   ),
                   React.createElement(
-                    'a',
-                    { className: 'dropdown-item', href: '#' },
-                    'Another action'
+                    "a",
+                    { className: "dropdown-item", href: "#" },
+                    "Another action"
                   ),
                   React.createElement(
-                    'a',
-                    { className: 'dropdown-item', href: '#' },
-                    'Something else here'
+                    "a",
+                    { className: "dropdown-item", href: "#" },
+                    "Something else here"
                   )
                 )
               )
             ),
             React.createElement(
-              'form',
-              { className: 'form-inline my-2 my-lg-0' },
-              React.createElement('input', {
-                className: 'form-control mr-sm-2',
-                type: 'text',
-                placeholder: 'Search',
-                'aria-label': 'Search'
+              "form",
+              { className: "form-inline my-2 my-lg-0" },
+              React.createElement("input", {
+                className: "form-control mr-sm-2",
+                type: "text",
+                placeholder: "Search",
+                "aria-label": "Search"
               }),
               React.createElement(
-                'button',
-                { className: 'btn btn-secondary my-2 my-sm-0', type: 'submit' },
-                'Search'
+                "button",
+                { className: "btn btn-secondary my-2 my-sm-0", type: "submit" },
+                "Search"
               )
             )
           )
@@ -184,15 +183,15 @@ var Header = function (_React$Component) {
 
 function Home() {
   return React.createElement(
-    'div',
-    { className: 'container', id: 'jsDiv' },
+    "div",
+    { className: "container", id: "jsDiv" },
     React.createElement(
-      'div',
-      { className: 'starter-template' },
+      "div",
+      { className: "starter-template" },
       React.createElement(
-        'h1',
+        "h1",
         null,
-        'Official Site of Antisocialistic'
+        "Official Site of Antisocialistic"
       )
     )
   );
@@ -200,11 +199,11 @@ function Home() {
 
 function Square(props) {
   return React.createElement(
-    'button',
+    "button",
     { key: props.id, id: props.id, className: props.class },
     React.createElement(
-      'span',
-      { className: 'food-label' },
+      "span",
+      { className: "food-label" },
       props.label
     )
   );
@@ -238,12 +237,12 @@ var Board = function (_React$Component2) {
   }
 
   _createClass(Board, [{
-    key: 'getRandom',
+    key: "getRandom",
     value: function getRandom(min, max) {
       return Math.floor(Math.random() * (max - min) + min);
     }
   }, {
-    key: 'initBoard',
+    key: "initBoard",
     value: function initBoard() {
       var squares = Array(NUM_SQUARES).fill({
         isSnake: false,
@@ -264,7 +263,7 @@ var Board = function (_React$Component2) {
       return squares;
     }
   }, {
-    key: 'handleKeyPress',
+    key: "handleKeyPress",
     value: function handleKeyPress(event) {
       event.preventDefault();
       var dir = void 0;
@@ -293,7 +292,7 @@ var Board = function (_React$Component2) {
       });
     }
   }, {
-    key: 'move',
+    key: "move",
     value: function move() {
       if (!this.state.start) return;
       var squares = this.state.squares.slice();
@@ -372,21 +371,21 @@ var Board = function (_React$Component2) {
       });
     }
   }, {
-    key: 'handleClick',
+    key: "handleClick",
     value: function handleClick() {
       this.setState({
         start: true
       });
     }
   }, {
-    key: 'renderSquare',
+    key: "renderSquare",
     value: function renderSquare(i) {
       var className = this.state.squares[i].isSnake ? "black-square" : "white-square";
       var label = this.state.squares[i].isFood ? "*" : "";
-      return React.createElement(Square, { key: i, id: i, 'class': className, label: label });
+      return React.createElement(Square, { key: i, id: i, "class": className, label: label });
     }
   }, {
-    key: 'reset',
+    key: "reset",
     value: function reset() {
       this.setState({
         squares: this.initBoard(),
@@ -402,7 +401,7 @@ var Board = function (_React$Component2) {
       });
     }
   }, {
-    key: 'render',
+    key: "render",
     value: function render() {
       console.log('rendering board');
       var squareRows = [];
@@ -413,57 +412,57 @@ var Board = function (_React$Component2) {
           squares.push(this.renderSquare(ndx++));
         }
         squareRows.push(React.createElement(
-          'div',
-          { key: i, className: 'board-row' },
+          "div",
+          { key: i, className: "board-row" },
           squares
         ));
       }
       if (this.state.gameOver) {
         return React.createElement(
-          'div',
-          { className: 'game-over' },
+          "div",
+          { className: "game-over" },
           React.createElement(
-            'div',
-            { className: 'snake-title' },
-            'Game Over.'
+            "div",
+            { className: "snake-title" },
+            "Game Over."
           ),
           React.createElement(
-            'div',
-            { className: 'snake-title' },
-            '\xA0\xA0\xA0Score: ',
+            "div",
+            { className: "snake-title" },
+            "\xA0\xA0\xA0Score: ",
             this.state.score
           ),
           React.createElement(
-            'button',
-            { className: 'btn btn-dark go-back', onClick: this.reset },
-            'Go Back'
+            "button",
+            { className: "btn btn-dark go-back", onClick: this.reset },
+            "Go Back"
           )
         );
       } else {
         return React.createElement(
-          'div',
-          { className: 'game' },
+          "div",
+          { className: "game" },
           React.createElement(
-            'div',
-            { className: 'game-info' },
+            "div",
+            { className: "game-info" },
             React.createElement(
-              'div',
-              { className: 'snake-title' },
-              'Snake! (Click on game to start)'
+              "div",
+              { className: "snake-title" },
+              "Snake! (Click on game to start)"
             ),
             React.createElement(
-              'div',
-              { className: 'snake-title score' },
-              'Score: ',
+              "div",
+              { className: "snake-title score" },
+              "Score: ",
               this.state.score
             )
           ),
           React.createElement(
-            'div',
+            "div",
             {
-              className: 'board',
-              id: 'board',
-              tabIndex: '0',
+              className: "board",
+              id: "board",
+              tabIndex: "0",
               onClick: this.handleClick,
               onKeyDown: this.handleKeyPress
             },
