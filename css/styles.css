@@ -53,7 +53,7 @@
   .game-over {
     border-style: none;
     margin: auto;
-    width: 10% 
+    width:200px; 
   }
 
   .game {
@@ -74,9 +74,9 @@
   }
 
   .score {
-    margin-left:120px;
+    margin-left:115px;
   }
 
   .go-back {
-      margin-left: 20px;
+      margin-left: 25px;
   }
