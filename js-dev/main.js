@@ -1,7 +1,5 @@
 "use strict";
 
-import { Document } from '../modules/react-pdf';
-
 const NUM_SQUARES = 400;
 const RIGHT = 1;
 const LEFT = -1;
