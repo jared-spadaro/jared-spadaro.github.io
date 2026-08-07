@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600">
+  <!-- Stand-in for a 4:3 photo used inside the ornate border-image frame. -->
+  <defs>
+    <linearGradient id="wash" x1="0" y1="0" x2="0.6" y2="1">
+      <stop offset="0" stop-color="#DFE3D6"/>
+      <stop offset="0.55" stop-color="#C6CFC8"/>
+      <stop offset="1" stop-color="#AFBAB9"/>
+    </linearGradient>
+    <path id="ph-leaf" d="M0 0C13-21 42-27 60-8 42 11 13 17 0 0Z"/>
+  </defs>
+  <rect width="800" height="600" fill="url(#wash)"/>
+  <g fill="#8EA396" opacity="0.32">
+    <use href="#ph-leaf" transform="translate(30,90) rotate(26) scale(1.6)"/>
+    <use href="#ph-leaf" transform="translate(760,520) rotate(200) scale(1.8)"/>
+    <use href="#ph-leaf" transform="translate(140,530) rotate(-34) scale(1.3)"/>
+  </g>
+  <text x="400" y="292" text-anchor="middle" fill="#3E5C4B" opacity="0.62"
+        font-family="Cormorant Garamond, Georgia, serif" font-size="88" letter-spacing="6">J &amp; H</text>
+  <text x="400" y="336" text-anchor="middle" fill="#3E5C4B" opacity="0.55"
+        font-family="Lato, Helvetica, Arial, sans-serif" font-size="19" letter-spacing="7">PHOTO COMING SOON</text>
+</svg>

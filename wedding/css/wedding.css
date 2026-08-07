@@ -1,0 +1,528 @@
+/* ==========================================================================
+   Jared & Hannah — wedding theme
+   Layered on top of Bootstrap 4.5.3 (../../bootstrap/css/bootstrap.min.css).
+   Palette: muted garden red, dusty blue and deep green on warm parchment.
+   ========================================================================== */
+
+:root {
+  /* Greens — foliage */
+  --green-900: #2c4436;
+  --green-700: #3e5c4b;
+  --green-500: #5f7f63;
+  --green-300: #93ac8b;
+  --green-100: #dce5d6;
+
+  /* Reds — muted brick / dried rose */
+  --red-700: #8b4438;
+  --red-500: #9c5348;
+  --red-300: #c08a7e;
+  --red-100: #f0dfd9;
+
+  /* Blues — dusty hydrangea */
+  --blue-700: #46647a;
+  --blue-500: #5c7a91;
+  --blue-300: #9db2c0;
+  --blue-100: #dfe6ea;
+
+  /* Neutrals */
+  --cream: #fbf7ef;
+  --cream-2: #f4ecdf;
+  --brass: #bc9e6a;
+  --ink: #2c352e;
+  --ink-soft: #5a675e;
+
+  --serif: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  --sans: "Lato", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+  --script: "Parisienne", "Cormorant Garamond", cursive;
+}
+
+/* --------------------------------------------------------------- base ---- */
+
+body {
+  background-color: var(--cream);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-weight: 300;
+  font-size: 1.0625rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, .display-name {
+  font-family: var(--serif);
+  font-weight: 300;
+  color: var(--green-900);
+  letter-spacing: 0.02em;
+}
+
+a {
+  color: var(--red-700);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+a:hover, a:focus {
+  color: var(--red-500);
+  text-decoration: none;
+}
+
+/* Small caps label used above section headings and on nav links. */
+.eyebrow {
+  font-family: var(--sans);
+  font-weight: 400;
+  font-size: 0.72rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--blue-700);
+}
+
+.script {
+  font-family: var(--script);
+  font-weight: 400;
+  color: var(--red-500);
+  letter-spacing: 0;
+}
+
+.section {
+  padding: 5.5rem 0;
+}
+
+.section--tint {
+  background-color: var(--cream-2);
+}
+
+.section-title {
+  font-size: clamp(2rem, 4.5vw, 2.9rem);
+  margin: 0.6rem 0 0;
+}
+
+.divider {
+  display: block;
+  width: 200px;
+  max-width: 60%;
+  height: auto;
+  margin: 1.5rem auto 0;
+}
+
+/* ------------------------------------------------------------- navbar ---- */
+
+.wed-nav {
+  background-color: transparent;
+  padding: 1.35rem 0;
+  transition: background-color 0.3s ease, padding 0.3s ease, box-shadow 0.3s ease;
+}
+
+.wed-nav.is-stuck {
+  background-color: rgba(251, 247, 239, 0.96);
+  padding: 0.65rem 0;
+  box-shadow: 0 1px 0 rgba(44, 68, 54, 0.12);
+}
+
+.wed-nav .navbar-brand {
+  font-family: var(--serif);
+  font-size: 1.3rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--green-900);
+}
+
+.wed-nav .nav-link {
+  font-size: 0.74rem;
+  font-weight: 400;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--green-700);
+  padding: 0.5rem 0.95rem;
+}
+
+.wed-nav .nav-link:hover,
+.wed-nav .nav-link.active {
+  color: var(--red-500);
+}
+
+.wed-nav .nav-link.disabled {
+  color: var(--green-300);
+}
+
+/* Bootstrap's default toggler icon is a dark-on-light bitmap; swap in ours. */
+.wed-nav .navbar-toggler {
+  border-color: rgba(62, 92, 75, 0.35);
+  padding: 0.35rem 0.55rem;
+}
+
+.wed-nav .navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30'%3E%3Cpath stroke='%233e5c4b' stroke-width='2' stroke-linecap='round' d='M4 8h22M4 15h22M4 22h22'/%3E%3C/svg%3E");
+}
+
+@media (max-width: 991.98px) {
+  /* Collapsed menu needs its own ground, since the bar itself is transparent. */
+  .wed-nav .navbar-collapse {
+    background-color: rgba(251, 247, 239, 0.98);
+    margin-top: 0.9rem;
+    padding: 0.6rem 0.25rem;
+    border-top: 1px solid rgba(62, 92, 75, 0.15);
+    border-bottom: 1px solid rgba(62, 92, 75, 0.15);
+  }
+}
+
+/* --------------------------------------------------------------- hero ---- */
+
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  padding: 8rem 0 5rem;
+  overflow: hidden;
+  background-color: var(--cream);
+}
+
+/* Soft garden light: three overlapping washes in the three theme hues. */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(46rem 32rem at 12% 14%, rgba(147, 172, 139, 0.42), transparent 62%),
+    radial-gradient(40rem 30rem at 88% 22%, rgba(157, 178, 192, 0.38), transparent 62%),
+    radial-gradient(38rem 28rem at 74% 92%, rgba(192, 138, 126, 0.32), transparent 64%),
+    radial-gradient(34rem 26rem at 22% 86%, rgba(95, 127, 99, 0.26), transparent 66%);
+}
+
+.hero > .container {
+  position: relative;
+  z-index: 1;
+}
+
+.hero__names {
+  font-family: var(--serif);
+  font-weight: 300;
+  font-size: clamp(3.1rem, 11vw, 7rem);
+  line-height: 1.02;
+  letter-spacing: 0.06em;
+  color: var(--green-900);
+  margin: 0.9rem 0 0;
+}
+
+.hero__amp {
+  display: block;
+  font-family: var(--script);
+  font-size: clamp(2.6rem, 8vw, 4.6rem);
+  line-height: 1.1;
+  letter-spacing: 0;
+  color: var(--red-500);
+  margin: 0.1rem 0;
+}
+
+/* Hairline rules flanking the date. */
+.hero__date {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(0.75rem, 2vw, 1.25rem);
+  margin: 2.25rem 0 0.75rem;
+  font-family: var(--sans);
+  font-size: clamp(0.78rem, 2.2vw, 0.95rem);
+  font-weight: 400;
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  color: var(--green-700);
+}
+
+/* The date stays on one line; the rules give up their width instead. */
+.hero__date span {
+  flex: 0 0 auto;
+  white-space: nowrap;
+}
+
+.hero__date::before,
+.hero__date::after {
+  content: "";
+  flex: 1 1 0;
+  min-width: 0;
+  max-width: 5.5rem;
+  height: 1px;
+  background-color: var(--brass);
+}
+
+.hero__venue {
+  font-family: var(--serif);
+  font-size: clamp(1.15rem, 3.2vw, 1.6rem);
+  color: var(--ink-soft);
+  margin: 0;
+}
+
+.hero__scroll {
+  position: absolute;
+  left: 50%;
+  bottom: 2rem;
+  transform: translateX(-50%);
+  z-index: 1;
+  font-size: 0.66rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--green-500);
+}
+
+/* ----------------------------------------------------- picture frames ---- */
+
+/*
+ * Three reusable frames. Each expects a single <img> child; the img is set to
+ * `object-fit: cover`, so any photo of roughly the right ratio works.
+ */
+
+.pf {
+  position: relative;
+  margin: 0 auto;
+  max-width: 100%;
+}
+
+.pf img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.pf__caption {
+  margin-top: 1.5rem;
+  text-align: center;
+  font-family: var(--serif);
+  font-size: 1.05rem;
+  font-style: italic;
+  color: var(--ink-soft);
+}
+
+/* The overlay frames sit on top of the photo and never intercept clicks. */
+.pf__frame {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+/*
+ * The photo is inset by offsetting .pf__photo, not the <img> itself, and not
+ * with percentage padding on the figure. Both of those shortcuts break the
+ * geometry: an absolutely positioned *replaced* element resolves `width: auto`
+ * to its intrinsic width and discards the opposing offset (which overflows the
+ * page), while percentage padding resolves against the *parent's* width rather
+ * than the figure's. Offsets on a plain wrapper resolve against the figure —
+ * its padding box — which is what the SVG openings were drawn against.
+ */
+.pf__photo {
+  position: absolute;
+  display: block;
+  overflow: hidden;
+  box-shadow: 0 6px 24px rgba(44, 68, 54, 0.16);
+}
+
+/* 1. Ornate botanical frame — the SVG *is* the border, so it adapts to
+      whatever aspect ratio the photo has. Best with landscape shots. */
+.pf--ornate {
+  max-width: 34rem;
+}
+
+.pf--ornate img {
+  height: auto;
+  border-style: solid;
+  border-width: clamp(26px, 7vw, 46px);
+  border-color: transparent;
+  border-image: url("../img/frames/frame-ornate.svg") 100 / clamp(26px, 7vw, 46px) / 0 round;
+}
+
+/* 2. Wreath frame — square figure, circular photo inset 12%, so the photo and
+      the wreath ring stay concentric at every size. */
+.pf--wreath {
+  width: 100%;
+  max-width: 26rem;
+  aspect-ratio: 1 / 1;
+}
+
+.pf--wreath .pf__photo {
+  inset: 12%;
+  border-radius: 50%;
+}
+
+/* 3. Arch frame — 3:4 figure. The 12-unit opening of the 300x400 artwork is
+      4% of its width and 3% of its height; the border-radius then reproduces
+      the SVG arch (radius 138 of the 276x376 opening => 50% / 36.7%). */
+.pf--arch {
+  width: 100%;
+  max-width: 22rem;
+  aspect-ratio: 3 / 4;
+}
+
+.pf--arch .pf__photo {
+  inset: 3% 4%;
+  border-radius: 50% 50% 4px 4px / 36.7% 36.7% 4px 4px;
+}
+
+/* ------------------------------------------------------------ details ---- */
+
+.detail-card {
+  height: 100%;
+  background-color: var(--cream);
+  border: 1px solid rgba(62, 92, 75, 0.18);
+  padding: 2.5rem 1.75rem;
+  text-align: center;
+}
+
+.detail-card__icon {
+  width: 2.4rem;
+  height: 2.4rem;
+  margin: 0 auto 1.1rem;
+  color: var(--green-500);
+}
+
+.detail-card h3 {
+  font-size: 1.5rem;
+  margin-bottom: 0.65rem;
+}
+
+.detail-card p {
+  margin-bottom: 0;
+  color: var(--ink-soft);
+}
+
+.detail-card p strong {
+  font-weight: 400;
+  color: var(--ink);
+}
+
+/* ---------------------------------------------------------- countdown ---- */
+
+.countdown {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem 2.75rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.countdown li {
+  min-width: 5.5rem;
+}
+
+.countdown__value {
+  display: block;
+  font-family: var(--serif);
+  font-size: clamp(2.4rem, 7vw, 3.6rem);
+  line-height: 1.1;
+  color: var(--green-900);
+}
+
+.countdown__label {
+  display: block;
+  font-size: 0.68rem;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--blue-700);
+}
+
+/* -------------------------------------------------------------- venue ---- */
+
+.venue-quote {
+  font-family: var(--serif);
+  font-size: clamp(1.25rem, 3.4vw, 1.75rem);
+  font-style: italic;
+  line-height: 1.6;
+  color: var(--green-700);
+}
+
+.btn-garden {
+  font-family: var(--sans);
+  font-size: 0.74rem;
+  font-weight: 400;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--cream);
+  background-color: var(--green-700);
+  border: 1px solid var(--green-700);
+  border-radius: 0;
+  padding: 0.85rem 2.1rem;
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.btn-garden:hover, .btn-garden:focus {
+  color: var(--cream);
+  background-color: var(--red-700);
+  border-color: var(--red-700);
+}
+
+/* Pair with .btn-garden in the markup: .btn-garden.btn-garden-outline */
+.btn-garden-outline {
+  color: var(--green-700);
+  background-color: transparent;
+  border: 1px solid var(--brass);
+}
+
+.btn-garden-outline:hover, .btn-garden-outline:focus {
+  color: var(--cream);
+  background-color: var(--green-700);
+  border-color: var(--green-700);
+}
+
+/* ------------------------------------------------------------- footer ---- */
+
+.wed-footer {
+  background-color: var(--green-900);
+  color: var(--green-100);
+  padding: 4rem 0 2.5rem;
+  text-align: center;
+}
+
+.wed-footer h2 {
+  color: var(--cream);
+  font-size: clamp(1.9rem, 5vw, 2.6rem);
+  margin: 0;
+}
+
+.wed-footer .script {
+  color: var(--red-300);
+}
+
+.wed-footer__meta {
+  font-size: 0.72rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--green-300);
+  margin: 1.75rem 0 0;
+}
+
+.wed-footer a {
+  color: var(--green-100);
+  border-bottom: 1px solid rgba(220, 229, 214, 0.35);
+}
+
+.wed-footer a:hover {
+  color: #fff;
+}
+
+/* ----------------------------------------------------------- a11y ------- */
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 1100;
+}
+
+.skip-link:focus {
+  left: 1rem;
+  top: 1rem;
+  padding: 0.6rem 1rem;
+  background: var(--cream);
+  border: 1px solid var(--green-700);
+}

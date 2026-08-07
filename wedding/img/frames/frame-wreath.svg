@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="420" height="420" viewBox="0 0 420 420">
+  <!--
+    Circular garden wreath, used as an absolutely-positioned overlay on a
+    square container. The photo underneath sits at `inset: 12%` with
+    `border-radius: 50%`, so both are concentric circles and always align.
+  -->
+  <defs>
+    <path id="leaf" d="M0 0C6.5-10.5 21-13.5 30-4 21 5.5 6.5 8.5 0 0Z"/>
+
+    <g id="floret">
+      <g fill="#6E8CA1">
+        <ellipse cx="0" cy="-4.6" rx="2.6" ry="4.4"/>
+        <ellipse cx="4.6" cy="0" rx="4.4" ry="2.6"/>
+        <ellipse cx="0" cy="4.6" rx="2.6" ry="4.4"/>
+        <ellipse cx="-4.6" cy="0" rx="4.4" ry="2.6"/>
+      </g>
+      <circle r="1.9" fill="#C7A96B"/>
+    </g>
+
+    <!-- One repeat of the wreath: a long outer leaf and a short inner one. -->
+    <g id="unit">
+      <use href="#leaf" transform="translate(0,-182) rotate(-22) scale(1.12)"/>
+      <use href="#leaf" transform="translate(-4,-161) rotate(16) scale(0.72)" fill-opacity="0.68"/>
+    </g>
+
+    <g id="berries" fill="#9C5348">
+      <circle r="3.6"/>
+      <circle cx="7.5" cy="4" r="2.6"/>
+      <circle cx="-7" cy="4.5" r="2.3" fill="#8B4438"/>
+    </g>
+  </defs>
+
+  <g transform="translate(210,210)">
+    <circle r="163" fill="none" stroke="#BCCBB2" stroke-width="1"/>
+    <circle r="200" fill="none" stroke="#E2D9C8" stroke-width="1"/>
+
+    <use href="#unit" transform="rotate(0)"    fill="#3E5C4B"/>
+    <use href="#unit" transform="rotate(18)"   fill="#5F7F63"/>
+    <use href="#unit" transform="rotate(36)"   fill="#2C4436"/>
+    <use href="#unit" transform="rotate(54)"   fill="#7C9A78"/>
+    <use href="#unit" transform="rotate(72)"   fill="#4E6E54"/>
+    <use href="#unit" transform="rotate(90)"   fill="#3E5C4B"/>
+    <use href="#unit" transform="rotate(108)"  fill="#93AC8B"/>
+    <use href="#unit" transform="rotate(126)"  fill="#2C4436"/>
+    <use href="#unit" transform="rotate(144)"  fill="#5F7F63"/>
+    <use href="#unit" transform="rotate(162)"  fill="#4E6E54"/>
+    <use href="#unit" transform="rotate(180)"  fill="#3E5C4B"/>
+    <use href="#unit" transform="rotate(198)"  fill="#7C9A78"/>
+    <use href="#unit" transform="rotate(216)"  fill="#2C4436"/>
+    <use href="#unit" transform="rotate(234)"  fill="#5F7F63"/>
+    <use href="#unit" transform="rotate(252)"  fill="#4E6E54"/>
+    <use href="#unit" transform="rotate(270)"  fill="#3E5C4B"/>
+    <use href="#unit" transform="rotate(288)"  fill="#93AC8B"/>
+    <use href="#unit" transform="rotate(306)"  fill="#2C4436"/>
+    <use href="#unit" transform="rotate(324)"  fill="#5F7F63"/>
+    <use href="#unit" transform="rotate(342)"  fill="#4E6E54"/>
+
+    <g transform="rotate(30)"><use href="#berries" transform="translate(0,-173)"/></g>
+    <g transform="rotate(115)"><use href="#berries" transform="translate(0,-173)"/></g>
+    <g transform="rotate(210)"><use href="#berries" transform="translate(0,-173)"/></g>
+    <g transform="rotate(295)"><use href="#berries" transform="translate(0,-173)"/></g>
+
+    <g transform="rotate(68)"><use href="#floret" transform="translate(0,-176)"/></g>
+    <g transform="rotate(168)"><use href="#floret" transform="translate(0,-176)"/></g>
+    <g transform="rotate(255)"><use href="#floret" transform="translate(0,-176)"/></g>
+    <g transform="rotate(330)"><use href="#floret" transform="translate(0,-176) scale(0.8)"/></g>
+  </g>
+</svg>

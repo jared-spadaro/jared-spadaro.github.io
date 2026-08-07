@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="700" height="700" viewBox="0 0 700 700">
+  <!-- Stand-in for a 1:1 photo used inside the wreath frame. -->
+  <defs>
+    <linearGradient id="wash" x1="0" y1="0" x2="0.5" y2="1">
+      <stop offset="0" stop-color="#E4DED2"/>
+      <stop offset="0.6" stop-color="#C9CFC2"/>
+      <stop offset="1" stop-color="#AAB9AE"/>
+    </linearGradient>
+    <path id="ph-leaf" d="M0 0C13-21 42-27 60-8 42 11 13 17 0 0Z"/>
+  </defs>
+  <rect width="700" height="700" fill="url(#wash)"/>
+  <g fill="#93A691" opacity="0.32">
+    <use href="#ph-leaf" transform="translate(40,110) rotate(24) scale(1.7)"/>
+    <use href="#ph-leaf" transform="translate(650,590) rotate(198) scale(1.8)"/>
+    <use href="#ph-leaf" transform="translate(120,610) rotate(-36) scale(1.4)"/>
+  </g>
+  <text x="350" y="342" text-anchor="middle" fill="#3E5C4B" opacity="0.62"
+        font-family="Cormorant Garamond, Georgia, serif" font-size="92" letter-spacing="6">J &amp; H</text>
+  <text x="350" y="388" text-anchor="middle" fill="#3E5C4B" opacity="0.55"
+        font-family="Lato, Helvetica, Arial, sans-serif" font-size="20" letter-spacing="7">PHOTO COMING SOON</text>
+</svg>

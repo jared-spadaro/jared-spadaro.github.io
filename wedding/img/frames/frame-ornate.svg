@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="300" height="300" viewBox="0 0 300 300">
+  <!--
+    Ornate botanical frame, drawn for CSS `border-image` with a slice of 100.
+    The four 100x100 corner tiles hold a leaf spray; the four edge tiles hold a
+    trailing vine that tiles seamlessly, so the frame fits any photo ratio:
+      border-image: url(frame-ornate.svg) 100 / 46px / 0 round;
+    Everything must stay inside its own tile — art crossing a slice boundary
+    gets cut in half by the slicer.
+  -->
+  <defs>
+    <path id="leaf" d="M0 0C6.5-10.5 21-13.5 30-4 21 5.5 6.5 8.5 0 0Z"/>
+
+    <g id="floret">
+      <g fill="#6E8CA1">
+        <ellipse cx="0" cy="-4.6" rx="2.6" ry="4.4"/>
+        <ellipse cx="4.6" cy="0" rx="4.4" ry="2.6"/>
+        <ellipse cx="0" cy="4.6" rx="2.6" ry="4.4"/>
+        <ellipse cx="-4.6" cy="0" rx="4.4" ry="2.6"/>
+      </g>
+      <circle r="1.9" fill="#C7A96B"/>
+    </g>
+
+    <!-- Leaves stepping along a stem, growing from the origin toward +x. -->
+    <g id="spray">
+      <path d="M0 0C14-3 32-4 50-2" fill="none" stroke="#4E6E54" stroke-width="1.3"/>
+      <use href="#leaf" transform="translate(4,-1) rotate(-46) scale(0.95)" fill="#2C4436"/>
+      <use href="#leaf" transform="translate(9,1) rotate(40) scale(0.8)" fill="#7C9A78"/>
+      <use href="#leaf" transform="translate(20,-3) rotate(-28) scale(1.15)" fill="#3E5C4B"/>
+      <use href="#leaf" transform="translate(26,-1) rotate(26) scale(0.92)" fill="#5F7F63"/>
+      <use href="#leaf" transform="translate(37,-4) rotate(-13) scale(1.05)" fill="#4E6E54"/>
+      <use href="#leaf" transform="translate(47,-2) rotate(8) scale(0.78)" fill="#93AC8B"/>
+      <g fill="#9C5348">
+        <circle cx="15" cy="4" r="3"/>
+        <circle cx="22" cy="8" r="2.2"/>
+        <circle cx="32" cy="5" r="1.9" fill="#8B4438"/>
+      </g>
+    </g>
+
+    <!-- Corner ornament: two sprays mirrored about the 45deg diagonal. -->
+    <g id="corner">
+      <use href="#spray" transform="translate(28,28)"/>
+      <use href="#spray" transform="translate(28,28) rotate(90) scale(1,-1)"/>
+      <use href="#leaf" transform="translate(30,30) rotate(45) scale(0.9)" fill="#3E5C4B"/>
+      <g fill="#8B4438">
+        <circle cx="25" cy="25" r="3.4"/>
+        <circle cx="34" cy="21" r="2.2" fill="#9C5348"/>
+        <circle cx="21" cy="34" r="2.2" fill="#9C5348"/>
+      </g>
+      <use href="#floret" transform="translate(52,44) scale(0.9)"/>
+      <use href="#floret" transform="translate(44,52) scale(0.9)"/>
+    </g>
+
+    <!-- One edge tile of vine, 100 units long, running from origin toward +x. -->
+    <g id="vine">
+      <path d="M0 0H100" fill="none" stroke="#7C9A78" stroke-width="1.1"/>
+      <use href="#leaf" transform="translate(16,0) rotate(-56) scale(0.74)" fill="#3E5C4B"/>
+      <use href="#leaf" transform="translate(30,1) rotate(52) scale(0.66)" fill="#7C9A78"/>
+      <use href="#leaf" transform="translate(48,-1) rotate(-52) scale(0.7)" fill="#4E6E54"/>
+      <use href="#leaf" transform="translate(64,1) rotate(56) scale(0.62)" fill="#93AC8B"/>
+      <use href="#leaf" transform="translate(80,-1) rotate(-50) scale(0.7)" fill="#2C4436"/>
+      <circle cx="40" cy="-3" r="2.1" fill="#9C5348"/>
+      <circle cx="73" cy="4" r="2.1" fill="#9C5348"/>
+    </g>
+  </defs>
+
+  <!-- Straight rules. These run the full width, so every tile carries its
+       matching segment and the lines stay continuous once tiled. -->
+  <rect x="10" y="10" width="280" height="280" fill="none" stroke="#46644F" stroke-width="4"/>
+  <rect x="86" y="86" width="128" height="128" fill="none" stroke="#9C5348" stroke-width="2"/>
+
+  <!-- Edge vines: each sits inside its own tile's middle band. -->
+  <use href="#vine" transform="translate(100,48)"/>
+  <use href="#vine" transform="translate(200,252) scale(-1,1)"/>
+  <use href="#vine" transform="translate(48,100) rotate(90)"/>
+  <use href="#vine" transform="translate(252,200) rotate(-90)"/>
+
+  <use href="#corner"/>
+  <use href="#corner" transform="translate(300,0) scale(-1,1)"/>
+  <use href="#corner" transform="translate(300,300) scale(-1,-1)"/>
+  <use href="#corner" transform="translate(0,300) scale(1,-1)"/>
+</svg>
