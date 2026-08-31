@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>Blog &middot; Antisocialistic</title>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="../favicon/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="../favicon/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="../favicon/favicon-16x16.png" />
+
+    <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="css/blog.css" rel="stylesheet" />
+
+    <script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dompurify@3.1.6/dist/purify.min.js"></script>
+  </head>
+
+  <body class="blog">
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+      <a class="navbar-brand" href="../">Home</a>
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active"><a class="nav-link" href="./">Blog</a></li>
+      </ul>
+    </nav>
+
+    <main class="blog-wrap">
+      <article>
+        <header class="post-header" id="post-header">
+          <h1 id="post-title">Loading&hellip;</h1>
+          <div class="post-meta" id="post-meta"></div>
+          <div id="post-tags"></div>
+        </header>
+
+        <div class="post-body" id="post-body"></div>
+      </article>
+
+      <footer class="post-footer">
+        <a href="./">&larr; All posts</a>
+      </footer>
+    </main>
+
+    <script>
+      (function () {
+        var titleEl = document.getElementById("post-title");
+        var metaEl = document.getElementById("post-meta");
+        var tagsEl = document.getElementById("post-tags");
+        var bodyEl = document.getElementById("post-body");
+
+        var slug = new URLSearchParams(window.location.search).get("slug");
+
+        function fail(message) {
+          titleEl.textContent = "Post not found";
+          metaEl.textContent = "";
+          bodyEl.className = "blog-error";
+          bodyEl.textContent = message;
+        }
+
+        function formatDate(iso) {
+          var parts = String(iso).slice(0, 10).split("-");
+          var d = new Date(Number(parts[0]), Number(parts[1]) - 1, Number(parts[2]));
+          if (isNaN(d)) return iso;
+          return d.toLocaleDateString(undefined, {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+          });
+        }
+
+        // Drop the YAML front matter block; posts.json already carries that metadata.
+        function stripFrontMatter(text) {
+          var match = /^\uFEFF?---\r?\n[\s\S]*?\r?\n---\r?\n?/.exec(text);
+          return match ? text.slice(match[0].length) : text;
+        }
+
+        if (!slug) {
+          fail("No post was requested.");
+          return;
+        }
+
+        fetch("posts.json", { cache: "no-cache" })
+          .then(function (res) {
+            if (!res.ok) throw new Error("HTTP " + res.status);
+            return res.json();
+          })
+          .then(function (data) {
+            var posts = Array.isArray(data) ? data : data.posts || [];
+            var post = posts.filter(function (p) {
+              return p.slug === slug;
+            })[0];
+
+            if (!post) throw new Error("No post with slug \u201c" + slug + "\u201d.");
+
+            document.title = post.title + " \u00b7 Antisocialistic";
+            titleEl.textContent = post.title;
+            metaEl.textContent = formatDate(post.date);
+
+            (post.tags || []).forEach(function (tag) {
+              var span = document.createElement("span");
+              span.className = "tag";
+              span.textContent = tag;
+              tagsEl.appendChild(span);
+            });
+
+            return fetch(post.file, { cache: "no-cache" }).then(function (res) {
+              if (!res.ok) throw new Error("Could not load " + post.file);
+              return res.text();
+            });
+          })
+          .then(function (markdown) {
+            var html = marked.parse(stripFrontMatter(markdown));
+            bodyEl.innerHTML = DOMPurify.sanitize(html);
+          })
+          .catch(function (err) {
+            fail(err.message);
+          });
+      })();
+    </script>
+  </body>
+</html>

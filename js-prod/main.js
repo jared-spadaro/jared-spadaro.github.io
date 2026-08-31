@@ -110,13 +110,8 @@ var Header = function (_React$Component) {
                 { className: "nav-item" },
                 React.createElement(
                   "a",
-                  {
-                    className: "nav-link disabled",
-                    href: "#",
-                    tabIndex: "-1",
-                    "aria-disabled": "true"
-                  },
-                  "???"
+                  { className: "nav-link", href: "blog/" },
+                  "Blog"
                 )
               ),
               React.createElement(

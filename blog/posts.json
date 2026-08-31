@@ -1,0 +1,13 @@
+[
+  {
+    "slug": "hello-world",
+    "title": "Hello, world",
+    "date": "2026-08-28",
+    "summary": "A blog that runs on nothing but a Markdown file and a git commit.",
+    "tags": [
+      "meta",
+      "site"
+    ],
+    "file": "posts/2026-08-28-hello-world.md"
+  }
+]
