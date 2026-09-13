@@ -35,6 +35,9 @@
   --sans: "Lato", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
   --script: "Parisienne", "Cormorant Garamond", cursive;
   --display: "Abril Fatface", Georgia, "Times New Roman", serif;
+
+  /* Outer gold of the hero frame, sampled from flush-gold-frame-border.webp. */
+  --frame-gold: #be9854;
 }
 
 /* --------------------------------------------------------------- base ---- */
@@ -188,12 +191,15 @@ a:hover, a:focus {
 /*
  * The first screen is one framed photograph filling the viewport.
  *
- * thick-gold-frame-border.png is the moulding cut out of the original
- * thick-gold-frame.png (which ships with its "transparent" checkerboard baked
- * in as opaque pixels, and so cannot be used directly). The cut-out is 819x594
- * and its moulding measures 127 / 128 / 125 / 130 px on the top / right /
- * bottom / left edges — those are the border-image-slice values. No `fill`
- * keyword: the middle slice must stay empty so the photo shows through.
+ * flush-gold-frame-border.webp is flush-gold-frame.webp cropped to the gold's
+ * opaque bounding box (473x350 -> 420x299, stripping a ~27px transparent
+ * margin). The crop is what makes the moulding sit hard against the edge of
+ * the screen: border-image scales each slice into the border area, so any
+ * transparent margin left in the source would be scaled up into a gap.
+ *
+ * Within the crop the moulding measures 37 / 39 / 37 / 39 px on the top /
+ * right / bottom / left edges — those are the border-image-slice values. No
+ * `fill` keyword: the middle slice must stay empty so the photo shows through.
  *
  * Bootstrap's reboot puts everything in border-box, so the border is drawn
  * inside the 100svh, and the absolutely positioned children below resolve
@@ -208,12 +214,20 @@ a:hover, a:focus {
   min-height: 26rem;
   padding: 0;
   overflow: hidden;
-  background-color: var(--cream);
   border-style: solid;
   border-width: var(--frame-w);
   border-color: transparent;
-  border-image: url("../img/frames/thick-gold-frame-border.png") 127 128 125 130 /
-    var(--frame-w) round;
+  border-image: url("../img/frames/flush-gold-frame-border.webp") 37 39 37 39 /
+    var(--frame-w) stretch;
+
+  /*
+   * The outermost 1-3px of the moulding is antialiased down to transparent,
+   * which would read as a hairline gap against the screen edge. The background
+   * paints across the border box, under the border-image, so this fills that
+   * sliver with the moulding's own outer gold (#be9854, sampled from the
+   * opaque pixels of the outer ring). The photo covers it everywhere else.
+   */
+  background-color: var(--frame-gold);
 }
 
 /* Fills the opening. `cover` rather than `fill` — the photo has two people in
@@ -244,7 +258,7 @@ a:hover, a:focus {
   line-height: 1.15;
   letter-spacing: 0.01em;
   text-align: center;
-  color: #000;
+  color: #fff;
 }
 
 /* ----------------------------------------------------- picture frames ---- */
