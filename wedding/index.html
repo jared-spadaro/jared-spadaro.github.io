@@ -16,7 +16,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Lato:wght@300;400&family=Parisienne&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Cormorant+Garamond:wght@300;400;500&family=Lato:wght@300;400&family=Parisienne&display=swap"
       rel="stylesheet"
     />
 
@@ -58,30 +58,15 @@
     <main id="main">
       <!-- ------------------------------------------------------------ hero -->
       <header class="hero" id="top">
-        <div class="container">
-          <p class="eyebrow mb-0">Together with our families</p>
+        <img
+          class="hero__photo"
+          src="img/hannah-jared-beach.jpg"
+          alt="Hannah and Jared standing at the water's edge on a beach"
+          width="2048"
+          height="1536"
+        />
 
-          <h1 class="hero__names">
-            Jared
-            <span class="hero__amp">&amp;</span>
-            Hannah
-          </h1>
-
-          <p class="hero__date"><span>Saturday &middot; July 17, 2027</span></p>
-          <p class="hero__venue">
-            The Peabody Essex Museum &middot; Salem, Massachusetts
-          </p>
-
-          <img
-            class="divider"
-            src="img/frames/sprig-divider.svg"
-            alt=""
-            width="260"
-            height="36"
-          />
-        </div>
-
-        <p class="hero__scroll d-none d-md-block">Scroll</p>
+        <h1 class="hero__names">Hannah &amp; Jared</h1>
       </header>
 
       <!-- ----------------------------------------------------------- story -->
@@ -324,13 +309,17 @@
     </footer>
 
     <script>
-      // Solidify the navbar once the hero starts scrolling away.
+      // The framed first screen carries no text but the names, so the navbar
+      // stays hidden over it and fades in — solid — as the hero scrolls away.
       (function () {
         var nav = document.getElementById("wedNav");
+        var hero = document.getElementById("top");
         var onScroll = function () {
-          nav.classList.toggle("is-stuck", window.scrollY > 40);
+          var after = hero ? hero.offsetHeight - 80 : 40;
+          nav.classList.toggle("is-stuck", window.scrollY > after);
         };
         window.addEventListener("scroll", onScroll, { passive: true });
+        window.addEventListener("resize", onScroll);
         onScroll();
       })();
 

@@ -34,6 +34,7 @@
   --serif: "Cormorant Garamond", Georgia, "Times New Roman", serif;
   --sans: "Lato", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
   --script: "Parisienne", "Cormorant Garamond", cursive;
+  --display: "Abril Fatface", Georgia, "Times New Roman", serif;
 }
 
 /* --------------------------------------------------------------- base ---- */
@@ -106,16 +107,33 @@ a:hover, a:focus {
 
 /* ------------------------------------------------------------- navbar ---- */
 
+/*
+ * The hero is a framed photograph with nothing on it but the two names, so the
+ * bar is hidden while it is in view and appears — solid — once you scroll past.
+ * .is-stuck is toggled in index.html against the hero's height.
+ */
 .wed-nav {
   background-color: transparent;
   padding: 1.35rem 0;
-  transition: background-color 0.3s ease, padding 0.3s ease, box-shadow 0.3s ease;
+  opacity: 0;
+  visibility: hidden;
+  transition: background-color 0.3s ease, padding 0.3s ease, box-shadow 0.3s ease,
+    opacity 0.3s ease, visibility 0.3s ease;
 }
 
 .wed-nav.is-stuck {
   background-color: rgba(251, 247, 239, 0.96);
   padding: 0.65rem 0;
   box-shadow: 0 1px 0 rgba(44, 68, 54, 0.12);
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Keyboard users still need to reach the links while the bar is hidden. */
+.wed-nav:focus-within {
+  opacity: 1;
+  visibility: visible;
+  background-color: rgba(251, 247, 239, 0.96);
 }
 
 .wed-nav .navbar-brand {
@@ -167,102 +185,66 @@ a:hover, a:focus {
 
 /* --------------------------------------------------------------- hero ---- */
 
+/*
+ * The first screen is one framed photograph filling the viewport.
+ *
+ * thick-gold-frame-border.png is the moulding cut out of the original
+ * thick-gold-frame.png (which ships with its "transparent" checkerboard baked
+ * in as opaque pixels, and so cannot be used directly). The cut-out is 819x594
+ * and its moulding measures 127 / 128 / 125 / 130 px on the top / right /
+ * bottom / left edges — those are the border-image-slice values. No `fill`
+ * keyword: the middle slice must stay empty so the photo shows through.
+ *
+ * Bootstrap's reboot puts everything in border-box, so the border is drawn
+ * inside the 100svh, and the absolutely positioned children below resolve
+ * against the padding box — i.e. the opening the moulding leaves behind.
+ */
 .hero {
+  --frame-w: clamp(24px, 6.5vmin, 90px);
+
   position: relative;
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  text-align: center;
-  padding: 8rem 0 5rem;
+  height: 100vh;
+  height: 100svh;
+  min-height: 26rem;
+  padding: 0;
   overflow: hidden;
   background-color: var(--cream);
+  border-style: solid;
+  border-width: var(--frame-w);
+  border-color: transparent;
+  border-image: url("../img/frames/thick-gold-frame-border.png") 127 128 125 130 /
+    var(--frame-w) round;
 }
 
-/* Soft garden light: three overlapping washes in the three theme hues. */
-.hero::before {
-  content: "";
+/* Fills the opening. `cover` rather than `fill` — the photo has two people in
+   it, and stretching to the viewport's ratio would distort them. */
+.hero__photo {
   position: absolute;
   inset: 0;
-  background:
-    radial-gradient(46rem 32rem at 12% 14%, rgba(147, 172, 139, 0.42), transparent 62%),
-    radial-gradient(40rem 30rem at 88% 22%, rgba(157, 178, 192, 0.38), transparent 62%),
-    radial-gradient(38rem 28rem at 74% 92%, rgba(192, 138, 126, 0.32), transparent 64%),
-    radial-gradient(34rem 26rem at 22% 86%, rgba(95, 127, 99, 0.26), transparent 66%);
-}
-
-.hero > .container {
-  position: relative;
-  z-index: 1;
-}
-
-.hero__names {
-  font-family: var(--serif);
-  font-weight: 300;
-  font-size: clamp(3.1rem, 11vw, 7rem);
-  line-height: 1.02;
-  letter-spacing: 0.06em;
-  color: var(--green-900);
-  margin: 0.9rem 0 0;
-}
-
-.hero__amp {
   display: block;
-  font-family: var(--script);
-  font-size: clamp(2.6rem, 8vw, 4.6rem);
-  line-height: 1.1;
-  letter-spacing: 0;
-  color: var(--red-500);
-  margin: 0.1rem 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
 }
 
-/* Hairline rules flanking the date. */
-.hero__date {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: clamp(0.75rem, 2vw, 1.25rem);
-  margin: 2.25rem 0 0.75rem;
-  font-family: var(--sans);
-  font-size: clamp(0.78rem, 2.2vw, 0.95rem);
-  font-weight: 400;
-  letter-spacing: 0.34em;
-  text-transform: uppercase;
-  color: var(--green-700);
-}
-
-/* The date stays on one line; the rules give up their width instead. */
-.hero__date span {
-  flex: 0 0 auto;
-  white-space: nowrap;
-}
-
-.hero__date::before,
-.hero__date::after {
-  content: "";
-  flex: 1 1 0;
-  min-width: 0;
-  max-width: 5.5rem;
-  height: 1px;
-  background-color: var(--brass);
-}
-
-.hero__venue {
-  font-family: var(--serif);
-  font-size: clamp(1.15rem, 3.2vw, 1.6rem);
-  color: var(--ink-soft);
-  margin: 0;
-}
-
-.hero__scroll {
+/* Sits over the sky: the horizon is about 36% down the photo, and `cover`
+   keeps it in the lower two thirds at every viewport ratio we care about. */
+.hero__names {
   position: absolute;
-  left: 50%;
-  bottom: 2rem;
-  transform: translateX(-50%);
+  top: 11%;
+  left: 0;
+  right: 0;
   z-index: 1;
-  font-size: 0.66rem;
-  letter-spacing: 0.28em;
-  text-transform: uppercase;
-  color: var(--green-500);
+  margin: 0;
+  padding: 0 5%;
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(1.9rem, 7.5vw, 6rem);
+  line-height: 1.15;
+  letter-spacing: 0.01em;
+  text-align: center;
+  color: #000;
 }
 
 /* ----------------------------------------------------- picture frames ---- */
