@@ -36,8 +36,8 @@
   --script: "Parisienne", "Cormorant Garamond", cursive;
   --display: "Abril Fatface", Georgia, "Times New Roman", serif;
 
-  /* Outer gold of the hero frame, sampled from flush-gold-frame-border.webp. */
-  --frame-gold: #be9854;
+  /* Outer wood of the hero frame, sampled from dark-wooden-frame-border.webp. */
+  --frame-wood: #542f12;
 }
 
 /* --------------------------------------------------------------- base ---- */
@@ -189,24 +189,34 @@ a:hover, a:focus {
 /* --------------------------------------------------------------- hero ---- */
 
 /*
- * The first screen is one framed photograph filling the viewport.
+ * The first screen is three nested layers filling the viewport:
  *
- * flush-gold-frame-border.webp is flush-gold-frame.webp cropped to the gold's
- * opaque bounding box (473x350 -> 420x299, stripping a ~27px transparent
- * margin). The crop is what makes the moulding sit hard against the edge of
- * the screen: border-image scales each slice into the border area, so any
- * transparent margin left in the source would be scaled up into a gap.
+ *   .hero        wooden moulding, drawn as the element's border-image
+ *   .hero__mat   the paper ground, a spacer between moulding and photograph
+ *   .hero__photo the photograph itself
  *
- * Within the crop the moulding measures 37 / 39 / 37 / 39 px on the top /
- * right / bottom / left edges — those are the border-image-slice values. No
- * `fill` keyword: the middle slice must stay empty so the photo shows through.
+ * dark-wooden-frame-border.webp is dark-wooden-frame.png cropped to the
+ * largest rectangle whose entire perimeter is solid wood (1800x1400 ->
+ * 1643x1242, origin 95,81). Two things make that crop necessary. The source
+ * carries a drop shadow — 33px to the right and 53px below the wood — which
+ * the crop discards, so the moulding runs off the edges of the screen with no
+ * shadow visible. The source is also very slightly rotated, so its corners are
+ * neither square nor axis-aligned; cropping to the solid-wood rectangle is
+ * what lets border-image treat it as a clean rectangular frame.
+ *
+ * Within the crop the wood measures 125 / 147 / 148 / 108 px on the top /
+ * right / bottom / left edges — those are the border-image-slice values. They
+ * are uneven because the photographed frame is in slight perspective. No
+ * `fill` keyword, so the middle slice — which holds the moulding's inner
+ * shadow — is dropped, and .hero__mat covers that area instead.
  *
  * Bootstrap's reboot puts everything in border-box, so the border is drawn
- * inside the 100svh, and the absolutely positioned children below resolve
- * against the padding box — i.e. the opening the moulding leaves behind.
+ * inside the 100svh and .hero__mat's `inset: 0` resolves against the padding
+ * box — i.e. exactly the opening the moulding leaves behind.
  */
 .hero {
   --frame-w: clamp(24px, 6.5vmin, 90px);
+  --mat-w: clamp(14px, 3.2vmin, 52px);
 
   position: relative;
   height: 100vh;
@@ -217,24 +227,30 @@ a:hover, a:focus {
   border-style: solid;
   border-width: var(--frame-w);
   border-color: transparent;
-  border-image: url("../img/frames/flush-gold-frame-border.webp") 37 39 37 39 /
+  border-image: url("../img/frames/dark-wooden-frame-border.webp") 125 147 148 108 /
     var(--frame-w) stretch;
 
-  /*
-   * The outermost 1-3px of the moulding is antialiased down to transparent,
-   * which would read as a hairline gap against the screen edge. The background
-   * paints across the border box, under the border-image, so this fills that
-   * sliver with the moulding's own outer gold (#be9854, sampled from the
-   * opaque pixels of the outer ring). The photo covers it everywhere else.
-   */
-  background-color: var(--frame-gold);
+  /* Backstop under the border-image, so subpixel scaling can never open a
+     hairline of page background between the moulding and the screen edge. */
+  background-color: var(--frame-wood);
 }
 
-/* Fills the opening. `cover` rather than `fill` — the photo has two people in
-   it, and stretching to the viewport's ratio would distort them. */
-.hero__photo {
+/*
+ * The paper ground. Fills the frame's opening; its padding is the visible
+ * margin of paper left showing around the photograph.
+ */
+.hero__mat {
   position: absolute;
   inset: 0;
+  display: block;
+  overflow: hidden;
+  padding: var(--mat-w);
+  background: url("../img/picture-background.jpg") center / cover no-repeat;
+}
+
+/* Fills what the mat's padding leaves. `cover` rather than `fill` — the photo
+   has two people in it, and stretching would distort them. */
+.hero__photo {
   display: block;
   width: 100%;
   height: 100%;
