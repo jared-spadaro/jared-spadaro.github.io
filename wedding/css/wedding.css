@@ -193,6 +193,7 @@ a:hover, a:focus {
  *
  *   .hero        wooden moulding, drawn as the element's border-image
  *   .hero__mat   the paper ground, a spacer between moulding and photograph
+ *   .hero__plate the photograph's box, --photo-scale of the mat's opening
  *   .hero__photo the photograph itself
  *
  * dark-wooden-frame-border.webp is dark-wooden-frame.png cropped to the
@@ -217,6 +218,8 @@ a:hover, a:focus {
 .hero {
   --frame-w: clamp(24px, 6.5vmin, 90px);
   --mat-w: clamp(14px, 3.2vmin, 52px);
+  /* The photograph is shrunk 40%; the paper shows through the rest. */
+  --photo-scale: 60%;
 
   position: relative;
   height: 100vh;
@@ -236,20 +239,31 @@ a:hover, a:focus {
 }
 
 /*
- * The paper ground. Fills the frame's opening; its padding is the visible
- * margin of paper left showing around the photograph.
+ * The paper ground. Fills the frame's opening and centres the photograph in
+ * it, so every part of the opening the photo does not cover shows paper.
  */
 .hero__mat {
   position: absolute;
   inset: 0;
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   overflow: hidden;
   padding: var(--mat-w);
   background: url("../img/picture-background.jpg") center / cover no-repeat;
 }
 
-/* Fills what the mat's padding leaves. `cover` rather than `fill` — the photo
-   has two people in it, and stretching would distort them. */
+/*
+ * The photograph, at --photo-scale of the opening. It keeps the opening's
+ * aspect ratio, so shrinking it widens the paper margin evenly on all four
+ * sides rather than re-cropping the photo.
+ */
+.hero__plate {
+  position: relative;
+  width: var(--photo-scale);
+  height: var(--photo-scale);
+}
+
 .hero__photo {
   display: block;
   width: 100%;
@@ -258,8 +272,12 @@ a:hover, a:focus {
   object-position: center;
 }
 
-/* Sits over the sky: the horizon is about 36% down the photo, and `cover`
-   keeps it in the lower two thirds at every viewport ratio we care about. */
+/*
+ * Sits over the sky: the horizon is about 36% down the photo, and `cover`
+ * keeps it in the lower two thirds at every viewport ratio we care about.
+ * Anchored to .hero__plate, not the frame, so it tracks the photo as it
+ * shrinks instead of drifting up onto the paper.
+ */
 .hero__names {
   position: absolute;
   top: 11%;
@@ -270,7 +288,9 @@ a:hover, a:focus {
   padding: 0 5%;
   font-family: var(--display);
   font-weight: 400;
-  font-size: clamp(1.9rem, 7.5vw, 6rem);
+  /* Scaled with the plate, which is --photo-scale of the viewport less the
+     frame and paper margins; 4.6vw keeps the names inside the photo's width. */
+  font-size: clamp(1.1rem, 4.6vw, 3.6rem);
   line-height: 1.15;
   letter-spacing: 0.01em;
   text-align: center;
