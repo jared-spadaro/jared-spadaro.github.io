@@ -219,7 +219,7 @@ a:hover, a:focus {
   --frame-w: clamp(24px, 6.5vmin, 90px);
   --mat-w: clamp(14px, 3.2vmin, 52px);
   /* The photograph is shrunk 40%; the paper shows through the rest. */
-  --photo-scale: 60%;
+  --photo-scale: 70%;
 
   position: relative;
   height: 100vh;
