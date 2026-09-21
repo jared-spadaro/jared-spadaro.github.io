@@ -171,7 +171,6 @@ h1, h2, h3, p, figure, ul { margin: 0; }
   display: flex;
   justify-content: center;
   /* The bar sits in its own band of sky: the same gap below it as above. */
-  margin-bottom: var(--edge);
 }
 .nav ul {
   list-style: none;
