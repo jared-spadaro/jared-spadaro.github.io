@@ -35,8 +35,10 @@ right; if you move a swash onto a letter with a different flourish (`C`, `A`,
 
 The palette is four custom properties at the top of `css/wedding.css`
 (`--cream`, `--cream-dim`, `--ink`, `--light`). The background is
-`picture-background.jpg` under a deep-moss wash — the paper grain survives, the
-acid green does not. Change the wash in the `body` rule.
+`cloud-background.avif`, fixed and covering, under a thin slate veil. The veil
+is load-bearing: the clouds are almost exactly the value of `--cream`, so
+without it the column's edges dissolve wherever a cloud passes behind them.
+Both live in the `body` rule.
 
 ## Swapping in real photos
 

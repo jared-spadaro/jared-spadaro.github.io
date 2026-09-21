@@ -50,12 +50,13 @@ body {
   font-family: var(--serif);
   font-weight: 300;
   color: var(--ink);
-  /* A deep moss wash over the paper texture: the grain survives, the acid
-     green does not, and the cream panels read warm against it. */
+  /* Printed sky, with a thin slate veil over it. The veil is doing one job:
+     the clouds are almost exactly the value of --cream, so without it the
+     column's edges dissolve wherever a cloud passes behind them. */
   background:
-    linear-gradient(rgba(47, 53, 40, 0.76), rgba(47, 53, 40, 0.76)),
-    url("../img/picture-background.jpg") center / cover fixed no-repeat,
-    #4c5734;
+    linear-gradient(rgba(74, 98, 126, 0.24), rgba(74, 98, 126, 0.24)),
+    url("../img/cloud-background.avif") center / cover fixed no-repeat,
+    #7ea8cf;
 }
 
 img { display: block; max-width: 100%; }
