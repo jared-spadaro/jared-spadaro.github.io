@@ -35,6 +35,7 @@
 
   --col: 1180px;           /* width of the floating column                   */
   --gap: 10px;             /* background shows through between panels        */
+  --edge: clamp(1.25rem, 3vw, 2.75rem); /* sky above the nav, and below it   */
   --pad: clamp(1.5rem, 4vw, 3.25rem);
 }
 
@@ -145,7 +146,7 @@ h1, h2, h3, p, figure, ul { margin: 0; }
 .column {
   width: min(var(--col), 92vw);
   margin-inline: auto;
-  padding-block: clamp(1.25rem, 3vw, 2.75rem);
+  padding-block: var(--edge);
   display: flex;
   flex-direction: column;
 }
@@ -169,6 +170,8 @@ h1, h2, h3, p, figure, ul { margin: 0; }
   background: var(--cream-dim);
   display: flex;
   justify-content: center;
+  /* The bar sits in its own band of sky: the same gap below it as above. */
+  margin-bottom: var(--edge);
 }
 .nav ul {
   list-style: none;
@@ -180,7 +183,7 @@ h1, h2, h3, p, figure, ul { margin: 0; }
 .nav li + li { border-left: 1px solid var(--rule); }
 .nav a {
   display: block;
-  padding: 0.85rem clamp(0.9rem, 2.4vw, 2.1rem);
+  padding: 1.5rem clamp(0.9rem, 2.4vw, 2.1rem);
   transition: color 0.2s ease;
 }
 .nav a:hover,
@@ -215,12 +218,14 @@ h1, h2, h3, p, figure, ul { margin: 0; }
   justify-content: center;
   margin: 0;
   padding: 19% 1rem 0;
-  font-size: clamp(1.3rem, 6.2vw, 4.6rem);  /* fallback: no container queries */
-  font-size: clamp(1.3rem, 5.6cqw, 4.6rem);
-  font-weight: 300;
-  letter-spacing: 0.055em;
-  text-indent: 0.055em;
-  text-transform: uppercase;
+  font-family: var(--swash);
+  font-size: clamp(1.9rem, 8.4vw, 6.8rem);  /* fallback: no container queries */
+  font-size: clamp(1.9rem, 7.6cqw, 6.8rem);
+  font-weight: 400;
+  /* Pinyon's default line box is deep enough to drop the names toward the
+     middle of the hero; pinning it to 1 keeps them where the padding puts
+     them. */
+  line-height: 1;
   color: rgba(246, 244, 239, 0.94);
   text-shadow: 0 1px 24px rgba(0, 0, 0, 0.32);
   white-space: nowrap;
@@ -390,7 +395,9 @@ h1, h2, h3, p, figure, ul { margin: 0; }
   /* The bar wraps to two rows down here; a left rule on the first item of
      the second row would read as a stray tick, so the rules come off. */
   .nav li + li { border-left: 0; }
-  .nav a { padding-inline: 0.75rem; }
+  /* Two stacked rows at the desktop height would eat the first screen, and
+     with the rules gone there are no boxes left to keep tall anyway. */
+  .nav a { padding: 1.05rem 0.75rem; }
 }
 
 @media (prefers-reduced-motion: reduce) {

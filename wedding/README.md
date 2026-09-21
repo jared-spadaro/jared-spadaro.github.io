@@ -24,9 +24,11 @@ Two typefaces do all of it:
 | Role | Face | Where |
 | --- | --- | --- |
 | Everything | Cormorant Garamond 300/400 | headings, nav, labels, body |
-| Swash initials only | Pinyon Script | the `.sw` span — one letter at a time |
+| The names, and swash initials | Pinyon Script | the `<h1>`, and the `.sw` span — one letter at a time |
 
-`.sw` is the whole trick. It sets a single capital in the script face at
+The names in the hero are set wholesale in the script face — no caps, no
+tracking, since a copperplate takes neither. Everywhere else the script appears
+one letter at a time, and `.sw` is the trick. It sets a single capital in the script face at
 `1.45em`, which lands it about half again the height of the roman capitals
 beside it — the proportion the reference uses. Pinyon's entry flourish
 overhangs its origin, so the class pads the left and claws the gap back on the
@@ -52,7 +54,7 @@ Each figure carries a `data-slot` name so you can find it:
 
 | `data-slot` | Ratio | Where it appears | Currently |
 | --- | --- | --- | --- |
-| `hero-left` | 11:12 | first screen, left half | `photo-placeholder-landscape.svg` |
+| `hero-left` | 11:12 | first screen, left half | `hannah-jared-beach-1.jpg` |
 | `hero-right` | 11:12 | first screen, right half | `hannah-jared-beach.jpg` |
 | `duo-photo` | fills its row | tall photo beside the cream plate | `photo-placeholder-arch.svg` |
 | `plate-portrait` | 3:4 | matted portrait on the cream plate | `photo-placeholder-square.svg` |
