@@ -217,7 +217,7 @@ h1, h2, h3, p, figure, ul { margin: 0; }
   align-items: flex-start;
   justify-content: center;
   margin: 0;
-  padding: 19% 1rem 0;
+  padding: 8% 1rem 0;
   font-family: var(--swash) !important;
   font-size: clamp(1.9rem, 8.4vw, 6.8rem);  /* fallback: no container queries */
   font-size: clamp(1.9rem, 7.6cqw, 6.8rem);

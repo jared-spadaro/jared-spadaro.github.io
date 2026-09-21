@@ -55,7 +55,7 @@ Each figure carries a `data-slot` name so you can find it:
 | `data-slot` | Ratio | Where it appears | Currently |
 | --- | --- | --- | --- |
 | `hero-left` | 11:12 | first screen, left half | `hannah-jared-beach-1.jpg` |
-| `hero-right` | 11:12 | first screen, right half | `hannah-jared-beach.jpg` |
+| `hero-right` | 11:12 | first screen, right half | `hannah-jared-lake-1.jpg` |
 | `duo-photo` | fills its row | tall photo beside the cream plate | `photo-placeholder-arch.svg` |
 | `plate-portrait` | 3:4 | matted portrait on the cream plate | `photo-placeholder-square.svg` |
 | `verse-inset` | 3:4 | small photo floated over the verse | `photo-placeholder-square.svg` |
