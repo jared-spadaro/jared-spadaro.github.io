@@ -2,378 +2,254 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <title>Jared &amp; Hannah &middot; July 17, 2027 &middot; Salem, MA</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Hannah &amp; Jared &middot; July 17, 2027 &middot; Salem, MA</title>
     <meta
       name="description"
-      content="Jared and Hannah are getting married on Saturday, July 17, 2027 at the Peabody Essex Museum in Salem, Massachusetts."
+      content="Hannah and Jared are getting married on Saturday, July 17, 2027 at the Peabody Essex Museum in Salem, Massachusetts."
     />
 
     <link rel="apple-touch-icon" sizes="180x180" href="../favicon/swan-apple-touch-icon.png" />
     <link rel="icon" type="image/png" sizes="32x32" href="../favicon/swan-favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="../favicon/swan-favicon-16x16.png" />
 
+    <!-- Two faces do all the work: a high-contrast Garamond for everything,
+         and a copperplate script used only for single swash initials. -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Cormorant+Garamond:wght@300;400;500&family=Lato:wght@300;400&family=Parisienne&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Pinyon+Script&display=swap"
       rel="stylesheet"
     />
 
-    <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet" />
     <link href="css/wedding.css" rel="stylesheet" />
   </head>
 
+  <!-- =====================================================================
+       PHOTO SLOTS — every photograph below is a <figure class="slot"> whose
+       <img> is cropped to fill it. To use a real photo, drop the file in
+       img/ and change that one src. Nothing else needs touching; the ratio
+       lives on the figure and object-fit absorbs the mismatch.
+
+         data-slot           ratio   currently
+         ---------------------------------------------------------------
+         hero-left           11:12   photo-placeholder-landscape.svg
+         hero-right          11:12   hannah-jared-beach.jpg
+         duo-photo           fills   photo-placeholder-arch.svg
+         plate-portrait      3:4     photo-placeholder-square.svg
+         verse-inset         3:4     photo-placeholder-square.svg
+         verse-photo         fills   photo-placeholder-landscape.svg
+         weekend-01          3:4     photo-placeholder-arch.svg
+         weekend-02          3:4     photo-placeholder-square.svg
+         weekend-03          3:4     photo-placeholder-landscape.svg
+
+       See README.md for the full table.
+       ===================================================================== -->
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
 
-    <nav class="navbar navbar-expand-lg fixed-top wed-nav" id="wedNav">
-      <div class="container">
-        <a class="navbar-brand" href="#top">J &amp; H</a>
-        <button
-          class="navbar-toggler"
-          type="button"
-          id="wedNavToggle"
-          aria-controls="wedNavItems"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
+    <div class="column">
+      <!-- ---------------------------------------------------------- nav -->
+      <nav class="nav micro panel" aria-label="Primary">
+        <ul>
+          <li><a href="#top" aria-current="page">Home</a></li>
+          <li><a href="#story">Our Story</a></li>
+          <li><a href="#day">The Day</a></li>
+          <li><a href="#weekend">Weekend</a></li>
+          <li><a href="#rsvp">RSVP</a></li>
+        </ul>
+      </nav>
 
-        <div class="collapse navbar-collapse justify-content-end" id="wedNavItems">
-          <ul class="navbar-nav">
-            <li class="nav-item"><a class="nav-link active" href="#top">Home</a></li>
-            <li class="nav-item"><a class="nav-link" href="#story">Our Story</a></li>
-            <li class="nav-item"><a class="nav-link" href="#details">The Day</a></li>
-            <li class="nav-item"><a class="nav-link" href="#salem">Salem</a></li>
-            <li class="nav-item">
-              <a class="nav-link disabled" href="#rsvp" tabindex="-1" aria-disabled="true">RSVP</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-
-    <main id="main">
-      <!-- ------------------------------------------------------------ hero -->
-      <header class="hero" id="top">
-        <div class="hero__mat">
-          <div class="hero__plate">
-            <img
-              class="hero__photo"
-              src="img/hannah-jared-beach.jpg"
-              alt="Hannah and Jared standing at the water's edge on a beach"
-              width="2048"
-              height="1536"
-            />
-
-            <h1 class="hero__names">Hannah &amp; Jared</h1>
-          </div>
-        </div>
-      </header>
-
-      <!-- ----------------------------------------------------------- story -->
-      <section class="section" id="story">
-        <div class="container">
-          <div class="text-center mb-5">
-            <p class="eyebrow mb-0">Two years of yes</p>
-            <h2 class="section-title">Our Story</h2>
-            <img
-              class="divider"
-              src="img/frames/sprig-divider.svg"
-              alt=""
-              width="260"
-              height="36"
-            />
-          </div>
-
-          <div class="row align-items-center">
-            <div class="col-lg-5 mb-5 mb-lg-0">
-              <!-- Arch frame -->
-              <figure class="pf pf--arch">
-                <span class="pf__photo">
-                  <img
-                    src="img/photo-placeholder-arch.svg"
-                    alt="Jared and Hannah"
-                    width="600"
-                    height="800"
-                  />
-                </span>
-                <img
-                  class="pf__frame"
-                  src="img/frames/frame-arch.svg"
-                  alt=""
-                  width="300"
-                  height="400"
-                />
-              </figure>
-            </div>
-
-            <div class="col-lg-7">
-              <p>
-                We are getting married in a museum full of gardens, glass and old
-                New England light &mdash; which felt like exactly the right place
-                for the two of us to say yes in front of everyone we love.
-              </p>
-              <p>
-                This page is the beginning of the plan. Over the next few months
-                we'll add our story, travel and lodging details for Salem, the
-                weekend schedule, and of course the RSVP. For now, all you need is
-                the date.
-              </p>
-              <p class="mb-0">
-                <span class="script" style="font-size: 1.9rem">Save the date &mdash;</span>
-                <span class="d-block eyebrow mt-2">07 &middot; 17 &middot; 2027</span>
-              </p>
-            </div>
-          </div>
-
-          <div class="row align-items-center mt-5 pt-4">
-            <div class="col-lg-7 order-lg-2 mb-5 mb-lg-0">
-              <!-- Wreath frame -->
-              <figure class="pf pf--wreath">
-                <span class="pf__photo">
-                  <img
-                    src="img/photo-placeholder-square.svg"
-                    alt="Jared and Hannah"
-                    width="700"
-                    height="700"
-                  />
-                </span>
-                <img
-                  class="pf__frame"
-                  src="img/frames/frame-wreath.svg"
-                  alt=""
-                  width="420"
-                  height="420"
-                />
-              </figure>
-            </div>
-
-            <div class="col-lg-5 order-lg-1">
-              <p class="venue-quote mb-0">
-                &ldquo;A garden in July, a museum courtyard, and the people who got
-                us here.&rdquo;
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- --------------------------------------------------------- details -->
-      <section class="section section--tint" id="details">
-        <div class="container">
-          <div class="text-center mb-5">
-            <p class="eyebrow mb-0">Mark your calendars</p>
-            <h2 class="section-title">The Day</h2>
-            <img
-              class="divider"
-              src="img/frames/sprig-divider.svg"
-              alt=""
-              width="260"
-              height="36"
-            />
-          </div>
-
-          <div class="row">
-            <div class="col-md-4 mb-4 mb-md-0">
-              <div class="detail-card">
-                <svg class="detail-card__icon" viewBox="0 0 24 24" fill="none"
-                     stroke="currentColor" stroke-width="1.2" aria-hidden="true">
-                  <rect x="3" y="5" width="18" height="16" rx="1.5" />
-                  <path d="M3 10h18M8 3v4M16 3v4" />
-                </svg>
-                <h3>The Date</h3>
-                <p>
-                  <strong>Saturday, July 17, 2027</strong><br />
-                  Ceremony and reception times to be announced.
-                </p>
-              </div>
-            </div>
-
-            <div class="col-md-4 mb-4 mb-md-0">
-              <div class="detail-card">
-                <svg class="detail-card__icon" viewBox="0 0 24 24" fill="none"
-                     stroke="currentColor" stroke-width="1.2" aria-hidden="true">
-                  <path d="M12 21s7-6.2 7-11a7 7 0 1 0-14 0c0 4.8 7 11 7 11Z" />
-                  <circle cx="12" cy="10" r="2.6" />
-                </svg>
-                <h3>The Place</h3>
-                <p>
-                  <strong>Peabody Essex Museum</strong><br />
-                  161 Essex Street<br />
-                  Salem, Massachusetts
-                </p>
-              </div>
-            </div>
-
-            <div class="col-md-4">
-              <div class="detail-card">
-                <svg class="detail-card__icon" viewBox="0 0 24 24" fill="none"
-                     stroke="currentColor" stroke-width="1.2" aria-hidden="true">
-                  <path d="M12 21c-4.5-2.4-7-5.6-7-9.2A5.8 5.8 0 0 1 12 7a5.8 5.8 0 0 1 7 4.8c0 3.6-2.5 6.8-7 9.2Z" />
-                  <path d="M12 21V7M12 7C12 4.8 13.6 3 16 3c0 2.4-1.7 4-4 4Z" />
-                </svg>
-                <h3>The Attire</h3>
-                <p>
-                  <strong>Garden formal</strong><br />
-                  Summer colors welcome &mdash; details to follow.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <!-- Ornate frame -->
-          <figure class="pf pf--ornate mt-5 pt-3">
+      <main id="main">
+        <!-- ------------------------------------------------------ hero -->
+        <header class="hero split" id="top">
+          <figure class="slot slot--hero" data-slot="hero-left">
             <img
               src="img/photo-placeholder-landscape.svg"
-              alt="Jared and Hannah"
+              alt=""
               width="800"
               height="600"
             />
-            <figcaption class="pf__caption">
-              More photos coming as the day gets closer.
-            </figcaption>
           </figure>
-        </div>
-      </section>
 
-      <!-- ------------------------------------------------------- countdown -->
-      <section class="section" id="countdown">
-        <div class="container text-center">
-          <p class="eyebrow mb-4">Until we say I do</p>
+          <figure class="slot slot--hero" data-slot="hero-right">
+            <img
+              src="img/hannah-jared-beach.jpg"
+              alt="Hannah and Jared at the water's edge"
+              width="2048"
+              height="1536"
+            />
+          </figure>
 
-          <ul class="countdown" id="countdownList" aria-live="polite">
+          <h1 class="hero__names">Hannah <span class="amp">&amp;</span> <span class="sw">J</span>ared</h1>
+        </header>
+
+        <!-- ----------------------------------------------------- creed -->
+        <section class="panel panel--ink creed" aria-label="Invitation">
+          <p>
+            <span class="sw">J</span>oining two families<br />
+            in the gardens of <span class="sw">O</span>ld New England<br />
+            on the seventeenth of July.
+          </p>
+        </section>
+
+        <!-- ------------------------------------------------------- duo -->
+        <section class="split" id="story">
+          <figure class="slot slot--fill" data-slot="duo-photo">
+            <img
+              loading="lazy"
+              decoding="async"
+              src="img/photo-placeholder-arch.svg"
+              alt=""
+              width="600"
+              height="800"
+            />
+          </figure>
+
+          <div class="panel plate">
+            <p class="micro">Two summers of yes.</p>
+
+            <figure class="slot slot--portrait plate__photo" data-slot="plate-portrait">
+              <img
+              loading="lazy"
+              decoding="async"
+                src="img/photo-placeholder-square.svg"
+                alt="Hannah and Jared"
+                width="700"
+                height="700"
+              />
+            </figure>
+
+            <p class="micro">Salem, Massachusetts.</p>
+
+            <p class="micro plate__label--side plate__label--left">Hannah &amp; Jared</p>
+            <p class="micro plate__label--side plate__label--right">MMXXVII</p>
+          </div>
+        </section>
+
+        <!-- ------------------------------------------------------ menu -->
+        <section class="panel menu detached" aria-label="Sections">
+          <div class="menu__inner">
+            <p>
+              <a href="#story"><span class="sw">O</span>ur Story</a>
+              <span class="menu__sep">/</span>
+              <a href="#day">The Day</a>
+              <span class="menu__sep">/</span>
+              <a href="#weekend">Weekend</a><br />
+              <a href="#story">Where to Stay</a>
+              <span class="menu__sep">/</span>
+              <a href="#rsvp"><span class="sw">R</span>SVP</a>
+            </p>
+          </div>
+        </section>
+
+        <!-- ----------------------------------------------------- verse -->
+        <section class="split detached" id="day">
+          <div class="panel verse">
+            <p class="verse__text">
+              In the heart of the garden,<br />
+              where the light runs low<br />
+              &amp; the sea air turns<br />
+              to evening, we will<br />
+              say yes.
+            </p>
+
+            <figure class="slot slot--portrait verse__photo" data-slot="verse-inset">
+              <img
+              loading="lazy"
+              decoding="async"
+                src="img/photo-placeholder-square.svg"
+                alt=""
+                width="700"
+                height="700"
+              />
+            </figure>
+          </div>
+
+          <figure class="slot slot--fill" data-slot="verse-photo">
+            <img
+              loading="lazy"
+              decoding="async"
+              src="img/photo-placeholder-landscape.svg"
+              alt=""
+              width="800"
+              height="600"
+            />
+          </figure>
+        </section>
+
+        <!-- --------------------------------------------------- weekend -->
+        <section class="panel weekend detached" id="weekend">
+          <h2 class="weekend__title"><span class="sw">W</span>eekend.</h2>
+
+          <ul class="weekend__cards">
             <li>
-              <span class="countdown__value" id="cdDays">&mdash;</span>
-              <span class="countdown__label">Days</span>
+              <p class="card__head">
+                <span class="card__name">Friday 01</span>
+                <span class="card__note micro">Welcome</span>
+              </p>
+              <figure class="slot slot--portrait" data-slot="weekend-01">
+                <img
+              loading="lazy"
+              decoding="async"
+                  src="img/photo-placeholder-arch.svg"
+                  alt=""
+                  width="600"
+                  height="800"
+                />
+              </figure>
             </li>
+
             <li>
-              <span class="countdown__value" id="cdHours">&mdash;</span>
-              <span class="countdown__label">Hours</span>
+              <p class="card__head">
+                <span class="card__name">Saturday 02</span>
+                <span class="card__note micro">Ceremony</span>
+              </p>
+              <figure class="slot slot--portrait" data-slot="weekend-02">
+                <img
+              loading="lazy"
+              decoding="async"
+                  src="img/photo-placeholder-square.svg"
+                  alt=""
+                  width="700"
+                  height="700"
+                />
+              </figure>
             </li>
+
             <li>
-              <span class="countdown__value" id="cdMinutes">&mdash;</span>
-              <span class="countdown__label">Minutes</span>
+              <p class="card__head">
+                <span class="card__name">Sunday 03</span>
+                <span class="card__note micro">Farewell</span>
+              </p>
+              <figure class="slot slot--portrait" data-slot="weekend-03">
+                <img
+              loading="lazy"
+              decoding="async"
+                  src="img/photo-placeholder-landscape.svg"
+                  alt=""
+                  width="800"
+                  height="600"
+                />
+              </figure>
             </li>
           </ul>
-        </div>
-      </section>
+        </section>
+      </main>
 
-      <!-- ----------------------------------------------------------- salem -->
-      <section class="section section--tint" id="salem">
-        <div class="container">
-          <div class="row justify-content-center text-center">
-            <div class="col-lg-8">
-              <p class="eyebrow mb-0">Where to find us</p>
-              <h2 class="section-title">Salem, Massachusetts</h2>
-              <img
-                class="divider mb-4"
-                src="img/frames/sprig-divider.svg"
-                alt=""
-                width="260"
-                height="36"
-              />
-              <p>
-                The Peabody Essex Museum sits in the middle of downtown Salem,
-                about a half hour north of Boston and a short walk from the
-                commuter rail. Hotel blocks, parking notes and a few of our
-                favorite places to eat will land on this page well before the
-                weekend.
-              </p>
-              <p class="mb-4">
-                <a
-                  href="https://www.pem.org/visit"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  >Visiting the museum</a
-                >
-              </p>
-              <a class="btn btn-garden btn-garden-outline" href="#rsvp"
-                >RSVP opens closer to the date</a
-              >
-            </div>
-          </div>
-        </div>
-      </section>
-    </main>
-
-    <footer class="wed-footer" id="rsvp">
-      <div class="container">
-        <p class="script mb-1" style="font-size: 2.4rem">We can't wait</p>
-        <h2>Jared &amp; Hannah</h2>
-        <p class="wed-footer__meta">
-          July 17, 2027 &middot; Peabody Essex Museum &middot; Salem, MA
+      <!-- ------------------------------------------------------- footer -->
+      <footer class="panel panel--ink footer detached" id="rsvp">
+        <p class="micro" style="color: rgba(244, 242, 237, 0.62)">
+          Saturday, the seventeenth of July
         </p>
-        <p class="wed-footer__meta mt-3">
+        <p class="footer__names">Hannah <span class="amp">&amp;</span> <span class="sw">J</span>ared</p>
+        <p class="micro footer__meta" style="color: rgba(244, 242, 237, 0.62)">
+          Peabody Essex Museum &middot; Salem, Massachusetts
+        </p>
+        <p class="micro footer__meta" style="color: rgba(244, 242, 237, 0.62)">
           <a href="../">antisocialistic.com</a>
         </p>
-      </div>
-    </footer>
-
-    <script>
-      // The framed first screen carries no text but the names, so the navbar
-      // stays hidden over it and fades in — solid — as the hero scrolls away.
-      (function () {
-        var nav = document.getElementById("wedNav");
-        var hero = document.getElementById("top");
-        var onScroll = function () {
-          var after = hero ? hero.offsetHeight - 80 : 40;
-          nav.classList.toggle("is-stuck", window.scrollY > after);
-        };
-        window.addEventListener("scroll", onScroll, { passive: true });
-        window.addEventListener("resize", onScroll);
-        onScroll();
-      })();
-
-      // Collapse toggle. Bootstrap's collapse CSS keys off .show, so this is the
-      // only behaviour we need from its JS — cheaper than pulling in jQuery.
-      (function () {
-        var btn = document.getElementById("wedNavToggle");
-        var menu = document.getElementById("wedNavItems");
-
-        var setOpen = function (open) {
-          menu.classList.toggle("show", open);
-          btn.setAttribute("aria-expanded", open ? "true" : "false");
-        };
-
-        btn.addEventListener("click", function () {
-          setOpen(!menu.classList.contains("show"));
-        });
-
-        // Tapping a link on mobile should close the menu behind it.
-        menu.addEventListener("click", function (e) {
-          if (e.target.tagName === "A") setOpen(false);
-        });
-      })();
-
-      // Countdown to July 17, 2027 (local time). Month is zero-based.
-      (function () {
-        var target = new Date(2027, 6, 17, 0, 0, 0);
-        var out = {
-          days: document.getElementById("cdDays"),
-          hours: document.getElementById("cdHours"),
-          minutes: document.getElementById("cdMinutes"),
-        };
-
-        function tick() {
-          var ms = target - new Date();
-          if (ms <= 0) {
-            document.getElementById("countdownList").innerHTML =
-              '<li><span class="countdown__value">Today</span>' +
-              '<span class="countdown__label">Is the day</span></li>';
-            return;
-          }
-          var minutes = Math.floor(ms / 60000);
-          out.days.textContent = Math.floor(minutes / 1440);
-          out.hours.textContent = Math.floor(minutes / 60) % 24;
-          out.minutes.textContent = minutes % 60;
-        }
-
-        tick();
-        setInterval(tick, 30000);
-      })();
-    </script>
+      </footer>
+    </div>
   </body>
 </html>

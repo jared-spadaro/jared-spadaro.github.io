@@ -1,560 +1,397 @@
 /* ==========================================================================
-   Jared & Hannah — wedding theme
-   Layered on top of Bootstrap 4.5.3 (../../bootstrap/css/bootstrap.min.css).
-   Palette: muted garden red, dusty blue and deep green on warm parchment.
+   Jared & Hannah — /wedding
+   A "garden editorial" layout: a narrow column of cream and ink panels
+   floating over a full-bleed photograph, set entirely in one high-contrast
+   Garamond with calligraphic swash initials.
+
+   Sections in source order:
+     1. Tokens
+     2. Base + helpers
+     3. Photo slots      <- the bit you touch when swapping in real photos
+     4. Column + panels
+     5. Nav
+     6. Hero
+     7. Creed band
+     8. Duo (photo | plate)
+     9. Menu block
+    10. Verse
+    11. Weekend cards
+    12. Footer
+    13. Responsive
    ========================================================================== */
 
+/* ------------------------------------------------------------- 1. tokens - */
 :root {
-  /* Greens — foliage */
-  --green-900: #2c4436;
-  --green-700: #3e5c4b;
-  --green-500: #5f7f63;
-  --green-300: #93ac8b;
-  --green-100: #dce5d6;
+  --cream: #eeede9;        /* the panels                                     */
+  --cream-dim: #e3dfdc;    /* the nav bar, one step darker                   */
+  --ink: #171717;          /* the black band, and all type                   */
+  --ink-soft: #4a4844;     /* micro labels                                   */
+  --light: #f4f2ed;        /* type on ink                                    */
+  --ghost: rgba(23, 23, 23, 0.16); /* the oversized watermark verse          */
+  --rule: rgba(23, 23, 23, 0.22);
 
-  /* Reds — muted brick / dried rose */
-  --red-700: #8b4438;
-  --red-500: #9c5348;
-  --red-300: #c08a7e;
-  --red-100: #f0dfd9;
+  --serif: "Cormorant Garamond", "Cormorant", Garamond, "Times New Roman", serif;
+  --swash: "Pinyon Script", "Cormorant Garamond", cursive;
 
-  /* Blues — dusty hydrangea */
-  --blue-700: #46647a;
-  --blue-500: #5c7a91;
-  --blue-300: #9db2c0;
-  --blue-100: #dfe6ea;
-
-  /* Neutrals */
-  --cream: #fbf7ef;
-  --cream-2: #f4ecdf;
-  --brass: #bc9e6a;
-  --ink: #2c352e;
-  --ink-soft: #5a675e;
-
-  --serif: "Cormorant Garamond", Georgia, "Times New Roman", serif;
-  --sans: "Lato", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
-  --script: "Parisienne", "Cormorant Garamond", cursive;
-  --display: "Abril Fatface", Georgia, "Times New Roman", serif;
-
-  /* Outer wood of the hero frame, sampled from dark-wooden-frame-border.webp. */
-  --frame-wood: #542f12;
+  --col: 1180px;           /* width of the floating column                   */
+  --gap: 10px;             /* background shows through between panels        */
+  --pad: clamp(1.5rem, 4vw, 3.25rem);
 }
 
-/* --------------------------------------------------------------- base ---- */
+/* --------------------------------------------------------- 2. base + help - */
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
 
 body {
-  background-color: var(--cream);
-  color: var(--ink);
-  font-family: var(--sans);
-  font-weight: 300;
-  font-size: 1.0625rem;
-  line-height: 1.75;
-  -webkit-font-smoothing: antialiased;
-}
-
-h1, h2, h3, h4, .display-name {
+  margin: 0;
   font-family: var(--serif);
   font-weight: 300;
-  color: var(--green-900);
-  letter-spacing: 0.02em;
-}
-
-a {
-  color: var(--red-700);
-  text-decoration: none;
-  transition: color 0.2s ease;
-}
-
-a:hover, a:focus {
-  color: var(--red-500);
-  text-decoration: none;
-}
-
-/* Small caps label used above section headings and on nav links. */
-.eyebrow {
-  font-family: var(--sans);
-  font-weight: 400;
-  font-size: 0.72rem;
-  letter-spacing: 0.3em;
-  text-transform: uppercase;
-  color: var(--blue-700);
-}
-
-.script {
-  font-family: var(--script);
-  font-weight: 400;
-  color: var(--red-500);
-  letter-spacing: 0;
-}
-
-.section {
-  padding: 5.5rem 0;
-}
-
-.section--tint {
-  background-color: var(--cream-2);
-}
-
-.section-title {
-  font-size: clamp(2rem, 4.5vw, 2.9rem);
-  margin: 0.6rem 0 0;
-}
-
-.divider {
-  display: block;
-  width: 200px;
-  max-width: 60%;
-  height: auto;
-  margin: 1.5rem auto 0;
-}
-
-/* ------------------------------------------------------------- navbar ---- */
-
-/*
- * The hero is a framed photograph with nothing on it but the two names, so the
- * bar is hidden while it is in view and appears — solid — once you scroll past.
- * .is-stuck is toggled in index.html against the hero's height.
- */
-.wed-nav {
-  background-color: transparent;
-  padding: 1.35rem 0;
-  opacity: 0;
-  visibility: hidden;
-  transition: background-color 0.3s ease, padding 0.3s ease, box-shadow 0.3s ease,
-    opacity 0.3s ease, visibility 0.3s ease;
-}
-
-.wed-nav.is-stuck {
-  background-color: rgba(251, 247, 239, 0.96);
-  padding: 0.65rem 0;
-  box-shadow: 0 1px 0 rgba(44, 68, 54, 0.12);
-  opacity: 1;
-  visibility: visible;
-}
-
-/* Keyboard users still need to reach the links while the bar is hidden. */
-.wed-nav:focus-within {
-  opacity: 1;
-  visibility: visible;
-  background-color: rgba(251, 247, 239, 0.96);
-}
-
-.wed-nav .navbar-brand {
-  font-family: var(--serif);
-  font-size: 1.3rem;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: var(--green-900);
-}
-
-.wed-nav .nav-link {
-  font-size: 0.74rem;
-  font-weight: 400;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: var(--green-700);
-  padding: 0.5rem 0.95rem;
-}
-
-.wed-nav .nav-link:hover,
-.wed-nav .nav-link.active {
-  color: var(--red-500);
-}
-
-.wed-nav .nav-link.disabled {
-  color: var(--green-300);
-}
-
-/* Bootstrap's default toggler icon is a dark-on-light bitmap; swap in ours. */
-.wed-nav .navbar-toggler {
-  border-color: rgba(62, 92, 75, 0.35);
-  padding: 0.35rem 0.55rem;
-}
-
-.wed-nav .navbar-toggler-icon {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30'%3E%3Cpath stroke='%233e5c4b' stroke-width='2' stroke-linecap='round' d='M4 8h22M4 15h22M4 22h22'/%3E%3C/svg%3E");
-}
-
-@media (max-width: 991.98px) {
-  /* Collapsed menu needs its own ground, since the bar itself is transparent. */
-  .wed-nav .navbar-collapse {
-    background-color: rgba(251, 247, 239, 0.98);
-    margin-top: 0.9rem;
-    padding: 0.6rem 0.25rem;
-    border-top: 1px solid rgba(62, 92, 75, 0.15);
-    border-bottom: 1px solid rgba(62, 92, 75, 0.15);
-  }
-}
-
-/* --------------------------------------------------------------- hero ---- */
-
-/*
- * The first screen is three nested layers filling the viewport:
- *
- *   .hero        wooden moulding, drawn as the element's border-image
- *   .hero__mat   the paper ground, a spacer between moulding and photograph
- *   .hero__plate the photograph's box, --photo-scale of the mat's opening
- *   .hero__photo the photograph itself
- *
- * dark-wooden-frame-border.webp is dark-wooden-frame.png cropped to the
- * largest rectangle whose entire perimeter is solid wood (1800x1400 ->
- * 1643x1242, origin 95,81). Two things make that crop necessary. The source
- * carries a drop shadow — 33px to the right and 53px below the wood — which
- * the crop discards, so the moulding runs off the edges of the screen with no
- * shadow visible. The source is also very slightly rotated, so its corners are
- * neither square nor axis-aligned; cropping to the solid-wood rectangle is
- * what lets border-image treat it as a clean rectangular frame.
- *
- * Within the crop the wood measures 125 / 147 / 148 / 108 px on the top /
- * right / bottom / left edges — those are the border-image-slice values. They
- * are uneven because the photographed frame is in slight perspective. No
- * `fill` keyword, so the middle slice — which holds the moulding's inner
- * shadow — is dropped, and .hero__mat covers that area instead.
- *
- * Bootstrap's reboot puts everything in border-box, so the border is drawn
- * inside the 100svh and .hero__mat's `inset: 0` resolves against the padding
- * box — i.e. exactly the opening the moulding leaves behind.
- */
-.hero {
-  --frame-w: clamp(24px, 6.5vmin, 90px);
-  --mat-w: clamp(14px, 3.2vmin, 52px);
-  /* The photograph is shrunk 40%; the paper shows through the rest. */
-  --photo-scale: 75%;
-
-  position: relative;
-  height: 100vh;
-  height: 100svh;
-  min-height: 26rem;
-  padding: 0;
-  overflow: hidden;
-  border-style: solid;
-  border-width: var(--frame-w);
-  border-color: transparent;
-  border-image: url("../img/frames/dark-wooden-frame-border.webp") 125 147 148 108 /
-    var(--frame-w) stretch;
-
-  /* Backstop under the border-image, so subpixel scaling can never open a
-     hairline of page background between the moulding and the screen edge. */
-  background-color: var(--frame-wood);
-}
-
-/*
- * The paper ground. Fills the frame's opening and centres the photograph in
- * it, so every part of the opening the photo does not cover shows paper.
- */
-.hero__mat {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  padding: var(--mat-w);
-  background: url("../img/picture-background.jpg") center / cover no-repeat;
-}
-
-/*
- * The photograph, at --photo-scale of the opening. It keeps the opening's
- * aspect ratio, so shrinking it widens the paper margin evenly on all four
- * sides rather than re-cropping the photo.
- */
-.hero__plate {
-  position: relative;
-  width: var(--photo-scale);
-  height: var(--photo-scale);
-}
-
-.hero__photo {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-}
-
-/*
- * Sits over the sky: the horizon is about 36% down the photo, and `cover`
- * keeps it in the lower two thirds at every viewport ratio we care about.
- * Anchored to .hero__plate, not the frame, so it tracks the photo as it
- * shrinks instead of drifting up onto the paper.
- */
-.hero__names {
-  position: absolute;
-  top: 11%;
-  left: 0;
-  right: 0;
-  z-index: 1;
-  margin: 0;
-  padding: 0 5%;
-  font-family: var(--display);
-  font-weight: 400;
-  /* Scaled with the plate, which is --photo-scale of the viewport less the
-     frame and paper margins; 4.6vw keeps the names inside the photo's width. */
-  font-size: clamp(1.1rem, 4.6vw, 3.6rem);
-  line-height: 1.15;
-  letter-spacing: 0.01em;
-  text-align: center;
-  color: #fff;
-}
-
-/* ----------------------------------------------------- picture frames ---- */
-
-/*
- * Three reusable frames. Each expects a single <img> child; the img is set to
- * `object-fit: cover`, so any photo of roughly the right ratio works.
- */
-
-.pf {
-  position: relative;
-  margin: 0 auto;
-  max-width: 100%;
-}
-
-.pf img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.pf__caption {
-  margin-top: 1.5rem;
-  text-align: center;
-  font-family: var(--serif);
-  font-size: 1.05rem;
-  font-style: italic;
-  color: var(--ink-soft);
-}
-
-/* The overlay frames sit on top of the photo and never intercept clicks. */
-.pf__frame {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-}
-
-/*
- * The photo is inset by offsetting .pf__photo, not the <img> itself, and not
- * with percentage padding on the figure. Both of those shortcuts break the
- * geometry: an absolutely positioned *replaced* element resolves `width: auto`
- * to its intrinsic width and discards the opposing offset (which overflows the
- * page), while percentage padding resolves against the *parent's* width rather
- * than the figure's. Offsets on a plain wrapper resolve against the figure —
- * its padding box — which is what the SVG openings were drawn against.
- */
-.pf__photo {
-  position: absolute;
-  display: block;
-  overflow: hidden;
-  box-shadow: 0 6px 24px rgba(44, 68, 54, 0.16);
-}
-
-/* 1. Ornate botanical frame — the SVG *is* the border, so it adapts to
-      whatever aspect ratio the photo has. Best with landscape shots. */
-.pf--ornate {
-  max-width: 34rem;
-}
-
-.pf--ornate img {
-  height: auto;
-  border-style: solid;
-  border-width: clamp(26px, 7vw, 46px);
-  border-color: transparent;
-  border-image: url("../img/frames/frame-ornate.svg") 100 / clamp(26px, 7vw, 46px) / 0 round;
-}
-
-/* 2. Wreath frame — square figure, circular photo inset 12%, so the photo and
-      the wreath ring stay concentric at every size. */
-.pf--wreath {
-  width: 100%;
-  max-width: 26rem;
-  aspect-ratio: 1 / 1;
-}
-
-.pf--wreath .pf__photo {
-  inset: 12%;
-  border-radius: 50%;
-}
-
-/* 3. Arch frame — 3:4 figure. The 12-unit opening of the 300x400 artwork is
-      4% of its width and 3% of its height; the border-radius then reproduces
-      the SVG arch (radius 138 of the 276x376 opening => 50% / 36.7%). */
-.pf--arch {
-  width: 100%;
-  max-width: 22rem;
-  aspect-ratio: 3 / 4;
-}
-
-.pf--arch .pf__photo {
-  inset: 3% 4%;
-  border-radius: 50% 50% 4px 4px / 36.7% 36.7% 4px 4px;
-}
-
-/* ------------------------------------------------------------ details ---- */
-
-.detail-card {
-  height: 100%;
-  background-color: var(--cream);
-  border: 1px solid rgba(62, 92, 75, 0.18);
-  padding: 2.5rem 1.75rem;
-  text-align: center;
-}
-
-.detail-card__icon {
-  width: 2.4rem;
-  height: 2.4rem;
-  margin: 0 auto 1.1rem;
-  color: var(--green-500);
-}
-
-.detail-card h3 {
-  font-size: 1.5rem;
-  margin-bottom: 0.65rem;
-}
-
-.detail-card p {
-  margin-bottom: 0;
-  color: var(--ink-soft);
-}
-
-.detail-card p strong {
-  font-weight: 400;
   color: var(--ink);
+  /* A deep moss wash over the paper texture: the grain survives, the acid
+     green does not, and the cream panels read warm against it. */
+  background:
+    linear-gradient(rgba(47, 53, 40, 0.76), rgba(47, 53, 40, 0.76)),
+    url("../img/picture-background.jpg") center / cover fixed no-repeat,
+    #4c5734;
 }
 
-/* ---------------------------------------------------------- countdown ---- */
+img { display: block; max-width: 100%; }
 
-.countdown {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 1rem 2.75rem;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
+/* <main> is only a landmark here — its sections are laid out by .column. */
+main { display: contents; }
 
-.countdown li {
-  min-width: 5.5rem;
-}
+a { color: inherit; text-decoration: none; }
 
-.countdown__value {
-  display: block;
-  font-family: var(--serif);
-  font-size: clamp(2.4rem, 7vw, 3.6rem);
-  line-height: 1.1;
-  color: var(--green-900);
-}
-
-.countdown__label {
-  display: block;
-  font-size: 0.68rem;
-  letter-spacing: 0.26em;
-  text-transform: uppercase;
-  color: var(--blue-700);
-}
-
-/* -------------------------------------------------------------- venue ---- */
-
-.venue-quote {
-  font-family: var(--serif);
-  font-size: clamp(1.25rem, 3.4vw, 1.75rem);
-  font-style: italic;
-  line-height: 1.6;
-  color: var(--green-700);
-}
-
-.btn-garden {
-  font-family: var(--sans);
-  font-size: 0.74rem;
-  font-weight: 400;
-  letter-spacing: 0.24em;
-  text-transform: uppercase;
-  color: var(--cream);
-  background-color: var(--green-700);
-  border: 1px solid var(--green-700);
-  border-radius: 0;
-  padding: 0.85rem 2.1rem;
-  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
-}
-
-.btn-garden:hover, .btn-garden:focus {
-  color: var(--cream);
-  background-color: var(--red-700);
-  border-color: var(--red-700);
-}
-
-/* Pair with .btn-garden in the markup: .btn-garden.btn-garden-outline */
-.btn-garden-outline {
-  color: var(--green-700);
-  background-color: transparent;
-  border: 1px solid var(--brass);
-}
-
-.btn-garden-outline:hover, .btn-garden-outline:focus {
-  color: var(--cream);
-  background-color: var(--green-700);
-  border-color: var(--green-700);
-}
-
-/* ------------------------------------------------------------- footer ---- */
-
-.wed-footer {
-  background-color: var(--green-900);
-  color: var(--green-100);
-  padding: 4rem 0 2.5rem;
-  text-align: center;
-}
-
-.wed-footer h2 {
-  color: var(--cream);
-  font-size: clamp(1.9rem, 5vw, 2.6rem);
-  margin: 0;
-}
-
-.wed-footer .script {
-  color: var(--red-300);
-}
-
-.wed-footer__meta {
-  font-size: 0.72rem;
-  letter-spacing: 0.24em;
-  text-transform: uppercase;
-  color: var(--green-300);
-  margin: 1.75rem 0 0;
-}
-
-.wed-footer a {
-  color: var(--green-100);
-  border-bottom: 1px solid rgba(220, 229, 214, 0.35);
-}
-
-.wed-footer a:hover {
-  color: #fff;
-}
-
-/* ----------------------------------------------------------- a11y ------- */
-
-@media (prefers-reduced-motion: reduce) {
-  * {
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
-}
+/* Every heading on this page is a tracked, all-caps line of the same face;
+   only the size changes. */
+h1, h2, h3, p, figure, ul { margin: 0; }
 
 .skip-link {
   position: absolute;
   left: -9999px;
   top: 0;
-  z-index: 1100;
+  background: var(--cream);
+  color: var(--ink);
+  padding: 0.6rem 1rem;
+  z-index: 99;
+}
+.skip-link:focus { left: 0; }
+
+:focus-visible { outline: 1px solid var(--ink); outline-offset: 3px; }
+
+/* The calligraphic initial. It sits on the same baseline as the roman caps
+   beside it, so it needs its own size and a tuck on both sides. */
+.sw {
+  font-family: var(--swash);
+  font-weight: 400;
+  /* Pinyon's caps are 0.68em tall against Cormorant's 0.625em, so 1.45em
+     lands the swash about half again the height of the roman caps beside it —
+     the proportion the reference uses. */
+  font-size: 1.45em;
+  line-height: 0;
+  letter-spacing: 0;
+  /* The entry flourish overhangs the origin; give it room on the left and
+     claw the gap back on the right. */
+  margin-inline: 0.16em -0.02em;
 }
 
-.skip-link:focus {
-  left: 1rem;
-  top: 1rem;
-  padding: 0.6rem 1rem;
-  background: var(--cream);
-  border: 1px solid var(--green-700);
+/* Ampersand set in the text face's italic, not the script. */
+.amp {
+  font-style: italic;
+  font-weight: 400;
+}
+
+/* Tiny tracked caps: nav items, plate labels, card kickers. */
+.micro {
+  font-size: clamp(0.5rem, 0.86vw, 0.66rem);
+  letter-spacing: 0.34em;
+  text-indent: 0.34em;      /* tracking adds space after the last letter too */
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  line-height: 1.6;
+}
+
+/* ------------------------------------------------------- 3. photo slots --- *
+ * EVERY photograph on this page is one of these. To swap one, change the
+ * <img src> and nothing else: the figure owns the aspect ratio and the image
+ * is cropped to fill it, so a source of any size or ratio still works.
+ * ------------------------------------------------------------------------- */
+.slot {
+  position: relative;
+  overflow: hidden;
+  background: #cfcdc6;      /* shows while the photo loads */
+}
+.slot > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;        /* crop to fill, never distort */
+  object-position: center;  /* per-slot override below if a face is off-centre */
+}
+
+.slot--hero    { aspect-ratio: 11 / 12; }
+.slot--square  { aspect-ratio: 1 / 1; }
+.slot--tall    { aspect-ratio: 5 / 6; }
+.slot--portrait{ aspect-ratio: 3 / 4; }
+
+/* Slots that have to match a neighbouring panel's height instead of their
+   own ratio. */
+.slot--fill { aspect-ratio: auto; height: 100%; min-height: 100%; }
+
+/* ----------------------------------------------------- 4. column + panels - */
+.column {
+  width: min(var(--col), 92vw);
+  margin-inline: auto;
+  padding-block: clamp(1.25rem, 3vw, 2.75rem);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Blocks that float clear of the stack above, with the background showing
+   through the seam. */
+.detached { margin-top: var(--gap); }
+
+.panel { background: var(--cream); }
+.panel--ink { background: var(--ink); color: var(--light); }
+
+/* Two equal columns, edge to edge, no gutter — the template butts its
+   photographs straight up against each other. */
+.split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+/* ------------------------------------------------------------- 5. nav ----- */
+.nav {
+  background: var(--cream-dim);
+  display: flex;
+  justify-content: center;
+}
+.nav ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.nav li + li { border-left: 1px solid var(--rule); }
+.nav a {
+  display: block;
+  padding: 0.85rem clamp(0.9rem, 2.4vw, 2.1rem);
+  transition: color 0.2s ease;
+}
+.nav a:hover,
+.nav a[aria-current="page"] { color: var(--ink); }
+
+/* ------------------------------------------------------------ 6. hero ----- */
+/* The column stops growing at --col while the viewport keeps going, so the
+   names are sized against the hero's own width, not the viewport's. */
+.hero {
+  position: relative;
+  container-type: inline-size;
+}
+
+/* The names are set in white across both photographs, so each one carries a
+   scrim. It keeps the title legible whatever photo gets dropped in later. */
+.hero .slot::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(18, 20, 15, 0.42),
+    rgba(18, 20, 15, 0.2) 45%,
+    rgba(18, 20, 15, 0.44)
+  );
+}
+.hero__names {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  margin: 0;
+  padding: 19% 1rem 0;
+  font-size: clamp(1.3rem, 6.2vw, 4.6rem);  /* fallback: no container queries */
+  font-size: clamp(1.3rem, 5.6cqw, 4.6rem);
+  font-weight: 300;
+  letter-spacing: 0.055em;
+  text-indent: 0.055em;
+  text-transform: uppercase;
+  color: rgba(246, 244, 239, 0.94);
+  text-shadow: 0 1px 24px rgba(0, 0, 0, 0.32);
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+/* ------------------------------------------------------- 7. creed band ---- */
+.creed {
+  text-align: center;
+  padding: clamp(2rem, 5vw, 3.6rem) var(--pad);
+}
+.creed p {
+  font-size: clamp(0.95rem, 2.15vw, 1.7rem);
+  line-height: 1.32;
+  letter-spacing: 0.055em;
+  text-transform: uppercase;
+  color: rgba(244, 242, 237, 0.92);
+}
+
+/* ------------------------------------------------------------- 8. duo ----- */
+/* A full-height photograph beside a cream plate that mats a second, smaller
+   photograph and labels it on all four sides. */
+.plate {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(1.1rem, 2.6vw, 2rem);
+  padding: clamp(2rem, 4.5vw, 3.75rem) clamp(2.5rem, 7vw, 5.5rem);
+}
+.plate__photo { width: min(62%, 320px); }
+.plate__label--side {
+  position: absolute;
+  top: 50%;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg) translateY(50%);  /* reads bottom-to-top */
+  white-space: nowrap;
+}
+.plate__label--left { left: clamp(0.7rem, 2vw, 1.6rem); }
+.plate__label--right { right: clamp(0.7rem, 2vw, 1.6rem); }
+
+/* ------------------------------------------------------- 9. menu block ---- */
+.menu {
+  padding: clamp(0.7rem, 1.6vw, 1.1rem);
+}
+.menu__inner {
+  border: 1px solid var(--rule);
+  padding: clamp(1.6rem, 3.6vw, 2.9rem) var(--pad);
+  text-align: center;
+}
+.menu__inner p {
+  font-size: clamp(1.05rem, 2.5vw, 2rem);
+  line-height: 1.4;
+  letter-spacing: 0.045em;
+  text-transform: uppercase;
+}
+.menu__inner a { transition: opacity 0.2s ease; }
+.menu__inner a:hover { opacity: 0.55; }
+.menu__sep { padding-inline: 0.5em; color: var(--ink-soft); }
+
+/* ------------------------------------------------------------ 10. verse --- */
+/* Oversized watermark type, clipped by the panel, with a small photograph
+   floated over the middle of it. */
+.verse {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: clamp(20rem, 42vw, 34rem);
+  padding: clamp(1.5rem, 3vw, 2.5rem);
+}
+.verse__text {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: clamp(1rem, 2.5vw, 2rem);
+  font-size: clamp(1.4rem, 3.6vw, 2.9rem);
+  line-height: 1.22;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--ghost);
+}
+.verse__photo {
+  position: relative;
+  width: min(52%, 250px);
+}
+
+/* --------------------------------------------------- 11. weekend cards ---- */
+.weekend {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: clamp(1rem, 3vw, 2.5rem);
+  padding: clamp(1.5rem, 3vw, 2.5rem);
+}
+.weekend__title {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);          /* reads bottom-to-top */
+  font-size: clamp(2.4rem, 6vw, 4.6rem);
+  font-weight: 300;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  line-height: 1;
+  align-self: end;
+}
+.weekend__cards {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(0.5rem, 1.4vw, 1rem);
+  align-self: end;
+  width: min(100%, 34rem);
+  margin-left: auto;
+}
+.card__head {
+  text-align: right;
+  margin-bottom: 0.5rem;
+}
+.card__name {
+  display: block;
+  font-size: clamp(0.62rem, 1.15vw, 0.9rem);
+  letter-spacing: 0.16em;
+  text-indent: 0.16em;
+  text-transform: uppercase;
+}
+.card__note { display: block; }
+
+/* ----------------------------------------------------------- 12. footer --- */
+.footer {
+  text-align: center;
+  padding: clamp(2.2rem, 5vw, 4rem) var(--pad);
+}
+.footer__names {
+  font-size: clamp(1.4rem, 3.4vw, 2.6rem);
+  font-weight: 300;
+  letter-spacing: 0.08em;
+  text-indent: 0.08em;
+  text-transform: uppercase;
+}
+.footer__meta { margin-top: 0.9rem; }
+.footer__meta a { border-bottom: 1px solid var(--rule); }
+
+/* ------------------------------------------------------- 13. responsive --- */
+@media (max-width: 720px) {
+  :root { --gap: 8px; }
+
+  /* Every two-up becomes a stack. The duo's photograph keeps a real ratio
+     again now that it has no sibling to match. */
+  .split { grid-template-columns: 1fr; }
+  .slot--fill { aspect-ratio: 5 / 6; height: auto; min-height: 0; }
+
+  .plate__label--side { display: none; }  /* no room beside the mat */
+
+  .weekend { grid-template-columns: 1fr; }
+  .weekend__title {
+    writing-mode: horizontal-tb;
+    transform: none;
+    align-self: start;
+  }
+  .weekend__cards { width: 100%; margin-left: 0; }
+
+  /* The bar wraps to two rows down here; a left rule on the first item of
+     the second row would read as a stray tick, so the rules come off. */
+  .nav li + li { border-left: 0; }
+  .nav a { padding-inline: 0.75rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; }
 }

@@ -1,86 +1,92 @@
 # /wedding
 
-Jared &amp; Hannah — July 17, 2027, Peabody Essex Museum, Salem MA.
+Hannah &amp; Jared — July 17, 2027, Peabody Essex Museum, Salem MA.
 
 Served straight off GitHub Pages at `https://www.antisocialistic.com/wedding/`.
-Plain static HTML: no build step, no framework. It reuses the Bootstrap 4.5.3
-already vendored at the repo root (`../bootstrap/`) and adds one stylesheet of
-its own. There is no JS dependency — the navbar toggle and countdown are a
-dozen lines of vanilla script at the bottom of `index.html`.
+Plain static HTML: no build step, no framework, no JavaScript, and no Bootstrap
+— the layout is a handful of CSS grids.
 
 ```
 wedding/
-  index.html            the home page
-  css/wedding.css       theme tokens, layout, picture-frame classes
-  img/frames/*.svg      the reusable picture frames
-  img/photo-*.svg       placeholders, meant to be replaced with real photos
+  index.html            the whole page
+  css/wedding.css       tokens, layout, photo slots
+  img/                  photographs and placeholders
 ```
 
-## Palette
+## The look
 
-Muted garden red, dusty blue and deep green on warm parchment. All of it lives
-in CSS custom properties at the top of `css/wedding.css` (`--green-700`,
-`--red-500`, `--blue-500`, `--cream`, …). Change them there and the whole page
-follows.
+A "garden editorial" layout, reproduced from `img/garden-theme.jpg`: a narrow
+column of cream and ink panels floating over a full-bleed paper texture, with
+the background showing through the seams between the lower blocks.
+
+Two typefaces do all of it:
+
+| Role | Face | Where |
+| --- | --- | --- |
+| Everything | Cormorant Garamond 300/400 | headings, nav, labels, body |
+| Swash initials only | Pinyon Script | the `.sw` span — one letter at a time |
+
+`.sw` is the whole trick. It sets a single capital in the script face at
+`1.45em`, which lands it about half again the height of the roman capitals
+beside it — the proportion the reference uses. Pinyon's entry flourish
+overhangs its origin, so the class pads the left and claws the gap back on the
+right; if you move a swash onto a letter with a different flourish (`C`, `A`,
+`M`) you may want to nudge `margin-inline`.
+
+The palette is four custom properties at the top of `css/wedding.css`
+(`--cream`, `--cream-dim`, `--ink`, `--light`). The background is
+`picture-background.jpg` under a deep-moss wash — the paper grain survives, the
+acid green does not. Change the wash in the `body` rule.
 
 ## Swapping in real photos
 
-Each frame wants a photo at a particular aspect ratio. Drop the file in `img/`
-and change the `src` — nothing else needs touching, and `object-fit: cover`
-absorbs small ratio mismatches.
+**Every photograph on the page is one `<figure class="slot">` holding one
+`<img>`. To use a real photo, drop the file in `img/` and change that one
+`src`.** Nothing else needs touching: the figure owns the aspect ratio and the
+image is `object-fit: cover`, so a source of any size or ratio still works — it
+just gets cropped to fill.
 
-| Frame | Class | Ratio | Placeholder to replace |
+Each figure carries a `data-slot` name so you can find it:
+
+| `data-slot` | Ratio | Where it appears | Currently |
 | --- | --- | --- | --- |
-| Garden arch | `pf pf--arch` | 3:4 portrait | `photo-placeholder-arch.svg` |
-| Leaf wreath | `pf pf--wreath` | 1:1 square | `photo-placeholder-square.svg` |
-| Ornate botanical | `pf pf--ornate` | any (landscape suits it) | `photo-placeholder-landscape.svg` |
+| `hero-left` | 11:12 | first screen, left half | `photo-placeholder-landscape.svg` |
+| `hero-right` | 11:12 | first screen, right half | `hannah-jared-beach.jpg` |
+| `duo-photo` | fills its row | tall photo beside the cream plate | `photo-placeholder-arch.svg` |
+| `plate-portrait` | 3:4 | matted portrait on the cream plate | `photo-placeholder-square.svg` |
+| `verse-inset` | 3:4 | small photo floated over the verse | `photo-placeholder-square.svg` |
+| `verse-photo` | fills its row | tall photo beside the verse | `photo-placeholder-landscape.svg` |
+| `weekend-01` | 3:4 | Friday card | `photo-placeholder-arch.svg` |
+| `weekend-02` | 3:4 | Saturday card | `photo-placeholder-square.svg` |
+| `weekend-03` | 3:4 | Sunday card | `photo-placeholder-landscape.svg` |
 
-The arch and wreath are overlay frames — the SVG sits on top of the photo:
+The same table is repeated as a comment just above `<body>` in `index.html`.
 
-```html
-<figure class="pf pf--arch">
-  <span class="pf__photo"><img src="img/us-at-the-pem.jpg" alt="Jared and Hannah" /></span>
-  <img class="pf__frame" src="img/frames/frame-arch.svg" alt="" />
-</figure>
-```
+Two notes:
 
-The ornate one is a real CSS `border-image`, so it needs no overlay and stretches
-to whatever ratio the photo happens to be:
+- **`fills its row` means no ratio at all.** `.slot--fill` sets
+  `aspect-ratio: auto; height: 100%` so the photograph stretches to whatever
+  height the cream panel beside it ends up being. Give those two slots a
+  reasonably tall source — a portrait or a square crops best. Below 720px the
+  panels stack and the class falls back to 5:6 so the photo still has a shape.
+- **If a face sits off-centre in the crop**, add
+  `object-position: 50% 30%` (or wherever) to that one `<img>`. That is the
+  only per-photo tuning the layout should ever need.
 
-```html
-<figure class="pf pf--ornate">
-  <img src="img/us-in-the-garden.jpg" alt="Jared and Hannah" />
-</figure>
-```
+The two remaining placeholders that ship with the page —
+`photo-placeholder-*.svg` — are just washes with "PHOTO COMING SOON" on them.
+They are meant to be replaced; nothing in the CSS depends on them.
 
-## Two things to know before editing the frames
+## The hero scrim
 
-Both are load-bearing, and both are easy to break by accident.
-
-**The overlay frames align by proportion, not by pixel.** `frame-arch.svg` is a
-300×400 drawing whose photo opening is inset 12 units on every side; the figure
-is locked to `aspect-ratio: 3 / 4` and the photo is inset `3% 4%` (12/400 and
-12/300) with a `border-radius` that reproduces the SVG's arch. Because both the
-SVG and the photo scale uniformly, they stay aligned at every size. Change the
-inset in one place and you have to change it in the other. The wreath works the
-same way at `inset: 12%` of a square.
-
-Note the inset lives on the `.pf__photo` wrapper, not on the `<img>` and not as
-percentage padding on the figure. Neither shortcut works: an absolutely
-positioned *replaced* element resolves `width: auto` to its intrinsic width and
-throws away the opposing offset (which overflows the page), and percentage
-padding resolves against the *parent's* width rather than the figure's.
-
-**`frame-ornate.svg` is sliced into nine tiles.** `border-image ... 100` cuts the
-300×300 drawing on the 100-unit grid: four corner tiles carry the leaf sprays,
-four edge tiles carry a vine that repeats (`round`), and the centre is dropped.
-Any artwork that crosses a slice boundary gets cut in half, so ornaments must
-stay inside their own tile. The straight rules are drawn as full-width `rect`s
-on purpose — every tile then carries its matching segment and the lines stay
-continuous however many times the edges repeat.
+The names are set in white across both hero photographs, so `.hero .slot::after`
+paints a dark gradient over each one. It exists so the title stays legible
+whatever photo gets dropped in later — don't remove it without checking the
+title against the new photos.
 
 ## Still to build
 
-`#rsvp` is a placeholder anchor and the RSVP nav link is disabled. Our Story,
-travel/lodging for Salem, and the weekend schedule are stubs on this page for
-now, ready to become their own pages under `/wedding/`.
+`#rsvp` is the footer, not a form. Our Story, the weekend schedule, and
+travel/lodging for Salem are anchors on this page for now, ready to become
+their own pages under `/wedding/` — the nav and the centre menu block are where
+you would point them.
