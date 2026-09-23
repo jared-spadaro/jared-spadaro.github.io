@@ -58,11 +58,11 @@ Each figure carries a `data-slot` name so you can find it:
 | `hero-right` | 11:12 | first screen, right half | `hannah-jared-lake-1.jpg` |
 | `duo-photo` | fills its row | tall photo beside the cream plate | `sitting-bw-1.jpg` |
 | `plate-portrait` | 3:4 | matted portrait on the cream plate | `sutro-sitting.jpg` |
-| `verse-inset` | 3:4 | small photo floated over the verse | `photo-placeholder-square.svg` |
-| `verse-photo` | fills its row | tall photo beside the verse | `photo-placeholder-landscape.svg` |
-| `weekend-01` | 3:4 | Friday card | `photo-placeholder-arch.svg` |
-| `weekend-02` | 3:4 | Saturday card | `photo-placeholder-square.svg` |
-| `weekend-03` | 3:4 | Sunday card | `photo-placeholder-landscape.svg` |
+| `verse-inset` | 3:4 | small photo floated over the verse | `kissing-beach.jpg` |
+| `verse-photo` | fills its row | tall photo beside the verse | `pensive-bw.jpeg` |
+| `weekend-01` | 3:4 | Friday card | `tahoe-boat.JPG` |
+| `weekend-02` | 3:4 | Saturday card | `running-bw.jpg` |
+| `weekend-03` | 3:4 | Sunday card | `snowboarding.JPG` |
 
 The same table is repeated as a comment just above `<body>` in `index.html`.
 
@@ -77,9 +77,19 @@ Two notes:
   `object-position: 50% 30%` (or wherever) to that one `<img>`. That is the
   only per-photo tuning the layout should ever need.
 
-The two remaining placeholders that ship with the page —
-`photo-placeholder-*.svg` — are just washes with "PHOTO COMING SOON" on them.
-They are meant to be replaced; nothing in the CSS depends on them.
+Every slot now holds a real photograph. The `photo-placeholder-*.svg` files
+are still in `img/` as stand-ins for any slot added later; nothing in the CSS
+depends on them.
+
+Three of the photographs carry an `object-position`, because their subjects sit
+away from the centre of the frame and the default centre crop clipped them:
+`kissing-beach.jpg` at `32%`, `pensive-bw.jpeg` at `65%` and `tahoe-boat.JPG`
+at `70%`. `pensive-bw.jpeg` is the awkward one — its two subjects sit at
+opposite edges of a very wide frame, so no crop holds both of them whole; `65%`
+is the compromise that keeps both faces.
+
+Note the file extensions are not uniform (`.jpg`, `.jpeg`, `.JPG`). GitHub
+Pages serves case-sensitively, so each `src` has to match its file exactly.
 
 ## The hero scrim
 
