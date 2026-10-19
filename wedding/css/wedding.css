@@ -210,6 +210,10 @@ h1, h2, h3, p, figure, ul { margin: 0; }
   );
 }
 .hero__text {
+  /* One source for the names' size, so the date line can be a fixed
+     fraction of it at every width. */
+  --names: clamp(1.9rem, 8.4vw, 6.8rem);  /* fallback: no container queries */
+  --names: clamp(1.9rem, 7.6cqw, 6.8rem);
   position: absolute;
   inset: 0;
   display: flex;
@@ -217,7 +221,10 @@ h1, h2, h3, p, figure, ul { margin: 0; }
   align-items: center;
   justify-content: flex-start;
   gap: clamp(0.9rem, 2.4cqw, 2.1rem);
-  padding: 8% 1rem 0;
+  /* No side padding here: the date line is offset by a percentage of this
+     box, so it has to be exactly the hero's width. The gutter the names
+     need lives on the names. */
+  padding: 8% 0 0;
   text-align: center;
   /* Only the museum link is clickable; the rest must not swallow clicks. */
   pointer-events: none;
@@ -226,9 +233,9 @@ h1, h2, h3, p, figure, ul { margin: 0; }
 
 .hero__names {
   margin: 0;
+  padding-inline: 1rem;
   font-family: var(--swash) !important;
-  font-size: clamp(1.9rem, 8.4vw, 6.8rem);  /* fallback: no container queries */
-  font-size: clamp(1.9rem, 7.6cqw, 6.8rem);
+  font-size: var(--names);
   font-weight: 400;
   /* Pinyon's default line box is deep enough to drop the names toward the
      middle of the hero; pinning it to 1 keeps them where the padding puts
@@ -242,11 +249,15 @@ h1, h2, h3, p, figure, ul { margin: 0; }
 /* Date and place, under the names and over the photographs. Tracked caps in
    the text face — the script is for the names only. */
 .hero__where {
+  /* The line spans the whole hero and centres in it, so translating it by a
+     quarter of its own width lands its centre on the middle of the right-hand
+     photograph exactly. The 20px is the nudge down off the names. */
+  align-self: stretch;
+  transform: translate(25%, 20px);
   margin: 0;
-  font-size: clamp(0.72rem, 1.55cqw, 1.2rem);
-  line-height: 1.75;
-  letter-spacing: 0.26em;
-  text-indent: 0.26em;
+  font-size: calc(var(--names) * 0.5);
+  line-height: 1.5;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
   color: rgba(246, 244, 239, 0.93);
   text-shadow: 0 1px 14px rgba(0, 0, 0, 0.55);
@@ -401,6 +412,10 @@ h1, h2, h3, p, figure, ul { margin: 0; }
      again now that it has no sibling to match. */
   .split { grid-template-columns: 1fr; }
   .slot--fill { aspect-ratio: 5 / 6; height: auto; min-height: 0; }
+
+  /* The photographs stack, so the second one is below rather than beside:
+     the date line goes back to the middle. */
+  .hero__where { transform: translateY(20px); }
 
   .plate__label--side { display: none; }  /* no room beside the mat */
 
