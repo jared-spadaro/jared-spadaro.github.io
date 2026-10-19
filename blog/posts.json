@@ -9,5 +9,15 @@
       "site"
     ],
     "file": "posts/2026-08-28-hello-world.md"
+  },
+  {
+    "slug": "2026-8-31-empiricism",
+    "title": "In Defense of Empiricism",
+    "date": "2026-08-28",
+    "summary": "All knowledge is provisional.",
+    "tags": [
+      "empiricism"
+    ],
+    "file": "posts/2026-8-31-empiricism.md"
   }
 ]
