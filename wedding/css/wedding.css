@@ -417,7 +417,7 @@ h3 {
   align-items: center;
   justify-content: center;
   aspect-ratio: 3 / 2;
-  padding: clamp(1.5rem, 3vw, 2.5rem);
+  background: transparent;
 }
 .verse__text {
   position: absolute;
