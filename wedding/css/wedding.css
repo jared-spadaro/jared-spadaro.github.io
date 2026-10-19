@@ -212,28 +212,27 @@ h1, h2, h3, p, figure, ul { margin: 0; }
 .hero__text {
   /* One source for the names' size, so the date line can be a fixed
      fraction of it at every width. */
-  --names: clamp(1.9rem, 8.4vw, 6.8rem);  /* fallback: no container queries */
-  --names: clamp(1.9rem, 7.6cqw, 6.8rem);
+  /* Sized so the names clear the seam: at 7cqw they run ~534px inside the
+     590px half, leaving a margin either side. */
+  --names: clamp(1.75rem, 7.7vw, 6.3rem);  /* fallback: no container queries */
+  --names: clamp(1.75rem, 7cqw, 6.3rem);
   position: absolute;
   inset: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  gap: clamp(0.9rem, 2.4cqw, 2.1rem);
-  /* No side padding here: the date line is offset by a percentage of this
-     box, so it has to be exactly the hero's width. The gutter the names
-     need lives on the names. */
-  padding: 8% 0 0;
   text-align: center;
   /* Only the museum link is clickable; the rest must not swallow clicks. */
   pointer-events: none;
 }
 .hero__text a { pointer-events: auto; }
 
+/* Each block is pinned to one half of the hero and to the part of that
+   photograph it has to sit on: the names over the treeline on the left, the
+   details over the open sand on the right. */
 .hero__names {
+  position: absolute;
+  top: 17%;
+  left: 0;
+  width: 50%;
   margin: 0;
-  padding-inline: 1rem;
   font-family: var(--swash) !important;
   font-size: var(--names);
   font-weight: 400;
@@ -249,13 +248,15 @@ h1, h2, h3, p, figure, ul { margin: 0; }
 /* Date and place, under the names and over the photographs. Tracked caps in
    the text face — the script is for the names only. */
 .hero__where {
-  /* The line spans the whole hero and centres in it, so translating it by a
-     quarter of its own width lands its centre on the middle of the right-hand
-     photograph exactly. The 20px is the nudge down off the names. */
-  align-self: stretch;
-  transform: translate(25%, 20px);
+  position: absolute;
+  top: 56%;
+  left: 50%;
+  width: 50%;
   margin: 0;
-  font-size: calc(var(--names) * 0.5);
+  padding-inline: 0.75rem;
+  /* A quarter of the names, but never small enough to stop being readable:
+     on a phone the names are ~28px, and a quarter of that is not text. */
+  font-size: max(0.8rem, calc(var(--names) * 0.25));
   line-height: 1.5;
   letter-spacing: 0.05em;
   text-transform: uppercase;
@@ -413,9 +414,10 @@ h1, h2, h3, p, figure, ul { margin: 0; }
   .split { grid-template-columns: 1fr; }
   .slot--fill { aspect-ratio: 5 / 6; height: auto; min-height: 0; }
 
-  /* The photographs stack, so the second one is below rather than beside:
-     the date line goes back to the middle. */
-  .hero__where { transform: translateY(20px); }
+  /* The photographs stack, so each block spans the full width and sits on
+     its own photograph top and bottom instead of left and right. */
+  .hero__names { left: 0; width: 100%; top: 13%; }
+  .hero__where { left: 0; width: 100%; top: 80%; }
 
   .plate__label--side { display: none; }  /* no room beside the mat */
 
