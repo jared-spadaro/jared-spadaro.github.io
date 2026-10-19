@@ -244,6 +244,19 @@ h1, h2, h3, p, figure, ul { margin: 0; }
   color: rgba(244, 242, 237, 0.92);
 }
 
+/* The museum link is meant to disappear into the line — it only marks itself
+   on hover. Focus gets the rule too, since a keyboard user cannot hover to
+   discover it. */
+.creed a {
+  text-decoration: none;
+  text-underline-offset: 0.2em;
+  text-decoration-thickness: 1px;
+}
+.creed a:hover,
+.creed a:focus-visible {
+  text-decoration: underline;
+}
+
 /* ------------------------------------------------------------- 8. duo ----- */
 /* A full-height photograph beside a cream plate that mats a second, smaller
    photograph and labels it on all four sides. */
