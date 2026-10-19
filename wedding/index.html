@@ -26,22 +26,20 @@
   </head>
 
   <!-- =====================================================================
-       PHOTO SLOTS — every photograph below is a <figure class="slot"> whose
-       <img> is cropped to fill it. To use a real photo, drop the file in
-       img/ and change that one src. Nothing else needs touching; the ratio
-       lives on the figure and object-fit absorbs the mismatch.
+       PHOTO SLOTS — every photograph below is a <figure class="slot"> that
+       takes the photograph's own 3:2 shape, so nothing is cropped. To use a
+       different photo, drop the file in img/ and change that one src. Keep
+       to 3:2 landscape sources, or add a slot class for the new ratio.
 
-         data-slot           ratio   currently
+         data-slot         currently
          ---------------------------------------------------------------
-         hero-left           11:12   hannah-jared-beach-1.jpg
-         hero-right          11:12   hannah-jared-lake-1.jpg
-         duo-photo           fills   sitting-bw-1.jpg
-         plate-portrait      3:4     sutro-sitting.jpg
-         verse-inset         3:4     kissing-beach.jpg
-         verse-photo         fills   pensive-bw.jpeg
-         weekend-01          3:4     tahoe-boat.JPG
-         weekend-02          3:4     running-bw.jpg
-         weekend-03          3:4     snowboarding.JPG
+         hero-left         hannah-jared-beach-1.jpg
+         hero-right        hannah-jared-lake-1.jpg
+         story-photo       sitting-bw-1.jpg
+         verse-inset       kissing-beach.jpg
+         verse-photo       pensive-bw.jpeg
+         schedule-friday   tahoe-boat.JPG
+         schedule-saturday running-bw.jpg
 
        See README.md for the full table.
        ===================================================================== -->
@@ -54,8 +52,9 @@
         <ul>
           <li><a href="#top" aria-current="page">Home</a></li>
           <li><a href="#story">Our Story</a></li>
-          <li><a href="#day">The Day</a></li>
-          <li><a href="#weekend">Weekend</a></li>
+          <li><a href="#schedule">Schedule</a></li>
+          <li><a href="#travel">Travel</a></li>
+          <li><a href="#registry">Registry</a></li>
           <li><a href="#rsvp">RSVP</a></li>
         </ul>
       </nav>
@@ -63,7 +62,7 @@
       <main id="main">
         <!-- ------------------------------------------------------ hero -->
         <header class="hero split" id="top">
-          <figure class="slot slot--hero" data-slot="hero-left">
+          <figure class="slot slot--landscape" data-slot="hero-left">
             <img
               src="img/hannah-jared-beach-1.jpg"
               alt="Hannah and Jared walking along the dunes"
@@ -72,7 +71,7 @@
             />
           </figure>
 
-          <figure class="slot slot--hero" data-slot="hero-right">
+          <figure class="slot slot--landscape" data-slot="hero-right">
             <img
               src="img/hannah-jared-lake-1.jpg"
               alt="Hannah and Jared swimming in a mountain lake"
@@ -100,9 +99,9 @@
           </p>
         </section>
 
-        <!-- ------------------------------------------------------- duo -->
-        <section class="split" id="story">
-          <figure class="slot slot--fill" data-slot="duo-photo">
+        <!-- ----------------------------------------------------- story -->
+        <section class="split story" id="story" aria-labelledby="storyTitle">
+          <figure class="slot slot--landscape" data-slot="story-photo">
             <img
               loading="lazy"
               decoding="async"
@@ -113,25 +112,75 @@
             />
           </figure>
 
-          <div class="panel plate">
+          <div class="panel story__intro">
             <p class="micro">Two summers of yes.</p>
-
-            <figure class="slot slot--portrait plate__photo" data-slot="plate-portrait">
-              <img
-                loading="lazy"
-                decoding="async"
-                src="img/sutro-sitting.jpg"
-                alt="Hannah and Jared looking out over the city toward Sutro Tower"
-                width="2316"
-                height="1536"
-              />
-            </figure>
-
-            <p class="micro">Salem, Massachusetts.</p>
-
-            <p class="micro plate__label--side plate__label--left">Hannah &amp; Jared</p>
-            <p class="micro plate__label--side plate__label--right">MMXXVII</p>
+            <h2 class="title" id="storyTitle"><span class="sw">O</span>ur Story</h2>
+            <p class="prose">
+              Hannah spends her days building technology that keeps wildfires
+              from starting. Jared spends his building worlds in augmented
+              reality. Somewhere between protecting the real one and inventing
+              new ones, they found each other &mdash; and a life that sounds,
+              most evenings, like Jared&rsquo;s guitar drifting through the
+              apartment while Hannah pretends she didn&rsquo;t ask for that
+              song again.
+            </p>
           </div>
+        </section>
+
+        <!-- -------------------------------------------------- timeline -->
+        <section class="panel timeline detached" aria-label="Our story, in order">
+          <ol class="timeline__list">
+            <li>
+              <p class="micro timeline__when">August 2019</p>
+              <h3>Where it began</h3>
+              <p class="prose">
+                We met at Cisco Systems in San Jose CA, our first jobs out of college.
+              </p>
+            </li>
+
+            <li>
+              <p class="micro timeline__when">January 2020</p>
+              <h3>Things heat up</h3>
+              <p class="prose">
+                A memorable early date was a beautiful hike in Big Basin Redwoods State Park (sadly, it has since been severely burned by a wildfire).
+              </p>
+            </li>
+
+            <li>
+              <p class="micro timeline__when">January 2023</p>
+              <h3>A frosty turn of events</h3>
+              <p class="prose">
+                We love to snowboard together. Our home mountain is Palisades Tahoe.
+              </p>
+            </li>
+
+            <li>
+              <p class="micro timeline__when">August 2023</p>
+              <h3>Den of thieves</h3>
+              <p class="prose">
+                We moved in together in the Noe Valley neighborhood of San Francisco.
+              </p>
+            </li>
+
+            <li>
+              <p class="micro timeline__when">August 2025</p>
+              <h3>A cut above</h3>
+              <p class="prose">
+                Jared popped the question at the Pemberton Steps, a series of stunning stairwells
+                draped in greenery in the hills of San Francisco. 
+                We often walk up them while heading to Twin Peaks.
+              </p>
+            </li>
+
+            <li>
+              <p class="micro timeline__when">July 17, 2027</p>
+              <h3>Peabody Essex Museum</h3>
+              <p class="prose">
+                And now: a summer evening in a museum on the Massachusetts
+                coast, with everyone who got them here.
+              </p>
+            </li>
+          </ol>
         </section>
 
         <!-- ------------------------------------------------------ menu -->
@@ -140,10 +189,10 @@
             <p>
               <a href="#story"><span class="sw">O</span>ur Story</a>
               <span class="menu__sep">/</span>
-              <a href="#day">The Day</a>
+              <a href="#schedule">Schedule</a>
               <span class="menu__sep">/</span>
-              <a href="#weekend">Weekend</a><br />
-              <a href="#story">Where to Stay</a>
+              <a href="#travel">Travel</a><br />
+              <a href="#registry">Registry</a>
               <span class="menu__sep">/</span>
               <a href="#rsvp"><span class="sw">R</span>SVP</a>
             </p>
@@ -151,7 +200,7 @@
         </section>
 
         <!-- ----------------------------------------------------- verse -->
-        <section class="split detached" id="day">
+        <section class="split detached" id="day" aria-label="The day">
           <div class="panel verse">
             <p class="verse__text">
               In the heart of the garden,<br />
@@ -161,11 +210,10 @@
               say yes.
             </p>
 
-            <figure class="slot slot--portrait verse__photo" data-slot="verse-inset">
+            <figure class="slot slot--landscape verse__photo" data-slot="verse-inset">
               <img
                 loading="lazy"
                 decoding="async"
-                style="object-position: 32% center"
                 src="img/kissing-beach.jpg"
                 alt="Hannah and Jared kissing on the beach"
                 width="2316"
@@ -174,11 +222,10 @@
             </figure>
           </div>
 
-          <figure class="slot slot--fill" data-slot="verse-photo">
+          <figure class="slot slot--landscape" data-slot="verse-photo">
             <img
               loading="lazy"
               decoding="async"
-              style="object-position: 65% center"
               src="img/pensive-bw.jpeg"
               alt="Hannah and Jared sitting across a quiet room"
               width="2316"
@@ -187,35 +234,44 @@
           </figure>
         </section>
 
-        <!-- --------------------------------------------------- weekend -->
-        <section class="panel weekend detached" id="weekend">
-          <h2 class="weekend__title"><span class="sw">W</span>eekend.</h2>
+        <!-- -------------------------------------------------- schedule -->
+        <section class="panel schedule detached" id="schedule" aria-labelledby="scheduleTitle">
+          <p class="micro">The weekend</p>
+          <h2 class="title" id="scheduleTitle"><span class="sw">S</span>chedule</h2>
 
-          <ul class="weekend__cards">
-            <li>
-              <p class="card__head">
-                <span class="card__name">Friday 01</span>
-                <span class="card__note micro">Welcome</span>
-              </p>
-              <figure class="slot slot--portrait" data-slot="weekend-01">
+          <ul class="schedule__cards">
+            <li class="event">
+              <figure class="slot slot--landscape" data-slot="schedule-friday">
                 <img
                   loading="lazy"
                   decoding="async"
-                  style="object-position: 70% center"
                   src="img/tahoe-boat.JPG"
                   alt="Hannah and Jared on a boat at Lake Tahoe"
                   width="2318"
                   height="1536"
                 />
               </figure>
+              <div class="event__body">
+                <p class="micro">Friday, July 16 &middot; 7:30-ish</p>
+                <h3>Welcome Bonfire</h3>
+                <p class="prose">
+                  Drinks and light bites by the fire as the sun goes down. Come
+                  as you are &mdash; and bring a layer, the ocean breeze picks up
+                  after dark.
+                </p>
+                <p class="micro event__where">
+                  <a
+                    href="https://www.google.com/maps/search/?api=1&amp;query=Fisherman%27s+Beach+Swampscott+MA"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >Fisherman&rsquo;s Beach &middot; Swampscott</a
+                  >
+                </p>
+              </div>
             </li>
 
-            <li>
-              <p class="card__head">
-                <span class="card__name">Saturday 02</span>
-                <span class="card__note micro">Ceremony</span>
-              </p>
-              <figure class="slot slot--portrait" data-slot="weekend-02">
+            <li class="event">
+              <figure class="slot slot--landscape" data-slot="schedule-saturday">
                 <img
                   loading="lazy"
                   decoding="async"
@@ -225,25 +281,110 @@
                   height="1536"
                 />
               </figure>
-            </li>
-
-            <li>
-              <p class="card__head">
-                <span class="card__name">Sunday 03</span>
-                <span class="card__note micro">Farewell</span>
-              </p>
-              <figure class="slot slot--portrait" data-slot="weekend-03">
-                <img
-                  loading="lazy"
-                  decoding="async"
-                  src="img/snowboarding.JPG"
-                  alt="Hannah and Jared snowboarding"
-                  width="707"
-                  height="1000"
-                />
-              </figure>
+              <div class="event__body">
+                <p class="micro">Saturday, July 17 &middot; 6:00 pm</p>
+                <h3>The Wedding</h3>
+                <p class="prose">
+                  The ceremony begins at six, followed by drinks, dinner and
+                  dancing late into the summer night.
+                </p>
+                <p class="micro event__where">
+                  <a
+                    href="https://www.google.com/maps/search/?api=1&amp;query=Peabody+Essex+Museum+161+Essex+St+Salem+MA"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >Peabody Essex Museum &middot; 161 Essex St, Salem</a
+                  >
+                </p>
+              </div>
             </li>
           </ul>
+        </section>
+
+        <!-- ---------------------------------------------------- travel -->
+        <section class="panel travel detached" id="travel" aria-labelledby="travelTitle">
+          <p class="micro">Getting to Salem</p>
+          <h2 class="title" id="travelTitle"><span class="sw">T</span>ravel</h2>
+
+          <div class="travel__how">
+            <div>
+              <h3>Getting here</h3>
+              <p class="prose">
+                Fly into Boston Logan (BOS). Salem is about <span class="nowrap">30&ndash;40</span> minutes
+                north by Uber or Lyft. Or take the T to North Station and ride
+                the Newburyport/Rockport commuter rail to Salem &mdash; about half
+                an hour &mdash; then walk a few minutes to the museum.
+              </p>
+            </div>
+            <div>
+              <h3>Getting around</h3>
+              <p class="prose">
+                Salem is wonderfully walkable: the museum, the waterfront and
+                most hotels are a few blocks apart. A rental car opens up the
+                rest of the North Shore &mdash; Marblehead&rsquo;s harbor,
+                Rockport and Gloucester on Cape Ann, Crane Beach in Ipswich
+                &mdash; and gets you to Friday&rsquo;s bonfire in Swampscott.
+              </p>
+            </div>
+          </div>
+
+          <div class="travel__block">
+            <p class="micro">Room block</p>
+            <p class="prose">
+              We&rsquo;re reserving a block of rooms for our guests. It
+              won&rsquo;t open until about six months before the wedding (early
+              2027), and we&rsquo;ll post the booking link here as soon as it
+              does.
+            </p>
+          </div>
+
+          <h3 class="travel__stay">Where to stay</h3>
+          <ul class="hotels">
+            <li>
+              <a href="https://www.hawthornehotel.com/" target="_blank" rel="noopener noreferrer">
+                <span class="hotels__name">Hawthorne Hotel</span>
+                <span class="micro">Historic &middot; on the Common</span>
+              </a>
+            </li>
+            <li>
+              <a href="https://www.larkhotels.com/massachusetts/salem/the-hotel-salem" target="_blank" rel="noopener noreferrer">
+                <span class="hotels__name">The Hotel Salem</span>
+                <span class="micro">Boutique &middot; rooftop bar</span>
+              </a>
+            </li>
+            <li>
+              <a href="https://www.larkhotels.com/massachusetts/salem/the-merchant" target="_blank" rel="noopener noreferrer">
+                <span class="hotels__name">The Merchant</span>
+                <span class="micro">Boutique &middot; Washington St</span>
+              </a>
+            </li>
+            <li>
+              <a href="https://www.salemwaterfronthotel.com/" target="_blank" rel="noopener noreferrer">
+                <span class="hotels__name">Salem Waterfront Hotel</span>
+                <span class="micro">Harbor views &middot; pool</span>
+              </a>
+            </li>
+            <li>
+              <a href="https://saleminnma.com/" target="_blank" rel="noopener noreferrer">
+                <span class="hotels__name">The Salem Inn</span>
+                <span class="micro">Inn &middot; historic houses</span>
+              </a>
+            </li>
+            <li>
+              <a href="https://thesteppingstoneinn.com/" target="_blank" rel="noopener noreferrer">
+                <span class="hotels__name">The Stepping Stone Inn</span>
+                <span class="micro">Bed &amp; breakfast</span>
+              </a>
+            </li>
+          </ul>
+        </section>
+
+        <!-- -------------------------------------------------- registry -->
+        <section class="panel registry detached" id="registry" aria-labelledby="registryTitle">
+          <div class="menu__inner">
+            <h2 class="title" id="registryTitle"><span class="sw">R</span>egistry</h2>
+            <p class="micro">Coming soon</p>
+          </div>
         </section>
       </main>
 
@@ -259,7 +400,93 @@
         <p class="micro footer__meta" style="color: rgba(244, 242, 237, 0.62)">
           <a href="../">antisocialistic.com</a>
         </p>
+        <p class="micro footer__credit">
+          Music: &ldquo;Easy Lemon&rdquo; by Kevin MacLeod (<a
+            href="https://incompetech.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            >incompetech.com</a
+          >), licensed under
+          <a
+            href="https://creativecommons.org/licenses/by/4.0/"
+            target="_blank"
+            rel="noopener noreferrer"
+            >CC BY 4.0</a
+          >
+        </p>
       </footer>
     </div>
+
+    <!-- -------------------------------------------------------- music -->
+    <audio id="song" src="audio/song.mp3" loop preload="none"></audio>
+    <button class="music" id="musicToggle" type="button" aria-label="Play music" aria-pressed="false">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path class="music__speaker" d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z" />
+        <path class="music__on" d="M15.5 9a4 4 0 0 1 0 6M18 6.5a7.5 7.5 0 0 1 0 11" />
+        <path class="music__off" d="M16 9.5l5 5M21 9.5l-5 5" />
+      </svg>
+    </button>
+
+    <script>
+      // Browsers only let audio start after the visitor interacts with the
+      // page, so the song waits for the first tap, click or key press — then
+      // fades in. A mute is remembered so a returning visitor isn't surprised.
+      (function () {
+        var KEY = "wedding-music-muted";
+        var VOLUME = 0.4;
+        var audio = document.getElementById("song");
+        var btn = document.getElementById("musicToggle");
+        var calm = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        var fade;
+
+        function remember(muted) {
+          try { localStorage.setItem(KEY, muted ? "1" : "0"); } catch (e) {}
+        }
+        function wasMuted() {
+          try { return localStorage.getItem(KEY) === "1"; } catch (e) { return false; }
+        }
+
+        function show(playing) {
+          btn.classList.toggle("is-playing", playing);
+          btn.setAttribute("aria-pressed", playing ? "true" : "false");
+          btn.setAttribute("aria-label", playing ? "Pause music" : "Play music");
+        }
+
+        function play() {
+          clearInterval(fade);
+          audio.volume = calm ? VOLUME : 0;
+          var started = audio.play();
+          if (started && started.catch) started.catch(function () { show(false); });
+          show(true);
+          if (calm) return;
+          fade = setInterval(function () {
+            audio.volume = Math.min(VOLUME, audio.volume + VOLUME / 40);
+            if (audio.volume >= VOLUME) clearInterval(fade);
+          }, 50);
+        }
+
+        function pause() {
+          clearInterval(fade);
+          audio.pause();
+          show(false);
+        }
+
+        var gestures = ["pointerdown", "keydown"];
+        function firstGesture(e) {
+          // The toggle handles its own clicks; starting here as well would
+          // let the same tap start the song and immediately stop it.
+          if (btn.contains(e.target)) return;
+          gestures.forEach(function (g) { document.removeEventListener(g, firstGesture); });
+          if (!wasMuted()) play();
+        }
+        gestures.forEach(function (g) { document.addEventListener(g, firstGesture); });
+
+        btn.addEventListener("click", function () {
+          gestures.forEach(function (g) { document.removeEventListener(g, firstGesture); });
+          if (audio.paused) { play(); remember(false); }
+          else { pause(); remember(true); }
+        });
+      })();
+    </script>
   </body>
 </html>

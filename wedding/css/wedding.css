@@ -12,12 +12,14 @@
      5. Nav
      6. Hero
      7. Creed band
-     8. Duo (photo | plate)
+     8. Story (photo | intro) + timeline
      9. Menu block
     10. Verse
-    11. Weekend cards
-    12. Footer
-    13. Responsive
+    11. Schedule cards
+    12. Travel + registry
+    13. Footer
+    14. Music toggle
+    15. Responsive
    ========================================================================== */
 
 /* ------------------------------------------------------------- 1. tokens - */
@@ -100,13 +102,15 @@ h1, h2, h3, p, figure, ul { margin: 0; }
   margin-inline: 0.16em -0.02em;
 }
 
+.nowrap { white-space: nowrap; }
+
 /* Ampersand set in the text face's italic, not the script. */
 .amp {
   font-style: italic;
   font-weight: 400;
 }
 
-/* Tiny tracked caps: nav items, plate labels, card kickers. */
+/* Tiny tracked caps: nav items, eyebrows, card kickers. */
 .micro {
   font-size: clamp(0.5rem, 0.86vw, 0.66rem);
   letter-spacing: 0.34em;
@@ -117,9 +121,10 @@ h1, h2, h3, p, figure, ul { margin: 0; }
 }
 
 /* ------------------------------------------------------- 3. photo slots --- *
- * EVERY photograph on this page is one of these. To swap one, change the
- * <img src> and nothing else: the figure owns the aspect ratio and the image
- * is cropped to fill it, so a source of any size or ratio still works.
+ * EVERY photograph on this page is one of these, and every slot takes its
+ * photograph's own shape — nothing on this page is cropped. All the current
+ * photos are 3:2 (2316x1536 and near neighbours), so one class covers them.
+ * A photo of another shape needs a slot class of its own ratio, not a crop.
  * ------------------------------------------------------------------------- */
 .slot {
   position: relative;
@@ -129,18 +134,37 @@ h1, h2, h3, p, figure, ul { margin: 0; }
 .slot > img {
   width: 100%;
   height: 100%;
-  object-fit: cover;        /* crop to fill, never distort */
-  object-position: center;  /* per-slot override below if a face is off-centre */
+  /* The slot already matches the photo; cover only absorbs the <0.5%
+     difference between 3:2 and the sources' exact ratios. */
+  object-fit: cover;
 }
 
-.slot--hero    { aspect-ratio: 11 / 12; }
-.slot--square  { aspect-ratio: 1 / 1; }
-.slot--tall    { aspect-ratio: 5 / 6; }
-.slot--portrait{ aspect-ratio: 3 / 4; }
+.slot--landscape { aspect-ratio: 3 / 2; }
 
-/* Slots that have to match a neighbouring panel's height instead of their
-   own ratio. */
-.slot--fill { aspect-ratio: auto; height: 100%; min-height: 100%; }
+/* In a two-up the photo keeps its ratio rather than stretching to its
+   neighbour; the row is as tall as the photo and the panel beside it
+   centres its content in that height. */
+.split > .slot { align-self: center; }
+
+/* Shared section heading and running text. */
+.title {
+  font-size: clamp(2rem, 4.6vw, 3.6rem);
+  font-weight: 300;
+  line-height: 1.15;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.prose {
+  font-size: clamp(1.02rem, 1.35vw, 1.2rem);
+  line-height: 1.6;
+}
+h3 {
+  font-size: clamp(1.25rem, 2.2vw, 1.7rem);
+  font-weight: 300;
+  line-height: 1.25;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
 
 /* ----------------------------------------------------- 4. column + panels - */
 .column {
@@ -280,28 +304,88 @@ h1, h2, h3, p, figure, ul { margin: 0; }
   text-decoration: underline;
 }
 
-/* ------------------------------------------------------------- 8. duo ----- */
-/* A full-height photograph beside a cream plate that mats a second, smaller
-   photograph and labels it on all four sides. */
-.plate {
-  position: relative;
+/* --------------------------------------------- 8. story + timeline ------- */
+/* The black-and-white photograph beside a cream intro. The split itself is
+   cream, so if the intro ever runs taller than the photo the photo sits
+   centred on a mat instead of leaving a grey gap under it. */
+/* Side by side, the intro is sized in units of the row's own width (cqw), as
+   the photo's height is — so text that fits beside the photo at one width
+   fits at every width. It stacks below 1100px (see responsive). */
+.story {
+  background: var(--cream);
+  container-type: inline-size;
+}
+.story__intro {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: clamp(1.1rem, 2.6vw, 2rem);
-  padding: clamp(2rem, 4.5vw, 3.75rem) clamp(2.5rem, 7vw, 5.5rem);
+  gap: 1.1cqw;
+  padding: 2.6cqw 3.4cqw;
+  text-align: center;
 }
-.plate__photo { width: min(62%, 320px); }
-.plate__label--side {
+.story__intro .title { font-size: 3.6cqw; }
+.story__intro .prose { font-size: 1.42cqw; }
+
+/* A centred rule with the chapters hung off alternate sides of it. Below
+   720px the rule moves to the left edge and every chapter sits to its right. */
+.timeline { padding: var(--pad); }
+/* Each chapter spans two grid rows, one row below the last, so the two sides
+   interleave like a zip instead of each chapter taking a full-width row. */
+.timeline__list {
+  list-style: none;
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  max-width: 60rem;
+  margin-inline: auto;
+  padding: 0;
+}
+.timeline__list::before {
+  content: "";
   position: absolute;
-  top: 50%;
-  writing-mode: vertical-rl;
-  transform: rotate(180deg) translateY(50%);  /* reads bottom-to-top */
-  white-space: nowrap;
+  top: 0.5rem;
+  bottom: 0.5rem;
+  left: 50%;
+  width: 1px;
+  background: var(--rule);
 }
-.plate__label--left { left: clamp(0.7rem, 2vw, 1.6rem); }
-.plate__label--right { right: clamp(0.7rem, 2vw, 1.6rem); }
+.timeline__list li {
+  --side: clamp(1.5rem, 4vw, 3.5rem);
+  position: relative;
+  grid-column: 1;
+  grid-row: var(--n) / span 2;
+  padding: 0 var(--side) clamp(1.25rem, 2.5vw, 2rem) 0;
+  text-align: right;
+}
+.timeline__list li:nth-child(even) {
+  grid-column: 2;
+  padding: 0 0 clamp(1.25rem, 2.5vw, 2rem) var(--side);
+  text-align: left;
+}
+.timeline__list li:nth-child(1) { --n: 1; }
+.timeline__list li:nth-child(2) { --n: 2; }
+.timeline__list li:nth-child(3) { --n: 3; }
+.timeline__list li:nth-child(4) { --n: 4; }
+.timeline__list li:nth-child(5) { --n: 5; }
+.timeline__list li:nth-child(6) { --n: 6; }
+.timeline__list li:nth-child(7) { --n: 7; }
+.timeline__list li:nth-child(8) { --n: 8; }
+.timeline__list li:last-child { padding-bottom: 0; }
+/* The bead on the rule. */
+.timeline__list li::before {
+  content: "";
+  position: absolute;
+  top: 0.4rem;
+  right: -4px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--ink);
+}
+.timeline__list li:nth-child(even)::before { right: auto; left: -3px; }
+.timeline__when { margin-bottom: 0.35rem; }
+.timeline__list h3 { margin-bottom: 0.5rem; }
 
 /* ------------------------------------------------------- 9. menu block ---- */
 .menu {
@@ -324,14 +408,15 @@ h1, h2, h3, p, figure, ul { margin: 0; }
 
 /* ------------------------------------------------------------ 10. verse --- */
 /* Oversized watermark type, clipped by the panel, with a small photograph
-   floated over the middle of it. */
+   floated over the middle of it. The panel is 3:2 like the photograph beside
+   it, so the two halves are always exactly the same size. */
 .verse {
   position: relative;
   overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: clamp(20rem, 42vw, 34rem);
+  aspect-ratio: 3 / 2;
   padding: clamp(1.5rem, 3vw, 2.5rem);
 }
 .verse__text {
@@ -350,50 +435,97 @@ h1, h2, h3, p, figure, ul { margin: 0; }
 }
 .verse__photo {
   position: relative;
-  width: min(52%, 250px);
+  width: min(56%, 300px);
 }
 
-/* --------------------------------------------------- 11. weekend cards ---- */
-.weekend {
+/* -------------------------------------------------- 11. schedule cards ---- */
+/* Two equal cards, photograph over text. The location line is pushed to the
+   foot of each card so the two lines align even when the copy differs. */
+.schedule {
+  padding: var(--pad);
+  text-align: center;
+}
+.schedule .title { margin-top: 0.4rem; }
+.schedule__cards {
+  list-style: none;
+  padding: 0;
   display: grid;
-  grid-template-columns: auto 1fr;
-  gap: clamp(1rem, 3vw, 2.5rem);
-  padding: clamp(1.5rem, 3vw, 2.5rem);
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(1rem, 2.5vw, 2rem);
+  margin-top: clamp(1.5rem, 3vw, 2.5rem);
 }
-.weekend__title {
-  writing-mode: vertical-rl;
-  transform: rotate(180deg);          /* reads bottom-to-top */
-  font-size: clamp(2.4rem, 6vw, 4.6rem);
-  font-weight: 300;
-  letter-spacing: 0.02em;
-  text-transform: uppercase;
-  line-height: 1;
-  align-self: end;
+.event {
+  display: flex;
+  flex-direction: column;
 }
-.weekend__cards {
+.event__body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+  padding: clamp(1.1rem, 2.4vw, 1.75rem) clamp(0.5rem, 2vw, 1.5rem) 0;
+}
+.event__body .prose { max-width: 26rem; }
+.event__where { margin-top: auto; padding-top: 0.4rem; }
+.event__where a { border-bottom: 1px solid var(--rule); }
+.event__where a:hover { border-bottom-color: var(--ink); }
+
+/* ----------------------------------------------- 12. travel + registry ---- */
+.travel {
+  padding: var(--pad);
+  text-align: center;
+}
+.travel .title { margin-top: 0.4rem; }
+.travel__how {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(1.5rem, 4vw, 3.5rem);
+  max-width: 60rem;
+  margin: clamp(1.5rem, 3vw, 2.5rem) auto 0;
+}
+.travel__how h3 { margin-bottom: 0.6rem; }
+
+/* The room-block note: ruled like the menu block, so it reads as an aside. */
+.travel__block {
+  max-width: 40rem;
+  margin: clamp(2rem, 4vw, 3rem) auto;
+  padding: clamp(1.25rem, 2.6vw, 1.9rem) var(--pad);
+  border: 1px solid var(--rule);
+}
+.travel__block .micro { margin-bottom: 0.5rem; color: var(--ink); }
+
+.travel__stay { margin-bottom: clamp(1rem, 2vw, 1.5rem); }
+.hotels {
   list-style: none;
   padding: 0;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: clamp(0.5rem, 1.4vw, 1rem);
-  align-self: end;
-  width: min(100%, 34rem);
-  margin-left: auto;
+  gap: var(--gap);
 }
-.card__head {
-  text-align: right;
-  margin-bottom: 0.5rem;
+.hotels a {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.3rem;
+  height: 100%;
+  padding: clamp(1.1rem, 2.2vw, 1.6rem) 1rem;
+  border: 1px solid var(--rule);
+  transition: background-color 0.2s ease;
 }
-.card__name {
-  display: block;
-  font-size: clamp(0.62rem, 1.15vw, 0.9rem);
-  letter-spacing: 0.16em;
-  text-indent: 0.16em;
+.hotels a:hover,
+.hotels a:focus-visible { background: var(--cream-dim); }
+.hotels__name {
+  font-size: clamp(1.05rem, 1.6vw, 1.3rem);
+  letter-spacing: 0.05em;
   text-transform: uppercase;
 }
-.card__note { display: block; }
 
-/* ----------------------------------------------------------- 12. footer --- */
+/* Registry reuses the menu block's ruled inner box. */
+.registry { padding: clamp(0.7rem, 1.6vw, 1.1rem); }
+.registry .micro { margin-top: 0.6rem; }
+
+/* ----------------------------------------------------------- 13. footer --- */
 .footer {
   text-align: center;
   padding: clamp(2.2rem, 5vw, 4rem) var(--pad);
@@ -407,25 +539,93 @@ h1, h2, h3, p, figure, ul { margin: 0; }
 }
 .footer__meta { margin-top: 0.9rem; }
 .footer__meta a { border-bottom: 1px solid var(--rule); }
+/* The music licence asks for credit; this keeps it present but quiet. */
+.footer__credit {
+  margin-top: 1.6rem;
+  letter-spacing: 0.12em;
+  text-indent: 0;
+  text-transform: none;
+  color: rgba(244, 242, 237, 0.45);
+}
+.footer__credit a { border-bottom: 1px solid rgba(244, 242, 237, 0.25); }
 
-/* ------------------------------------------------------- 13. responsive --- */
+/* ----------------------------------------------------- 14. music toggle --- */
+/* Floats bottom-right. Shows a crossed-out speaker until the song is
+   actually playing (see the script at the end of index.html). */
+.music {
+  position: fixed;
+  right: max(1rem, env(safe-area-inset-right));
+  bottom: max(1rem, env(safe-area-inset-bottom));
+  z-index: 50;
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  padding: 0;
+  border: 1px solid rgba(244, 242, 237, 0.28);
+  border-radius: 50%;
+  background: var(--ink);
+  color: var(--light);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.22);
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+.music:hover { opacity: 0.8; }
+.music svg {
+  width: 1.25rem;
+  height: 1.25rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.music .music__on { display: none; }
+.music.is-playing .music__on { display: inline; }
+.music.is-playing .music__off { display: none; }
+
+/* ------------------------------------------------------- 15. responsive --- */
+@media (max-width: 1100px) {
+  /* Half a column is too narrow for the story intro down here; stack it and
+     hand its type back to the shared sizes. */
+  .story { grid-template-columns: 1fr; }
+  .story__intro { gap: clamp(0.8rem, 1.8vw, 1.3rem); padding: var(--pad); }
+  .story__intro .title { font-size: clamp(2rem, 4.6vw, 3.6rem); }
+  .story__intro .prose {
+    font-size: clamp(1.02rem, 1.35vw, 1.2rem);
+    max-width: 34rem;
+  }
+}
+
+@media (max-width: 960px) {
+  .hotels { grid-template-columns: repeat(2, 1fr); }
+}
+
 @media (max-width: 720px) {
   :root { --gap: 8px; }
 
-  /* Every two-up becomes a stack. The duo's photograph keeps a real ratio
-     again now that it has no sibling to match. */
+  /* Every two-up becomes a stack; each photo keeps its own ratio. */
   .split { grid-template-columns: 1fr; }
-  .slot--fill { aspect-ratio: 5 / 6; height: auto; min-height: 0; }
 
-  .plate__label--side { display: none; }  /* no room beside the mat */
-
-  .weekend { grid-template-columns: 1fr; }
-  .weekend__title {
-    writing-mode: horizontal-tb;
-    transform: none;
-    align-self: start;
+  .timeline__list { grid-template-columns: 1fr; }
+  .timeline__list::before { left: 3px; }
+  .timeline__list li,
+  .timeline__list li:nth-child(even) {
+    grid-column: 1;
+    grid-row: auto;
+    padding: 0 0 1.75rem 1.75rem;
+    text-align: left;
   }
-  .weekend__cards { width: 100%; margin-left: 0; }
+  .timeline__list li:last-child { padding-bottom: 0; }
+  .timeline__list li::before,
+  .timeline__list li:nth-child(even)::before { left: 0; right: auto; }
+
+  .schedule__cards,
+  .travel__how,
+  .hotels { grid-template-columns: 1fr; }
+
+  /* Clear the floating music button. */
+  .footer { padding-bottom: 5rem; }
 
   /* The bar wraps to two rows down here; a left rule on the first item of
      the second row would read as a stray tick, so the rules come off. */

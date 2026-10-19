@@ -5,7 +5,8 @@
   "main": "test.js",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "wedding": "npx --yes live-server@1.2.2 --open=/wedding/ --watch=wedding"
   },
   "repository": {
     "type": "git",
