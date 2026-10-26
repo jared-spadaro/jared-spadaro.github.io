@@ -129,7 +129,13 @@ h1, h2, h3, p, figure, ul { margin: 0; }
   overflow: hidden;
   background: #cfcdc6;      /* shows while the photo loads */
 }
+/* The image is laid over its slot rather than sized inside it, so the slot's
+   height comes from aspect-ratio alone. A percentage-height image in flow
+   trips Safari 16 (iOS 16): it sizes the hero's grid rows from the photo, not
+   the slot, and the two hero photos slide down over the venue band. */
 .slot > img {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   /* The slot already matches the photo; cover only absorbs the <0.5%
