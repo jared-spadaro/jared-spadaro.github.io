@@ -2,7 +2,7 @@
    Jared & Hannah — /wedding
    A "garden editorial" layout: a narrow column of cream and ink panels
    floating over a full-bleed photograph, set entirely in one high-contrast
-   Garamond with calligraphic swash initials.
+   Garamond, with a copperplate script for the names in the hero alone.
 
    Sections in source order:
      1. Tokens
@@ -46,20 +46,33 @@
 *::before,
 *::after { box-sizing: border-box; }
 
-html { -webkit-text-size-adjust: 100%; }
+html {
+  -webkit-text-size-adjust: 100%;
+  background: #7ea8cf;       /* the sky's colour, under the photograph */
+}
 
 body {
   margin: 0;
   font-family: var(--serif);
   font-weight: 300;
   color: var(--ink);
-  /* Printed sky, with a thin slate veil over it. The veil is doing one job:
-     the clouds are almost exactly the value of --cream, so without it the
-     column's edges dissolve wherever a cloud passes behind them. */
+}
+
+/* Printed sky, with a thin slate veil over it. The veil is doing one job:
+   the clouds are almost exactly the value of --cream, so without it the
+   column's edges dissolve wherever a cloud passes behind them.
+   It lives on a fixed layer rather than as `background-attachment: fixed`:
+   iOS Safari ignores fixed backgrounds and stretches `cover` over the whole
+   page height instead, blowing the clouds up into a blur. A fixed element
+   the size of the screen behaves the same everywhere. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
   background:
     linear-gradient(rgba(74, 98, 126, 0.24), rgba(74, 98, 126, 0.24)),
-    url("../img/cloud-background.avif") center / cover fixed no-repeat,
-    #7ea8cf;
+    url("../img/cloud-background.avif") center / cover no-repeat;
 }
 
 img { display: block; max-width: 100%; }
@@ -86,22 +99,6 @@ h1, h2, h3, p, figure, ul { margin: 0; }
 
 :focus-visible { outline: 1px solid var(--ink); outline-offset: 3px; }
 
-/* The calligraphic initial. It sits on the same baseline as the roman caps
-   beside it, so it needs its own size and a tuck on both sides. */
-.sw {
-  font-family: var(--swash);
-  font-weight: 400;
-  /* Pinyon's caps are 0.68em tall against Cormorant's 0.625em, so 1.45em
-     lands the swash about half again the height of the roman caps beside it —
-     the proportion the reference uses. */
-  font-size: 1.45em;
-  line-height: 0;
-  letter-spacing: 0;
-  /* The entry flourish overhangs the origin; give it room on the left and
-     claw the gap back on the right. */
-  margin-inline: 0.16em -0.02em;
-}
-
 .nowrap { white-space: nowrap; }
 
 /* Ampersand set in the text face's italic, not the script. */
@@ -112,7 +109,8 @@ h1, h2, h3, p, figure, ul { margin: 0; }
 
 /* Tiny tracked caps: nav items, eyebrows, card kickers. */
 .micro {
-  font-size: clamp(0.5rem, 0.86vw, 0.66rem);
+  /* The floor keeps these legible on a phone, where 0.86vw is ~3px. */
+  font-size: clamp(0.62rem, 0.86vw, 0.66rem);
   letter-spacing: 0.34em;
   text-indent: 0.34em;      /* tracking adds space after the last letter too */
   text-transform: uppercase;
@@ -212,6 +210,51 @@ h3 {
 .nav a:hover,
 .nav a[aria-current="page"] { color: var(--ink); }
 
+/* The mobile menu button: an ink disc in the top-right corner, the twin of
+   the music button in the bottom-right. Hidden on desktop, where the bar is
+   always visible. Its three bars fold into an X while the drawer is open. */
+.nav-toggle {
+  display: none;
+  position: fixed;
+  top: max(1rem, env(safe-area-inset-top));
+  right: max(1rem, env(safe-area-inset-right));
+  z-index: 70;
+  width: 2.75rem;
+  height: 2.75rem;
+  padding: 0;
+  border: 1px solid rgba(244, 242, 237, 0.28);
+  border-radius: 50%;
+  background: var(--ink);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.22);
+  cursor: pointer;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+.nav-toggle span {
+  display: block;
+  width: 1.1rem;
+  height: 1px;
+  background: var(--light);
+  transition: transform 0.3s ease, opacity 0.2s ease;
+}
+.nav-open .nav-toggle span:nth-child(1) { transform: translateY(5px) rotate(45deg); }
+.nav-open .nav-toggle span:nth-child(2) { opacity: 0; }
+.nav-open .nav-toggle span:nth-child(3) { transform: translateY(-5px) rotate(-45deg); }
+
+/* Dims the page behind the open drawer; tapping it closes the drawer. */
+.nav-scrim {
+  position: fixed;
+  inset: 0;
+  z-index: 55;
+  background: rgba(23, 23, 23, 0.38);
+}
+
+/* While the drawer is open the page underneath stays put. */
+.nav-open,
+.nav-open body { overflow: hidden; }
+
 /* ------------------------------------------------------------ 6. hero ----- */
 /* The column stops growing at --col while the viewport keeps going, so the
    names are sized against the hero's own width, not the viewport's. */
@@ -305,31 +348,32 @@ h3 {
 }
 
 /* --------------------------------------------- 8. story + timeline ------- */
-/* The black-and-white photograph beside a cream intro. The split itself is
-   cream, so if the intro ever runs taller than the photo the photo sits
-   centred on a mat instead of leaving a grey gap under it. */
-/* Side by side, the intro is sized in units of the row's own width (cqw), as
-   the photo's height is — so text that fits beside the photo at one width
-   fits at every width. It stacks below 1100px (see responsive). */
-.story {
-  background: var(--cream);
-  container-type: inline-size;
+/* One cream panel: the black-and-white photograph beside the intro, then a
+   hairline, then the timeline. The photo is matted inside the panel's
+   padding and centred against the intro, so however long the intro runs the
+   photo sits level with its middle. Stacks below 900px (see responsive). */
+.story { padding: var(--pad); }
+.story__top {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: var(--pad);
 }
 .story__intro {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  gap: 1.1cqw;
-  padding: 2.6cqw 3.4cqw;
+  gap: clamp(0.8rem, 1.8vw, 1.3rem);
   text-align: center;
 }
-.story__intro .title { font-size: 3.6cqw; }
-.story__intro .prose { font-size: 1.42cqw; }
 
 /* A centred rule with the chapters hung off alternate sides of it. Below
    720px the rule moves to the left edge and every chapter sits to its right. */
-.timeline { padding: var(--pad); }
+.timeline {
+  margin-top: var(--pad);
+  padding-top: var(--pad);
+  border-top: 1px solid var(--rule);
+}
 /* Each chapter spans two grid rows, one row below the last, so the two sides
    interleave like a zip instead of each chapter taking a full-width row. */
 .timeline__list {
@@ -585,20 +629,14 @@ h3 {
 .music.is-playing .music__off { display: none; }
 
 /* ------------------------------------------------------- 15. responsive --- */
-@media (max-width: 1100px) {
-  /* Half a column is too narrow for the story intro down here; stack it and
-     hand its type back to the shared sizes. */
-  .story { grid-template-columns: 1fr; }
-  .story__intro { gap: clamp(0.8rem, 1.8vw, 1.3rem); padding: var(--pad); }
-  .story__intro .title { font-size: clamp(2rem, 4.6vw, 3.6rem); }
-  .story__intro .prose {
-    font-size: clamp(1.02rem, 1.35vw, 1.2rem);
-    max-width: 34rem;
-  }
-}
-
 @media (max-width: 960px) {
   .hotels { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 900px) {
+  /* Half the panel is too narrow for the story intro; stack photo over text. */
+  .story__top { grid-template-columns: 1fr; }
+  .story__intro .prose { max-width: 34rem; }
 }
 
 @media (max-width: 720px) {
@@ -627,12 +665,36 @@ h3 {
   /* Clear the floating music button. */
   .footer { padding-bottom: 5rem; }
 
-  /* The bar wraps to two rows down here; a left rule on the first item of
-     the second row would read as a stray tick, so the rules come off. */
-  .nav li + li { border-left: 0; }
-  /* Two stacked rows at the desktop height would eat the first screen, and
-     with the rules gone there are no boxes left to keep tall anyway. */
-  .nav a { padding: 1.05rem 0.75rem; }
+  /* The nav becomes a drawer parked off the right edge of the screen. It is
+     hidden (not just moved) while closed so its links drop out of the tab
+     order; visibility flips only after the slide-out has finished. */
+  .nav-toggle { display: flex; }
+  .nav {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 60;
+    width: min(78vw, 300px);
+    flex-direction: column;
+    justify-content: center;
+    padding: 5rem 1.75rem 2rem;
+    background: var(--cream);
+    box-shadow: -8px 0 32px rgba(0, 0, 0, 0.18);
+    font-size: 0.78rem;
+    transform: translateX(100%);
+    visibility: hidden;
+    transition: transform 0.35s ease, visibility 0s linear 0.35s;
+  }
+  .nav-open .nav {
+    transform: none;
+    visibility: visible;
+    transition: transform 0.35s ease, visibility 0s;
+  }
+  .nav:focus { outline: none; }   /* focused on open only to seat the Tab order */
+  .nav ul { flex-direction: column; flex-wrap: nowrap; text-align: center; }
+  .nav li + li { border-left: 0; border-top: 1px solid var(--rule); }
+  .nav a { padding: 1.15rem 0.25rem; }
 }
 
 @media (prefers-reduced-motion: reduce) {

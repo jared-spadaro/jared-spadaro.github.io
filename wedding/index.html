@@ -14,7 +14,7 @@
     <link rel="icon" type="image/png" sizes="16x16" href="../favicon/swan-favicon-16x16.png" />
 
     <!-- Two faces do all the work: a high-contrast Garamond for everything,
-         and a copperplate script used only for single swash initials. -->
+         and a copperplate script used only for the names in the hero. -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -35,11 +35,11 @@
          ---------------------------------------------------------------
          hero-left         hannah-jared-beach-1.jpg
          hero-right        hannah-jared-lake-1.jpg
-         story-photo       sitting-bw-1.jpg
-         verse-inset       kissing-beach.jpg
-         verse-photo       pensive-bw.jpeg
          schedule-friday   tahoe-boat.JPG
          schedule-saturday running-bw.jpg
+         story-photo       sitting-bw-1.jpg
+         verse-photo       pensive-bw.jpeg
+         (verse, left)     sutro-sitting.jpg — a plain <img>, not a slot
 
        See README.md for the full table.
        ===================================================================== -->
@@ -48,14 +48,27 @@
 
     <div class="column">
       <!-- ---------------------------------------------------------- nav -->
-      <nav class="nav micro panel" aria-label="Primary">
+      <!-- A bar on desktop. Below 720px it becomes a drawer that slides in
+           from the right, opened by the round button in the top-right corner. -->
+      <button
+        class="nav-toggle"
+        id="navToggle"
+        type="button"
+        aria-controls="primaryNav"
+        aria-expanded="false"
+        aria-label="Open menu"
+      >
+        <span></span><span></span><span></span>
+      </button>
+      <div class="nav-scrim" id="navScrim" hidden></div>
+
+      <nav class="nav micro panel" id="primaryNav" aria-label="Primary" tabindex="-1">
         <ul>
           <li><a href="#top" aria-current="page">Home</a></li>
-          <li><a href="#story">Our Story</a></li>
           <li><a href="#schedule">Schedule</a></li>
+          <li><a href="#story">Our Story</a></li>
           <li><a href="#travel">Travel</a></li>
           <li><a href="#registry">Registry</a></li>
-          <li><a href="#rsvp">RSVP</a></li>
         </ul>
       </nav>
 
@@ -99,107 +112,10 @@
           </p>
         </section>
 
-        <!-- ----------------------------------------------------- story -->
-        <section class="split story" id="story" aria-labelledby="storyTitle">
-          <figure class="slot slot--landscape" data-slot="story-photo">
-            <img
-              loading="lazy"
-              decoding="async"
-              src="img/sitting-bw-1.jpg"
-              alt="Hannah and Jared sitting on the grass in Alamo Square"
-              width="2316"
-              height="1536"
-            />
-          </figure>
-
-          <div class="panel story__intro">
-            <h2 class="title" id="storyTitle"><span class="sw">O</span>ur Story</h2>
-            <p class="prose">
-              We got to know each other as friends for several months before
-              any romantic element emerged. This allowed us to get acquainted
-              without the pressure of a relationship. As friends, we had instant chemistry.
-              Our similar senses of humor formed the bedrock of our time together. In an early ploy
-              to allow him to spend some extra quality time with Hannah, Jared attended a yoga class
-              for the first time in his life.
-              <br/><br/>
-               We share a love and appreciation of nature. A common weekend activity in the summer months
-               is a hike in the coastal hills of Mt Tamalapais or the redwoods of the Santa Cruz mountains.
-               Alternatively, we will often stroll around the hills of San Francisco, frequenting
-               its many bucolic parks and listening to the chattering of the local birds. In the winters, our favorite
-               activity is snowboarding at Palisades Tahoe. Amongst sweeping mountain vistas, we always experience a vast range
-               of emotions as we navigate dynamic weather conditions and varied terrain.
-            </p>
-          </div>
-        </section>
-
-        <!-- -------------------------------------------------- timeline -->
-        <section class="panel timeline detached" aria-label="Our story, in order">
-          <ol class="timeline__list">
-            <li>
-              <p class="micro timeline__when">August 2019</p>
-              <h3>It begins</h3>
-              <p class="prose">
-                We met at Cisco Systems in San Jose CA, our first jobs out of college. This where we got know
-                each other amid the sea of computer screens and the gurgling utterances of the CEO's old coffee machine
-                (we got recruited by the office manager to help care for the old beast).
-              </p>
-            </li>
-
-            <li>
-              <p class="micro timeline__when">2020 - 2022</p>
-              <h3>A Tale of Two Cities</h3>
-              <p class="prose">
-                For the first several years, Jared made a weekly pilgrimage from San Jose to San Francisco
-                to spend weekends with his beaux. Many thanks are due to Hannah's roommates for allowing him
-                to be an itinerant lodger during this period.
-              </p>
-            </li>
-
-            <li>
-              <p class="micro timeline__when">June 2022</p>
-              <h3>Head in the Clouds</h3>
-              <p class="prose">
-                Jared made the fateful decision to move to San Francisco, in the pint-sized neighborhood of Diamond Heights.
-                The area is best known for its lofty location above the city, which brings exposure to a combination of high winds 
-                and thick fog.
-              </p>
-            </li>
-
-            <li>
-              <p class="micro timeline__when">August 2023</p>
-              <h3>Den of thieves</h3>
-              <p class="prose">
-                We moved in together in the Noe Valley neighborhood of San Francisco in the second floor of a century-old
-                duplex perched atop a hill just a block from the famous Mission Dolores Park. The location is notable for its proximity 
-                to several well-known neighborhoods, including Castro and Mission.
-              </p>
-            </li>
-
-            <li>
-              <p class="micro timeline__when">August 2025</p>
-              <h3>A cut above</h3>
-              <p class="prose">
-                Jared popped the question at the Pemberton Steps, a series of stunning stairwells
-                draped in greenery in the hills of San Francisco. 
-                We often walk up them during our regularly scheduled city excursions.
-              </p>
-            </li>
-
-            <li>
-              <p class="micro timeline__when">July 17, 2027</p>
-              <h3>Sailor's Knot</h3>
-              <p class="prose">
-                We couldn't be more thrilled to celebrate the start of the next chapter of our lives with all of you in
-                beautiful Salem Massachusetts!
-              </p>
-            </li>
-          </ol>
-        </section>
-
         <!-- -------------------------------------------------- schedule -->
         <section class="panel schedule detached" id="schedule" aria-labelledby="scheduleTitle">
           <p class="micro">The weekend</p>
-          <h2 class="title" id="scheduleTitle"><span class="sw">S</span>chedule</h2>
+          <h2 class="title" id="scheduleTitle">Schedule</h2>
 
           <ul class="schedule__cards">
             <li class="event">
@@ -262,10 +178,109 @@
           </ul>
         </section>
 
+        <!-- ----------------------------------------------------- story -->
+        <section class="panel story detached" id="story" aria-labelledby="storyTitle">
+          <div class="story__top">
+            <figure class="slot slot--landscape" data-slot="story-photo">
+              <img
+                loading="lazy"
+                decoding="async"
+                src="img/sitting-bw-1.jpg"
+                alt="Hannah and Jared sitting on the grass in Alamo Square"
+                width="2316"
+                height="1536"
+              />
+            </figure>
+  
+            <div class="story__intro">
+              <h2 class="title" id="storyTitle">Our Story</h2>
+              <p class="prose">
+                We got to know each other as friends for several months before
+                any romantic element emerged. This allowed us to get acquainted
+                without the pressure of a relationship. As friends, we had instant chemistry.
+                Our similar senses of humor formed the bedrock of our time together. In an early ploy
+                to allow him to spend some extra quality time with Hannah, Jared attended a yoga class
+                for the first time in his life.
+                <br/><br/>
+                 We share a love and appreciation of nature. A common weekend activity in the summer months
+                 is a hike in the coastal hills of Mt Tamalapais or the redwoods of the Santa Cruz mountains.
+                 Alternatively, we will often stroll around the hills of San Francisco, frequenting
+                 its many bucolic parks and listening to the chattering of the local birds. In the winters, our favorite
+                 activity is snowboarding at Palisades Tahoe. Amongst sweeping mountain vistas, we always experience a vast range
+                 of emotions as we navigate dynamic weather conditions and varied terrain.
+              </p>
+            </div>
+          </div>
+
+          <!-- The same story, in order. -->
+          <div class="timeline">
+            <ol class="timeline__list">
+              <li>
+                <p class="micro timeline__when">August 2019</p>
+                <h3>It begins</h3>
+                <p class="prose">
+                  We met at Cisco Systems in San Jose CA, our first jobs out of college. This where we got know
+                  each other amid the sea of computer screens and the gurgling utterances of the CEO's old coffee machine
+                  (we got recruited by the office manager to help care for the old beast).
+                </p>
+              </li>
+  
+              <li>
+                <p class="micro timeline__when">2020 - 2022</p>
+                <h3>A Tale of Two Cities</h3>
+                <p class="prose">
+                  For the first several years, Jared made a weekly pilgrimage from San Jose to San Francisco
+                  to spend weekends with his beaux. Many thanks are due to Hannah's roommates for allowing him
+                  to be an itinerant lodger during this period.
+                </p>
+              </li>
+  
+              <li>
+                <p class="micro timeline__when">June 2022</p>
+                <h3>Head in the Clouds</h3>
+                <p class="prose">
+                  Jared made the fateful decision to move to San Francisco, in the pint-sized neighborhood of Diamond Heights.
+                  The area is best known for its lofty location above the city, which brings exposure to a combination of high winds 
+                  and thick fog.
+                </p>
+              </li>
+  
+              <li>
+                <p class="micro timeline__when">August 2023</p>
+                <h3>Den of thieves</h3>
+                <p class="prose">
+                  We moved in together in the Noe Valley neighborhood of San Francisco in the second floor of a century-old
+                  duplex perched atop a hill just a block from the famous Mission Dolores Park. The location is notable for its proximity 
+                  to several well-known neighborhoods, including Castro and Mission.
+                </p>
+              </li>
+  
+              <li>
+                <p class="micro timeline__when">August 2025</p>
+                <h3>A cut above</h3>
+                <p class="prose">
+                  Jared popped the question at the Pemberton Steps, a series of stunning stairwells
+                  draped in greenery in the hills of San Francisco. 
+                  We often walk up them during our regularly scheduled city excursions.
+                </p>
+              </li>
+  
+              <li>
+                <p class="micro timeline__when">July 17, 2027</p>
+                <h3>Sailor's Knot</h3>
+                <p class="prose">
+                  We couldn't be more thrilled to celebrate the start of the next chapter of our lives with all of you in
+                  beautiful Salem Massachusetts!
+                </p>
+              </li>
+            </ol>
+          </div>
+        </section>
+
         <!-- ---------------------------------------------------- travel -->
         <section class="panel travel detached" id="travel" aria-labelledby="travelTitle">
           <p class="micro">Getting to Salem</p>
-          <h2 class="title" id="travelTitle"><span class="sw">T</span>ravel</h2>
+          <h2 class="title" id="travelTitle">Travel</h2>
 
           <div class="travel__how">
             <div>
@@ -347,7 +362,7 @@
                 loading="lazy"
                 decoding="async"
                 src="img/sutro-sitting.jpg"
-                alt="Hannah and Jared kissing on the beach"
+                alt="Hannah and Jared looking out over the city toward Sutro Tower"
               />
           </div>
 
@@ -366,7 +381,7 @@
         <!-- -------------------------------------------------- registry -->
         <section class="panel registry detached" id="registry" aria-labelledby="registryTitle">
           <div class="menu__inner">
-            <h2 class="title" id="registryTitle"><span class="sw">R</span>egistry</h2>
+            <h2 class="title" id="registryTitle">Registry</h2>
             <p class="micro">Coming soon</p>
           </div>
         </section>
@@ -377,7 +392,7 @@
         <p class="micro" style="color: rgba(244, 242, 237, 0.62)">
           Saturday, the seventeenth of July
         </p>
-        <p class="footer__names">Hannah <span class="amp">&amp;</span> <span class="sw">J</span>ared</p>
+        <p class="footer__names">Hannah <span class="amp">&amp;</span> Jared</p>
         <p class="micro footer__meta" style="color: rgba(244, 242, 237, 0.62)">
           Peabody Essex Museum &middot; Salem, Massachusetts
         </p>
@@ -412,6 +427,43 @@
     </button>
 
     <script>
+      // Mobile menu. Below 720px the nav is a drawer off the right edge;
+      // the toggle slides it in, and a link tap, the scrim or Escape closes it.
+      (function () {
+        var btn = document.getElementById("navToggle");
+        var nav = document.getElementById("primaryNav");
+        var scrim = document.getElementById("navScrim");
+
+        function setOpen(open) {
+          document.documentElement.classList.toggle("nav-open", open);
+          btn.setAttribute("aria-expanded", open ? "true" : "false");
+          btn.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+          scrim.hidden = !open;
+          // Focus the drawer itself, so the next Tab lands on its first link
+          // without drawing a focus ring on "Home" for every tap.
+          if (open) nav.focus({ preventScroll: true });
+        }
+
+        btn.addEventListener("click", function () {
+          setOpen(btn.getAttribute("aria-expanded") !== "true");
+        });
+        scrim.addEventListener("click", function () { setOpen(false); });
+        nav.addEventListener("click", function (e) {
+          if (e.target.closest("a")) setOpen(false);
+        });
+        document.addEventListener("keydown", function (e) {
+          if (e.key === "Escape" && btn.getAttribute("aria-expanded") === "true") {
+            setOpen(false);
+            btn.focus();
+          }
+        });
+        // Rotating a phone to landscape can cross the breakpoint with the
+        // drawer open; drop the open state so the desktop bar isn't affected.
+        window.matchMedia("(min-width: 721px)").addEventListener("change", function (m) {
+          if (m.matches) setOpen(false);
+        });
+      })();
+
       // Browsers only let audio start after the visitor interacts with the
       // page, so the song waits for the first tap, click or key press — then
       // fades in. A mute is remembered so a returning visitor isn't surprised.

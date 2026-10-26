@@ -29,10 +29,23 @@ browser, and reloads the page every time you save a file under `wedding/`.
 
 ## The page, top to bottom
 
-Nav · hero · venue band · **Our Story** (photo + intro) · timeline · menu
-block · verse · **Schedule** (Friday bonfire, Saturday wedding) · **Travel**
-(getting here, getting around, room-block note, hotels) · **Registry** (coming
-soon) · footer (`#rsvp`).
+Nav · hero · venue band · **Schedule** (Friday bonfire, Saturday wedding) ·
+**Our Story** (photo + intro, then the timeline, as one panel) · **Travel**
+(getting here, getting around, room-block note, hotels) · verse (two photos) ·
+**Registry** (coming soon) · footer.
+
+## Navigation
+
+On desktop the nav is the bar at the top of the column. Below 720px that bar
+turns into a drawer: the round ink button in the top-right corner (the twin of
+the music button in the bottom-right) slides it in from the right edge. Tapping
+a link, the dimmed page behind it, or pressing Escape closes it, and the page
+underneath doesn't scroll while it's open. The script is the first block at the
+bottom of `index.html`; the styles are in the `.nav-toggle` / `.nav-scrim`
+rules and the 720px block of `css/wedding.css`.
+
+The nav links follow the page order. If you add or move a section, update the
+`<ul>` in the `<nav>` to match.
 
 ## The look
 
@@ -45,23 +58,20 @@ Two typefaces do all of it:
 | Role | Face | Where |
 | --- | --- | --- |
 | Everything | Cormorant Garamond 300/400 | headings, nav, labels, body |
-| The names, and swash initials | Pinyon Script | the `<h1>`, and the `.sw` span — one letter at a time |
+| The names in the hero | Pinyon Script | the `<h1>` only |
 
 The names in the hero are set wholesale in the script face — no caps, no
-tracking, since a copperplate takes neither. Everywhere else the script appears
-one letter at a time, and `.sw` is the trick. It sets a single capital in the script face at
-`1.45em`, which lands it about half again the height of the roman capitals
-beside it — the proportion the reference uses. Pinyon's entry flourish
-overhangs its origin, so the class pads the left and claws the gap back on the
-right; if you move a swash onto a letter with a different flourish (`C`, `A`,
-`M`) you may want to nudge `margin-inline`.
+tracking, since a copperplate takes neither. Nowhere else uses it: every other
+heading is one face throughout, with no decorative first letters.
 
 The palette is four custom properties at the top of `css/wedding.css`
 (`--cream`, `--cream-dim`, `--ink`, `--light`). The background is
-`cloud-background.avif`, fixed and covering, under a thin slate veil. The veil
-is load-bearing: the clouds are almost exactly the value of `--cream`, so
-without it the column's edges dissolve wherever a cloud passes behind them.
-Both live in the `body` rule.
+`cloud-background.avif` under a thin slate veil. The veil is load-bearing: the
+clouds are almost exactly the value of `--cream`, so without it the column's
+edges dissolve wherever a cloud passes behind them. Both live on `body::before`,
+a fixed, screen-sized layer behind the page — not `background-attachment:
+fixed`, which iOS Safari ignores, stretching the clouds over the whole page
+height instead.
 
 ## Photos: nothing is cropped
 
@@ -80,22 +90,20 @@ landscape sources. A photo of another shape needs a slot class of its own ratio
 | --- | --- | --- |
 | `hero-left` | first screen, left half | `hannah-jared-beach-1.jpg` |
 | `hero-right` | first screen, right half | `hannah-jared-lake-1.jpg` |
-| `story-photo` | beside the Our Story intro | `sitting-bw-1.jpg` |
-| `verse-inset` | small photo floated over the verse | `kissing-beach.jpg` |
-| `verse-photo` | beside the verse | `pensive-bw.jpeg` |
 | `schedule-friday` | Friday card | `tahoe-boat.JPG` |
 | `schedule-saturday` | Saturday card | `running-bw.jpg` |
+| `story-photo` | beside the Our Story intro | `sitting-bw-1.jpg` |
+| `verse-photo` | verse row, right half | `pensive-bw.jpeg` |
 
 The same table is repeated as a comment just above `<body>` in `index.html`.
-`snowboarding.JPG` (portrait) and `sutro-sitting.jpg` are no longer on the
-page; the `photo-placeholder-*.svg` files are unused stand-ins.
+The verse row's left half is `sutro-sitting.jpg` as a plain `<img>` inside a
+3:2 panel rather than a slot. `snowboarding.JPG` and `kissing-beach.jpg` are no
+longer on the page; the `photo-placeholder-*.svg` files are unused stand-ins.
 
 **Symmetry.** In each two-up (`.split`) the photo keeps its ratio and the panel
-beside it matches its height: the verse panel is itself 3:2, and the story
-intro is sized in container units (`cqw`) of the row, so its text always fits
-beside the photo. Below 1100px the story stacks; below 720px every two-up
-stacks. If you lengthen the story intro, check it still fits beside the photo
-at 1101px wide — that's the tightest point.
+beside it matches its height (the verse panel is itself 3:2). The story's photo
+is matted inside its panel and centred against the intro text, so the intro can
+be any length. Below 900px the story stacks; below 720px every two-up stacks.
 
 Note the file extensions are not uniform (`.jpg`, `.jpeg`, `.JPG`). GitHub
 Pages serves case-sensitively, so each `src` has to match its file exactly.
@@ -120,17 +128,6 @@ paints a dark gradient over each one. It exists so the title stays legible
 whatever photo gets dropped in later — don't remove it without checking the
 title against the new photos.
 
-## Still to fill in
+## Still to come
 
-The story and timeline are written with `[TBD: …]` markers wherever a fact is
-needed — search `index.html` for `[TBD`:
-
-- how they met: month/year, where, city, one detail
-- first date: month/year, where
-- the in-between years: one or two milestones
-- home: month/year, neighbourhood and city
-- favourite things: anything beyond the outdoors
-- the proposal: month/year, where, how it happened
-
-Also still to come: the room-block booking link (opens around early 2027), the
-registry, and an actual RSVP — `#rsvp` is still just the footer.
+The room-block booking link (opens around early 2027) and the registry.
