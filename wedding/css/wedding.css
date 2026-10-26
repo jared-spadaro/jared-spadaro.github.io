@@ -327,10 +327,17 @@ h3 {
 }
 
 /* ------------------------------------------------------- 7. creed band ---- */
-/* The ink bar under the hero: venue and town. */
+/* The ink bar: venue and town. It lives inside the hero, between the two
+   photos in the source, so that on a phone — where the photos stack — it
+   falls between them. On desktop it is pinned to a second row spanning both
+   photos (the 720px block hands it back to source order). */
 .creed {
   text-align: center;
   padding: clamp(2rem, 5vw, 3.6rem) var(--pad);
+}
+.hero .creed {
+  grid-column: 1 / -1;
+  grid-row: 2;
 }
 .creed p {
   font-size: clamp(0.95rem, 2.15vw, 1.7rem);
@@ -340,17 +347,18 @@ h3 {
   color: rgba(244, 242, 237, 0.92);
 }
 
-/* The museum link is meant to disappear into the line — it only marks itself
-   on hover. Focus gets the rule too, since a keyboard user cannot hover to
-   discover it. */
+/* The museum name is a link, and always underlined so it reads as one —
+   on a phone there is no hover to discover it. */
 .creed a {
-  text-decoration: none;
+  text-decoration: underline;
   text-underline-offset: 0.2em;
   text-decoration-thickness: 1px;
+  text-decoration-color: rgba(244, 242, 237, 0.55);
+  transition: text-decoration-color 0.2s ease;
 }
 .creed a:hover,
 .creed a:focus-visible {
-  text-decoration: underline;
+  text-decoration-color: currentColor;
 }
 
 /* --------------------------------------------- 8. story + timeline ------- */
@@ -650,9 +658,24 @@ h3 {
 
   /* Every two-up becomes a stack; each photo keeps its own ratio. */
   .split { grid-template-columns: 1fr; }
+  /* Back to source order: first photo, venue band, second photo. */
+  .hero .creed { grid-column: auto; grid-row: auto; }
 
   .timeline__list { grid-template-columns: 1fr; }
-  .timeline__list::before { left: 3px; }
+  /* The rule is drawn per chapter, from its bead down to the next chapter's
+     bead, so it stops at the last bead instead of running on beneath the
+     final chapter's text. */
+  .timeline__list::before { content: none; }
+  .timeline__list li::after {
+    content: "";
+    position: absolute;
+    top: 0.4rem;
+    bottom: -0.4rem;
+    left: 3px;
+    width: 1px;
+    background: var(--rule);
+  }
+  .timeline__list li:last-child::after { content: none; }
   .timeline__list li,
   .timeline__list li:nth-child(even) {
     grid-column: 1;
@@ -669,7 +692,7 @@ h3 {
   .hotels { grid-template-columns: 1fr; }
 
   /* Clear the floating music button. */
-  .footer { padding-bottom: 5rem; }
+  .footer { padding-bottom: 3rem; }
 
   /* The nav becomes a drawer parked off the right edge of the screen. It is
      hidden (not just moved) while closed so its links drop out of the tab

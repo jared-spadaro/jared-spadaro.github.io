@@ -84,6 +84,20 @@
             />
           </figure>
 
+          <!-- The venue band. A full-width bar under both photos on desktop;
+               on a phone, where the photos stack, it sits between them. -->
+          <div class="panel--ink creed">
+            <p>
+              <a
+                href="https://www.pem.org/"
+                target="_blank"
+                rel="noopener noreferrer"
+                >Peabody Essex Museum</a
+              ><br />
+              Salem, Massachusetts
+            </p>
+          </div>
+
           <figure class="slot slot--landscape" data-slot="hero-right">
             <img
               src="img/hannah-jared-lake-1.jpg"
@@ -98,19 +112,6 @@
             <p class="hero__where">Saturday, the Seventeenth of July</p>
           </div>
         </header>
-
-        <!-- ----------------------------------------------------- creed -->
-        <section class="panel panel--ink creed" aria-label="Venue">
-          <p>
-            <a
-              href="https://www.pem.org/"
-              target="_blank"
-              rel="noopener noreferrer"
-              >Peabody Essex Museum</a
-            ><br />
-            Salem, Massachusetts
-          </p>
-        </section>
 
         <!-- -------------------------------------------------- schedule -->
         <section class="panel schedule detached" id="schedule" aria-labelledby="scheduleTitle">
@@ -277,6 +278,18 @@
           </div>
         </section>
 
+                <!-- ----------------------------------------------------- verse -->
+        <section class="split detached" id="day" aria-label="The day">
+          <div class="panel verse">
+              <img
+                loading="lazy"
+                decoding="async"
+                src="img/sutro-sitting.jpg"
+                alt="Hannah and Jared looking out over the city toward Sutro Tower"
+              />
+          </div>
+        </section>
+
         <!-- ---------------------------------------------------- travel -->
         <section class="panel travel detached" id="travel" aria-labelledby="travelTitle">
           <p class="micro">Getting to Salem</p>
@@ -357,14 +370,6 @@
 
         <!-- ----------------------------------------------------- verse -->
         <section class="split detached" id="day" aria-label="The day">
-          <div class="panel verse">
-              <img
-                loading="lazy"
-                decoding="async"
-                src="img/sutro-sitting.jpg"
-                alt="Hannah and Jared looking out over the city toward Sutro Tower"
-              />
-          </div>
 
           <figure class="slot slot--landscape" data-slot="verse-photo">
             <img
@@ -389,29 +394,12 @@
 
       <!-- ------------------------------------------------------- footer -->
       <footer class="panel panel--ink footer detached" id="rsvp">
-        <p class="micro" style="color: rgba(244, 242, 237, 0.62)">
-          Saturday, the seventeenth of July
-        </p>
         <p class="footer__names">Hannah <span class="amp">&amp;</span> Jared</p>
         <p class="micro footer__meta" style="color: rgba(244, 242, 237, 0.62)">
           Peabody Essex Museum &middot; Salem, Massachusetts
         </p>
         <p class="micro footer__meta" style="color: rgba(244, 242, 237, 0.62)">
           <a href="../">antisocialistic.com</a>
-        </p>
-        <p class="micro footer__credit">
-          Music: &ldquo;Easy Lemon&rdquo; by Kevin MacLeod (<a
-            href="https://incompetech.com/"
-            target="_blank"
-            rel="noopener noreferrer"
-            >incompetech.com</a
-          >), licensed under
-          <a
-            href="https://creativecommons.org/licenses/by/4.0/"
-            target="_blank"
-            rel="noopener noreferrer"
-            >CC BY 4.0</a
-          >
         </p>
       </footer>
     </div>
