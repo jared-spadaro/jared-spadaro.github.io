@@ -14,7 +14,7 @@
      7. Creed band
      8. Story (photo | intro) + timeline
      9. Menu block
-    10. Verse
+    10. Photo pair
     11. Schedule cards
     12. Travel + registry
     13. Footer
@@ -29,7 +29,6 @@
   --ink: #171717;          /* the black band, and all type                   */
   --ink-soft: #4a4844;     /* micro labels                                   */
   --light: #f4f2ed;        /* type on ink                                    */
-  --ghost: rgba(23, 23, 23, 0.16); /* the oversized watermark verse          */
   --rule: rgba(23, 23, 23, 0.22);
 
   --serif: "Cormorant Garamond", "Cormorant", Garamond, "Times New Roman", serif;
@@ -285,8 +284,8 @@ h3 {
 .hero__text {
   /* One source for the names' size, so the date line can be a fixed
      fraction of it at every width. */
-  --names: clamp(1.75rem, 7.7vw, 6.3rem);  /* fallback: no container queries */
-  --names: clamp(1.75rem, 7cqw, 6.3rem);
+  --names: clamp(2.5rem, 7.7vw, 6.3rem);  /* fallback: no container queries */
+  --names: clamp(2.5rem, 7cqw, 6.3rem);
   position: absolute;
   inset: 0;
   display: flex;
@@ -315,7 +314,7 @@ h3 {
 /* The date, under the names and over the photographs. Tracked caps in the
    text face — the script is for the names only. */
 .hero__where {
-  margin: 0;
+  margin-top: -10px;
   /* A quarter of the names, but never small enough to stop being readable:
      on a phone the names are ~28px, and a quarter of that is not text. */
   font-size: max(0.8rem, calc(var(--names) * 0.25));
@@ -464,37 +463,10 @@ h3 {
 .menu__inner a:hover { opacity: 0.55; }
 .menu__sep { padding-inline: 0.5em; color: var(--ink-soft); }
 
-/* ------------------------------------------------------------ 10. verse --- */
-/* Oversized watermark type, clipped by the panel, with a small photograph
-   floated over the middle of it. The panel is 3:2 like the photograph beside
-   it, so the two halves are always exactly the same size. */
-.verse {
-  position: relative;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  aspect-ratio: 3 / 2;
-  background: transparent;
-}
-.verse__text {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: clamp(1rem, 2.5vw, 2rem);
-  font-size: clamp(1.4rem, 3.6vw, 2.9rem);
-  line-height: 1.22;
-  letter-spacing: 0.03em;
-  text-transform: uppercase;
-  color: var(--ghost);
-}
-.verse__photo {
-  position: relative;
-  width: min(56%, 300px);
-}
+/* ------------------------------------------------------------- 10. pair --- */
+/* Two photographs side by side (Sutro | pensive). On desktop it is a plain
+   .split; on a phone it comes apart so the Sutro photo can move up the page
+   — see .pair in the 720px block. */
 
 /* -------------------------------------------------- 11. schedule cards ---- */
 /* Two equal cards, photograph over text. The location line is pushed to the
@@ -660,6 +632,26 @@ h3 {
   .split { grid-template-columns: 1fr; }
   /* Back to source order: first photo, venue band, second photo. */
   .hero .creed { grid-column: auto; grid-row: auto; }
+
+  /* The photo pair dissolves into the column (a flex column, and <main> is
+     display: contents, so every section is a flex item of it). Its Sutro
+     photo is then ordered up between the timeline and Travel to break up the
+     text; the pensive photo keeps the pair's place. Everything from Travel
+     down needs a later order than the Sutro photo — give any new section
+     added below Travel order 2 as well. */
+  .pair { display: contents; }
+  .pair > .slot {
+    margin-top: var(--gap);
+    /* Undo .split's centring: as a flex item of the column, a centred slot
+       shrinks to its content — and its image is absolutely positioned, so
+       that is nothing. */
+    align-self: stretch;
+  }
+  .pair > [data-slot="pair-left"] { order: 1; }
+  .travel,
+  .pair > [data-slot="pair-right"],
+  .registry,
+  .footer { order: 2; }
 
   .timeline__list { grid-template-columns: 1fr; }
   /* The rule is drawn per chapter, from its bead down to the next chapter's

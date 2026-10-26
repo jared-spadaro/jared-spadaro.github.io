@@ -38,8 +38,8 @@
          schedule-friday   tahoe-boat.JPG
          schedule-saturday running-bw.jpg
          story-photo       sitting-bw-1.jpg
-         verse-photo       pensive-bw.jpeg
-         (verse, left)     sutro-sitting.jpg — a plain <img>, not a slot
+         pair-left         sutro-sitting.jpg (on a phone: above Travel)
+         pair-right        pensive-bw.jpeg
 
        See README.md for the full table.
        ===================================================================== -->
@@ -278,18 +278,6 @@
           </div>
         </section>
 
-                <!-- ----------------------------------------------------- verse -->
-        <section class="split detached" id="day" aria-label="The day">
-          <div class="panel verse">
-              <img
-                loading="lazy"
-                decoding="async"
-                src="img/sutro-sitting.jpg"
-                alt="Hannah and Jared looking out over the city toward Sutro Tower"
-              />
-          </div>
-        </section>
-
         <!-- ---------------------------------------------------- travel -->
         <section class="panel travel detached" id="travel" aria-labelledby="travelTitle">
           <p class="micro">Getting to Salem</p>
@@ -368,10 +356,24 @@
           </ul>
         </section>
 
-        <!-- ----------------------------------------------------- verse -->
-        <section class="split detached" id="day" aria-label="The day">
+        <!-- ----------------------------------------------------- pair -->
+        <!-- Two photographs side by side on desktop. On a phone this section
+             dissolves (display: contents) and the Sutro photo is reordered up
+             to sit between the timeline and Travel, to break up the text; the
+             other stays here. See .pair in the 720px block of the CSS. -->
+        <section class="split pair detached" id="day" aria-label="Photographs">
+          <figure class="slot slot--landscape" data-slot="pair-left">
+            <img
+              loading="lazy"
+              decoding="async"
+              src="img/sutro-sitting.jpg"
+              alt="Hannah and Jared looking out over the city toward Sutro Tower"
+              width="2316"
+              height="1536"
+            />
+          </figure>
 
-          <figure class="slot slot--landscape" data-slot="verse-photo">
+          <figure class="slot slot--landscape" data-slot="pair-right">
             <img
               loading="lazy"
               decoding="async"

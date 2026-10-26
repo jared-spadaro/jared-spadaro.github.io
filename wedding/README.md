@@ -31,8 +31,15 @@ browser, and reloads the page every time you save a file under `wedding/`.
 
 Nav · hero · venue band · **Schedule** (Friday bonfire, Saturday wedding) ·
 **Our Story** (photo + intro, then the timeline, as one panel) · **Travel**
-(getting here, getting around, room-block note, hotels) · verse (two photos) ·
-**Registry** (coming soon) · footer.
+(getting here, getting around, room-block note, hotels) · photo pair (Sutro |
+pensive) · **Registry** (coming soon) · footer.
+
+On a phone the hero's venue band sits between its two photos, and the photo
+pair comes apart: the Sutro photo moves up between the timeline and Travel to
+break up the text, while the pensive photo stays after Travel. That's done with
+`display: contents` and flex `order` in the 720px block of the CSS — any new
+section added below Travel needs `order: 2` there too, or it will jump above
+the Sutro photo on phones.
 
 ## Navigation
 
@@ -93,15 +100,15 @@ landscape sources. A photo of another shape needs a slot class of its own ratio
 | `schedule-friday` | Friday card | `tahoe-boat.JPG` |
 | `schedule-saturday` | Saturday card | `running-bw.jpg` |
 | `story-photo` | beside the Our Story intro | `sitting-bw-1.jpg` |
-| `verse-photo` | verse row, right half | `pensive-bw.jpeg` |
+| `pair-left` | photo pair, left (on a phone: above Travel) | `sutro-sitting.jpg` |
+| `pair-right` | photo pair, right | `pensive-bw.jpeg` |
 
 The same table is repeated as a comment just above `<body>` in `index.html`.
-The verse row's left half is `sutro-sitting.jpg` as a plain `<img>` inside a
-3:2 panel rather than a slot. `snowboarding.JPG` and `kissing-beach.jpg` are no
+`snowboarding.JPG` and `kissing-beach.jpg` are no
 longer on the page; the `photo-placeholder-*.svg` files are unused stand-ins.
 
 **Symmetry.** In each two-up (`.split`) the photo keeps its ratio and the panel
-beside it matches its height (the verse panel is itself 3:2). The story's photo
+beside it matches its height. The story's photo
 is matted inside its panel and centred against the intro text, so the intro can
 be any length. Below 900px the story stacks; below 720px every two-up stacks.
 
