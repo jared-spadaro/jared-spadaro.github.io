@@ -463,34 +463,57 @@ h3 {
    — see .pair in the 720px block. */
 
 /* -------------------------------------------------- 11. schedule cards ---- */
-/* Two equal cards, photograph over text. The location line is pushed to the
-   foot of each card so the two lines align even when the copy differs. */
+/* The heading runs up the left edge of the section; the cards sit to its
+   right, each one a block of text ranged right over its photograph. */
 .schedule {
   padding: var(--pad);
-  text-align: center;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: clamp(1.25rem, 3.5vw, 3rem);
+  align-items: start;
 }
-.schedule .title { margin-top: 0.4rem; }
+
+/* Rotated a quarter turn anticlockwise: it reads bottom to top, so you tilt
+   your head to the left. vertical-rl turns the glyphs; the 180 flip turns the
+   line itself, which is what puts the top of the letters on the left. */
+.schedule__head {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  display: flex;
+  align-items: baseline;
+  gap: clamp(0.5rem, 1.4vw, 1rem);
+}
+.schedule__head .title { margin: 0; }
+.schedule__head .micro { margin: 0; text-indent: 0; }
+
 .schedule__cards {
   list-style: none;
   padding: 0;
   display: grid;
   grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto;   /* text row, photo row */
   gap: clamp(1rem, 2.5vw, 2rem);
-  margin-top: clamp(1.5rem, 3vw, 2.5rem);
 }
+/* Both cards share the two rows, so the photographs line up however much the
+   text above them differs. */
 .event {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-row: span 2;
+  grid-template-rows: subgrid;
+  gap: 0;
 }
 .event__body {
-  flex: 1;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 0.6rem;
-  padding: clamp(1.1rem, 2.4vw, 1.75rem) clamp(0.5rem, 2vw, 1.5rem) 0;
+  align-items: flex-end;
+  text-align: right;
+  gap: 0.5rem;
+  padding-bottom: clamp(0.8rem, 1.8vw, 1.2rem);
 }
-.event__body .prose { max-width: 26rem; }
+/* Tracking leaves a space after the last letter of every line, which would
+   hold the text off the photograph's right edge. Pull it back. */
+.event__body .micro { text-indent: 0; margin-right: -0.34em; }
+.event__body h3 { margin-right: -0.05em; }
 .event__where { margin-top: auto; padding-top: 0.4rem; }
 .event__where a { border-bottom: 1px solid var(--rule); }
 .event__where a:hover { border-bottom-color: var(--ink); }
