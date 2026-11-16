@@ -171,16 +171,10 @@ h3 {
 
 /* ----------------------------------------------------- 4. column + panels - */
 .column {
-  width: min(var(--col), 92vw);
   margin-inline: auto;
-  padding-block: var(--edge);
   display: flex;
   flex-direction: column;
 }
-
-/* Blocks that float clear of the stack above, with the background showing
-   through the seam. */
-.detached { margin-top: var(--gap); }
 
 .panel { background: var(--cream); }
 .panel--ink { background: var(--ink); color: var(--light); }
