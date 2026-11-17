@@ -364,6 +364,23 @@ h3 {
    hairline, then the timeline. The photo is matted inside the panel's
    padding and centred against the intro, so however long the intro runs the
    photo sits level with its middle. Stacks below 900px (see responsive). */
+/* The two section rules: schedule | our story, and timeline | travel. Drawn
+   on the later section of each pair so the line sits in the space between
+   them, inset to the padding so it lines up with the content rather than
+   running to the column edges. */
+.story,
+.travel { position: relative; }
+.story::before,
+.travel::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: var(--pad);
+  right: var(--pad);
+  height: 1px;
+  background: var(--rule);
+}
+
 .story { padding: var(--pad); }
 .story__top {
   display: grid;
