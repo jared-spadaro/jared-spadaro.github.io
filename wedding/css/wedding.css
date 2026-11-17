@@ -144,6 +144,11 @@ h1, h2, h3, p, figure, ul { margin: 0; }
 
 .slot--landscape { aspect-ratio: 3 / 2; }
 
+/* The two schedule photographs are portrait, and not quite the same shape as
+   each other. Each gets its own ratio rather than a crop. */
+.slot--sign    { aspect-ratio: 768 / 1161; }
+.slot--running { aspect-ratio: 1050 / 1536; }
+
 /* In a two-up the photo keeps its ratio rather than stretching to its
    neighbour; the row is as tall as the photo and the panel beside it
    centres its content in that height. */
@@ -470,7 +475,6 @@ h3 {
   display: grid;
   grid-template-columns: auto 1fr;
   gap: clamp(1.25rem, 3.5vw, 3rem);
-  align-items: start;
 }
 
 /* Rotated a quarter turn anticlockwise: it reads bottom to top, so you tilt
@@ -483,16 +487,21 @@ h3 {
   align-items: baseline;
   gap: clamp(0.5rem, 1.4vw, 1rem);
 }
-.schedule__head .title { margin: 0; }
+.schedule__head .title { margin-top: 5rem; }
 .schedule__head .micro { margin: 0; text-indent: 0; }
 
+/* The two cards take their own width rather than half the section each, and
+   the pair is pushed to the right edge — the slack the portrait photographs
+   leave all falls to their left. */
 .schedule__cards {
   list-style: none;
   padding: 0;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: auto auto;
   grid-template-rows: auto auto;   /* text row, photo row */
-  gap: clamp(1rem, 2.5vw, 2rem);
+  justify-content: end;
+  column-gap: 20px;
+  row-gap: 0;
 }
 /* Both cards share the two rows, so the photographs line up however much the
    text above them differs. */
@@ -501,6 +510,14 @@ h3 {
   grid-row: span 2;
   grid-template-rows: subgrid;
   gap: 0;
+}
+/* The portrait photographs are sized by height, so the pair matches across
+   the row while each keeps its own width, and pushed to the right edge of
+   the card. The slack they leave falls on their left. */
+.event > .slot {
+  height: clamp(17rem, 32vw, 28rem);
+  width: auto;
+  justify-self: end;
 }
 .event__body {
   display: flex;
@@ -699,6 +716,11 @@ h3 {
   .schedule__cards,
   .travel__how,
   .hotels { grid-template-columns: 1fr; }
+
+  /* Stacked, the cards need air between them again: the zero row gap that
+     keeps each card's text tight to its own photograph would otherwise run
+     the first photograph straight into the second card's heading. */
+  .schedule__cards { row-gap: clamp(1.75rem, 6vw, 2.75rem); }
 
   /* Clear the floating music button. */
   .footer { padding-bottom: 3rem; }

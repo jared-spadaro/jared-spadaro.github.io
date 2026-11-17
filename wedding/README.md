@@ -97,8 +97,8 @@ landscape sources. A photo of another shape needs a slot class of its own ratio
 | --- | --- | --- |
 | `hero-left` | first screen, left half | `hannah-jared-beach-1.jpg` |
 | `hero-right` | first screen, right half | `hannah-jared-lake-1.jpg` |
-| `schedule-friday` | Friday card | `tahoe-boat.JPG` |
-| `schedule-saturday` | Saturday card | `running-bw.jpg` |
+| `schedule-friday` | Friday card | `vert/sign.jpg` |
+| `schedule-saturday` | Saturday card | `vert/running.jpg` |
 | `story-photo` | beside the Our Story intro | `sitting-bw-1.jpg` |
 | `pair-left` | photo pair, left (on a phone: above Travel) | `sutro-sitting.jpg` |
 | `pair-right` | photo pair, right | `pensive-bw.jpeg` |
