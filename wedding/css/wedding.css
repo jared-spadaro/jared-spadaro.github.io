@@ -504,7 +504,7 @@ h3 {
   align-items: baseline;
   gap: clamp(0.5rem, 1.4vw, 1rem);
 }
-.schedule__head .title { margin-top: 5rem; }
+.schedule__head .title { margin-top: 20%; }
 .schedule__head .micro { margin: 0; text-indent: 0; }
 
 /* The two cards take their own width rather than half the section each, and
@@ -668,6 +668,8 @@ h3 {
 /* ------------------------------------------------------- 15. responsive --- */
 @media (max-width: 960px) {
   .hotels { grid-template-columns: repeat(2, 1fr); }
+
+  .schedule__cards { column-gap: 10px; }
 }
 
 @media (max-width: 900px) {
