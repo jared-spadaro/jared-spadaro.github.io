@@ -668,8 +668,9 @@ h3 {
 /* ------------------------------------------------------- 15. responsive --- */
 @media (max-width: 960px) {
   .hotels { grid-template-columns: repeat(2, 1fr); }
-
-  .schedule__cards { column-gap: 10px; }
+  .schedule__cards { column-gap: 0px; }
+  .schedule__head .title { margin-top: 10%; }
+  .schedule { gap: 10%; }
 }
 
 @media (max-width: 900px) {
