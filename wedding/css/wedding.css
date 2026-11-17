@@ -699,6 +699,8 @@ h3 {
     align-self: stretch;
   }
   .pair > [data-slot="pair-left"] { order: 1; }
+  /* This one butts straight up against Travel — no seam. */
+  .pair > [data-slot="pair-right"] { margin-top: 0; }
   .travel,
   .pair > [data-slot="pair-right"],
   .registry,
@@ -730,14 +732,22 @@ h3 {
   .timeline__list li::before,
   .timeline__list li:nth-child(even)::before { left: 0; right: auto; }
 
-  .schedule__cards,
   .travel__how,
   .hotels { grid-template-columns: 1fr; }
 
-  /* Stacked, the cards need air between them again: the zero row gap that
-     keeps each card's text tight to its own photograph would otherwise run
-     the first photograph straight into the second card's heading. */
-  .schedule__cards { row-gap: clamp(1.75rem, 6vw, 2.75rem); }
+  /* The schedule stays one row across: heading, then both cards side by
+     side. The cards share what width is left rather than sizing to their
+     text, which at 320px is wider than the photographs and pushed the page
+     into a horizontal scroll. The photographs stay ranged right inside. */
+  .schedule__cards { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .event > .slot { height: 44vw; }
+  /* The card titles set the cards' minimum width. At the desktop size
+     "WELCOME" alone is wider than half the room left on a 320px screen, and
+     the grid cannot shrink past it. */
+  .event__body h3 { font-size: clamp(0.95rem, 4.2vw, 1.7rem); }
+  /* At a card's width the date line will not take 0.34em of tracking —
+     "Saturday, July 17" breaks and strands the 17. */
+  .event__body .micro { letter-spacing: 0.13em; margin-right: -0.13em; }
 
   /* Clear the floating music button. */
   .footer { padding-bottom: 3rem; }
@@ -770,7 +780,7 @@ h3 {
   }
   .nav:focus { outline: none; }   /* focused on open only to seat the Tab order */
   .nav ul { flex-direction: column; flex-wrap: nowrap; text-align: center; }
-  .nav li + li { border-left: 0; border-top: 1px solid var(--rule); }
+  .nav li + li { border-left: 0; }
   .nav a { padding: 1.15rem 0.25rem; }
 }
 
