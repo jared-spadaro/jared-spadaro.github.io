@@ -517,7 +517,7 @@ h3 {
   grid-template-columns: auto auto;
   grid-template-rows: auto auto;   /* text row, photo row */
   justify-content: end;
-  column-gap: 20px;
+  column-gap: 40px;
   row-gap: 0;
 }
 /* Both cards share the two rows, so the photographs line up however much the
