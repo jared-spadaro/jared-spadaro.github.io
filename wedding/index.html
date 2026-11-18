@@ -84,8 +84,7 @@
             />
           </figure>
 
-          <!-- The venue band. A full-width bar under both photos on desktop;
-               on a phone, where the photos stack, it sits between them. -->
+          <!-- The venue band: a full-width bar under both photos. -->
           <div class="panel--ink creed">
             <p>
               <a
@@ -196,7 +195,17 @@
 
           <!-- The same story, in order. -->
           <div class="timeline">
-            <ol class="timeline__list">
+            <button
+              class="timeline__toggle micro"
+              id="timelineToggle"
+              type="button"
+              aria-expanded="false"
+              aria-controls="timelineList"
+            >
+              Read our story
+            </button>
+
+            <ol class="timeline__list" id="timelineList">
               <li>
                 <p class="micro timeline__when">August 2019</p>
                 <h3>It begins</h3>
@@ -398,6 +407,20 @@
     </button>
 
     <script>
+      // The timeline collapses on a phone. Its button is hidden by CSS at
+      // wider widths, where the chapters are always shown.
+      (function () {
+        var btn = document.getElementById("timelineToggle");
+        if (!btn) return;
+        var wrap = btn.closest(".timeline");
+
+        btn.addEventListener("click", function () {
+          var open = wrap.classList.toggle("is-open");
+          btn.setAttribute("aria-expanded", open ? "true" : "false");
+          btn.textContent = open ? "Hide our story" : "Read our story";
+        });
+      })();
+
       // Mobile menu. Below 720px the nav is a drawer off the right edge;
       // the toggle slides it in, and a link tap, the scrim or Escape closes it.
       (function () {

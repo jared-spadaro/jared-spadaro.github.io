@@ -405,6 +405,10 @@ h3 {
 }
 /* Each chapter spans two grid rows, one row below the last, so the two sides
    interleave like a zip instead of each chapter taking a full-width row. */
+/* The control for the collapsed timeline. It only appears on a phone — see
+   the 720px block; everywhere else the chapters are simply shown. */
+.timeline__toggle { display: none; }
+
 .timeline__list {
   list-style: none;
   position: relative;
@@ -682,10 +686,10 @@ h3 {
 @media (max-width: 720px) {
   :root { --gap: 8px; }
 
-  /* Every two-up becomes a stack; each photo keeps its own ratio. */
-  .split { grid-template-columns: 1fr; }
-  /* Back to source order: first photo, venue band, second photo. */
-  .hero .creed { grid-column: auto; grid-row: auto; }
+  /* Every two-up becomes a stack, except the hero: its two photographs stay
+     side by side so the names can sit centred across both of them, with the
+     venue band spanning underneath as it does at full width. */
+  .split:not(.hero) { grid-template-columns: 1fr; }
 
   /* The photo pair dissolves into the column (a flex column, and <main> is
      display: contents, so every section is a flex item of it). Its Sutro
@@ -709,7 +713,18 @@ h3 {
   .registry,
   .footer { order: 2; }
 
-  .timeline__list { grid-template-columns: 1fr; }
+  .timeline__toggle {
+    display: block;
+    margin: 0 auto;
+    padding: 0.9rem 1.6rem;
+    border: 1px solid var(--rule);
+    background: none;
+    font-family: inherit;
+    color: var(--ink-soft);
+    cursor: pointer;
+  }
+  .timeline__list { grid-template-columns: 1fr; display: none; }
+  .timeline.is-open .timeline__list { display: grid; margin-top: var(--pad); }
   /* The rule is drawn per chapter, from its bead down to the next chapter's
      bead, so it stops at the last bead instead of running on beneath the
      final chapter's text. */
