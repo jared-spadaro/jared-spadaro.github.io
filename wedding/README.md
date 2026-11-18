@@ -80,7 +80,7 @@ a fixed, screen-sized layer behind the page — not `background-attachment:
 fixed`, which iOS Safari ignores, stretching the clouds over the whole page
 height instead.
 
-## Photos: nothing is cropped
+## Photos: nothing is cropped, with one exception
 
 **Every photograph on the page is one `<figure class="slot">` holding one
 `<img>`, and every slot takes its photograph's own shape** — so each photo is
@@ -92,6 +92,17 @@ real ratio — a pixel or two, never a face.
 To swap a photo, drop it in `img/` and change that one `src`. Keep to 3:2
 landscape sources. A photo of another shape needs a slot class of its own ratio
 (e.g. `.slot--portrait { aspect-ratio: 2 / 3 }`) — not a crop.
+
+**The exception is the two hero photos below 720px.** Side by side they are
+each only half the screen wide, and a 3:2 photo at that width is too thin a
+band to carry the names, so `.hero .slot` becomes 3:4 there and `cover` takes
+the middle of each frame. That is the only place a subject can fall outside
+what is shown, and the only place `object-position` is needed: the lake photo
+carries `object-position: 29.5% center` because its two swimmers sit left of
+centre (source x 665–1165 of 2296, midpoint 913), and the default middle crop
+pushed them to the right edge. If you replace that photo, recompute it — for a
+crop of width `H × 0.75` out of a source `W × H`, the value is
+`(subject_centre − H × 0.375) / (W − H × 0.75)`.
 
 | `data-slot` | Where it appears | Currently |
 | --- | --- | --- |
