@@ -282,17 +282,11 @@ h3 {
   );
 }
 .hero__text {
-  /* One source for the names' size, so the date line can be a fixed
-     fraction of it at every width. */
-  --names: clamp(2.5rem, 7.7vw, 6.3rem);  /* fallback: no container queries */
-  --names: clamp(2.5rem, 7cqw, 6.3rem);
   position: absolute;
   inset: 0;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  gap: clamp(0.8rem, 2cqw, 1.8rem);
+  align-items: flex-start;
+  justify-content: center;
   padding: 8% 1rem 0;
   text-align: center;
   pointer-events: none;  /* nothing in here is clickable */
@@ -300,7 +294,10 @@ h3 {
 .hero__names {
   margin: 0;
   font-family: var(--swash) !important;
-  font-size: var(--names);
+  /* The column stops at --col while the viewport keeps going, so this is
+     sized against the hero's own width (cqw), not the viewport's. */
+  font-size: clamp(2.5rem, 7.7vw, 6.3rem);  /* fallback: no container queries */
+  font-size: clamp(2.5rem, 7cqw, 6.3rem);
   font-weight: 400;
   /* Pinyon's default line box is deep enough to drop the names toward the
      middle of the hero; pinning it to 1 keeps them where the padding puts
@@ -309,20 +306,6 @@ h3 {
   color: rgba(246, 244, 239, 0.94);
   text-shadow: 0 1px 24px rgba(0, 0, 0, 0.32);
   white-space: nowrap;
-}
-
-/* The date, under the names and over the photographs. Tracked caps in the
-   text face — the script is for the names only. */
-.hero__where {
-  margin-top: -10px;
-  /* A quarter of the names, but never small enough to stop being readable:
-     on a phone the names are ~28px, and a quarter of that is not text. */
-  font-size: max(0.8rem, calc(var(--names) * 0.25));
-  line-height: 1.5;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  color: rgba(246, 244, 239, 0.93);
-  text-shadow: 0 1px 14px rgba(0, 0, 0, 0.55);
 }
 
 /* ------------------------------------------------------- 7. creed band ---- */
