@@ -119,7 +119,8 @@ h1, h2, h3, p, figure, ul { margin: 0; }
 
 /* ------------------------------------------------------- 3. photo slots --- *
  * EVERY photograph on this page is one of these, and every slot takes its
- * photograph's own shape — nothing on this page is cropped. All the current
+ * photograph's own shape — nothing on this page is cropped, with one
+ * exception: the two hero photos below 720px (see the 720px block). All the current
  * photos are 3:2 (2316x1536 and near neighbours), so one class covers them.
  * A photo of another shape needs a slot class of its own ratio, not a crop.
  * ------------------------------------------------------------------------- */
@@ -690,6 +691,14 @@ h3 {
      side by side so the names can sit centred across both of them, with the
      venue band spanning underneath as it does at full width. */
   .split:not(.hero) { grid-template-columns: 1fr; }
+
+  /* Side by side, a 3:2 photo is only half the screen wide and so barely a
+     third of that tall — too thin a band to carry the names. These two are
+     the one place the page crops: a portrait slot takes the middle of each
+     frame and doubles the height it can stand at. Both subjects sit near
+     the centre, so a middle crop keeps them. Make this ratio taller than
+     3/4 for a deeper hero. */
+  .hero .slot { aspect-ratio: 3 / 4; }
 
   /* The photo pair dissolves into the column (a flex column, and <main> is
      display: contents, so every section is a flex item of it). Its Sutro
