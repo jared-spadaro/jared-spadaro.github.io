@@ -659,6 +659,7 @@ h3 {
   .schedule__cards { column-gap: 0px; }
   .schedule__head .title { margin-top: 10%; }
   .schedule { gap: 10%; }
+  .hero__text { padding-top: 12%; }
 }
 
 @media (max-width: 900px) {
