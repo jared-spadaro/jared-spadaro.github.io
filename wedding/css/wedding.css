@@ -260,6 +260,38 @@ h3 {
 .nav-open,
 .nav-open body { overflow: hidden; }
 
+/* On a wide screen the bar leaves the page and sits on the photographs:
+   no band of its own, no rules between the items, white type over the
+   hero's scrim. Taken out of flow, so the hero starts at the top of the
+   column and the bar lies over it. The links share the width equally. */
+@media (min-width: 721px) {
+  .column { position: relative; }
+
+  .nav {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 20;
+    background: transparent;
+  }
+  .nav ul {
+    width: 100%;
+    flex-wrap: nowrap;
+  }
+  .nav li { flex: 1; }
+  .nav li + li { border-left: 0; }
+  .nav a {
+    text-align: center;
+    color: rgba(255, 255, 255, 0.92);
+    /* The hero's scrim is strongest at the top, but a photo swapped in later
+       may not be; the shadow keeps the links legible either way. */
+    text-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);
+  }
+  .nav a:hover,
+  .nav a[aria-current="page"] { color: #fff; }
+}
+
 /* ------------------------------------------------------------ 6. hero ----- */
 /* The column stops growing at --col while the viewport keeps going, so the
    names are sized against the hero's own width, not the viewport's. */

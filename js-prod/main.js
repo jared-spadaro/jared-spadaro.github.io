@@ -127,42 +127,7 @@ var Header = function (_React$Component) {
                     "aria-haspopup": "true",
                     "aria-expanded": "false"
                   },
-                  "Check These Out"
                 ),
-                React.createElement(
-                  "div",
-                  { className: "dropdown-menu", "aria-labelledby": "dropdown01" },
-                  React.createElement(
-                    "a",
-                    { className: "dropdown-item", href: "#" },
-                    "Action"
-                  ),
-                  React.createElement(
-                    "a",
-                    { className: "dropdown-item", href: "#" },
-                    "Another action"
-                  ),
-                  React.createElement(
-                    "a",
-                    { className: "dropdown-item", href: "#" },
-                    "Something else here"
-                  )
-                )
-              )
-            ),
-            React.createElement(
-              "form",
-              { className: "form-inline my-2 my-lg-0" },
-              React.createElement("input", {
-                className: "form-control mr-sm-2",
-                type: "text",
-                placeholder: "Search",
-                "aria-label": "Search"
-              }),
-              React.createElement(
-                "button",
-                { className: "btn btn-secondary my-2 my-sm-0", type: "submit" },
-                "Search"
               )
             )
           )
@@ -197,17 +162,6 @@ function Home() {
         "Official Site of Antisocialistic"
       ),
       React.createElement("img", { className: "headshot", src: "career_headshot.jpg", height: "200", width: "200" }),
-      React.createElement("br", null),
-      React.createElement(
-        "p",
-        null,
-        "Howdy. This is the project site of Jared Spadaro aka Antisocialistic."
-      ),
-      React.createElement(
-        "p",
-        null,
-        "Use the navbar to check out different things I've done or am working on."
-      )
     )
   );
 }
