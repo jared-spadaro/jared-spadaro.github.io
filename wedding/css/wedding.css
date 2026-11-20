@@ -109,7 +109,7 @@ h1, h2, h3, p, figure, ul { margin: 0; }
 /* Tiny tracked caps: nav items, eyebrows, card kickers. */
 .micro {
   /* The floor keeps these legible on a phone, where 0.86vw is ~3px. */
-  font-size: clamp(0.62rem, 0.86vw, 0.66rem);
+  font-size: clamp(0.62rem, 0.86vw, 0.85rem);
   letter-spacing: 0.34em;
   text-indent: 0.34em;      /* tracking adds space after the last letter too */
   text-transform: uppercase;
@@ -314,22 +314,39 @@ h3 {
   );
 }
 .hero__text {
+  /* One source for the names' size, so the line above them can be a fixed
+     quarter of it at every width. */
+  --names: clamp(2.5rem, 7.7vw, 6.3rem);  /* fallback: no container queries */
+  --names: clamp(2.5rem, 7cqw, 6.3rem);
   position: absolute;
   inset: 0;
   display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  padding: 8% 1rem 0;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.35em;
+  padding: 11% 1rem 0;
   text-align: center;
   pointer-events: none;  /* nothing in here is clickable */
+}
+
+/* The line above the names: a quarter of their size, and set in the text
+   face the nav links use rather than the script. */
+.hero__intro {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: calc(var(--names) * 0.25);
+  font-weight: 300;
+  line-height: 1.3;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(246, 244, 239, 0.93);
+  text-shadow: 0 1px 14px rgba(0, 0, 0, 0.55);
 }
 .hero__names {
   margin: 0;
   font-family: var(--swash) !important;
-  /* The column stops at --col while the viewport keeps going, so this is
-     sized against the hero's own width (cqw), not the viewport's. */
-  font-size: clamp(2.5rem, 7.7vw, 6.3rem);  /* fallback: no container queries */
-  font-size: clamp(2.5rem, 7cqw, 6.3rem);
+  font-size: var(--names);
   font-weight: 400;
   /* Pinyon's default line box is deep enough to drop the names toward the
      middle of the hero; pinning it to 1 keeps them where the padding puts
