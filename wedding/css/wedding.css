@@ -393,10 +393,10 @@ h3 {
 }
 
 /* --------------------------------------------- 8. story + timeline ------- */
-/* One cream panel: the black-and-white photograph beside the intro, with
-   the collapsible timeline at the foot of the intro. The photo is matted
-   inside the panel's padding and centred against the intro while the
-   timeline is closed. Stacks below 900px (see responsive). */
+/* One cream panel: the black-and-white photograph beside the intro, then
+   the collapsible timeline centred beneath both. The photo is matted inside
+   the panel's padding and centred against the intro. Stacks below 900px
+   (see responsive). */
 /* The two section rules: schedule | our story, and timeline | travel. Drawn
    on the later section of each pair so the line sits in the space between
    them, inset to the padding so it lines up with the content rather than
@@ -429,12 +429,13 @@ h3 {
   text-align: center;
 }
 
-/* The timeline lives in the intro column under the story, closed until its
+/* The timeline sits centred under the photo and the intro, closed until its
    heading is tapped. It is a <details>, so it opens without script and
    keyboards and screen readers get a real disclosure control. */
 .timeline {
-  width: 100%;
-  margin-top: clamp(0.4rem, 1vw, 0.8rem);
+  max-width: 40rem;
+  margin: var(--pad) auto 0;
+  text-align: center;
 }
 .timeline__summary {
   display: inline-flex;
@@ -446,23 +447,19 @@ h3 {
 .timeline__summary::-webkit-details-marker { display: none; }
 .timeline__heading { margin: 0; }
 
-/* The caret: an L of two borders turned a quarter, pointing left while the
-   timeline is closed and down once it is open. */
-.timeline__summary::before {
+/* The caret, after the heading: an L of two borders, turned to point right
+   while the timeline is closed and a further quarter turn, down, once open. */
+.timeline__summary::after {
   content: "";
   flex: none;
   width: 0.5rem;
   height: 0.5rem;
   border-left: 1.5px solid currentColor;
   border-bottom: 1.5px solid currentColor;
-  transform: rotate(45deg);
+  transform: rotate(225deg);
   transition: transform 0.2s ease;
 }
-.timeline[open] > .timeline__summary::before { transform: rotate(-45deg); }
-
-/* Open, the column grows well past the photo beside it, so the photo stops
-   centring against it and stays at the top. */
-.story__top:has(.timeline[open]) { align-items: start; }
+.timeline[open] > .timeline__summary::after { transform: rotate(315deg); }
 
 /* A rule down the left with a bead for each chapter. The rule is drawn per
    chapter, from its bead down to the next one, so it stops at the last bead
