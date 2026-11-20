@@ -325,7 +325,7 @@ h3 {
   align-items: center;
   justify-content: flex-start;
   gap: 0.35em;
-  padding: 11% 1rem 0;
+  padding: 13% 1rem 0;
   text-align: center;
   pointer-events: none;  /* nothing in here is clickable */
 }
@@ -335,7 +335,7 @@ h3 {
 .hero__intro {
   margin: 0;
   font-family: var(--serif);
-  font-size: calc(var(--names) * 0.25);
+  font-size: calc(var(--names) * 0.15);
   font-weight: 300;
   line-height: 1.3;
   letter-spacing: 0.1em;
@@ -393,10 +393,10 @@ h3 {
 }
 
 /* --------------------------------------------- 8. story + timeline ------- */
-/* One cream panel: the black-and-white photograph beside the intro, then a
-   hairline, then the timeline. The photo is matted inside the panel's
-   padding and centred against the intro, so however long the intro runs the
-   photo sits level with its middle. Stacks below 900px (see responsive). */
+/* One cream panel: the black-and-white photograph beside the intro, with
+   the collapsible timeline at the foot of the intro. The photo is matted
+   inside the panel's padding and centred against the intro while the
+   timeline is closed. Stacks below 900px (see responsive). */
 /* The two section rules: schedule | our story, and timeline | travel. Drawn
    on the later section of each pair so the line sits in the space between
    them, inset to the padding so it lines up with the content rather than
@@ -429,71 +429,75 @@ h3 {
   text-align: center;
 }
 
-/* A centred rule with the chapters hung off alternate sides of it. Below
-   720px the rule moves to the left edge and every chapter sits to its right. */
+/* The timeline lives in the intro column under the story, closed until its
+   heading is tapped. It is a <details>, so it opens without script and
+   keyboards and screen readers get a real disclosure control. */
 .timeline {
-  margin-top: var(--pad);
-  padding-top: var(--pad);
-  border-top: 1px solid var(--rule);
+  width: 100%;
+  margin-top: clamp(0.4rem, 1vw, 0.8rem);
 }
-/* Each chapter spans two grid rows, one row below the last, so the two sides
-   interleave like a zip instead of each chapter taking a full-width row. */
-/* The control for the collapsed timeline. It only appears on a phone — see
-   the 720px block; everywhere else the chapters are simply shown. */
-.timeline__toggle { display: none; }
+.timeline__summary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  cursor: pointer;
+  list-style: none;            /* drop the browser's own triangle */
+}
+.timeline__summary::-webkit-details-marker { display: none; }
+.timeline__heading { margin: 0; }
 
+/* The caret: an L of two borders turned a quarter, pointing left while the
+   timeline is closed and down once it is open. */
+.timeline__summary::before {
+  content: "";
+  flex: none;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-left: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: rotate(45deg);
+  transition: transform 0.2s ease;
+}
+.timeline[open] > .timeline__summary::before { transform: rotate(-45deg); }
+
+/* Open, the column grows well past the photo beside it, so the photo stops
+   centring against it and stays at the top. */
+.story__top:has(.timeline[open]) { align-items: start; }
+
+/* A rule down the left with a bead for each chapter. The rule is drawn per
+   chapter, from its bead down to the next one, so it stops at the last bead
+   instead of running on beneath the final chapter's text. */
 .timeline__list {
   list-style: none;
-  position: relative;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  max-width: 60rem;
-  margin-inline: auto;
+  margin: clamp(1.1rem, 2.4vw, 1.75rem) 0 0;
   padding: 0;
-}
-.timeline__list::before {
-  content: "";
-  position: absolute;
-  top: 0.5rem;
-  bottom: 0.5rem;
-  left: 50%;
-  width: 1px;
-  background: var(--rule);
-}
-.timeline__list li {
-  --side: clamp(1.5rem, 4vw, 3.5rem);
-  position: relative;
-  grid-column: 1;
-  grid-row: var(--n) / span 2;
-  padding: 0 var(--side) clamp(1.25rem, 2.5vw, 2rem) 0;
-  text-align: right;
-}
-.timeline__list li:nth-child(even) {
-  grid-column: 2;
-  padding: 0 0 clamp(1.25rem, 2.5vw, 2rem) var(--side);
   text-align: left;
 }
-.timeline__list li:nth-child(1) { --n: 1; }
-.timeline__list li:nth-child(2) { --n: 2; }
-.timeline__list li:nth-child(3) { --n: 3; }
-.timeline__list li:nth-child(4) { --n: 4; }
-.timeline__list li:nth-child(5) { --n: 5; }
-.timeline__list li:nth-child(6) { --n: 6; }
-.timeline__list li:nth-child(7) { --n: 7; }
-.timeline__list li:nth-child(8) { --n: 8; }
+.timeline__list li {
+  position: relative;
+  padding: 0 0 1.75rem 1.75rem;
+}
 .timeline__list li:last-child { padding-bottom: 0; }
-/* The bead on the rule. */
-.timeline__list li::before {
+.timeline__list li::before {          /* the bead */
   content: "";
   position: absolute;
   top: 0.4rem;
-  right: -4px;
+  left: 0;
   width: 7px;
   height: 7px;
   border-radius: 50%;
   background: var(--ink);
 }
-.timeline__list li:nth-child(even)::before { right: auto; left: -3px; }
+.timeline__list li::after {           /* the rule to the next bead */
+  content: "";
+  position: absolute;
+  top: 0.4rem;
+  bottom: -0.4rem;
+  left: 3px;
+  width: 1px;
+  background: var(--rule);
+}
+.timeline__list li:last-child::after { content: none; }
 .timeline__when { margin-bottom: 0.35rem; }
 .timeline__list h3 { margin-bottom: 0.5rem; }
 
@@ -755,42 +759,6 @@ h3 {
   .registry,
   .footer { order: 2; }
 
-  .timeline__toggle {
-    display: block;
-    margin: 0 auto;
-    padding: 0.9rem 1.6rem;
-    border: 1px solid var(--rule);
-    background: none;
-    font-family: inherit;
-    color: var(--ink-soft);
-    cursor: pointer;
-  }
-  .timeline__list { grid-template-columns: 1fr; display: none; }
-  .timeline.is-open .timeline__list { display: grid; margin-top: var(--pad); }
-  /* The rule is drawn per chapter, from its bead down to the next chapter's
-     bead, so it stops at the last bead instead of running on beneath the
-     final chapter's text. */
-  .timeline__list::before { content: none; }
-  .timeline__list li::after {
-    content: "";
-    position: absolute;
-    top: 0.4rem;
-    bottom: -0.4rem;
-    left: 3px;
-    width: 1px;
-    background: var(--rule);
-  }
-  .timeline__list li:last-child::after { content: none; }
-  .timeline__list li,
-  .timeline__list li:nth-child(even) {
-    grid-column: 1;
-    grid-row: auto;
-    padding: 0 0 1.75rem 1.75rem;
-    text-align: left;
-  }
-  .timeline__list li:last-child { padding-bottom: 0; }
-  .timeline__list li::before,
-  .timeline__list li:nth-child(even)::before { left: 0; right: auto; }
 
   .travel__how,
   .hotels { grid-template-columns: 1fr; }
