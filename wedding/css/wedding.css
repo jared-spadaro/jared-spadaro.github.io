@@ -393,28 +393,19 @@ h3 {
 }
 
 /* --------------------------------------------- 8. story + timeline ------- */
-/* One cream panel: the black-and-white photograph beside the intro, then
-   the collapsible timeline centred beneath both. The photo is matted inside
-   the panel's padding and centred against the intro. Stacks below 900px
-   (see responsive). */
-/* The two section rules: schedule | our story, and timeline | travel. Drawn
-   on the later section of each pair so the line sits in the space between
-   them, inset to the padding so it lines up with the content rather than
-   running to the column edges. */
-.story,
-.travel { position: relative; }
-.story::before,
-.travel::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: var(--pad);
-  right: var(--pad);
-  height: 1px;
-  background: var(--rule);
+/* One ink panel (.panel--ink in the markup): the black-and-white photograph
+   beside the intro, then the collapsible timeline centred beneath both. The
+   photo is matted inside the panel's padding and centred against the intro.
+   Stacks below 900px (see responsive). */
+.story {
+  padding: var(--pad);
+  /* The page's hairline and secondary-text tokens are dark-on-cream; on the
+     ink panel they are relit, so everything inside that uses them — the
+     timeline's rule, the dates — follows without its own override. */
+  --rule: rgba(244, 242, 237, 0.28);
+  --ink-soft: rgba(244, 242, 237, 0.62);
 }
-
-.story { padding: var(--pad); }
+.story :focus-visible { outline-color: var(--light); }
 .story__top {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -483,7 +474,7 @@ h3 {
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: var(--ink);
+  background: var(--light);
 }
 .timeline__list li::after {           /* the rule to the next bead */
   content: "";
