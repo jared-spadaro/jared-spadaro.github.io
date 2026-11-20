@@ -1,0 +1,322 @@
+/* ==========================================================================
+   antisocialistic — black-and-lime TTY theme
+   --------------------------------------------------------------------------
+   Loaded last, after bootstrap.min.css, starter-template.css and styles.css,
+   so it is the single source of truth for colour on the home page. The blog
+   and /wedding have their own stylesheets and are untouched by this file.
+
+   The page is a React app rendered into #root, so everything here is driven
+   off the class names in js-prod/main.js — no markup was changed to theme it.
+
+   Sections:
+     1. Palette
+     2. Screen: background, scanlines, text
+     3. Navbar + dropdown
+     4. Home panel
+     5. Controls: buttons, inputs
+     6. Snake
+     7. Senior project frame
+     8. Selection, focus, scrollbar
+   ========================================================================== */
+
+/* ----------------------------------------------------------- 1. palette - */
+:root {
+  --tty-bg: #000;
+  --tty-fg: #33ff33;         /* P1 phosphor green                           */
+  --tty-dim: #19a019;        /* rules, borders, secondary text              */
+  --tty-faint: #0c3f0c;      /* the board's grid, barely lit                */
+  --tty-bright: #ccffcc;     /* the food pip, focus, the thing you look at  */
+  --tty-glow: 0 0 6px rgba(51, 255, 51, 0.45);
+  --tty-mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas,
+    "DejaVu Sans Mono", monospace;
+}
+
+/* ------------------------------------------------------------ 2. screen - */
+html,
+body {
+  background: var(--tty-bg);
+}
+
+body {
+  color: var(--tty-fg);
+  font-family: var(--tty-mono);
+  font-size: 0.95rem;
+  line-height: 1.5;
+  letter-spacing: 0.02em;
+  text-shadow: var(--tty-glow);
+}
+
+/* Scanlines over the whole screen. Fixed and un-clickable, so it survives
+   scrolling and never eats a tap. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    rgba(0, 0, 0, 0) 0px,
+    rgba(0, 0, 0, 0) 2px,
+    rgba(0, 0, 0, 0.22) 3px,
+    rgba(0, 0, 0, 0.22) 4px
+  );
+}
+
+/* And the curve of the tube: darker at the corners than in the middle. */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(0, 0, 0, 0) 55%,
+    rgba(0, 0, 0, 0.55) 100%
+  );
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--tty-fg);
+  font-family: var(--tty-mono);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* The headline keeps a cursor blinking after it. */
+h1::after {
+  content: "\2588";
+  margin-left: 0.15em;
+  animation: tty-blink 1.06s steps(1, end) infinite;
+}
+
+@keyframes tty-blink {
+  0%, 50% { opacity: 1; }
+  50.01%, 100% { opacity: 0; }
+}
+
+a {
+  color: var(--tty-fg);
+  text-decoration: none;
+}
+a:hover,
+a:focus {
+  color: var(--tty-bg);
+  background: var(--tty-fg);
+  text-decoration: none;
+  text-shadow: none;
+}
+
+hr { border-top-color: var(--tty-dim); }
+
+/* ------------------------------------------------------------ 3. navbar - */
+/* .bg-dark carries !important, so matching it takes one too. */
+.navbar.bg-dark {
+  background: var(--tty-bg) !important;
+  border-bottom: 1px solid var(--tty-dim);
+  padding-top: 0.4rem;
+  padding-bottom: 0.4rem;
+}
+
+.navbar-dark .navbar-brand,
+.navbar-dark .navbar-nav .nav-link {
+  color: var(--tty-fg);
+  font-family: var(--tty-mono);
+  text-transform: lowercase;
+  letter-spacing: 0.04em;
+}
+
+/* The brand reads as a shell prompt. */
+.navbar-dark .navbar-brand::before {
+  content: "jared@antisocialistic:~$ ";
+  color: var(--tty-dim);
+}
+
+.navbar-dark .navbar-nav .nav-link::before { content: "[ "; color: var(--tty-dim); }
+.navbar-dark .navbar-nav .nav-link::after  { content: " ]"; color: var(--tty-dim); }
+
+.navbar-dark .navbar-brand:hover,
+.navbar-dark .navbar-nav .nav-link:hover,
+.navbar-dark .navbar-nav .nav-link:focus {
+  color: var(--tty-bg);
+  background: var(--tty-fg);
+  text-shadow: none;
+}
+
+/* The markup carries .active on one item permanently, so it must not read as
+   a selection — it only burns a little brighter. */
+.navbar-dark .navbar-nav .active > .nav-link { color: var(--tty-bright); }
+.navbar-dark .navbar-nav .nav-link:hover::before,
+.navbar-dark .navbar-nav .nav-link:hover::after { color: var(--tty-bg); }
+
+.navbar-dark .navbar-toggler {
+  border: 1px solid var(--tty-dim);
+  border-radius: 0;
+  color: var(--tty-fg);
+}
+/* Bootstrap's burger is a white SVG data URI; swap it for a green one. */
+.navbar-dark .navbar-toggler-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='%2333ff33' stroke-width='2' stroke-linecap='round' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}
+
+.dropdown-menu {
+  background: var(--tty-bg);
+  border: 1px solid var(--tty-dim);
+  border-radius: 0;
+  font-family: var(--tty-mono);
+}
+.dropdown-item { color: var(--tty-fg); }
+.dropdown-item:hover,
+.dropdown-item:focus {
+  color: var(--tty-bg);
+  background: var(--tty-fg);
+  text-shadow: none;
+}
+
+/* ------------------------------------------------------- 4. home panel - */
+.starter-template { text-align: left; }
+.starter-template p { max-width: 68ch; }
+/* Output lines, the way a program would print them. */
+.starter-template p::before {
+  content: "> ";
+  color: var(--tty-dim);
+}
+
+/* A photograph on a one-colour terminal is a one-colour photograph: flatten
+   it, then tint the result green. sepia lands the midtones around 40deg, so
+   the rotation carries them the rest of the way to phosphor. */
+.headshot {
+  border-radius: 0;
+  border: 1px solid var(--tty-dim);
+  padding: 4px;
+  margin: 1.25rem 0;
+  filter: grayscale(1) contrast(1.15) sepia(1) hue-rotate(72deg) saturate(5)
+    brightness(0.95);
+    margin-left: 35%;
+}
+
+/* ---------------------------------------------------------- 5. controls - */
+.btn,
+.form-control {
+  border-radius: 0;
+  font-family: var(--tty-mono);
+  letter-spacing: 0.06em;
+}
+
+.btn,
+.btn-secondary,
+.btn-dark {
+  color: var(--tty-fg);
+  background: var(--tty-bg);
+  border: 1px solid var(--tty-dim);
+  text-transform: uppercase;
+  text-shadow: var(--tty-glow);
+}
+.btn:hover,
+.btn-secondary:hover,
+.btn-dark:hover,
+.btn:focus,
+.btn-secondary:focus,
+.btn-dark:focus {
+  color: var(--tty-bg);
+  background: var(--tty-fg);
+  border-color: var(--tty-fg);
+  text-shadow: none;
+}
+
+.form-control {
+  color: var(--tty-fg);
+  background: var(--tty-bg);
+  border: 1px solid var(--tty-dim);
+  caret-color: var(--tty-fg);
+}
+.form-control:focus {
+  color: var(--tty-fg);
+  background: var(--tty-bg);
+  border-color: var(--tty-fg);
+  box-shadow: none;
+}
+.form-control::placeholder { color: var(--tty-dim); }
+
+/* ------------------------------------------------------------- 6. snake - */
+/* The class names come from js-prod/main.js and predate this theme:
+   .white-square is an empty cell and .black-square is a snake segment. The
+   names are now backwards — the empty cell is the black one — but renaming
+   them means editing the compiled bundle, so they stay as they are. */
+.board {
+  border: 1px solid var(--tty-dim);
+  border-width: 1px;
+  background: var(--tty-bg);
+  box-shadow: 0 0 18px rgba(51, 255, 51, 0.18);
+}
+
+.white-square {                 /* empty cell */
+  background: var(--tty-bg);
+  border: 1px solid var(--tty-faint);
+  color: var(--tty-bright);
+}
+
+.black-square {                 /* snake */
+  background: var(--tty-fg);
+  border: 1px solid var(--tty-fg);
+  box-shadow: 0 0 5px rgba(51, 255, 51, 0.65);
+}
+
+/* The food pip. */
+.food-label {
+  color: var(--tty-bright);
+  font-family: var(--tty-mono);
+  text-shadow: 0 0 7px rgba(204, 255, 204, 0.9);
+}
+
+.snake-title {
+  color: var(--tty-fg);
+  font-family: var(--tty-mono);
+  font-variant: normal;
+  font-variant-caps: normal;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.game-over { text-align: left; }
+
+/* ------------------------------------------------- 7. senior project ----- */
+.senior {
+  border: 1px solid var(--tty-dim);
+  background: var(--tty-bg);
+  max-width: 100%;
+}
+
+/* -------------------------------------- 8. selection, focus, scrollbar --- */
+::selection {
+  color: var(--tty-bg);
+  background: var(--tty-fg);
+  text-shadow: none;
+}
+
+:focus-visible {
+  outline: 1px solid var(--tty-fg);
+  outline-offset: 2px;
+}
+
+* { scrollbar-color: var(--tty-dim) var(--tty-bg); }
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: var(--tty-bg); }
+::-webkit-scrollbar-thumb {
+  background: var(--tty-dim);
+  border: 2px solid var(--tty-bg);
+}
+::-webkit-scrollbar-thumb:hover { background: var(--tty-fg); }
+
+/* The blink is the only motion here, and some people would rather not have
+   it. The cursor stays, lit. */
+@media (prefers-reduced-motion: reduce) {
+  h1::after { animation: none; }
+}
