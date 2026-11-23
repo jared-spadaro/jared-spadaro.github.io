@@ -38,6 +38,10 @@
   --gap: 10px;             /* background shows through between panels        */
   --edge: clamp(1.25rem, 3vw, 2.75rem); /* sky above the nav, and below it   */
   --pad: clamp(1.5rem, 4vw, 3.25rem);
+  /* The left inset of the two sideways headings (Schedule, Registry): a
+     little inside the panels' usual padding, and one value for both so they
+     line up. */
+  --title-inset: calc(var(--pad) * 0.7);
 }
 
 /* --------------------------------------------------------- 2. base + help - */
@@ -528,6 +532,7 @@ h3 {
    right, each one a block of text ranged right over its photograph. */
 .schedule {
   padding: var(--pad);
+  padding-left: var(--title-inset);
   display: grid;
   grid-template-columns: auto 1fr;
   gap: clamp(1.25rem, 3.5vw, 3rem);
@@ -735,6 +740,10 @@ h3 {
   margin: 0;
 }
 .registry .micro { margin-top: 0; }
+/* Registry's own padding sat outside the box its heading is in, which put
+   the heading further in than Schedule's; the box alone carries the inset. */
+.registry { padding-inline: 0; }
+.registry .menu__inner { padding-left: var(--title-inset); }
 
 /* RSVP's heading sits on top, as written rather than in capitals. */
 .rsvp .title { text-transform: none; }
