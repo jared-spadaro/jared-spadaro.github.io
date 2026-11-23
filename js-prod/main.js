@@ -113,21 +113,6 @@ var Header = function (_React$Component) {
                   { className: "nav-link", href: "blog/" },
                   "Blog"
                 )
-              ),
-              React.createElement(
-                "li",
-                { className: "nav-item dropdown" },
-                React.createElement(
-                  "a",
-                  {
-                    className: "nav-link dropdown-toggle",
-                    href: "#",
-                    id: "dropdown01",
-                    "data-toggle": "dropdown",
-                    "aria-haspopup": "true",
-                    "aria-expanded": "false"
-                  },
-                ),
               )
             )
           )
