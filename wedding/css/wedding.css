@@ -690,9 +690,17 @@ h3 {
   outline: none;
 }
 
-/* Registry reuses the menu block's ruled inner box. */
-.registry { padding: clamp(0.7rem, 1.6vw, 1.1rem); }
-.registry .micro { margin-top: 0.6rem; }
+/* Registry and RSVP reuse the menu block's ruled inner box. RSVP is the
+   same placeholder on ink: the box's rule and the secondary text are relit
+   for the dark ground, as in Our Story. */
+.registry,
+.rsvp { padding: clamp(0.7rem, 1.6vw, 1.1rem); }
+.registry .micro,
+.rsvp .micro { margin-top: 0.6rem; }
+.rsvp {
+  --rule: rgba(244, 242, 237, 0.28);
+  --ink-soft: rgba(244, 242, 237, 0.62);
+}
 
 /* ----------------------------------------------------------- 13. footer --- */
 .footer {
@@ -802,6 +810,7 @@ h3 {
   .pair > [data-slot="pair-right"] { margin-top: 0; }
   .travel,
   .pair > [data-slot="pair-right"],
+  .rsvp,
   .registry,
   .footer { order: 2; }
 
