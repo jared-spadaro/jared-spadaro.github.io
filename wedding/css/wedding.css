@@ -501,9 +501,13 @@ h3 {
   grid-template-columns: auto 1fr;
   gap: clamp(1.25rem, 3.5vw, 3rem);
 }
-/* The schedule sits on the printed sky instead of the cream panel. */
+/* The schedule sits on the printed sky instead of the cream panel. All of
+   its text is the page's black: the secondary grey used for the small
+   lines elsewhere is pointed at --ink here. */
 .schedule {
   background: url("../img/cloud-background.avif") center / cover no-repeat;
+  color: var(--ink);
+  --ink-soft: var(--ink);
 }
 
 /* Rotated a quarter turn anticlockwise: it reads bottom to top, so you tilt
