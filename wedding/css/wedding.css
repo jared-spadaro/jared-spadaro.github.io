@@ -144,6 +144,7 @@ h1, h2, h3, p, figure, ul { margin: 0; }
 }
 
 .slot--landscape { aspect-ratio: 3 / 2; }
+.slot--cute      { aspect-ratio: 1536 / 2316; }   /* vert/bw-cute.jpg */
 
 /* The two schedule photographs are portrait, and not quite the same shape as
    each other. Each gets its own ratio rather than a crop. */
@@ -393,10 +394,10 @@ h3 {
 }
 
 /* --------------------------------------------- 8. story + timeline ------- */
-/* One ink panel (.panel--ink in the markup): the black-and-white photograph
-   beside the intro, then the collapsible timeline centred beneath both. The
-   photo is matted inside the panel's padding and centred against the intro.
-   Stacks below 900px (see responsive). */
+/* One ink panel (.panel--ink in the markup): the intro centred in the
+   middle, a small photograph pinned to its top-left corner and another to
+   its bottom-right, then the collapsible timeline centred beneath. Stacks
+   below 900px (see responsive). */
 .story {
   padding: var(--pad);
   /* The page's hairline and secondary-text tokens are dark-on-cream; on the
@@ -406,12 +407,17 @@ h3 {
   --ink-soft: rgba(244, 242, 237, 0.62);
 }
 .story :focus-visible { outline-color: var(--light); }
+/* Three columns, the outer two a quarter each: half the width the photo had
+   when it shared the panel with the intro one-to-one. The first photo rides
+   up into the top-left corner, the second down into the bottom-right. */
 .story__top {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 2fr 1fr;
   align-items: center;
   gap: var(--pad);
 }
+.story__top > .slot:first-child { align-self: start; }
+.story__top > .slot:last-child { align-self: end; }
 .story__intro {
   display: flex;
   flex-direction: column;
@@ -793,8 +799,12 @@ h3 {
 }
 
 @media (max-width: 900px) {
-  /* Half the panel is too narrow for the story intro; stack photo over text. */
+  /* A quarter of the panel is too narrow for the story intro; stack it,
+     each photo at half width and still pushed to its own corner. */
   .story__top { grid-template-columns: 1fr; }
+  .story__top > .slot { width: 50%; }
+  .story__top > .slot:first-child { justify-self: start; }
+  .story__top > .slot:last-child { justify-self: end; }
   .story__intro .prose { max-width: 34rem; }
 }
 
