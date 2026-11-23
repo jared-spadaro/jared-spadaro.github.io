@@ -545,7 +545,7 @@ h3 {
   padding: 0;
   display: grid;
   grid-template-columns: auto auto;
-  grid-template-rows: auto auto;   /* text row, photo row */
+  grid-template-rows: auto auto auto;   /* text, photo, venue line */
   justify-content: end;
   column-gap: 40px;
   row-gap: 0;
@@ -554,7 +554,7 @@ h3 {
    text above them differs. */
 .event {
   display: grid;
-  grid-row: span 2;
+  grid-row: span 3;
   grid-template-rows: subgrid;
   gap: 0;
 }
@@ -584,18 +584,21 @@ h3 {
   font-size: clamp(1.55rem, 2.75vw, 2.1rem);   /* a size up from h3 */
   margin-right: -0.05em;
 }
-/* The line under each event name — the venue, a dot, the dress code — is
-   set as written rather than in capitals. Lowercase at the capitals' tiny
-   size would be hard to read, so it takes a small reading size, and only
-   light tracking: wide tracking is for capitals. Three classes so the phone
-   rule for .event__body .micro, later in the file, does not undo this. */
-.event__body .micro.event__where {
+/* The line under each photograph — the venue, a dot, the dress code — is
+   set as written rather than in capitals, ranged right like the rest of the
+   card. Lowercase at the capitals' tiny size would be hard to read, so it
+   takes a small reading size, and only light tracking: wide tracking is for
+   capitals. It is the card's third row, shared through the subgrid, so the
+   two lines sit level. */
+.event .micro.event__where {
+  padding-top: clamp(0.6rem, 1.4vw, 0.9rem);
   font-size: clamp(0.85rem, 1.05vw, 0.95rem);
   letter-spacing: 0.02em;
+  text-indent: 0;
   margin-right: -0.02em;
   text-transform: none;
+  text-align: right;
 }
-.event__where { margin-top: auto; padding-top: 0.4rem; }
 .event__where a { border-bottom: 1px solid var(--rule); }
 .event__where a:hover { border-bottom-color: var(--ink); }
 
