@@ -362,14 +362,18 @@ h3 {
 }
 
 /* --------------------------------------------- 8. story + timeline ------- */
-/* One cream panel: the intro centred in the
+/* One ink panel (.panel--ink in the markup): the intro centred in the
    middle, two small photographs stacked on its left and a portrait on its
    right, then the collapsible timeline centred beneath. Stacks below 900px
    (see responsive). */
 .story {
   padding: var(--pad);
-  --ink-soft: var(--ink);   /* all of its text black, the dates included */
+  /* On the ink panel all of the text is the light colour, the timeline dates
+     included, and the timeline's rule is relit for the dark ground. */
+  --ink-soft: var(--light);
+  --rule: rgba(244, 242, 237, 0.28);
 }
+.story :focus-visible { outline-color: var(--light); }
 /* Three columns, the outer two a quarter each: half the width the photo had
    when it shared the panel with the intro one-to-one. Both side columns are
    centred on the row, and the left stack is made exactly as tall as the
@@ -448,7 +452,7 @@ h3 {
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: var(--ink);
+  background: var(--light);
 }
 .timeline__list li::after {           /* the rule to the next bead */
   content: "";
@@ -496,16 +500,13 @@ h3 {
   grid-template-columns: auto 1fr;
   gap: clamp(1.25rem, 3.5vw, 3rem);
 }
-/* The schedule is an ink panel (.panel--ink in the markup) and all of its
-   text is the light colour: the small lines take the full light rather than
-   the softer secondary tone, and the hairline under the venue links is
-   relit for the dark ground. */
+/* The schedule is a cream panel and all of its text is the page's black:
+   the secondary grey used for the small lines elsewhere is pointed at --ink
+   here. */
 .schedule {
-  --ink-soft: var(--light);
-  --rule: rgba(244, 242, 237, 0.4);
+  color: var(--ink);
+  --ink-soft: var(--ink);
 }
-.schedule :focus-visible { outline-color: var(--light); }
-.schedule .event__where a:hover { border-bottom-color: var(--light); }
 
 /* Rotated a quarter turn anticlockwise: it reads bottom to top, so you tilt
    your head to the left. vertical-rl turns the glyphs; the 180 flip turns the
