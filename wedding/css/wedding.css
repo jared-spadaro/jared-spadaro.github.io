@@ -699,22 +699,24 @@ h3 {
 .rsvp .micro { margin-top: 0.6rem; }
 .rsvp { --ink-soft: rgba(244, 242, 237, 0.62); }
 
-/* RSVP's heading runs up the left edge of its box, as Schedule's does —
+/* Registry's heading runs up the left edge of its box, as Schedule's does —
    bottom to top, so you tilt your head to the left — with the line beside
-   it centred in what is left. It is set as written, not in capitals. */
-.rsvp .menu__inner {
+   it centred in what is left. */
+.registry .menu__inner {
   display: grid;
   grid-template-columns: auto 1fr;
   align-items: center;
   gap: clamp(1rem, 3vw, 2.5rem);
 }
-.rsvp .title {
+.registry .title {
   writing-mode: vertical-rl;
   transform: rotate(180deg);
-  text-transform: none;
   margin: 0;
 }
-.rsvp .micro { margin-top: 0; }
+.registry .micro { margin-top: 0; }
+
+/* RSVP's heading sits on top, as written rather than in capitals. */
+.rsvp .title { text-transform: none; }
 
 /* ----------------------------------------------------------- 13. footer --- */
 .footer {
