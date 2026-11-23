@@ -638,13 +638,14 @@ h3 {
 .tabs__panel[hidden] { display: grid; visibility: hidden; }
 .tabs__panel:focus-visible { outline-color: var(--light); outline-offset: -4px; }
 
-/* The photograph fills its half of the panel whatever its own shape. That
-   makes these, with the hero on a phone, the places the page crops; an
-   object-position on each <img> keeps its subjects in frame. */
+/* The photograph is shown whole: it shrinks to fit its half of the panel,
+   and the ink shows around it on whichever sides it does not reach. */
 .tabs__photo {
   height: 100%;
   min-height: 100%;
+  background: transparent;
 }
+.tabs__photo > img { object-fit: contain; }
 
 .tabs__body {
   display: flex;

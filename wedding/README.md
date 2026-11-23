@@ -93,11 +93,11 @@ To swap a photo, drop it in `img/` and change that one `src`. Keep to 3:2
 landscape sources. A photo of another shape needs a slot class of its own ratio
 (e.g. `.slot--portrait { aspect-ratio: 2 / 3 }`) — not a crop.
 
-**There are two exceptions.** The first is the three travel-tab photos, at
-every width: each fills the left part of its panel whatever its own shape, so
-the panels match, and each `<img>` carries an `object-position` that keeps its
-subjects in frame (`bw-lying-down.jpg` 78%, `tahoe-boat.jpg` 80%;
-`snowboarding.jpg` needs none). The second is the two hero photos below 720px. Side by side they are
+The three travel-tab photos are shown whole too, but not in a slot of their
+own ratio: they shrink to fit (`object-fit: contain`) the left part of a panel
+that is the same size for all three tabs, and the ink shows around them.
+
+**The exception is the two hero photos below 720px.** Side by side they are
 each only half the screen wide, and a 3:2 photo at that width is too thin a
 band to carry the names, so `.hero .slot` becomes 3:4 there and `cover` takes
 the middle of each frame. The lake photo
