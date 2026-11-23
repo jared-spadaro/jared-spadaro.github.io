@@ -361,6 +361,22 @@ h3 {
   white-space: nowrap;
 }
 
+/* ---------------------------------------------------------- dateline ---- */
+/* A narrow ink bar between Schedule and Our Story with the date, the venue
+   and the town on one line, in the tracked capitals of the nav. On a phone
+   the line is longer than the screen is wide, so it wraps. */
+.dateline {
+  padding: clamp(0.75rem, 1.5vw, 1.1rem) var(--pad);
+  text-align: center;
+}
+.dateline p {
+  margin: 0;
+  font-size: clamp(0.62rem, 1vw, 0.82rem);
+  line-height: 1.7;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+}
+
 /* --------------------------------------------- 8. story + timeline ------- */
 /* One ink panel (.panel--ink in the markup): the intro centred in the
    middle, two small photographs stacked on its left and a portrait on its
