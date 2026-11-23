@@ -501,15 +501,6 @@ h3 {
   grid-template-columns: auto 1fr;
   gap: clamp(1.25rem, 3.5vw, 3rem);
 }
-/* Travel and RSVP sit on the printed sky instead of the cream panel; the
-   schedule keeps the cream, and the ink sections (Our Story, Registry, the
-   footer) stay ink. Each section covers itself with its own copy of the
-   image. */
-.travel,
-.rsvp {
-  background: url("../img/cloud-background.avif") center / cover no-repeat;
-}
-
 /* All of the schedule's text is the page's black: the secondary grey used
    for the small lines elsewhere is pointed at --ink here. */
 .schedule {
