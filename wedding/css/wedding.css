@@ -167,6 +167,15 @@ h1, h2, h3, p, figure, ul { margin: 0; }
   letter-spacing: 0.04em;
   text-transform: uppercase;
 }
+
+/* Every section heading opens on a swash capital in Pinyon Script, half
+   again the height of the text face's capitals that follow it. */
+.title::first-letter {
+  font-family: var(--swash);
+  font-size: 1.45em;
+  font-weight: 400;
+  letter-spacing: 0;
+}
 .prose {
   font-size: clamp(1.02rem, 1.35vw, 1.2rem);
   line-height: 1.6;
@@ -743,8 +752,7 @@ h3 {
 .registry { padding-inline: 0; }
 .registry .menu__inner { padding-left: var(--title-inset); }
 
-/* RSVP's heading sits on top, as written rather than in capitals. */
-.rsvp .title { text-transform: none; }
+
 
 /* ----------------------------------------------------------- 13. footer --- */
 .footer {
