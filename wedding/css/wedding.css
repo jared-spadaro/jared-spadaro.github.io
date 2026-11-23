@@ -501,11 +501,18 @@ h3 {
   grid-template-columns: auto 1fr;
   gap: clamp(1.25rem, 3.5vw, 3rem);
 }
-/* The schedule sits on the printed sky instead of the cream panel. All of
-   its text is the page's black: the secondary grey used for the small
-   lines elsewhere is pointed at --ink here. */
-.schedule {
+/* Every light section sits on the printed sky instead of the cream panel;
+   the ink ones (Our Story, Registry, the footer) stay ink. Each section
+   covers itself with its own copy of the image. */
+.schedule,
+.travel,
+.rsvp {
   background: url("../img/cloud-background.avif") center / cover no-repeat;
+}
+
+/* All of the schedule's text is the page's black: the secondary grey used
+   for the small lines elsewhere is pointed at --ink here. */
+.schedule {
   color: var(--ink);
   --ink-soft: var(--ink);
 }
