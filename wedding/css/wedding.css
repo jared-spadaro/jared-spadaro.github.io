@@ -587,48 +587,106 @@ h3 {
   text-align: center;
 }
 .travel .title { margin-top: 0.4rem; }
-.travel__how {
+/* Three tabs over one ink panel. The tabs run the full width of the block;
+   the selected one fills with ink and runs straight into the panel below,
+   the other two stay open, outlined. Below the tabs, the photograph fills
+   the left of the panel and the details sit on the right. */
+.tabs {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: clamp(1.5rem, 4vw, 3.5rem);
-  max-width: 60rem;
+  max-width: 68rem;
   margin: clamp(1.5rem, 3vw, 2.5rem) auto 0;
+  text-align: left;
 }
-.travel__how h3 { margin-bottom: 0.6rem; }
-
-/* The room-block note: ruled like the menu block, so it reads as an aside. */
-.travel__block {
-  max-width: 40rem;
-  margin: clamp(2rem, 4vw, 3rem) auto;
-  padding: clamp(1.25rem, 2.6vw, 1.9rem) var(--pad);
-  border: 1px solid var(--rule);
-}
-.travel__block .micro { margin-bottom: 0.5rem; color: var(--ink); }
-
-.travel__stay { margin-bottom: clamp(1rem, 2vw, 1.5rem); }
-.hotels {
-  list-style: none;
-  padding: 0;
+.tabs__list { grid-row: 1; }
+.tabs__list {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: var(--gap);
 }
-.hotels a {
+.tabs__tab {
+  padding: 0.9rem 0.5rem;
+  border: 1px solid var(--ink);
+  border-bottom: 0;
+  background: transparent;
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: clamp(0.66rem, 0.95vw, 0.8rem);
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+.tabs__tab + .tabs__tab { border-left: 0; }
+.tabs__tab:hover { background: var(--cream-dim); }
+.tabs__tab[aria-selected="true"] {
+  background: var(--ink);
+  color: var(--light);
+}
+
+/* All three panels share one grid cell, so the block is always as tall as
+   the tallest of them and nothing below it moves when the tab changes. The
+   hidden ones keep their place but are invisible, which also takes them out
+   of the tab order and the accessibility tree. */
+.tabs__panel {
+  grid-row: 2;
+  grid-column: 1;
+  display: grid;
+  grid-template-columns: 9fr 11fr;
+  min-height: clamp(26rem, 36vw, 31rem);
+  background: var(--ink);
+  color: var(--light);
+}
+.tabs__panel[hidden] { display: grid; visibility: hidden; }
+.tabs__panel:focus-visible { outline-color: var(--light); outline-offset: -4px; }
+
+/* The photograph fills its half of the panel whatever its own shape. That
+   makes these, with the hero on a phone, the places the page crops; an
+   object-position on each <img> keeps its subjects in frame. */
+.tabs__photo {
+  height: 100%;
+  min-height: 100%;
+}
+
+.tabs__body {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  gap: 0.3rem;
-  height: 100%;
-  padding: clamp(1.1rem, 2.2vw, 1.6rem) 1rem;
-  border: 1px solid var(--rule);
-  transition: background-color 0.2s ease;
+  gap: clamp(0.9rem, 1.8vw, 1.3rem);
+  padding: clamp(1.75rem, 3.5vw, 3rem);
 }
-.hotels a:hover,
-.hotels a:focus-visible { background: var(--cream-dim); }
-.hotels__name {
-  font-size: clamp(1.05rem, 1.6vw, 1.3rem);
-  letter-spacing: 0.05em;
+.tabs__body .prose { font-size: clamp(0.98rem, 1.2vw, 1.08rem); }
+.tabs__points {
+  margin: 0;
+  padding-left: 1.1rem;
+  font-size: clamp(0.95rem, 1.15vw, 1.04rem);
+  line-height: 1.55;
+}
+.tabs__points li + li { margin-top: 0.3rem; }
+.tabs__points a { border-bottom: 1px solid rgba(244, 242, 237, 0.4); }
+.tabs__points a:hover { border-bottom-color: var(--light); }
+
+/* The panel's one large line, then the button, centred together at the
+   foot of the column. */
+.tabs__headline {
+  margin: auto 0 0;
+  padding-top: clamp(0.5rem, 1.2vw, 1rem);
+  font-size: clamp(1.35rem, 2.3vw, 1.9rem);
+  line-height: 1.2;
+  letter-spacing: 0.03em;
+  text-align: center;
+}
+.tabs__button {
+  align-self: center;
+  padding: 0.85rem 1.6rem;
+  border: 1px solid var(--light);
+  font-size: clamp(0.66rem, 0.9vw, 0.75rem);
+  letter-spacing: 0.24em;
   text-transform: uppercase;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+.tabs__button:hover,
+.tabs__button:focus-visible {
+  background: var(--light);
+  color: var(--ink);
+  outline: none;
 }
 
 /* Registry reuses the menu block's ruled inner box. */
@@ -696,7 +754,6 @@ h3 {
 
 /* ------------------------------------------------------- 15. responsive --- */
 @media (max-width: 960px) {
-  .hotels { grid-template-columns: repeat(2, 1fr); }
   .schedule__cards { column-gap: 0px; }
   .schedule__head .title { margin-top: 10%; }
   .schedule { gap: 10%; }
@@ -748,8 +805,11 @@ h3 {
   .footer { order: 2; }
 
 
-  .travel__how,
-  .hotels { grid-template-columns: 1fr; }
+  /* The panel stacks: photograph above, details below. The tabs stay three
+     across, so their labels drop their tracking and may wrap. */
+  .tabs__panel { grid-template-columns: 1fr; min-height: 0; }
+  .tabs__photo { aspect-ratio: 3 / 2; height: auto; min-height: 0; }
+  .tabs__tab { letter-spacing: 0.1em; padding-inline: 0.3rem; }
 
   /* The schedule stays one row across: heading, then both cards side by
      side. The cards share what width is left rather than sizing to their

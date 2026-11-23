@@ -93,11 +93,14 @@ To swap a photo, drop it in `img/` and change that one `src`. Keep to 3:2
 landscape sources. A photo of another shape needs a slot class of its own ratio
 (e.g. `.slot--portrait { aspect-ratio: 2 / 3 }`) — not a crop.
 
-**The exception is the two hero photos below 720px.** Side by side they are
+**There are two exceptions.** The first is the three travel-tab photos, at
+every width: each fills the left part of its panel whatever its own shape, so
+the panels match, and each `<img>` carries an `object-position` that keeps its
+subjects in frame (`bw-lying-down.jpg` 78%, `tahoe-boat.jpg` 80%;
+`snowboarding.jpg` needs none). The second is the two hero photos below 720px. Side by side they are
 each only half the screen wide, and a 3:2 photo at that width is too thin a
 band to carry the names, so `.hero .slot` becomes 3:4 there and `cover` takes
-the middle of each frame. That is the only place a subject can fall outside
-what is shown, and the only place `object-position` is needed: the lake photo
+the middle of each frame. The lake photo
 carries `object-position: 29.5% center` because its two swimmers sit left of
 centre (source x 665–1165 of 2296, midpoint 913), and the default middle crop
 pushed them to the right edge. If you replace that photo, recompute it — for a
@@ -113,10 +116,13 @@ crop of width `H × 0.75` out of a source `W × H`, the value is
 | `story-photo` | beside the Our Story intro | `sitting-bw-1.jpg` |
 | `pair-left` | photo pair, left (on a phone: above Travel) | `sutro-sitting.jpg` |
 | `pair-right` | photo pair, right | `pensive-bw.jpeg` |
+| `travel-hotels` | Travel, Hotels tab | `snowboarding.jpg` |
+| `travel-transport` | Travel, Transportation tab | `bw-lying-down.jpg` |
+| `travel-local` | Travel, Local recommendations tab | `tahoe-boat.jpg` |
 
 The same table is repeated as a comment just above `<body>` in `index.html`.
-`snowboarding.JPG` and `kissing-beach.jpg` are no
-longer on the page; the `photo-placeholder-*.svg` files are unused stand-ins.
+`kissing-beach.jpg` is no longer on the page; the
+`photo-placeholder-*.svg` files are unused stand-ins.
 
 **Symmetry.** In each two-up (`.split`) the photo keeps its ratio and the panel
 beside it matches its height. The story's photo
