@@ -362,19 +362,14 @@ h3 {
 }
 
 /* --------------------------------------------- 8. story + timeline ------- */
-/* One ink panel (.panel--ink in the markup): the intro centred in the
+/* One cream panel: the intro centred in the
    middle, two small photographs stacked on its left and a portrait on its
    right, then the collapsible timeline centred beneath. Stacks below 900px
    (see responsive). */
 .story {
   padding: var(--pad);
-  /* The page's hairline and secondary-text tokens are dark-on-cream; on the
-     ink panel they are relit, so everything inside that uses them — the
-     timeline's rule, the dates — follows without its own override. */
-  --rule: rgba(244, 242, 237, 0.28);
-  --ink-soft: rgba(244, 242, 237, 0.62);
+  --ink-soft: var(--ink);   /* all of its text black, the dates included */
 }
-.story :focus-visible { outline-color: var(--light); }
 /* Three columns, the outer two a quarter each: half the width the photo had
    when it shared the panel with the intro one-to-one. Both side columns are
    centred on the row, and the left stack is made exactly as tall as the
@@ -453,7 +448,7 @@ h3 {
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: var(--light);
+  background: var(--ink);
 }
 .timeline__list li::after {           /* the rule to the next bead */
   content: "";
@@ -501,12 +496,16 @@ h3 {
   grid-template-columns: auto 1fr;
   gap: clamp(1.25rem, 3.5vw, 3rem);
 }
-/* All of the schedule's text is the page's black: the secondary grey used
-   for the small lines elsewhere is pointed at --ink here. */
+/* The schedule is an ink panel (.panel--ink in the markup) and all of its
+   text is the light colour: the small lines take the full light rather than
+   the softer secondary tone, and the hairline under the venue links is
+   relit for the dark ground. */
 .schedule {
-  color: var(--ink);
-  --ink-soft: var(--ink);
+  --ink-soft: var(--light);
+  --rule: rgba(244, 242, 237, 0.4);
 }
+.schedule :focus-visible { outline-color: var(--light); }
+.schedule .event__where a:hover { border-bottom-color: var(--light); }
 
 /* Rotated a quarter turn anticlockwise: it reads bottom to top, so you tilt
    your head to the left. vertical-rl turns the glyphs; the 180 flip turns the
