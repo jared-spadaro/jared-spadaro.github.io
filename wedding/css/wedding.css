@@ -11,7 +11,6 @@
      4. Column + panels
      5. Nav
      6. Hero
-     7. Creed band
      8. Story (photo | intro) + timeline
      9. Menu block
     10. Photo pair
@@ -136,7 +135,7 @@ h1, h2, h3, p, figure, ul { margin: 0; }
 /* The image is laid over its slot rather than sized inside it, so the slot's
    height comes from aspect-ratio alone. A percentage-height image in flow
    trips Safari 16 (iOS 16): it sizes the hero's grid rows from the photo, not
-   the slot, and the two hero photos slide down over the venue band. */
+   the slot, and the two hero photos slide down over what follows them. */
 .slot > img {
   position: absolute;
   inset: 0;
@@ -360,41 +359,6 @@ h3 {
   color: rgba(246, 244, 239, 0.94);
   text-shadow: 0 1px 24px rgba(0, 0, 0, 0.32);
   white-space: nowrap;
-}
-
-/* ------------------------------------------------------- 7. creed band ---- */
-/* The ink bar: venue and town. It lives inside the hero, between the two
-   photos in the source, so that on a phone — where the photos stack — it
-   falls between them. On desktop it is pinned to a second row spanning both
-   photos (the 720px block hands it back to source order). */
-.creed {
-  text-align: center;
-  padding: clamp(2rem, 5vw, 3.6rem) var(--pad);
-}
-.hero .creed {
-  grid-column: 1 / -1;
-  grid-row: 2;
-}
-.creed p {
-  font-size: clamp(0.95rem, 2.15vw, 1.7rem);
-  line-height: 1.4;
-  letter-spacing: 0.055em;
-  text-transform: uppercase;
-  color: rgba(244, 242, 237, 0.92);
-}
-
-/* The museum name is a link, and always underlined so it reads as one —
-   on a phone there is no hover to discover it. */
-.creed a {
-  text-decoration: underline;
-  text-underline-offset: 0.2em;
-  text-decoration-thickness: 1px;
-  text-decoration-color: rgba(244, 242, 237, 0.55);
-  transition: text-decoration-color 0.2s ease;
-}
-.creed a:hover,
-.creed a:focus-visible {
-  text-decoration-color: currentColor;
 }
 
 /* --------------------------------------------- 8. story + timeline ------- */
@@ -831,8 +795,7 @@ h3 {
   :root { --gap: 8px; }
 
   /* Every two-up becomes a stack, except the hero: its two photographs stay
-     side by side so the names can sit centred across both of them, with the
-     venue band spanning underneath as it does at full width. */
+     side by side so the names can sit centred across both of them. */
   .split:not(.hero) { grid-template-columns: 1fr; }
 
   /* Side by side, a 3:2 photo is only half the screen wide and so barely a

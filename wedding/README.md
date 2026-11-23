@@ -29,13 +29,13 @@ browser, and reloads the page every time you save a file under `wedding/`.
 
 ## The page, top to bottom
 
-Nav · hero · venue band · **Schedule** (Friday bonfire, Saturday wedding) ·
-**Our Story** (photo + intro, then the timeline, as one panel) · **Travel**
-(getting here, getting around, room-block note, hotels) · photo pair (Sutro |
-pensive) · **Registry** (coming soon) · footer.
+Nav · hero (the names over two photos) · **Schedule** (Friday bonfire,
+Saturday wedding) · **Our Story** (the intro between corner photos, then the
+collapsible timeline) · **Travel** (Accommodations, Transportation and Local
+recommendations tabs) · photo pair (Sutro | pensive) · **Registry** ·
+**RSVP** · footer.
 
-On a phone the hero's venue band sits between its two photos, and the photo
-pair comes apart: the Sutro photo moves up between the timeline and Travel to
+On a phone the photo pair comes apart: the Sutro photo moves up between the timeline and Travel to
 break up the text, while the pensive photo stays after Travel. That's done with
 `display: contents` and flex `order` in the 720px block of the CSS — any new
 section added below Travel needs `order: 2` there too, or it will jump above
