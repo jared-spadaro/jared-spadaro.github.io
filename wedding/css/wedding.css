@@ -584,6 +584,18 @@ h3 {
   font-size: clamp(1.55rem, 2.75vw, 2.1rem);   /* a size up from h3 */
   margin-right: -0.05em;
 }
+/* The lines under each event name — the venue and the dress code — are set
+   as written rather than in capitals. Lowercase at the capitals' tiny size
+   would be hard to read, so they take a small reading size, and only light
+   tracking: wide tracking is for capitals. Three classes so the phone rule
+   for .event__body .micro, later in the file, does not undo this. */
+.event__body .micro.event__where,
+.event__body .micro.event__dress {
+  font-size: clamp(0.85rem, 1.05vw, 0.95rem);
+  letter-spacing: 0.02em;
+  margin-right: -0.02em;
+  text-transform: none;
+}
 .event__where { margin-top: auto; padding-top: 0.4rem; }
 .event__where a { border-bottom: 1px solid var(--rule); }
 .event__where a:hover { border-bottom-color: var(--ink); }
