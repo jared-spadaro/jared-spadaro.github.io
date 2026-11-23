@@ -669,9 +669,10 @@ h3 {
 .tabs__headline {
   margin: auto 0 0;
   padding-top: clamp(0.5rem, 1.2vw, 1rem);
+  font-family: var(--swash);     /* Pinyon Script, as the names */
   font-size: clamp(1.35rem, 2.3vw, 1.9rem);
   line-height: 1.2;
-  letter-spacing: 0.03em;
+  letter-spacing: 0;              /* a joined script takes no tracking */
   text-align: center;
 }
 .tabs__button {
