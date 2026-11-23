@@ -618,7 +618,9 @@ h3 {
 .tabs__list { grid-row: 1; }
 .tabs__list {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  /* minmax(0, …) so a long one-word label can never widen its column past a
+     third — a plain 1fr would grow to fit it and push the page sideways. */
+  grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 .tabs__tab {
   padding: 0.9rem 0.5rem;
@@ -860,7 +862,15 @@ h3 {
      across, so their labels drop their tracking and may wrap. */
   .tabs__panel { grid-template-columns: 1fr; min-height: 0; }
   .tabs__photo { aspect-ratio: 3 / 2; height: auto; min-height: 0; }
-  .tabs__tab { letter-spacing: 0.1em; padding-inline: 0.3rem; }
+  /* "Accommodations" is one long word and cannot wrap: the label scales
+     with the screen and loses most of its tracking so it fits a third of a
+     320px phone, and may break mid-word only if it still does not. */
+  .tabs__tab {
+    font-size: clamp(0.5rem, 2.6vw, 0.66rem);
+    letter-spacing: 0.04em;
+    padding-inline: 0.25rem;
+    overflow-wrap: anywhere;
+  }
 
   /* The schedule stays one row across: heading, then both cards side by
      side. The cards share what width is left rather than sizing to their
