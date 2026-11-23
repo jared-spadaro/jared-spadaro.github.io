@@ -575,7 +575,14 @@ h3 {
 /* Tracking leaves a space after the last letter of every line, which would
    hold the text off the photograph's right edge. Pull it back. */
 .event__body .micro { text-indent: 0; margin-right: -0.34em; }
-.event__body h3 { margin-right: -0.05em; }
+/* The event names are set in Pinyon Script, as the couple's names are: as
+   written, and without the tracking the serif headings carry. */
+.event__body h3 {
+  font-family: var(--swash);
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: 0;
+}
 .event__where { margin-top: auto; padding-top: 0.4rem; }
 .event__where a { border-bottom: 1px solid var(--rule); }
 .event__where a:hover { border-bottom-color: var(--ink); }
