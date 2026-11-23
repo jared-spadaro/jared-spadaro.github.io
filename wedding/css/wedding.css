@@ -632,7 +632,7 @@ h3 {
    the left of the panel and the details sit on the right. */
 .tabs {
   display: grid;
-  max-width: 68rem;
+  max-width: 75rem;
   margin: clamp(1.5rem, 3vw, 2.5rem) auto 0;
   text-align: left;
 }
@@ -686,7 +686,12 @@ h3 {
   min-height: 100%;
   background: transparent;
 }
-.tabs__photo > img { object-fit: contain; }
+
+.tabs__photo > img { 
+  object-fit: contain;
+  width: 65%;
+  margin-left: 24%;
+}
 
 .tabs__body {
   display: flex;
@@ -826,7 +831,7 @@ h3 {
 @media (max-width: 960px) {
   .schedule__cards { column-gap: 0px; }
   .schedule { gap: 10%; }
-  .hero__text { padding-top: 12%; }
+  .hero__text { padding-top: 25%; }
 }
 
 @media (max-width: 900px) {
@@ -835,9 +840,8 @@ h3 {
      right. */
   .story__top { grid-template-columns: 1fr; }
   .story__stack,
-  .story__top > .slot { width: 50%; }
+  .story__top > .slot { width: 100%; }
   .story__stack { justify-self: start; }
-  .story__top > .slot { justify-self: end; }
   .story__intro .prose { max-width: 34rem; }
 }
 

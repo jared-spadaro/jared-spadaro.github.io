@@ -136,10 +136,11 @@ Pages serves case-sensitively, so each `src` has to match its file exactly.
 
 ## Music
 
-`audio/song.mp3` is "Easy Lemon" by Kevin MacLeod (incompetech.com), licensed
-CC BY 4.0 — the licence requires the credit line in the footer, so keep it
-while this track is used. To change songs, replace the file (and the credit).
-It's 5 MB at 320 kbps; re-encoding to 128 kbps would roughly halve that.
+`audio/song.mp3` is "Bossa Antigua" by Kevin MacLeod (incompetech.com),
+licensed CC BY 4.0 — the licence requires a visible credit on the page (title,
+artist, source and licence) while this track is used. To change songs, replace
+the file and the credit. It's 8.7 MB at 256 kbps; re-encoding to 128 kbps would
+roughly halve that.
 
 Browsers won't let audio start until the visitor interacts with the page, so
 the song starts on the first tap, click or key press (scrolling doesn't count)
