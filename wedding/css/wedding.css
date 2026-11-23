@@ -501,6 +501,10 @@ h3 {
   grid-template-columns: auto 1fr;
   gap: clamp(1.25rem, 3.5vw, 3rem);
 }
+/* The schedule sits on the printed sky instead of the cream panel. */
+.schedule {
+  background: url("../img/cloud-background.avif") center / cover no-repeat;
+}
 
 /* Rotated a quarter turn anticlockwise: it reads bottom to top, so you tilt
    your head to the left. vertical-rl turns the glyphs; the 180 flip turns the
