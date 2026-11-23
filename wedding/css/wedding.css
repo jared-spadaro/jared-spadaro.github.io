@@ -362,7 +362,7 @@ h3 {
 }
 
 /* ---------------------------------------------------------- dateline ---- */
-/* A narrow ink bar between Schedule and Our Story with the date, the venue
+/* A narrow ink bar between the hero and Schedule with the date, the venue
    and the town on one line, in the tracked capitals of the nav. On a phone
    the line is longer than the screen is wide, so it wraps. */
 .dateline {
