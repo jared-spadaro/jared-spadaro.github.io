@@ -113,8 +113,9 @@ crop of width `H × 0.75` out of a source `W × H`, the value is
 | `hero-right` | first screen, right half | `hannah-jared-lake-1.jpg` |
 | `schedule-friday` | Friday card | `vert/sign.jpg` |
 | `schedule-saturday` | Saturday card | `vert/running.jpg` |
-| `story-photo` | Our Story, top-left corner | `sitting-bw-1.jpg` |
-| `story-photo-2` | Our Story, bottom-right corner | `vert/bw-cute.jpg` |
+| `story-photo` | Our Story, left, upper | `sitting-bw-1.jpg` |
+| `story-photo-below` | Our Story, left, lower | `bw-lying-down.jpg` |
+| `story-photo-2` | Our Story, right | `vert/bw-cute.jpg` |
 | `pair-left` | photo pair, left (on a phone: above Travel) | `sutro-sitting.jpg` |
 | `pair-right` | photo pair, right | `pensive-bw.jpeg` |
 | `travel-hotels` | Travel, Hotels tab | `snowboarding.jpg` |

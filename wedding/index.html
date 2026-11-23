@@ -38,6 +38,7 @@
          schedule-friday   vert/sign.jpg     (portrait)
          schedule-saturday vert/running.jpg  (portrait)
          story-photo       sitting-bw-1.jpg
+         story-photo-below bw-lying-down.jpg
          story-photo-2     vert/bw-cute.jpg  (portrait)
          pair-left         sutro-sitting.jpg (on a phone: above Travel)
          pair-right        pensive-bw.jpeg
@@ -181,17 +182,32 @@
         <!-- ----------------------------------------------------- story -->
         <section class="panel panel--ink story detached" id="story" aria-labelledby="storyTitle">
           <div class="story__top">
-            <figure class="slot slot--landscape" data-slot="story-photo">
-              <img
-                loading="lazy"
-                decoding="async"
-                src="img/sitting-bw-1.jpg"
-                alt="Hannah and Jared sitting on the grass in Alamo Square"
-                width="2316"
-                height="1536"
-              />
-            </figure>
-  
+            <!-- Two photos stacked on the left, together exactly as tall as
+                 the portrait on the right, so their tops and bottoms line up. -->
+            <div class="story__stack">
+              <figure class="slot slot--landscape" data-slot="story-photo">
+                <img
+                  loading="lazy"
+                  decoding="async"
+                  src="img/sitting-bw-1.jpg"
+                  alt="Hannah and Jared sitting on the grass in Alamo Square"
+                  width="2316"
+                  height="1536"
+                />
+              </figure>
+
+              <figure class="slot slot--landscape" data-slot="story-photo-below">
+                <img
+                  loading="lazy"
+                  decoding="async"
+                  src="img/bw-lying-down.jpg"
+                  alt="Hannah and Jared lying in the grass in a park"
+                  width="2316"
+                  height="1536"
+                />
+              </figure>
+            </div>
+
             <div class="story__intro">
               <h2 class="title" id="storyTitle">Our Story</h2>
               <p class="prose">
