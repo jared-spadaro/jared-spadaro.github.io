@@ -577,14 +577,12 @@ h3 {
 /* Tracking leaves a space after the last letter of every line, which would
    hold the text off the photograph's right edge. Pull it back. */
 .event__body .micro { text-indent: 0; margin-right: -0.34em; }
-/* The event names are set in Pinyon Script, as the couple's names are: as
-   written, and without the tracking the serif headings carry. */
+/* The event names, in the text face's tracked capitals a size up from h3.
+   Their tracking leaves a space after the last letter; pull it back so the
+   names sit flush right with the lines around them. */
 .event__body h3 {
-  font-family: var(--swash);
   font-size: clamp(1.55rem, 2.75vw, 2.1rem);   /* a size up from h3 */
-  font-weight: 400;
-  text-transform: none;
-  letter-spacing: 0;
+  margin-right: -0.05em;
 }
 .event__where { margin-top: auto; padding-top: 0.4rem; }
 .event__where a { border-bottom: 1px solid var(--rule); }
@@ -875,7 +873,9 @@ h3 {
   /* The card titles set the cards' minimum width. At the desktop size
      "WELCOME" alone is wider than half the room left on a 320px screen, and
      the grid cannot shrink past it. */
-  .event__body h3 { font-size: clamp(1.15rem, 5.2vw, 2.1rem); }
+  /* The names are tracked capitals, and "WELCOME" / "WEDDING" must each fit
+     a card as narrow as a 320px phone allows; the floor lets them shrink. */
+  .event__body h3 { font-size: clamp(0.8rem, 5.2vw, 2.1rem); }
   /* At a card's width the date line will not take 0.34em of tracking —
      "Saturday, July 17" breaks and strands the 17. */
   .event__body .micro { letter-spacing: 0.13em; margin-right: -0.13em; }
