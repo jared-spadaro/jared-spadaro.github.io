@@ -494,7 +494,6 @@ h3 {
   padding: clamp(0.7rem, 1.6vw, 1.1rem);
 }
 .menu__inner {
-  border: 1px solid var(--rule);
   padding: clamp(1.6rem, 3.6vw, 2.9rem) var(--pad);
   text-align: center;
 }
@@ -691,17 +690,14 @@ h3 {
   outline: none;
 }
 
-/* Registry and RSVP reuse the menu block's ruled inner box. RSVP is the
-   same placeholder on ink: the box's rule and the secondary text are relit
-   for the dark ground, as in Our Story. */
+/* Registry and RSVP reuse the menu block's inner box, without its rule.
+   RSVP is the same placeholder on ink, with its secondary text relit for the
+   dark ground, as in Our Story. */
 .registry,
 .rsvp { padding: clamp(0.7rem, 1.6vw, 1.1rem); }
 .registry .micro,
 .rsvp .micro { margin-top: 0.6rem; }
-.rsvp {
-  --rule: rgba(244, 242, 237, 0.28);
-  --ink-soft: rgba(244, 242, 237, 0.62);
-}
+.rsvp { --ink-soft: rgba(244, 242, 237, 0.62); }
 
 /* RSVP's heading runs up the left edge of its box, as Schedule's does —
    bottom to top, so you tilt your head to the left — with the line beside
