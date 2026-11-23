@@ -41,6 +41,10 @@
      little inside the panels' usual padding, and one value for both so they
      line up. */
   --title-inset: calc(var(--pad) * 0.7);
+  /* One size for the headings inside sections — the event names, the
+     travel tabs' headings, the Timeline heading. Smaller on a phone (see the
+     720px block). */
+  --subhead: clamp(1.55rem, 2.75vw, 2.1rem);
 }
 
 /* --------------------------------------------------------- 2. base + help - */
@@ -442,7 +446,7 @@ h3 {
   list-style: none;            /* drop the browser's own triangle */
 }
 .timeline__summary::-webkit-details-marker { display: none; }
-.timeline__heading { margin: 0; }
+.timeline__heading { margin: 0; font-size: var(--subhead); }
 
 /* The caret, after the heading: an L of two borders, turned to point right
    while the timeline is closed and a further quarter turn, down, once open. */
@@ -595,7 +599,7 @@ h3 {
    Their tracking leaves a space after the last letter; pull it back so the
    names sit flush right with the lines around them. */
 .event__body h3 {
-  font-size: clamp(1.55rem, 2.75vw, 2.1rem);   /* a size up from h3 */
+  font-size: var(--subhead);
   margin-right: -0.05em;
 }
 /* The line under each photograph — the venue, a dot, the dress code — is
@@ -706,9 +710,9 @@ h3 {
 .tabs__headline {
   margin: auto 0 0;
   padding-top: clamp(0.5rem, 1.2vw, 1rem);
-  font-size: clamp(1.35rem, 2.3vw, 1.9rem);
+  font-size: var(--subhead);
   line-height: 1.2;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
   text-align: center;
 }
@@ -900,9 +904,10 @@ h3 {
   /* The card titles set the cards' minimum width. At the desktop size
      "WELCOME" alone is wider than half the room left on a 320px screen, and
      the grid cannot shrink past it. */
-  /* The names are tracked capitals, and "WELCOME" / "WEDDING" must each fit
-     a card as narrow as a 320px phone allows; the floor lets them shrink. */
-  .event__body h3 { font-size: clamp(0.8rem, 5.2vw, 2.1rem); }
+  /* The in-section headings share one phone size, set by the narrowest
+     place they go: "WELCOME" / "WEDDING" must each fit a schedule card on a
+     320px phone, so the floor lets them shrink. */
+  :root { --subhead: clamp(0.8rem, 5.2vw, 2.1rem); }
   /* At a card's width the date line will not take 0.34em of tracking —
      "Saturday, July 17" breaks and strands the 17. */
   .event__body .micro { letter-spacing: 0.13em; margin-right: -0.13em; }
