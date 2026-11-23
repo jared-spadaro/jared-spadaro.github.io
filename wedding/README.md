@@ -118,8 +118,8 @@ crop of width `H × 0.75` out of a source `W × H`, the value is
 | `story-photo-2` | Our Story, right | `vert/bw-cute.jpg` |
 | `pair-left` | photo pair, left (on a phone: above Travel) | `sutro-sitting.jpg` |
 | `pair-right` | photo pair, right | `pensive-bw.jpeg` |
-| `travel-hotels` | Travel, Hotels tab | `snowboarding.jpg` |
-| `travel-transport` | Travel, Transportation tab | `bw-lying-down.jpg` |
+| `travel-hotels` | Travel, Accommodations tab | `vert/abbys-engagement.jpg` |
+| `travel-transport` | Travel, Transportation tab | `snowboarding.jpg` |
 | `travel-local` | Travel, Local recommendations tab | `tahoe-boat.jpg` |
 
 The same table is repeated as a comment just above `<body>` in `index.html`.
