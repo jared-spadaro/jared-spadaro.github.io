@@ -1101,15 +1101,13 @@ h3 {
   .pair > [data-slot="pair-right"] {
     margin-top: 0;
   }
+  /* Registry before RSVP, as on desktop: same order, so source order. */
   .travel,
   .pair > [data-slot="pair-right"],
+  .registry,
   .rsvp,
   .footer {
     order: 2;
-  }
-  /* On a phone RSVP comes before Registry, the reverse of the source. */
-  .registry {
-    order: 3;
   }
 
   /* The panel stacks: photograph above, details below. The tabs stay three
