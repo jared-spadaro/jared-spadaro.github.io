@@ -996,7 +996,7 @@ h3 {
     padding-top: 28%;
   }
   .hero__intro {
-    font-size: calc(var(--names) * 0.25);
+    font-size: calc(var(--names) * 0.20);
   }
 }
 
