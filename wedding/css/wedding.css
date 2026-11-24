@@ -375,8 +375,10 @@ h3 {
 
   /* The hero and the date bar together fill the screen exactly. The bar gets
      a fixed height and the hero takes the rest; each photo fills its half,
-     cropped from the outside edge only: the dunes lose their left side, the
-     lake its right, so both keep the seam between them. */
+     cropped mostly from the outside edge: the lake loses its right side;
+     the dunes lose mostly their left, but at 56% rather than 100% so the
+     couple (source x 965-1180 of 2316) stays whole, about 40% of the way
+     across, walking towards the seam. */
   .dateline {
     height: 3.5rem;
     padding-block: 0;
@@ -393,7 +395,7 @@ h3 {
     height: 100%;
     align-self: stretch;
   }
-  .hero > [data-slot="hero-left"] > img { object-position: right center; }
+  .hero > [data-slot="hero-left"] > img { object-position: 56% center; }
   .hero > [data-slot="hero-right"] > img { object-position: left center; }
 }
 
