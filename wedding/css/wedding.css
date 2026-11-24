@@ -1105,9 +1105,7 @@ h3 {
      photos stack, each the full width and half the height, so each is near
      square and both subjects fit: the couple on the dunes (source x
      965-1180 of 2316) and both swimmers (x 665-1165 of 2296) are centred in
-     their frames. The seam between them splits the hero text: "Join us
-     for the wedding of" sits on it from above, "Hannah & Jared" hangs from
-     it below, each a few pixels clear of it. */
+     their frames. The names sit centred on the seam between them. */
   .dateline {
     height: 4rem;
     padding-block: 0;
@@ -1129,21 +1127,8 @@ h3 {
   .hero > [data-slot="hero-left"] > img { object-position: 39% center; }
   .hero > [data-slot="hero-right"] > img { object-position: 20% center; }
   .hero .hero__text {
-    padding: 0;
-  }
-  .hero__intro,
-  .hero__names {
-    position: absolute;
-    left: 1rem;
-    right: 1rem;
-  }
-  .hero__intro {
-    bottom: 50%;
-    margin-bottom: 3px;          /* its ink ends ~4px above the seam */
-  }
-  .hero__names {
-    top: 50%;
-    margin-top: 6px;             /* its ink starts ~4px below */
+    justify-content: center;
+    padding: 0 1rem;
   }
 
   /* The photo pair dissolves into the column (a flex column, and <main> is
