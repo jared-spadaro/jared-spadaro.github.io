@@ -1101,13 +1101,11 @@ h3 {
   }
 
   /* The hero and the date bar together fill the screen, as on desktop. The
-     bar (two lines here) gets a fixed 4rem and the hero the rest; each photo
-     fills its half, a tall narrow slice of the frame. Each slice is placed
-     on its subjects: the couple on the dunes (source x 965-1180 of 2316) sit
-     in the middle of theirs. The lake slice is too narrow to hold both
-     swimmers (their heads are 455px apart in a 2296px frame; a tall phone's
-     slice is about 380px of it), so it frames the swimmer on the right,
-     x 1035-1165, whole and centred. */
+     bar (two lines here) gets a fixed 4rem and the hero the rest. The two
+     photos stack, each the full width and half the height, so each is near
+     square and both subjects fit: the couple on the dunes (source x
+     965-1180 of 2316) and both swimmers (x 665-1165 of 2296) are centred in
+     their frames. The names sit centred on the seam between them. */
   .dateline {
     height: 4rem;
     padding-block: 0;
@@ -1118,14 +1116,20 @@ h3 {
   .hero {
     height: calc(100vh - 4rem);
     height: calc(100svh - 4rem);
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
   }
   .hero > .slot {
     aspect-ratio: auto;
     height: 100%;
     align-self: stretch;
   }
-  .hero > [data-slot="hero-left"] > img { object-position: 45% center; }
-  .hero > [data-slot="hero-right"] > img { object-position: 47.5% center; }
+  .hero > [data-slot="hero-left"] > img { object-position: 39% center; }
+  .hero > [data-slot="hero-right"] > img { object-position: 20% center; }
+  .hero .hero__text {
+    justify-content: center;
+    padding: 0 1rem;
+  }
 
   /* The photo pair dissolves into the column (a flex column, and <main> is
      display: contents, so every section is a flex item of it). Its Sutro
