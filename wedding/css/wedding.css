@@ -1110,34 +1110,44 @@ h3 {
     order: 2;
   }
 
-  /* The panel stacks: photograph above, details below. The tabs stay three
-     across, so their labels drop their tracking and may wrap. */
-  /* All three panels still share one grid cell, so each is as tall as the
-     tallest (Accommodations). align-content: start keeps a shorter panel's
-     rows at their own height and lets the spare room fall below the text;
-     stretched, the photo row grew with it and floated the photo away from
-     its text by a different amount in every tab. */
-  .tabs__panel {
-    grid-template-columns: 1fr;
+  /* The photograph floats on the left and the tab's text wraps round it.
+     The panel is a flow root, so it holds the float; the text block is a
+     plain block rather than a flex column, because a flex container sits
+     beside a float instead of flowing round it. All three panels still
+     share one grid cell, so each is as tall as the tallest. */
+  .tabs__panel,
+  .tabs__panel[hidden] {
+    display: flow-root;
     min-height: 0;
-    align-content: start;
   }
-  /* Each photograph at its own shape, centred, with nothing around it, so
-     the space to the text is the text's own top padding — the same in
-     every tab. Portraits are held to 60vw tall, landscapes to 76vw wide. */
+  /* Top and left margins match the text's 2rem / 3rem padding, so the photo
+     lines up with the first line and with the text below it. Each photo
+     keeps its own shape at 42% of the panel. */
   .tabs__photo {
+    float: left;
+    width: 42%;
     aspect-ratio: auto;
     height: auto;
     min-height: 0;
-    margin: 2rem 0 0;
+    margin: 2rem 1.1rem 0.6rem 3rem;
   }
   .tabs__panel .tabs__photo > img {
     position: static;
-    width: auto;
+    width: 100%;
     height: auto;
-    max-width: 76vw;
-    max-height: 60vw;
-    margin: 0 auto;
+    margin: 0;
+  }
+  .tabs__body {
+    display: block;
+  }
+  .tabs__body > * + * {
+    margin-top: 0.9rem;
+  }
+  /* Markers outside the text box would sit on top of the photo; inside,
+     they travel with their line as it wraps. */
+  .tabs__points {
+    list-style-position: inside;
+    padding-left: 0;
   }
   /* "Accommodations" is one long word and cannot wrap: the label scales
      with the screen and loses most of its tracking so it fits a third of a
