@@ -583,6 +583,13 @@ h3 {
 .timeline__when {
   margin-bottom: 0.35rem;
 }
+/* A photograph under a chapter's text (the engagement, under "Stepping
+   up"): shown whole at its own 3:4, no wider than 18rem. */
+.slot--engagement { aspect-ratio: 3 / 4; }   /* img/engagement.jpg, 864x1152 */
+.timeline__photo {
+  width: min(100%, 18rem);
+  margin-top: 0.9rem;
+}
 .timeline__list h3 {
   margin-bottom: 0.5rem;
 }
