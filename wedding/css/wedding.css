@@ -23,18 +23,19 @@
 
 /* ------------------------------------------------------------- 1. tokens - */
 :root {
-  --cream: #eeede9;        /* the panels                                     */
-  --cream-dim: #e3dfdc;    /* the nav bar, one step darker                   */
-  --ink: #171717;          /* the black band, and all type                   */
-  --ink-soft: #4a4844;     /* micro labels                                   */
-  --light: #f4f2ed;        /* type on ink                                    */
+  --cream: #eeede9; /* the panels                                     */
+  --cream-dim: #e3dfdc; /* the nav bar, one step darker                   */
+  --ink: #171717; /* the black band, and all type                   */
+  --ink-soft: #4a4844; /* micro labels                                   */
+  --light: #f4f2ed; /* type on ink                                    */
   --rule: rgba(23, 23, 23, 0.22);
 
-  --serif: "Cormorant Garamond", "Cormorant", Garamond, "Times New Roman", serif;
+  --serif:
+    "Cormorant Garamond", "Cormorant", Garamond, "Times New Roman", serif;
   --swash: "Pinyon Script", "Cormorant Garamond", cursive;
 
-  --col: 1180px;           /* width of the floating column                   */
-  --gap: 10px;             /* background shows through between panels        */
+  --col: 1180px; /* width of the floating column                   */
+  --gap: 10px; /* background shows through between panels        */
   --edge: clamp(1.25rem, 3vw, 2.75rem); /* sky above the nav, and below it   */
   --pad: clamp(1.5rem, 4vw, 3.25rem);
   /* The left inset of the two sideways headings (Schedule, Registry): a
@@ -50,11 +51,13 @@
 /* --------------------------------------------------------- 2. base + help - */
 *,
 *::before,
-*::after { box-sizing: border-box; }
+*::after {
+  box-sizing: border-box;
+}
 
 html {
   -webkit-text-size-adjust: 100%;
-  background: #7ea8cf;       /* the sky's colour, under the photograph */
+  background: #7ea8cf; /* the sky's colour, under the photograph */
 }
 
 body {
@@ -81,16 +84,31 @@ body::before {
     url("../img/cloud-background.avif") center / cover no-repeat;
 }
 
-img { display: block; max-width: 100%; }
+img {
+  display: block;
+  max-width: 100%;
+}
 
 /* <main> is only a landmark here — its sections are laid out by .column. */
-main { display: contents; }
+main {
+  display: contents;
+}
 
-a { color: inherit; text-decoration: none; }
+a {
+  color: inherit;
+  text-decoration: none;
+}
 
 /* Every heading on this page is a tracked, all-caps line of the same face;
    only the size changes. */
-h1, h2, h3, p, figure, ul { margin: 0; }
+h1,
+h2,
+h3,
+p,
+figure,
+ul {
+  margin: 0;
+}
 
 .skip-link {
   position: absolute;
@@ -101,11 +119,18 @@ h1, h2, h3, p, figure, ul { margin: 0; }
   padding: 0.6rem 1rem;
   z-index: 99;
 }
-.skip-link:focus { left: 0; }
+.skip-link:focus {
+  left: 0;
+}
 
-:focus-visible { outline: 1px solid var(--ink); outline-offset: 3px; }
+:focus-visible {
+  outline: 1px solid var(--ink);
+  outline-offset: 3px;
+}
 
-.nowrap { white-space: nowrap; }
+.nowrap {
+  white-space: nowrap;
+}
 
 /* Ampersand set in the text face's italic, not the script. */
 .amp {
@@ -118,7 +143,7 @@ h1, h2, h3, p, figure, ul { margin: 0; }
   /* The floor keeps these legible on a phone, where 0.86vw is ~3px. */
   font-size: clamp(0.62rem, 0.86vw, 0.85rem);
   letter-spacing: 0.34em;
-  text-indent: 0.34em;      /* tracking adds space after the last letter too */
+  text-indent: 0.34em; /* tracking adds space after the last letter too */
   text-transform: uppercase;
   color: var(--ink-soft);
   line-height: 1.6;
@@ -134,7 +159,7 @@ h1, h2, h3, p, figure, ul { margin: 0; }
 .slot {
   position: relative;
   overflow: hidden;
-  background: #cfcdc6;      /* shows while the photo loads */
+  background: #cfcdc6; /* shows while the photo loads */
 }
 /* The image is laid over its slot rather than sized inside it, so the slot's
    height comes from aspect-ratio alone. A percentage-height image in flow
@@ -150,18 +175,28 @@ h1, h2, h3, p, figure, ul { margin: 0; }
   object-fit: cover;
 }
 
-.slot--landscape { aspect-ratio: 3 / 2; }
-.slot--cute      { aspect-ratio: 1536 / 2316; }   /* vert/bw-cute.jpg */
+.slot--landscape {
+  aspect-ratio: 3 / 2;
+}
+.slot--cute {
+  aspect-ratio: 1536 / 2316;
+} /* vert/bw-cute.jpg */
 
 /* The two schedule photographs are portrait, and not quite the same shape as
    each other. Each gets its own ratio rather than a crop. */
-.slot--sign    { aspect-ratio: 768 / 1161; }
-.slot--running { aspect-ratio: 1050 / 1536; }
+.slot--sign {
+  aspect-ratio: 768 / 1161;
+}
+.slot--running {
+  aspect-ratio: 1050 / 1536;
+}
 
 /* In a two-up the photo keeps its ratio rather than stretching to its
    neighbour; the row is as tall as the photo and the panel beside it
    centres its content in that height. */
-.split > .slot { align-self: center; }
+.split > .slot {
+  align-self: center;
+}
 
 /* Shared section heading and running text. */
 .title {
@@ -202,8 +237,13 @@ h3 {
   flex-direction: column;
 }
 
-.panel { background: var(--cream); }
-.panel--ink { background: var(--ink); color: var(--light); }
+.panel {
+  background: var(--cream);
+}
+.panel--ink {
+  background: var(--ink);
+  color: var(--light);
+}
 
 /* Two equal columns, edge to edge, no gutter — the template butts its
    photographs straight up against each other. */
@@ -226,14 +266,18 @@ h3 {
   flex-wrap: wrap;
   justify-content: center;
 }
-.nav li + li { border-left: 1px solid var(--rule); }
+.nav li + li {
+  border-left: 1px solid var(--rule);
+}
 .nav a {
   display: block;
   padding: 1.5rem clamp(0.9rem, 2.4vw, 2.1rem);
   transition: color 0.2s ease;
 }
 .nav a:hover,
-.nav a[aria-current="page"] { color: var(--ink); }
+.nav a[aria-current="page"] {
+  color: var(--ink);
+}
 
 /* The mobile menu button: an ink disc in the top-right corner, the twin of
    the music button in the bottom-right. Hidden on desktop, where the bar is
@@ -262,11 +306,19 @@ h3 {
   width: 1.1rem;
   height: 1px;
   background: var(--light);
-  transition: transform 0.3s ease, opacity 0.2s ease;
+  transition:
+    transform 0.3s ease,
+    opacity 0.2s ease;
 }
-.nav-open .nav-toggle span:nth-child(1) { transform: translateY(5px) rotate(45deg); }
-.nav-open .nav-toggle span:nth-child(2) { opacity: 0; }
-.nav-open .nav-toggle span:nth-child(3) { transform: translateY(-5px) rotate(-45deg); }
+.nav-open .nav-toggle span:nth-child(1) {
+  transform: translateY(5px) rotate(45deg);
+}
+.nav-open .nav-toggle span:nth-child(2) {
+  opacity: 0;
+}
+.nav-open .nav-toggle span:nth-child(3) {
+  transform: translateY(-5px) rotate(-45deg);
+}
 
 /* Dims the page behind the open drawer; tapping it closes the drawer. */
 .nav-scrim {
@@ -278,14 +330,18 @@ h3 {
 
 /* While the drawer is open the page underneath stays put. */
 .nav-open,
-.nav-open body { overflow: hidden; }
+.nav-open body {
+  overflow: hidden;
+}
 
 /* On a wide screen the bar leaves the page and sits on the photographs:
    no band of its own, no rules between the items, white type over the
    hero's scrim. Taken out of flow, so the hero starts at the top of the
    column and the bar lies over it. The links share the width equally. */
 @media (min-width: 721px) {
-  .column { position: relative; }
+  .column {
+    position: relative;
+  }
 
   .nav {
     position: absolute;
@@ -299,8 +355,12 @@ h3 {
     width: 100%;
     flex-wrap: nowrap;
   }
-  .nav li { flex: 1; }
-  .nav li + li { border-left: 0; }
+  .nav li {
+    flex: 1;
+  }
+  .nav li + li {
+    border-left: 0;
+  }
   .nav a {
     text-align: center;
     color: rgba(255, 255, 255, 0.92);
@@ -309,7 +369,9 @@ h3 {
     text-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);
   }
   .nav a:hover,
-  .nav a[aria-current="page"] { color: #fff; }
+  .nav a[aria-current="page"] {
+    color: #fff;
+  }
 }
 
 /* ------------------------------------------------------------ 6. hero ----- */
@@ -336,7 +398,7 @@ h3 {
 .hero__text {
   /* One source for the names' size, so the line above them can be a fixed
      quarter of it at every width. */
-  --names: clamp(2.5rem, 7.7vw, 6.3rem);  /* fallback: no container queries */
+  --names: clamp(2.5rem, 7.7vw, 6.3rem); /* fallback: no container queries */
   --names: clamp(2.5rem, 7cqw, 6.3rem);
   position: absolute;
   inset: 0;
@@ -347,7 +409,7 @@ h3 {
   gap: 0.35em;
   padding: 13% 1rem 0;
   text-align: center;
-  pointer-events: none;  /* nothing in here is clickable */
+  pointer-events: none; /* nothing in here is clickable */
 }
 
 /* The line above the names: a quarter of their size, and set in the text
@@ -405,7 +467,9 @@ h3 {
   --ink-soft: var(--light);
   --rule: rgba(244, 242, 237, 0.28);
 }
-.story :focus-visible { outline-color: var(--light); }
+.story :focus-visible {
+  outline-color: var(--light);
+}
 /* Three columns, the outer two a quarter each: half the width the photo had
    when it shared the panel with the intro one-to-one. Both side columns are
    centred on the row, and the left stack is made exactly as tall as the
@@ -421,7 +485,9 @@ h3 {
    column-widths tall; the portrait slot is 2316/1536 = 1.5078. The
    difference, 0.1745 of the column width, is the gap between them. A
    percentage margin resolves against the width, so it holds at any size. */
-.story__stack > .slot + .slot { margin-top: 17.45%; }
+.story__stack > .slot + .slot {
+  margin-top: 17.45%;
+}
 .story__intro {
   display: flex;
   flex-direction: column;
@@ -443,10 +509,15 @@ h3 {
   align-items: center;
   gap: 0.7rem;
   cursor: pointer;
-  list-style: none;            /* drop the browser's own triangle */
+  list-style: none; /* drop the browser's own triangle */
 }
-.timeline__summary::-webkit-details-marker { display: none; }
-.timeline__heading { margin: 0; font-size: var(--subhead); }
+.timeline__summary::-webkit-details-marker {
+  display: none;
+}
+.timeline__heading {
+  margin: 0;
+  font-size: var(--subhead);
+}
 
 /* The caret, after the heading: an L of two borders, turned to point right
    while the timeline is closed and a further quarter turn, down, once open. */
@@ -460,7 +531,9 @@ h3 {
   transform: rotate(225deg);
   transition: transform 0.2s ease;
 }
-.timeline[open] > .timeline__summary::after { transform: rotate(315deg); }
+.timeline[open] > .timeline__summary::after {
+  transform: rotate(315deg);
+}
 
 /* A rule down the left with a bead for each chapter. The rule is drawn per
    chapter, from its bead down to the next one, so it stops at the last bead
@@ -475,8 +548,11 @@ h3 {
   position: relative;
   padding: 0 0 1.75rem 1.75rem;
 }
-.timeline__list li:last-child { padding-bottom: 0; }
-.timeline__list li::before {          /* the bead */
+.timeline__list li:last-child {
+  padding-bottom: 0;
+}
+.timeline__list li::before {
+  /* the bead */
   content: "";
   position: absolute;
   top: 0.4rem;
@@ -486,7 +562,8 @@ h3 {
   border-radius: 50%;
   background: var(--light);
 }
-.timeline__list li::after {           /* the rule to the next bead */
+.timeline__list li::after {
+  /* the rule to the next bead */
   content: "";
   position: absolute;
   top: 0.4rem;
@@ -495,9 +572,15 @@ h3 {
   width: 1px;
   background: var(--rule);
 }
-.timeline__list li:last-child::after { content: none; }
-.timeline__when { margin-bottom: 0.35rem; }
-.timeline__list h3 { margin-bottom: 0.5rem; }
+.timeline__list li:last-child::after {
+  content: none;
+}
+.timeline__when {
+  margin-bottom: 0.35rem;
+}
+.timeline__list h3 {
+  margin-bottom: 0.5rem;
+}
 
 /* ------------------------------------------------------- 9. menu block ---- */
 .menu {
@@ -513,9 +596,16 @@ h3 {
   letter-spacing: 0.045em;
   text-transform: uppercase;
 }
-.menu__inner a { transition: opacity 0.2s ease; }
-.menu__inner a:hover { opacity: 0.55; }
-.menu__sep { padding-inline: 0.5em; color: var(--ink-soft); }
+.menu__inner a {
+  transition: opacity 0.2s ease;
+}
+.menu__inner a:hover {
+  opacity: 0.55;
+}
+.menu__sep {
+  padding-inline: 0.5em;
+  color: var(--ink-soft);
+}
 
 /* ------------------------------------------------------------- 10. pair --- */
 /* Two photographs side by side (Sutro | pensive). On desktop it is a plain
@@ -552,8 +642,13 @@ h3 {
   align-items: baseline;
   gap: clamp(0.5rem, 1.4vw, 1rem);
 }
-.schedule__head .title { margin-top: 0; }
-.schedule__head .micro { margin: 0; text-indent: 0; }
+.schedule__head .title {
+  margin-top: 0;
+}
+.schedule__head .micro {
+  margin: 0;
+  text-indent: 0;
+}
 
 /* The two cards take their own width rather than half the section each, and
    the pair is pushed to the right edge — the slack the portrait photographs
@@ -563,7 +658,7 @@ h3 {
   padding: 0;
   display: grid;
   grid-template-columns: auto auto;
-  grid-template-rows: auto auto auto;   /* text, photo, venue line */
+  grid-template-rows: auto auto auto; /* text, photo, venue line */
   justify-content: end;
   column-gap: 40px;
   row-gap: 0;
@@ -594,7 +689,10 @@ h3 {
 }
 /* Tracking leaves a space after the last letter of every line, which would
    hold the text off the photograph's right edge. Pull it back. */
-.event__body .micro { text-indent: 0; margin-right: -0.34em; }
+.event__body .micro {
+  text-indent: 0;
+  margin-right: -0.34em;
+}
 /* The event names, in the text face's tracked capitals a size up from h3.
    Their tracking leaves a space after the last letter; pull it back so the
    names sit flush right with the lines around them. */
@@ -617,15 +715,21 @@ h3 {
   text-transform: none;
   text-align: right;
 }
-.event__where a { border-bottom: 1px solid var(--rule); }
-.event__where a:hover { border-bottom-color: var(--ink); }
+.event__where a {
+  border-bottom: 1px solid var(--rule);
+}
+.event__where a:hover {
+  border-bottom-color: var(--ink);
+}
 
 /* ----------------------------------------------- 12. travel + registry ---- */
 .travel {
   padding: var(--pad);
   text-align: center;
 }
-.travel .title { margin-top: 0.4rem; }
+.travel .title {
+  margin-top: 0.4rem;
+}
 /* Three tabs over one ink panel. The tabs run the full width of the block;
    the selected one fills with ink and runs straight into the panel below,
    the other two stay open, outlined. Below the tabs, the photograph fills
@@ -636,7 +740,9 @@ h3 {
   margin: clamp(1.5rem, 3vw, 2.5rem) auto 0;
   text-align: left;
 }
-.tabs__list { grid-row: 1; }
+.tabs__list {
+  grid-row: 1;
+}
 .tabs__list {
   display: grid;
   /* minmax(0, …) so a long one-word label can never widen its column past a
@@ -654,10 +760,16 @@ h3 {
   letter-spacing: 0.24em;
   text-transform: uppercase;
   cursor: pointer;
-  transition: background-color 0.2s ease, color 0.2s ease;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
 }
-.tabs__tab + .tabs__tab { border-left: 0; }
-.tabs__tab:hover { background: var(--cream-dim); }
+.tabs__tab + .tabs__tab {
+  border-left: 0;
+}
+.tabs__tab:hover {
+  background: var(--cream-dim);
+}
 .tabs__tab[aria-selected="true"] {
   background: var(--ink);
   color: var(--light);
@@ -676,8 +788,14 @@ h3 {
   background: var(--ink);
   color: var(--light);
 }
-.tabs__panel[hidden] { display: grid; visibility: hidden; }
-.tabs__panel:focus-visible { outline-color: var(--light); outline-offset: -4px; }
+.tabs__panel[hidden] {
+  display: grid;
+  visibility: hidden;
+}
+.tabs__panel:focus-visible {
+  outline-color: var(--light);
+  outline-offset: -4px;
+}
 
 /* The photograph is shown whole: it shrinks to fit its half of the panel,
    and the ink shows around it on whichever sides it does not reach. */
@@ -687,10 +805,15 @@ h3 {
   background: transparent;
 }
 
-.tabs__photo > img { 
+.tabs__photo > img {
   object-fit: contain;
   width: 65%;
   margin-left: 24%;
+}
+/* The Tahoe photo is landscape, so it takes more of the column. */
+.tabs__photo[data-slot="travel-local"] > img {
+  width: 85%;
+  margin-left: 18%;
 }
 
 .tabs__body {
@@ -699,16 +822,24 @@ h3 {
   gap: clamp(0.9rem, 1.8vw, 1.3rem);
   padding: 6rem;
 }
-.tabs__body .prose { font-size: clamp(0.98rem, 1.2vw, 1.08rem); }
+.tabs__body .prose {
+  font-size: clamp(0.98rem, 1.2vw, 1.08rem);
+}
 .tabs__points {
   margin: 0;
   padding-left: 1.1rem;
   font-size: clamp(0.95rem, 1.15vw, 1.04rem);
   line-height: 1.55;
 }
-.tabs__points li + li { margin-top: 0.3rem; }
-.tabs__points a { border-bottom: 1px solid rgba(244, 242, 237, 0.4); }
-.tabs__points a:hover { border-bottom-color: var(--light); }
+.tabs__points li + li {
+  margin-top: 0.3rem;
+}
+.tabs__points a {
+  border-bottom: 1px solid rgba(244, 242, 237, 0.4);
+}
+.tabs__points a:hover {
+  border-bottom-color: var(--light);
+}
 
 /* The panel's one large line, then the button, centred together at the
    foot of the column. */
@@ -727,7 +858,9 @@ h3 {
   font-size: clamp(0.66rem, 0.9vw, 0.75rem);
   letter-spacing: 0.24em;
   text-transform: uppercase;
-  transition: background-color 0.2s ease, color 0.2s ease;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
 }
 .tabs__button:hover,
 .tabs__button:focus-visible {
@@ -740,10 +873,16 @@ h3 {
    Registry is the one on ink, with its secondary text relit for the dark
    ground, as in Our Story. */
 .registry,
-.rsvp { padding: clamp(0.7rem, 1.6vw, 1.1rem); }
+.rsvp {
+  padding: clamp(0.7rem, 1.6vw, 1.1rem);
+}
 .registry .micro,
-.rsvp .micro { margin-top: 0.6rem; }
-.registry { --ink-soft: rgba(244, 242, 237, 0.62); }
+.rsvp .micro {
+  margin-top: 0.6rem;
+}
+.registry {
+  --ink-soft: rgba(244, 242, 237, 0.62);
+}
 
 /* Registry's heading runs up the left edge of its box, as Schedule's does —
    bottom to top, so you tilt your head to the left — with the line beside
@@ -755,18 +894,22 @@ h3 {
   gap: clamp(1rem, 3vw, 2.5rem);
 }
 .registry .title {
-  align-self: start;            /* at the top of the box, not centred */
+  align-self: start; /* at the top of the box, not centred */
   writing-mode: vertical-rl;
   transform: rotate(180deg);
   margin: 0;
 }
-.registry .micro { margin-top: 0; }
+.registry .micro {
+  margin-top: 0;
+}
 /* Registry's own padding sat outside the box its heading is in, which put
    the heading further in than Schedule's; the box alone carries the inset. */
-.registry { padding-inline: 0; }
-.registry .menu__inner { padding-left: var(--title-inset); }
-
-
+.registry {
+  padding-inline: 0;
+}
+.registry .menu__inner {
+  padding-left: var(--title-inset);
+}
 
 /* ----------------------------------------------------------- 13. footer --- */
 .footer {
@@ -780,8 +923,12 @@ h3 {
   text-indent: 0.08em;
   text-transform: uppercase;
 }
-.footer__meta { margin-top: 0.9rem; }
-.footer__meta a { border-bottom: 1px solid var(--rule); }
+.footer__meta {
+  margin-top: 0.9rem;
+}
+.footer__meta a {
+  border-bottom: 1px solid var(--rule);
+}
 /* The music licence asks for credit; this keeps it present but quiet. */
 .footer__credit {
   margin-top: 1.6rem;
@@ -790,7 +937,9 @@ h3 {
   text-transform: none;
   color: rgba(244, 242, 237, 0.45);
 }
-.footer__credit a { border-bottom: 1px solid rgba(244, 242, 237, 0.25); }
+.footer__credit a {
+  border-bottom: 1px solid rgba(244, 242, 237, 0.25);
+}
 
 /* ----------------------------------------------------- 14. music toggle --- */
 /* Floats bottom-right. Shows a crossed-out speaker until the song is
@@ -813,7 +962,9 @@ h3 {
   cursor: pointer;
   transition: opacity 0.2s ease;
 }
-.music:hover { opacity: 0.8; }
+.music:hover {
+  opacity: 0.8;
+}
 .music svg {
   width: 1.25rem;
   height: 1.25rem;
@@ -823,34 +974,86 @@ h3 {
   stroke-linecap: round;
   stroke-linejoin: round;
 }
-.music .music__on { display: none; }
-.music.is-playing .music__on { display: inline; }
-.music.is-playing .music__off { display: none; }
+.music .music__on {
+  display: none;
+}
+.music.is-playing .music__on {
+  display: inline;
+}
+.music.is-playing .music__off {
+  display: none;
+}
 
 /* ------------------------------------------------------- 15. responsive --- */
 @media (max-width: 960px) {
-  .schedule__cards { column-gap: 0px; }
-  .schedule { gap: 10%; }
-  .hero__text { padding-top: 25%; }
+  .schedule__cards {
+    column-gap: 0px;
+  }
+  .schedule {
+    gap: 10%;
+  }
+  .hero__text {
+    padding-top: 25%;
+  }
 }
 
 @media (max-width: 900px) {
-  /* A quarter of the panel is too narrow for the story intro; stack it,
-     the photos at half width, the pair on the left and the portrait on the
-     right. */
-  .story__top { grid-template-columns: 1fr; }
-  .story__stack,
-  .story__top > .slot { width: 100%; }
-  .story__stack { justify-self: start; }
-  .story__intro .prose { max-width: 34rem; }
+  /* A quarter of the panel is too narrow for the story intro, so the intro
+     takes the full width on top and all three photographs gather below it:
+     the two landscapes stacked on the left, the portrait on the right.
+     The columns are equal, and the stack (two 3:2 photos with a 17.45% gap,
+     from the desktop rule) is exactly as tall as the portrait at the same
+     width, so their tops and bottoms line up. The column gap is set to match
+     that vertical gap: g = 0.1745 x column = 0.1745 x (100% - g) / 2 solves
+     to 8.025% of the row. */
+  .story__top {
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+      "intro intro"
+      "stack photo";
+    column-gap: 8.025%;
+    row-gap: var(--pad);
+    align-items: start;
+  }
+  .story__intro {
+    grid-area: intro;
+  }
+  .story__stack {
+    grid-area: stack;
+  }
+  .story__top > .slot {
+    grid-area: photo;
+  }
+  .story__intro .prose {
+    max-width: 34rem;
+  }
+  .tabs {
+    max-width: unset;
+    width: 100vw;
+    display: grid;
+    margin: 1rem 0 0 0;
+  }
+  .travel {
+    padding: 0;
+    padding-top: 1rem;
+  }
+  /* 2rem top and bottom, so the space under the last line of a tab matches
+     the space above its photograph; 3rem at the sides. */
+  .tabs__body {
+    padding: 2rem 3rem;
+  }
 }
 
 @media (max-width: 720px) {
-  :root { --gap: 8px; }
+  :root {
+    --gap: 8px;
+  }
 
   /* Every two-up becomes a stack, except the hero: its two photographs stay
      side by side so the names can sit centred across both of them. */
-  .split:not(.hero) { grid-template-columns: 1fr; }
+  .split:not(.hero) {
+    grid-template-columns: 1fr;
+  }
 
   /* Side by side, a 3:2 photo is only half the screen wide and so barely a
      third of that tall — too thin a band to carry the names. These two are
@@ -858,7 +1061,9 @@ h3 {
      frame and doubles the height it can stand at. Both subjects sit near
      the centre, so a middle crop keeps them. Make this ratio taller than
      3/4 for a deeper hero. */
-  .hero .slot { aspect-ratio: 3 / 4; }
+  .hero .slot {
+    aspect-ratio: 3 / 4;
+  }
 
   /* The photo pair dissolves into the column (a flex column, and <main> is
      display: contents, so every section is a flex item of it). Its Sutro
@@ -866,7 +1071,9 @@ h3 {
      text; the pensive photo keeps the pair's place. Everything from Travel
      down needs a later order than the Sutro photo — give any new section
      added below Travel order 2 as well. */
-  .pair { display: contents; }
+  .pair {
+    display: contents;
+  }
   .pair > .slot {
     margin-top: var(--gap);
     /* Undo .split's centring: as a flex item of the column, a centred slot
@@ -874,20 +1081,53 @@ h3 {
        that is nothing. */
     align-self: stretch;
   }
-  .pair > [data-slot="pair-left"] { order: 1; }
+  .pair > [data-slot="pair-left"] {
+    order: 1;
+  }
   /* This one butts straight up against Travel — no seam. */
-  .pair > [data-slot="pair-right"] { margin-top: 0; }
+  .pair > [data-slot="pair-right"] {
+    margin-top: 0;
+  }
   .travel,
   .pair > [data-slot="pair-right"],
   .rsvp,
-  .registry,
-  .footer { order: 2; }
-
+  .footer {
+    order: 2;
+  }
+  /* On a phone RSVP comes before Registry, the reverse of the source. */
+  .registry {
+    order: 3;
+  }
 
   /* The panel stacks: photograph above, details below. The tabs stay three
      across, so their labels drop their tracking and may wrap. */
-  .tabs__panel { grid-template-columns: 1fr; min-height: 0; }
-  .tabs__photo { aspect-ratio: 3 / 2; height: auto; min-height: 0; }
+  /* All three panels still share one grid cell, so each is as tall as the
+     tallest (Accommodations). align-content: start keeps a shorter panel's
+     rows at their own height and lets the spare room fall below the text;
+     stretched, the photo row grew with it and floated the photo away from
+     its text by a different amount in every tab. */
+  .tabs__panel {
+    grid-template-columns: 1fr;
+    min-height: 0;
+    align-content: start;
+  }
+  /* Each photograph at its own shape, centred, with nothing around it, so
+     the space to the text is the text's own top padding — the same in
+     every tab. Portraits are held to 60vw tall, landscapes to 76vw wide. */
+  .tabs__photo {
+    aspect-ratio: auto;
+    height: auto;
+    min-height: 0;
+    margin: 2rem 0 0;
+  }
+  .tabs__panel .tabs__photo > img {
+    position: static;
+    width: auto;
+    height: auto;
+    max-width: 76vw;
+    max-height: 60vw;
+    margin: 0 auto;
+  }
   /* "Accommodations" is one long word and cannot wrap: the label scales
      with the screen and loses most of its tracking so it fits a third of a
      320px phone, and may break mid-word only if it still does not. */
@@ -902,26 +1142,55 @@ h3 {
      side. The cards share what width is left rather than sizing to their
      text, which at 320px is wider than the photographs and pushed the page
      into a horizontal scroll. The photographs stay ranged right inside. */
-  .schedule__cards { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
-  .event > .slot { height: 44vw; }
+  .schedule__cards {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+  .event > .slot {
+    height: 44vw;
+  }
   /* The card titles set the cards' minimum width. At the desktop size
      "WELCOME" alone is wider than half the room left on a 320px screen, and
      the grid cannot shrink past it. */
   /* The in-section headings share one phone size, set by the narrowest
      place they go: "WELCOME" / "WEDDING" must each fit a schedule card on a
      320px phone, so the floor lets them shrink. */
-  :root { --subhead: clamp(0.8rem, 5.2vw, 2.1rem); }
+  :root {
+    --subhead: clamp(0.8rem, 5.2vw, 2.1rem);
+  }
   /* At a card's width the date line will not take 0.34em of tracking —
      "Saturday, July 17" breaks and strands the 17. */
-  .event__body .micro { letter-spacing: 0.13em; margin-right: -0.13em; }
+  .event__body .micro {
+    letter-spacing: 0.13em;
+    margin-right: -0.13em;
+  }
+  /* Under each photograph the venue and the dress code take a line each, the
+     dot between them dropped, so both fit the photo's width and range right
+     on its right edge. The size is tied to the photo: the Saturday photo is
+     44vw x 1050/1536 = 30.1vw wide, and "Peabody Essex Museum", the longest
+     line, sets 9.5em wide in this face, so 3.1vw keeps it inside at any
+     phone width. */
+  .event .micro.event__where {
+    font-size: min(3.1vw, 0.95rem);
+    white-space: nowrap;
+  }
+  .event__dot {
+    display: none;
+  }
+  .event__attire {
+    display: block;
+  }
 
   /* Clear the floating music button. */
-  .footer { padding-bottom: 3rem; }
+  .footer {
+    padding-bottom: 3rem;
+  }
 
   /* The nav becomes a drawer parked off the right edge of the screen. It is
      hidden (not just moved) while closed so its links drop out of the tab
      order; visibility flips only after the slide-out has finished. */
-  .nav-toggle { display: flex; }
+  .nav-toggle {
+    display: flex;
+  }
   .nav {
     position: fixed;
     top: 0;
@@ -937,19 +1206,35 @@ h3 {
     font-size: 0.78rem;
     transform: translateX(100%);
     visibility: hidden;
-    transition: transform 0.35s ease, visibility 0s linear 0.35s;
+    transition:
+      transform 0.35s ease,
+      visibility 0s linear 0.35s;
   }
   .nav-open .nav {
     transform: none;
     visibility: visible;
-    transition: transform 0.35s ease, visibility 0s;
+    transition:
+      transform 0.35s ease,
+      visibility 0s;
   }
-  .nav:focus { outline: none; }   /* focused on open only to seat the Tab order */
-  .nav ul { flex-direction: column; flex-wrap: nowrap; text-align: center; }
-  .nav li + li { border-left: 0; }
-  .nav a { padding: 1.15rem 0.25rem; }
+  .nav:focus {
+    outline: none;
+  } /* focused on open only to seat the Tab order */
+  .nav ul {
+    flex-direction: column;
+    flex-wrap: nowrap;
+    text-align: center;
+  }
+  .nav li + li {
+    border-left: 0;
+  }
+  .nav a {
+    padding: 1.15rem 0.25rem;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  * { transition: none !important; }
+  * {
+    transition: none !important;
+  }
 }
