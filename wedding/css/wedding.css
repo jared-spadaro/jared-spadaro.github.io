@@ -500,8 +500,13 @@ h3 {
    heading is tapped. It is a <details>, so it opens without script and
    keyboards and screen readers get a real disclosure control. */
 .timeline {
+  /* A row of the story grid of its own, under the photos and the intro on
+     desktop; centred in it, no wider than 40rem. The grid's row gap gives
+     the space above. */
+  grid-column: 1 / -1;
+  width: 100%;
   max-width: 40rem;
-  margin: var(--pad) auto 0;
+  margin: 0 auto;
   text-align: center;
 }
 .timeline__summary {
@@ -1002,7 +1007,8 @@ h3 {
 
 @media (max-width: 900px) {
   /* A quarter of the panel is too narrow for the story intro, so the intro
-     takes the full width on top and all three photographs gather below it:
+     takes the full width on top, the timeline follows it, and all three
+     photographs gather below them:
      the two landscapes stacked on the left, the portrait on the right.
      The columns are equal, and the stack (two 3:2 photos with a 17.45% gap,
      from the desktop rule) is exactly as tall as the portrait at the same
@@ -1012,14 +1018,19 @@ h3 {
   .story__top {
     grid-template-columns: 1fr 1fr;
     grid-template-areas:
-      "intro intro"
-      "stack photo";
+      "intro    intro"
+      "timeline timeline"
+      "stack    photo";
     column-gap: 8.025%;
     row-gap: var(--pad);
     align-items: start;
   }
   .story__intro {
     grid-area: intro;
+  }
+  /* The timeline comes straight after the story text, above the photos. */
+  .timeline {
+    grid-area: timeline;
   }
   .story__stack {
     grid-area: stack;
