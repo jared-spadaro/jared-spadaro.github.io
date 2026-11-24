@@ -1100,15 +1100,32 @@ h3 {
     grid-template-columns: 1fr;
   }
 
-  /* Side by side, a 3:2 photo is only half the screen wide and so barely a
-     third of that tall — too thin a band to carry the names. These two are
-     the one place the page crops: a portrait slot takes the middle of each
-     frame and doubles the height it can stand at. Both subjects sit near
-     the centre, so a middle crop keeps them. Make this ratio taller than
-     3/4 for a deeper hero. */
-  .hero .slot {
-    aspect-ratio: 3 / 4;
+  /* The hero and the date bar together fill the screen, as on desktop. The
+     bar (two lines here) gets a fixed 4rem and the hero the rest; each photo
+     fills its half, a tall narrow slice of the frame. Each slice is placed
+     on its subjects: the couple on the dunes (source x 965-1180 of 2316) sit
+     in the middle of theirs. The lake slice is too narrow to hold both
+     swimmers (their heads are 455px apart in a 2296px frame; a tall phone's
+     slice is about 380px of it), so it frames the swimmer on the right,
+     x 1035-1165, whole and centred. */
+  .dateline {
+    height: 4rem;
+    padding-block: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
+  .hero {
+    height: calc(100vh - 4rem);
+    height: calc(100svh - 4rem);
+  }
+  .hero > .slot {
+    aspect-ratio: auto;
+    height: 100%;
+    align-self: stretch;
+  }
+  .hero > [data-slot="hero-left"] > img { object-position: 45% center; }
+  .hero > [data-slot="hero-right"] > img { object-position: 47.5% center; }
 
   /* The photo pair dissolves into the column (a flex column, and <main> is
      display: contents, so every section is a flex item of it). Its Sutro
