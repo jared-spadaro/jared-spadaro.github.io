@@ -1043,9 +1043,8 @@ h3 {
   }
   .tabs {
     max-width: unset;
-    width: 100vw;
     display: grid;
-    margin: 1rem 0 0 0;
+    margin: 1rem 1rem 0 1rem;
   }
   .travel {
     padding: 0;
