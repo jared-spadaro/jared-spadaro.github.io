@@ -1110,26 +1110,29 @@ h3 {
     order: 2;
   }
 
-  /* The photograph floats on the left and the tab's text wraps round it.
-     The panel is a flow root, so it holds the float; the text block is a
-     plain block rather than a flex column, because a flex container sits
-     beside a float instead of flowing round it. All three panels still
-     share one grid cell, so each is as tall as the tallest. */
+  /* Photo and heading side by side on the first row, the heading centred
+     against the photo; the paragraph and the list run the full width
+     beneath. The text block's own box steps aside (display: contents) so
+     its heading, paragraph and list can each be placed in the panel's grid,
+     and the panel takes over its padding. All three panels still share one
+     grid cell, so each is as tall as the tallest. */
   .tabs__panel,
   .tabs__panel[hidden] {
-    display: flow-root;
+    display: grid;
+    grid-template-columns: 42% 1fr;
+    column-gap: 1.25rem;
+    row-gap: 1.1rem;
+    align-content: start;
     min-height: 0;
+    padding: 2rem 3rem;
   }
-  /* Top and left margins match the text's 2rem / 3rem padding, so the photo
-     lines up with the first line and with the text below it. Each photo
-     keeps its own shape at 42% of the panel. */
   .tabs__photo {
-    float: left;
-    width: 42%;
+    grid-column: 1;
+    grid-row: 1;
     aspect-ratio: auto;
     height: auto;
     min-height: 0;
-    margin: 2rem 1.1rem 0.6rem 3rem;
+    margin: 0;
   }
   .tabs__panel .tabs__photo > img {
     position: static;
@@ -1138,16 +1141,16 @@ h3 {
     margin: 0;
   }
   .tabs__body {
-    display: block;
+    display: contents;
   }
-  .tabs__body > * + * {
-    margin-top: 0.9rem;
+  .tabs__headline {
+    grid-column: 2;
+    grid-row: 1;
+    align-self: center;
+    padding-top: 0;
   }
-  /* Markers outside the text box would sit on top of the photo; inside,
-     they travel with their line as it wraps. */
-  .tabs__points {
-    list-style-position: inside;
-    padding-left: 0;
+  .tabs__body > :not(.tabs__headline) {
+    grid-column: 1 / -1;
   }
   /* "Accommodations" is one long word and cannot wrap: the label scales
      with the screen and loses most of its tracking so it fits a third of a
