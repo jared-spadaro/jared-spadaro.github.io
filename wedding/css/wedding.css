@@ -1105,8 +1105,8 @@ h3 {
      photos stack, each the full width and half the height, so each is near
      square and both subjects fit: the couple on the dunes (source x
      965-1180 of 2316) and both swimmers (x 665-1165 of 2296) are centred in
-     their frames. The names sit at the foot of the top photo, just above
-     the seam. */
+     their frames. The names sit at the foot of the top photo, the tail of
+     the J in "Jared" just touching the seam. */
   .dateline {
     height: 4rem;
     padding-block: 0;
@@ -1130,7 +1130,7 @@ h3 {
   .hero .hero__text {
     bottom: 50%;                 /* the top photo only */
     justify-content: flex-end;
-    padding: 0 1rem 1.25rem;
+    padding: 0 1rem 4px;         /* lands the J's last row of ink on the seam */
   }
 
   /* The photo pair dissolves into the column (a flex column, and <main> is
