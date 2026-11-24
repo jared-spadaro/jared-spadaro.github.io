@@ -993,7 +993,10 @@ h3 {
     gap: 10%;
   }
   .hero__text {
-    padding-top: 25%;
+    padding-top: 28%;
+  }
+  .hero__intro {
+    font-size: calc(var(--names) * 0.25);
   }
 }
 
