@@ -1130,6 +1130,19 @@ h3 {
     justify-content: center;
     padding: 0 1rem;
   }
+  /* iOS Safari can paint a photo a fraction of a pixel short of its slot on
+     first load, until a tap forces a repaint, leaving a hairline of the
+     slot's light loading colour along an edge. Each hero photo overdraws its
+     slot by a pixel all round (the slot clips it), and the slot behind is
+     ink, so no edge can show light. */
+  .hero .slot {
+    background: var(--ink);
+  }
+  .hero .slot > img {
+    inset: -1px;
+    width: calc(100% + 2px);
+    height: calc(100% + 2px);
+  }
 
   /* The photo pair dissolves into the column (a flex column, and <main> is
      display: contents, so every section is a flex item of it). Its Sutro

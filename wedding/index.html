@@ -724,12 +724,28 @@
           );
         }
 
+        // What the visitor last asked for. The button follows this rather
+        // than audio.paused: a play() that is still starting when the
+        // visitor pauses fails a moment later, and that late failure must not
+        // mark a newer play as stopped — on a phone, where the song is not
+        // preloaded, a quick pause-and-play hit exactly that, and the next
+        // tap paused the music the button said was already off.
+        var wanted = false;
+        var attempt = 0;
+
         function play() {
+          wanted = true;
+          var mine = ++attempt;
           clearInterval(fade);
+          // Phones (iOS) ignore volume and always play at full volume;
+          // setting it is harmless.
           audio.volume = calm ? VOLUME : 0;
           var started = audio.play();
           if (started && started.catch)
             started.catch(function () {
+              if (mine !== attempt) return; // superseded by a later tap
+              wanted = false;
+              clearInterval(fade);
               show(false);
             });
           show(true);
@@ -741,12 +757,26 @@
         }
 
         function pause() {
+          wanted = false;
+          attempt++;
           clearInterval(fade);
           audio.pause();
           show(false);
         }
 
-        var gestures = ["pointerdown", "keydown"];
+        // If the system stops the song (a call, another app, the lock
+        // screen), show it as stopped so the next tap starts it again.
+        audio.addEventListener("pause", function () {
+          if (!wanted) return;
+          wanted = false;
+          clearInterval(fade);
+          show(false);
+        });
+
+        // Only these count as a user gesture that may start audio. A touch's
+        // pointerdown does not, so on a phone the first tap used to be
+        // refused; its pointerup (and touchend, for older iOS) is allowed.
+        var gestures = ["pointerup", "touchend", "keydown"];
         function firstGesture(e) {
           // The toggle handles its own clicks; starting here as well would
           // let the same tap start the song and immediately stop it.
@@ -764,7 +794,7 @@
           gestures.forEach(function (g) {
             document.removeEventListener(g, firstGesture);
           });
-          if (audio.paused) {
+          if (!wanted) {
             play();
             remember(false);
           } else {
