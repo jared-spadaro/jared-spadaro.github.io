@@ -1215,6 +1215,12 @@ h3 {
     overflow-wrap: anywhere;
   }
 
+  /* The schedule's dates shorten to "Fri" and "Sat"; the full word stays in
+     the markup, so it is still read out in full. */
+  .day-rest {
+    display: none;
+  }
+
   /* The schedule stays one row across: heading, then both cards side by
      side. The cards share what width is left rather than sizing to their
      text, which at 320px is wider than the photographs and pushed the page
